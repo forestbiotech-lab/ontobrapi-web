@@ -2,10 +2,10 @@
 Docker file for the webserver running on Node JS
 
 ## Build image
-´´´ bash
+``` bash
 	docker build -t brunocosta/ontobrapi-node .
 	#docker build -t <your username>/ontobrapi-node .
-´´´
+```
 
 ## Run image
 
