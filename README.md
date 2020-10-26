@@ -26,4 +26,8 @@ Docker file for the webserver running on Node JS
 	docker run -p 49160:3000 -d <your username>/ontobrapi-node
 ``` 
 
+## Connecting to the SPARQL endpoint mas be done through the service name
+
+In this case db should be used instead of localhost to refere to network on another container
+
 

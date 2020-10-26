@@ -1,6 +1,6 @@
 const SparqlClient = require('sparql-http-client')
  
-const endpointUrl = 'http://localhost:8890/sparql'
+const endpointUrl = 'http://db:8890/sparql'
 let subject = 's'
 let object = 'o'
 let predicate = 'p'

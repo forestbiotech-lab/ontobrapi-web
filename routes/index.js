@@ -9,6 +9,8 @@ router.get('/', function(req, res, next) {
   sparqlQuery().then(queryRes=>{
   	result=queryRes.split('\n')
   	res.render('index', { title: 'Express', result});
+  }).catch(err=>{
+    res.error(err)
   })
 });
 
