@@ -1,7 +1,33 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  each line in result
-    p=line
+  .container-fluid
+    .row
+      .col-8
+        .card.bg-light
+          .card-header
+            h5 Upload 
+          .card-body
+            p Upload a file to map and convert to N-Triples (NT)  
+            .form-group
+              .pocket-progress
+              label.sr-only(for="augment-file") Upload file
+              input(hidden,type="file",id="augment-file",placeholder="tsv file",required="",autofocus="",autocomplete="off",name="uploads[]", accept="mime/*,.tsv",study-id=study_id)
+            button.btn.btn-success.btn-block.upload-augment-file(type="button") 
+              span.glyphicon.glyphicon-floppy-open
+              | &nbsp;upload file
+            .preview-table.d-none
+              .scroll(style="overflow-x:scroll")
+                .dummy(style="width:1000px;height:20px")
+              .table-div(style="overflow-x:scroll")
+              button.btn.btn-success.btn-block.generate-nt 
+                |Generate N-Triples (NT)
+              textarea(cols="120",rows="10").d-none
+      .col-4
+        .card.bg-light.ontology-terms
+          .card-header
+            h5 Rdf Syntax Type
+          .card-body#accordian-rdf-type
+            .spinner-border(role='status')
+            span.align-self-center &nbsp;Loading terms...
+                    
