@@ -21,7 +21,7 @@ router.post('/datafile/upload',(req,res)=>{
 router.get('/ontologyterms/:ontology/',(req,res)=>{
     query=`
     PREFIX rdf-syntax: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    SELECT DISTINCT ?s ?o from <http://purl.org/ppeo/PPEO.owl> 
+    SELECT DISTINCT ?s ?o from <https://raw.githubusercontent.com/MIAPPE/MIAPPE-ontology/master/PPEO.owl> 
     WHERE {
       ?s rdf-syntax:type ?o .
       FILTER (contains(str(?s), "http://purl.org/ppeo/PPEO.owl"))

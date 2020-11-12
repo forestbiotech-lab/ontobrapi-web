@@ -74,3 +74,20 @@ Edges podem ser:
 Data properties
 Data types
 Object properties
+
+
+https://github.com/mgcrea/node-xlsx#readme
+or
+https://github.com/SheetJS/sheetjs  (See what the above adds)
+
+#### Use case
+ * Upload file
+ * Define order of processing set worksheet foreign keys
+
+ * Define the observation Levels
+ * Define the observation Variables
+
+ * Set the mappings
+ * Define the object properties 
+ * Define the data properties
+
