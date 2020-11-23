@@ -55,10 +55,10 @@ router.get('/ontologycomments/:ontology/',(req,res)=>{
     res.end(message)
   })
 })
-router.get('/parse/file/',(req,res)=>{
+router.get('/parse/file/json',(req,res)=>{
   try{
     let filepath=path.join(uploadDir,destination,"/dados - N353.tsv")
-    nt(filepath).then(data=>{
+    nt.json(filepath).then(data=>{
       res.json(data)
     }).catch(err=>{
       let message=err.message
@@ -71,5 +71,25 @@ router.get('/parse/file/',(req,res)=>{
     res.end(message)
   }
 })
+
+router.get('/parse/file/',(req,res)=>{
+  try{
+    let filepath=path.join(uploadDir,destination,"/dados - N353.tsv")
+    nt.str(filepath).then(data=>{
+      res.set('Content-Type','text/txt')
+      res.send(data)
+    }).catch(err=>{
+      let message=err.message
+      res.writeHead( 400, message, {'content-type' : 'text/plain'});
+      res.end(message)
+    })
+  }catch(err){
+    let message=err.message
+    res.writeHead( 400, message, {'content-type' : 'text/plain'});
+    res.end(message)
+  }
+})
+
+
 
 module.exports = router;
