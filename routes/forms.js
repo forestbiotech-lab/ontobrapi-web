@@ -57,8 +57,22 @@ router.get('/ontologycomments/:ontology/',(req,res)=>{
 })
 router.get('/parse/file/json',(req,res)=>{
   try{
-    let filepath=path.join(uploadDir,destination,"/dados - N353.tsv")
-    nt.json(filepath).then(data=>{
+    let files=[]
+    let filepath=path.join(uploadDir,destination,"/dados - N353-short.tsv")
+    files.push(filepath)
+    filepath=path.join(uploadDir,destination,"/dados - N356-short.tsv")
+    files.push(filepath)
+    filepath=path.join(uploadDir,destination,"/dados - N369-short.tsv")
+    files.push(filepath)
+    filepath=path.join(uploadDir,destination,"/dados - caracteriza-ensaios.tsv")
+    files.push(filepath)
+    filepath=path.join(uploadDir,destination,"/dados - Materiais-pedigree-representati.tsv")
+    files.push(filepath)    
+    filepath=path.join(uploadDir,destination,"/dados - PIL-short.tsv")
+    files.push(filepath)
+    filepath=path.join(uploadDir,destination,"/dados - NIR-short.tsv")
+    files.push(filepath)
+    nt.json(files).then(data=>{
       res.json(data)
     }).catch(err=>{
       let message=err.message
@@ -74,8 +88,22 @@ router.get('/parse/file/json',(req,res)=>{
 
 router.get('/parse/file/',(req,res)=>{
   try{
+    let files=[]
     let filepath=path.join(uploadDir,destination,"/dados - N353.tsv")
-    nt.str(filepath).then(data=>{
+    files.push(filepath)
+    filepath=path.join(uploadDir,destination,"/dados - N356.tsv")
+    files.push(filepath)
+    filepath=path.join(uploadDir,destination,"/dados - N369.tsv")
+    files.push(filepath)
+    filepath=path.join(uploadDir,destination,"/dados - caracteriza-ensaios.tsv")
+    files.push(filepath)
+    filepath=path.join(uploadDir,destination,"/dados - Materiais-pedigree-representati.tsv")
+    files.push(filepath)    
+    filepath=path.join(uploadDir,destination,"/dados - PIL.tsv")
+    files.push(filepath)
+    filepath=path.join(uploadDir,destination,"/dados - NIR.tsv")
+    files.push(filepath)
+    nt.str(files).then(data=>{
       res.set('Content-Type','text/txt')
       res.send(data)
     }).catch(err=>{
