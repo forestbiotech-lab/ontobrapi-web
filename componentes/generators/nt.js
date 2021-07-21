@@ -85,19 +85,19 @@ function makeTriples(openFiles,type){
     },
     "age":{
       type:"class",
-      name:"observation_variable"
+      name:"observed_variable"
     },
     "height":{
       type:"class",
-      name:"observation_variable"
+      name:"observed_variable"
     },
     "diameter_at_breast_height":{
       type:"class",
-      name:"observation_variable"
+      name:"observed_variable"
     },
     "status_assessment":{
       type:"class",
-      name:"observation_variable"
+      name:"observed_variable"
     },
     "Pilodyn":{
       type:"class",
