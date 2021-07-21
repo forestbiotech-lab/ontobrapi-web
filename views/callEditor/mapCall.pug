@@ -1,0 +1,42 @@
+extends ../layout
+block content
+  script(src="/javascripts/callEditor.js" async defer)
+  include menu
+  h2=callName
+  table.table
+    each attr in Object.entries(json.result.data[0])
+      tr
+        td
+        - key=attr[0]
+          p
+            button.btn.btn-primary(key=key,type='button' data-toggle='collapse' data-target=`#${key}` aria-expanded='false' aria-controls=`#${key}`) #{key} 
+              span.badge.bg-success=attr[1]
+          .collapse(id=`${key}`)
+            .card.card-body(layer="0")
+              h5.card-title(layer="0") Layer 0
+              .form-group  
+                label Property
+                select.form-control.form-control-lg(id="layer0")
+                  option
+                  each entryProp in Object.entries(anchorProperties)
+                    - property=entryProp[1].property
+                    - propertyShortHand=property.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
+                    - className=entryProp[1].class
+                    - classNameShortHand=className.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
+                    option(className=className,property=property,classNameShortHand=classNameShortHand,propertyShortHand=propertyShortHand) Property:[#{propertyShortHand}] | Class:[#{classNameShortHand}]
+              .form-group
+                label Class
+                  .badge-holder
+                input.form-control(id=`layer0-${key}-class` type="text",name="class")
+              .form-group
+                label Property 
+                  .badge-holder
+                input.form-control(id=`layer0-${key}-property` type="text",name="property")
+              .form-group
+                button.btn.btn-primary.btn-block.add-new-layer add new layer
+
+  div !{html}
+    //each moduleValue in modules
+      //tr
+       // td
+       //   a(href="listcalls/"+moduleValue+"/list")=moduleValue

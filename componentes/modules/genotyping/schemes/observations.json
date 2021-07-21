@@ -1,0 +1,193 @@
+{
+    "_anchor": {
+        "class": "observation",
+        "s": "?observation",
+        "p": "rdf:type",
+        "o": "ppeo:observation"
+    },
+    "@context": [
+        "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+        "datafiles": [
+            {
+                "fileDescription": "This is an Excel data file",
+                "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+                "fileName": "datafile.xlsx",
+                "fileSize": 4398,
+                "fileType": "application/vnd.ms-excel",
+                "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+            }
+        ],
+        "status": [
+            {
+                "message": "Request accepted, response successful",
+                "messageType": "INFO"
+            }
+        ]
+    },
+    "result": {
+        "data": [
+            {
+                "additionalInfo": {
+                    "additionalProp1": "string",
+                    "additionalProp2": "string",
+                    "additionalProp3": "string"
+                },
+                "collector": "917d3ae0",
+                "externalReferences": [
+                    {
+                        "referenceID": "doi:10.155454/12341234",
+                        "referenceSource": "DOI"
+                    },
+                    {
+                        "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+                        "referenceSource": "OBO Library"
+                    },
+                    {
+                        "referenceID": "75a50e76",
+                        "referenceSource": "Remote Data Collection Upload Tool"
+                    }
+                ],
+                "germplasmDbId": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:observation_unit",
+                            "property": "ppeo:hasObservedSubject"
+                        },
+                        {
+                            "class": "ppeo:biological_material",
+                            "property": "ppeo:hasBiologicalMaterial"
+                        },
+                        {
+                            "class": "ppeo:biological_material",
+                            "property": "ppeo:hasTaxonIdentifier"
+                        }
+                    ],
+                    "_value": "2408ab11"
+                },
+                "germplasmName": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:observation_unit",
+                            "property": "ppeo:hasObservedSubject"
+                        },
+                        {
+                            "class": "ppeo:biological_material",
+                            "property": "ppeo:hasBiologicalMaterial"
+                        },
+                        {
+                            "class": "ppeo:biological_material",
+                            "property": "ppeo:hasInternalIdentifier"
+                        }
+                    ],
+                    "_value": "A0000003"
+                },
+                "observationTimeStamp": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:observation",
+                            "property": "ppeo:hasDateTime"
+                        }
+                    ],
+                    "_value": {
+                        "0": "2",
+                        "1": "0",
+                        "2": "2",
+                        "3": "1",
+                        "4": "-",
+                        "5": "0",
+                        "6": "4",
+                        "7": "-",
+                        "8": "0",
+                        "9": "7",
+                        "10": "T",
+                        "11": "1",
+                        "12": "4",
+                        "13": ":",
+                        "14": "3",
+                        "15": "8",
+                        "16": ":",
+                        "17": "1",
+                        "18": "4",
+                        "19": ".",
+                        "20": "2",
+                        "21": "3",
+                        "22": "4",
+                        "23": "Z"
+                    }
+                },
+                "observationUnitDbId": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:observation_unit",
+                            "property": "ppeo:hasObservedSubject"
+                        },
+                        {
+                            "class": "ppeo:observation_unit",
+                            "property": "ppeo:hasInternalIdentifier"
+                        }
+                    ],
+                    "_value": {
+                        "0": "5",
+                        "1": "9",
+                        "2": "8",
+                        "3": "1",
+                        "4": "1",
+                        "5": "1",
+                        "6": "d",
+                        "7": "4"
+                    }
+                },
+                "observationUnitName": {
+                    "_sparQL": [
+                        {
+                            "property": "ppeo:hasObservedSubject",
+                            "class": "ppeo:observation_unit"
+                        }
+                    ]
+                },
+                "observationVariableDbId": "c403d107",
+                "observationVariableName": {
+                    "_sparQL": [
+                        {
+                            "property": "ppeo:hasVariable",
+                            "class": "ppeo:observation_variable"
+                        }
+                    ]
+                },
+                "season": {
+                    "season": "Spring",
+                    "seasonDbId": "Spring_2018",
+                    "year": 2018
+                },
+                "studyDbId": {
+                    "_sparQL": [
+                        {
+                            "property": "ppeo:hasObservedSubject",
+                            "class": "ppeo:observation_unit"
+                        },
+                        {
+                            "class": "ppeo:study",
+                            "property": "ppeo:partOf"
+                        },
+                        {
+                            "class": "ppeo:study",
+                            "property": "ppeo:hasInternalIdentifier"
+                        }
+                    ]
+                },
+                "uploadedBy": "a2f7f60b",
+                "value": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:observation",
+                            "property": "ppeo:hasValue"
+                        }
+                    ]
+                },
+                "observationDbId": "ef24b615"
+            }
+        ]
+    }
+}

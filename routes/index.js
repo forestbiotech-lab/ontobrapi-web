@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var sparqlQuery = require('.././componentes/sparql/sparqlQuery')
 
+// / not previous route 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -16,5 +17,12 @@ router.get('/query', function(req, res, next) {
     res.error(err)
   })
 });
+
+router.get('/parse', function(req, res, next) {
+  let attr=require('./../componentes/attrlist.js')
+  res.json(attr)
+});
+
+
 
 module.exports = router;

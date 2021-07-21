@@ -1,0 +1,461 @@
+{
+  "breedingmethods":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ],
+      "pagination": {
+        "pageSize": 1000,
+        "totalCount": 10,
+        "totalPages": 1,
+        "currentPage": 0
+      }
+    },
+    "result": {
+      "data": [
+        {
+          "abbreviation": "MB",
+          "breedingMethodDbId": "ffcce7ef",
+          "breedingMethodName": "Male Backcross",
+          "description": "Backcross to recover a specific gene."
+        }
+      ]
+    }
+  },
+  "germplasm":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "accessionNumber": "A0000003",
+          "acquisitionDate": "2021-03-29",
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "biologicalStatusOfAccessionCode": "420",
+          "biologicalStatusOfAccessionDescription": "Genetic stock",
+          "breedingMethodDbId": "ffcce7ef",
+          "collection": "Rice Diversity Panel 1 (RDP1)",
+          "commonCropName": "Maize",
+          "countryOfOriginCode": "BES",
+          "defaultDisplayName": "A0000003",
+          "documentationURL": "https://wiki.brapi.org",
+          "donors": [
+            {
+              "donorAccessionNumber": "A0000123",
+              "donorInstituteCode": "PER001",
+              "germplasmPUI": "http://pui.per/accession/A0000003"
+            }
+          ],
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "genus": "Aspergillus",
+          "germplasmName": "A0000003",
+          "germplasmOrigin": [
+            {
+              "coordinateUncertainty": "20",
+              "coordinates": {
+                "geometry": {
+                  "coordinates": [
+                    -76.506042,
+                    42.417373,
+                    123
+                  ],
+                  "type": "Point"
+                },
+                "type": "Feature"
+              }
+            }
+          ],
+          "germplasmPUI": "http://pui.per/accession/A0000003",
+          "germplasmPreprocessing": "EO:0007210; transplanted from study 2351 observation unit ID: pot:894",
+          "instituteCode": "PER001",
+          "instituteName": "The BrAPI Institute",
+          "pedigree": "A0000001/A0000002",
+          "seedSource": "A0000001/A0000002",
+          "seedSourceDescription": "Branches were collected from a 10-year-old tree growing in a progeny trial established in a loamy brown earth soil.",
+          "species": "fructus",
+          "speciesAuthority": "Smith, 1822",
+          "storageTypes": [
+            {
+              "code": "20",
+              "description": "Field collection"
+            },
+            {
+              "code": "11",
+              "description": "Short term"
+            }
+          ],
+          "subtaxa": "Aspergillus fructus A",
+          "subtaxaAuthority": "Smith, 1822",
+          "synonyms": [
+            {
+              "synonym": "variety_1",
+              "type": "Pre-Code"
+            }
+          ],
+          "taxonIds": [
+            {
+              "sourceName": "NCBI",
+              "taxonId": "2026747"
+            }
+          ],
+          "germplasmDbId": "d4076594"
+        }
+      ]
+    }
+  },
+  "gemplasm/{germplasmDbId}/mcpd":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ],
+      "pagination": {
+        "pageSize": 1000,
+        "totalCount": 10,
+        "totalPages": 1,
+        "currentPage": 0
+      }
+    },
+    "result": {
+      "accessionNames": [
+        "Symphony",
+        "Emma"
+      ],
+      "accessionNumber": "A0000003",
+      "acquisitionDate": "2021-03-29",
+      "acquisitionSourceCode": "26",
+      "alternateIDs": [
+        "3",
+        "http://pui.per/accession/A0000003",
+        "A0000003"
+      ],
+      "ancestralData": "A0000001/A0000002",
+      "biologicalStatusOfAccessionCode": "421",
+      "breedingInstitutes": [
+        {
+          "instituteCode": "PER001",
+          "instituteName": "The BrAPI Institute"
+        }
+      ],
+      "collectingInfo": {
+        "collectingDate": "2021-03-29",
+        "collectingInstitutes": [
+          {
+            "instituteAddress": "123 Main Street, Lima, Peru, 5555",
+            "instituteCode": "PER001",
+            "instituteName": "The BrAPI Institute"
+          }
+        ],
+        "collectingMissionIdentifier": "CIATFOR_052",
+        "collectingNumber": "ab109909",
+        "collectingSite": {
+          "coordinateUncertainty": "20",
+          "elevation": "35",
+          "georeferencingMethod": "WGS84",
+          "latitudeDecimal": "+42.445295",
+          "latitudeDegrees": "42 26 43.1 N",
+          "locationDescription": "South east hill near institute buildings",
+          "longitudeDecimal": "-076.471934",
+          "longitudeDegrees": "76 28 19.0 W",
+          "spatialReferenceSystem": "WGS84"
+        }
+      },
+      "commonCropName": "malting barley",
+      "countryOfOrigin": "Peru",
+      "donorInfo": {
+        "donorAccessionNumber": "A0090204",
+        "donorAccessionPui": "http://pui.per/accession/A0010025",
+        "donorInstitute": {
+          "instituteCode": "PER001",
+          "instituteName": "The BrAPI Institute"
+        }
+      },
+      "genus": "Aspergillus",
+      "germplasmDbId": "31c4efbc",
+      "germplasmPUI": "http://pui.per/accession/A0403652",
+      "instituteCode": "PER001",
+      "mlsStatus": "0",
+      "remarks": "This is an example remark to demonstrate that any notable information can be put here",
+      "safetyDuplicateInstitutes": [
+        {
+          "instituteCode": "PER001",
+          "instituteName": "The BrAPI Institute"
+        }
+      ],
+      "species": "fructus",
+      "speciesAuthority": "Smith, 1822",
+      "storageTypeCodes": [
+        "11",
+        "13"
+      ],
+      "subtaxon": "Aspergillus fructus A",
+      "subtaxonAuthority": "Smith, 1822"
+    }
+  },
+  "germplasm/{germplasmDbId}/pedigree":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ],
+      "pagination": {
+        "pageSize": 1000,
+        "totalCount": 10,
+        "totalPages": 1,
+        "currentPage": 0
+      }
+    },
+    "result": {
+      "crossingProjectDbId": "625e745a",
+      "crossingYear": 2005,
+      "familyCode": "F0000203",
+      "germplasmDbId": "1098ebaf",
+      "germplasmName": "A0021004",
+      "parents": [
+        {
+          "germplasmDbId": "b66958de",
+          "germplasmName": "A0000592",
+          "parentType": "MALE"
+        },
+        {
+          "germplasmDbId": "a55847ed",
+          "germplasmName": "A0000592",
+          "parentType": "FEMALE"
+        }
+      ],
+      "pedigree": "A0000001/A0000002",
+      "siblings": [
+        {
+          "germplasmDbId": "334f53a3",
+          "germplasmName": "A0021005"
+        },
+        {
+          "germplasmDbId": "7bbbda8c",
+          "germplasmName": "A0021006"
+        },
+        {
+          "germplasmDbId": "ab1d9b26",
+          "germplasmName": "A0021007"
+        }
+      ]
+    }
+  },
+  "germplasm/{germplasmDbId}/progeny":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ],
+      "pagination": {
+        "pageSize": 1000,
+        "totalCount": 10,
+        "totalPages": 1,
+        "currentPage": 0
+      }
+    },
+    "result": {
+      "germplasmDbId": "01b974dc",
+      "germplasmName": "A0021004",
+      "progeny": [
+        {
+          "germplasmDbId": "e8d5dad7",
+          "germplasmName": "A0021011",
+          "parentType": "FEMALE"
+        },
+        {
+          "germplasmDbId": "ac07fbd8",
+          "germplasmName": "A0021012",
+          "parentType": "FEMALE"
+        },
+        {
+          "germplasmDbId": "07f45f67",
+          "germplasmName": "A0021013",
+          "parentType": "FEMALE"
+        }
+      ]
+    }
+  },
+  "attributes":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "attributeDbId": "2f08b902"
+        }
+      ]
+    }
+  },
+  "attributeValues":{
+  "@context": [
+    "https://brapi.org/jsonld/context/metadata.jsonld"
+  ],
+  "metadata": {
+    "datafiles": [
+      {
+        "fileDescription": "This is an Excel data file",
+        "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+        "fileName": "datafile.xlsx",
+        "fileSize": 4398,
+        "fileType": "application/vnd.ms-excel",
+        "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+      }
+    ],
+    "status": [
+      {
+        "message": "Request accepted, response successful",
+        "messageType": "INFO"
+      }
+    ]
+  },
+  "result": {
+    "data": [
+      {
+        "additionalInfo": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "attributeDbId": "e529dd5a",
+        "attributeName": "Weevil Resistance",
+        "determinedDate": "2021-03-29T11:59:39.046Z",
+        "externalReferences": [
+          {
+            "referenceID": "doi:10.155454/12341234",
+            "referenceSource": "DOI"
+          },
+          {
+            "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+            "referenceSource": "OBO Library"
+          },
+          {
+            "referenceID": "75a50e76",
+            "referenceSource": "Remote Data Collection Upload Tool"
+          }
+        ],
+        "germplasmDbId": "d4076594",
+        "germplasmName": "A0000003",
+        "value": "Present",
+        "attributeValueDbId": "33edbab7"
+      }
+    ]
+  }
+}
+
+}

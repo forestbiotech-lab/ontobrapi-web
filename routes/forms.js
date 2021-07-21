@@ -8,6 +8,9 @@ const uploadDir=path.join(__dirname,"../uploads/")
 const destination="uploadedfiles"
 const nt=require('./../componentes/generators/nt')
 
+
+// forms/
+
 router.post('/datafile/upload',(req,res)=>{
   uploadFile.uploadFileGetPreview(req,uploadDir,destination).then(data=>{
     res.json(data)
@@ -89,11 +92,11 @@ router.get('/parse/file/json',(req,res)=>{
 router.get('/parse/file/',(req,res)=>{
   try{
     let files=[]
-    let filepath=path.join(uploadDir,destination,"/dados - N353.tsv")
+    let filepath=path.join(uploadDir,destination,"/dados - N353-short.tsv")
     files.push(filepath)
-    filepath=path.join(uploadDir,destination,"/dados - N356.tsv")
+    filepath=path.join(uploadDir,destination,"/dados - N356-short.tsv")
     files.push(filepath)
-    filepath=path.join(uploadDir,destination,"/dados - N369.tsv")
+    filepath=path.join(uploadDir,destination,"/dados - N369-short.tsv")
     files.push(filepath)
     filepath=path.join(uploadDir,destination,"/dados - caracteriza-ensaios.tsv")
     files.push(filepath)

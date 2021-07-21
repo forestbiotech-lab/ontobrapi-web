@@ -1,0 +1,65 @@
+{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "collector": "917d3ae0",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "germplasmDbId": "2408ab11",
+          "germplasmName": "A0000003",
+          "observationTimeStamp": "2021-04-07T14:38:14.234Z",
+          "observationUnitDbId": "598111d4",
+          "observationUnitName": "Plot 1",
+          "observationVariableDbId": "c403d107",
+          "observationVariableName": "Plant Height in meters",
+          "season": {
+            "season": "Spring",
+            "seasonDbId": "Spring_2018",
+            "year": 2018
+          },
+          "studyDbId": "ef2829db",
+          "uploadedBy": "a2f7f60b",
+          "value": "2.3",
+          "observationDbId": "ef24b615"
+        }
+      ]
+    }
+  }

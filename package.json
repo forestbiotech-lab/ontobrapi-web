@@ -11,10 +11,13 @@
     "detect-file-type": "^0.2.8",
     "express": "~4.16.1",
     "formidable": "^1.2.2",
+    "fs": "0.0.1-security",
+    "glob": "^7.1.6",
     "http-errors": "~1.6.3",
+    "json-pretty-html": "^1.1.6",
     "morgan": "~1.9.1",
-    "object-hash": "^2.0.3",
-    "pug": "2.0.0-beta11",
-    "sparql-http-client": "^2.1.0"
+    "object-hash": "^2.1.1",
+    "pug": "^3.0.2",
+    "sparql-http-client": "^2.3.0"
   }
 }

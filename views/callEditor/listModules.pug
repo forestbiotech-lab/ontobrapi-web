@@ -1,0 +1,9 @@
+extends ../layout
+block content
+  include menu
+  h2 List of Modules
+  table.table
+    each moduleValue in modules
+      tr
+        td
+          a(href="listcalls/"+moduleValue+"/list")=moduleValue

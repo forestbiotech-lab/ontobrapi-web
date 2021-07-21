@@ -1,0 +1,724 @@
+{
+  "observations":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "collector": "917d3ae0",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "germplasmDbId": "2408ab11",
+          "germplasmName": "A0000003",
+          "observationTimeStamp": "2021-04-07T14:38:14.234Z",
+          "observationUnitDbId": "598111d4",
+          "observationUnitName": "Plot 1",
+          "observationVariableDbId": "c403d107",
+          "observationVariableName": "Plant Height in meters",
+          "season": {
+            "season": "Spring",
+            "seasonDbId": "Spring_2018",
+            "year": 2018
+          },
+          "studyDbId": "ef2829db",
+          "uploadedBy": "a2f7f60b",
+          "value": "2.3",
+          "observationDbId": "ef24b615"
+        }
+      ]
+    }
+  },
+  "observationlevels":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ],
+      "pagination": {
+        "pageSize": 1000,
+        "totalCount": 10,
+        "totalPages": 1,
+        "currentPage": 0
+      }
+    },
+    "result": {
+      "data": [
+        {
+          "levelName": "field",
+          "levelOrder": 0
+        },
+        {
+          "levelName": "block",
+          "levelOrder": 1
+        },
+        {
+          "levelName": "plot",
+          "levelOrder": 2
+        },
+        {
+          "levelName": "sub-plot",
+          "levelOrder": 3
+        },
+        {
+          "levelName": "plant",
+          "levelOrder": 4
+        }
+      ]
+    }
+  },
+  "obsercationunit":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "germplasmDbId": "e9d9ed57",
+          "germplasmName": "A0000001",
+          "locationDbId": "0e208b20",
+          "locationName": "Field Station Alpha",
+          "observationUnitName": "Plot 1",
+          "observationUnitPUI": "http://pui.per/plot/1a9afc14",
+          "observationUnitPosition": {
+            "entryType": "TEST",
+            "geoCoordinates": {
+              "geometry": {
+                "coordinates": [
+                  -76.506042,
+                  42.417373,
+                  123
+                ],
+                "type": "Point"
+              },
+              "type": "Feature"
+            },
+            "observationLevelRelationships": [
+              {
+                "levelCode": "Field_1",
+                "levelName": "field",
+                "levelOrder": 0
+              },
+              {
+                "levelCode": "Block_12",
+                "levelName": "block",
+                "levelOrder": 1
+              },
+              {
+                "levelCode": "Plot_123",
+                "levelName": "plot",
+                "levelOrder": 2
+              }
+            ],
+            "positionCoordinateX": "74",
+            "positionCoordinateXType": "GRID_COL",
+            "positionCoordinateY": "03",
+            "positionCoordinateYType": "GRID_ROW"
+          },
+          "programDbId": "2d763a7a",
+          "programName": "The Perfect Breeding Program",
+          "seedLotDbId": "261ecb09",
+          "studyDbId": "9865addc",
+          "studyName": "Purple_Tomato_1",
+          "treatments": [
+            {
+              "factor": "fertilizer",
+              "modality": "low fertilizer"
+            }
+          ],
+          "trialDbId": "776a609c",
+          "trialName": "Purple Tomato",
+          "observationUnitDbId": "8c67503c",
+          "observations": [
+            null
+          ]
+        }
+      ]
+    }
+  },
+  "variables":  {
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "commonCropName": "Maize",
+          "contextOfUse": [
+            "Trial evaluation",
+            "Nursery evaluation"
+          ],
+          "defaultValue": "2.0",
+          "documentationURL": "https://wiki.brapi.org/documentation.html",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "growthStage": "flowering",
+          "institution": "The BrAPI Institute",
+          "language": "en",
+          "ontologyReference": {
+            "documentationLinks": [
+              {
+                "URL": "http://purl.obolibrary.org/obo/ro.owl",
+                "type": "OBO"
+              }
+            ],
+            "ontologyDbId": "6b071868",
+            "ontologyName": "The Crop Ontology",
+            "version": "7.2.3"
+          },
+          "scientist": "Dr. Bob Robertson",
+          "status": "recommended",
+          "submissionTimestamp": "2021-04-07T15:23:33.208Z",
+          "synonyms": [
+            "Maize Height",
+            "Stalk Height",
+            "Corn Height"
+          ],
+          "observationVariableDbId": "b9b7edd1",
+          "observationVariableName": "Variable Name"
+        }
+      ]
+    }
+  },
+  "methods":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "bibliographicalReference": "Smith, 1893, Really Cool Paper, Popular Journal",
+          "description": "A measuring tape was used",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "formula": "a^2 + b^2 = c^2",
+          "methodClass": "Measurement",
+          "methodName": "Measuring Tape",
+          "ontologyReference": {
+            "documentationLinks": [
+              {
+                "URL": "http://purl.obolibrary.org/obo/ro.owl",
+                "type": "OBO"
+              }
+            ],
+            "ontologyDbId": "6b071868",
+            "ontologyName": "The Crop Ontology",
+            "version": "7.2.3"
+          },
+          "methodDbId": "0adb2764"
+        }
+      ]
+    }
+  },
+  "traits":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "alternativeAbbreviations": [
+            "H",
+            "PH",
+            "H1"
+          ],
+          "attribute": "height",
+          "entity": "Stalk",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "mainAbbreviation": "PH",
+          "ontologyReference": {
+            "documentationLinks": [
+              {
+                "URL": "http://purl.obolibrary.org/obo/ro.owl",
+                "type": "OBO"
+              }
+            ],
+            "ontologyDbId": "6b071868",
+            "ontologyName": "The Crop Ontology",
+            "version": "7.2.3"
+          },
+          "status": "recommended",
+          "synonyms": [
+            "Height",
+            "Plant Height",
+            "Stalk Height",
+            "Canopy Height"
+          ],
+          "traitClass": "phenological",
+          "traitDescription": "The height of the plant",
+          "traitName": "Height",
+          "traitDbId": "9b2e34f5"
+        }
+      ]
+    }
+  },
+  "scales":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "dataType": "Numerical",
+          "decimalPlaces": 2,
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "ontologyReference": {
+            "documentationLinks": [
+              {
+                "URL": "http://purl.obolibrary.org/obo/ro.owl",
+                "type": "OBO"
+              }
+            ],
+            "ontologyDbId": "6b071868",
+            "ontologyName": "The Crop Ontology",
+            "version": "7.2.3"
+          },
+          "scaleName": "Meters",
+          "validValues": {
+            "categories": [
+              {
+                "label": "low",
+                "value": "0"
+              },
+              {
+                "label": "medium",
+                "value": "5"
+              },
+              {
+                "label": "high",
+                "value": "10"
+              }
+            ],
+            "max": 9999,
+            "min": 2
+          },
+          "scaleDbId": "af730171"
+        }
+      ]
+    }
+  },
+  "ontologies":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ],
+      "pagination": {
+        "pageSize": 1000,
+        "totalCount": 10,
+        "totalPages": 1,
+        "currentPage": 0
+      }
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "authors": "Bob Robertson, Rob Robertson",
+          "copyright": "Copyright 1987, Bob Robertson",
+          "description": "This is an example ontology that does not exist",
+          "documentationURL": "https://wiki.brapi.org/ontology",
+          "licence": "MIT Open source licence",
+          "ontologyDbId": "18e186cd",
+          "ontologyName": "The Official Ontology",
+          "version": "V1.3.2"
+        }
+      ]
+    }
+  },
+  "images":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "copyright": "Copyright 2018 Bob Robertson",
+          "description": "This is a picture of a tomato",
+          "descriptiveOntologyTerms": [
+            "doi:10.1002/0470841559",
+            "Red",
+            "ncbi:0300294"
+          ],
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "imageFileName": "image_0000231.jpg",
+          "imageFileSize": 50000,
+          "imageHeight": 550,
+          "imageLocation": {
+            "geometry": {
+              "coordinates": [
+                -76.506042,
+                42.417373,
+                123
+              ],
+              "type": "Point"
+            },
+            "type": "Feature"
+          },
+          "imageName": "Tomato Image 1",
+          "imageTimeStamp": "2021-04-07T16:10:06.561Z",
+          "imageURL": "https://wiki.brapi.org/images/tomato",
+          "imageWidth": 700,
+          "mimeType": "image/jpeg",
+          "observationDbIds": [
+            "d05dd235",
+            "8875177d",
+            "c08e81b6"
+          ],
+          "observationUnitDbId": "b7e690b6",
+          "imageDbId": "a55efb9c"
+        }
+      ]
+    }
+  },
+  "events":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ],
+      "pagination": {
+        "pageSize": 1000,
+        "totalCount": 10,
+        "totalPages": 1,
+        "currentPage": 0
+      }
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "date": [
+            "2018-10-08T18:15:11Z",
+            "2018-11-09T18:16:12Z"
+          ],
+          "eventDbId": "8566d4cb",
+          "eventDescription": "A set of plots was watered",
+          "eventParameters": [
+            {
+              "key": "http://www.example.fr/vocabulary/2018#hasContact,",
+              "value": "http://www.example.fr/id/agent/marie,",
+              "valueRdfType": "http://xmlns.com/foaf/0.1/Agent,"
+            },
+            {
+              "key": "fertilizer",
+              "value": "nitrogen",
+              "valueRdfType": null
+            }
+          ],
+          "eventType": "Watering",
+          "eventTypeDbId": "4e7d691e",
+          "observationUnitDbIds": [
+            "8439eaff",
+            "d7682e7a",
+            "305ae51c"
+          ],
+          "studyDbId": "2cc2001f"
+        }
+      ]
+    }
+  }
+}

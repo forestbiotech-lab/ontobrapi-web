@@ -1,0 +1,924 @@
+{
+  "serverinfo":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ],
+      "pagination": {
+        "pageSize": 1000,
+        "totalCount": 10,
+        "totalPages": 1,
+        "currentPage": 0
+      }
+    },
+    "result": {
+      "calls": [
+        {
+          "dataTypes": [
+            "application/json"
+          ],
+          "methods": [
+            "GET",
+            "POST"
+          ],
+          "service": "germplasm/{germplasmDbId}/pedigree",
+          "versions": [
+            "2.0",
+            "2.1"
+          ]
+        }
+      ],
+      "contactEmail": "contact@institute.org",
+      "documentationURL": "institute.org/server",
+      "location": "USA",
+      "organizationName": "The Institute",
+      "organizationURL": "institute.org/home",
+      "serverDescription": "The BrAPI Test Server\nWeb Server - Apache Tomcat 7.0.32\nDatabase - Postgres 10\nSupported BrAPI Version - V2.0",
+      "serverName": "The BrAPI Test Server"
+    }
+  },
+  "commoncropnames":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ],
+      "pagination": {
+        "pageSize": 1000,
+        "totalCount": 10,
+        "totalPages": 1,
+        "currentPage": 0
+      }
+    },
+    "result": {
+      "data": [
+        "Tomatillo",
+        "Paw Paw"
+      ]
+    }
+  },
+  "programs":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "abbreviation": "P1",
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "commonCropName": "Tomatillo",
+          "documentationURL": "https://wiki.brapi.org",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "leadPersonDbId": "fe6f5c50",
+          "leadPersonName": "Bob Robertson",
+          "objective": "Make a better tomatillo",
+          "programName": "Tomatillo_Breeding_Program",
+          "programDbId": "f60f15b2"
+        }
+      ]
+    }
+  },
+  "program/id":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "abbreviation": "P1",
+      "additionalInfo": {
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      },
+      "commonCropName": "Tomatillo",
+      "documentationURL": "https://wiki.brapi.org",
+      "externalReferences": [
+        {
+          "referenceID": "doi:10.155454/12341234",
+          "referenceSource": "DOI"
+        },
+        {
+          "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+          "referenceSource": "OBO Library"
+        },
+        {
+          "referenceID": "75a50e76",
+          "referenceSource": "Remote Data Collection Upload Tool"
+        }
+      ],
+      "leadPersonDbId": "fe6f5c50",
+      "leadPersonName": "Bob Robertson",
+      "objective": "Make a better tomatillo",
+      "programName": "Tomatillo_Breeding_Program",
+      "programDbId": "f60f15b2"
+    }
+  },
+  "search/programs":{
+    "page": 0,
+    "pageSize": 1000,
+    "commonCropNames": [
+      "Tomatillo",
+      "Paw Paw"
+    ],
+    "programDbIds": [
+      "8f5de35b",
+      "0e2d4a13"
+    ],
+    "programNames": [
+      "Better Breeding Program",
+      "Best Breeding Program"
+    ],
+    "externalReferenceIDs": [
+      "http://purl.obolibrary.org/obo/ro.owl",
+      "14a19841"
+    ],
+    "externalReferenceSources": [
+      "OBO Library",
+      "Field App Name"
+    ],
+    "abbreviations": [
+      "P1",
+      "P2"
+    ],
+    "leadPersonDbIds": [
+      "d8bd96c7",
+      "a2b9c8e7"
+    ],
+    "leadPersonNames": [
+      "Bob Robertson",
+      "Rob Robertson"
+    ],
+    "objectives": [
+      "Objective Code One",
+      "This is a longer objective search query"
+    ]
+  },
+  "search/programs/id":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "abbreviation": "P1",
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "commonCropName": "Tomatillo",
+          "documentationURL": "https://wiki.brapi.org",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "leadPersonDbId": "fe6f5c50",
+          "leadPersonName": "Bob Robertson",
+          "objective": "Make a better tomatillo",
+          "programName": "Tomatillo_Breeding_Program",
+          "programDbId": "f60f15b2"
+        }
+      ]
+    }
+  },
+  "search/trials":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "active": true,
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "commonCropName": "Wheat",
+          "contacts": [
+            {
+              "contactDbId": "5f4e5509",
+              "email": "bob@bob.com",
+              "instituteName": "The BrAPI Institute",
+              "name": "Bob Robertson",
+              "orcid": "http://orcid.org/0000-0001-8640-1750",
+              "type": "PI"
+            }
+          ],
+          "datasetAuthorships": [
+            {
+              "datasetPUI": "doi:10.15454/312953986E3",
+              "license": "https://CreativeCommons.org/licenses/by/4.0",
+              "publicReleaseDate": "2021-03-24",
+              "submissionDate": "2021-03-24"
+            }
+          ],
+          "documentationURL": "https://wiki.brapi.org",
+          "endDate": "2021-03-24",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "programDbId": "673f378a",
+          "programName": "Tomatillo_Breeding_Program",
+          "publications": [
+            {
+              "publicationPUI": "doi:10.15454/312953986E3",
+              "publicationReference": "Selby, BrAPI - An application programming interface for plant breeding applications, Bioinformatics, https://doi.org/10.1093/bioinformatics/190"
+            }
+          ],
+          "startDate": "2021-03-24",
+          "trialDescription": "General drought resistance trial initiated in Peru before duplication in Africa",
+          "trialName": "Peru Yield Trial 1",
+          "trialPUI": "https://doi.org/101093190",
+          "trialDbId": "1883b402"
+        }
+      ]
+    }
+  },
+  "search/trials/{searchResultsDdId}":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "active": true,
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "commonCropName": "Wheat",
+          "contacts": [
+            {
+              "contactDbId": "5f4e5509",
+              "email": "bob@bob.com",
+              "instituteName": "The BrAPI Institute",
+              "name": "Bob Robertson",
+              "orcid": "http://orcid.org/0000-0001-8640-1750",
+              "type": "PI"
+            }
+          ],
+          "datasetAuthorships": [
+            {
+              "datasetPUI": "doi:10.15454/312953986E3",
+              "license": "https://CreativeCommons.org/licenses/by/4.0",
+              "publicReleaseDate": "2021-03-27",
+              "submissionDate": "2021-03-27"
+            }
+          ],
+          "documentationURL": "https://wiki.brapi.org",
+          "endDate": "2021-03-27",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "programDbId": "673f378a",
+          "programName": "Tomatillo_Breeding_Program",
+          "publications": [
+            {
+              "publicationPUI": "doi:10.15454/312953986E3",
+              "publicationReference": "Selby, BrAPI - An application programming interface for plant breeding applications, Bioinformatics, https://doi.org/10.1093/bioinformatics/190"
+            }
+          ],
+          "startDate": "2021-03-27",
+          "trialDescription": "General drought resistance trial initiated in Peru before duplication in Africa",
+          "trialName": "Peru Yield Trial 1",
+          "trialPUI": "https://doi.org/101093190",
+          "trialDbId": "1883b402"
+        }
+      ]
+    }
+  },
+  "trials":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "active": true,
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "commonCropName": "Wheat",
+          "contacts": [
+            {
+              "contactDbId": "5f4e5509",
+              "email": "bob@bob.com",
+              "instituteName": "The BrAPI Institute",
+              "name": "Bob Robertson",
+              "orcid": "http://orcid.org/0000-0001-8640-1750",
+              "type": "PI"
+            }
+          ],
+          "datasetAuthorships": [
+            {
+              "datasetPUI": "doi:10.15454/312953986E3",
+              "license": "https://CreativeCommons.org/licenses/by/4.0",
+              "publicReleaseDate": "2021-03-27",
+              "submissionDate": "2021-03-27"
+            }
+          ],
+          "documentationURL": "https://wiki.brapi.org",
+          "endDate": "2021-03-27",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "programDbId": "673f378a",
+          "programName": "Tomatillo_Breeding_Program",
+          "publications": [
+            {
+              "publicationPUI": "doi:10.15454/312953986E3",
+              "publicationReference": "Selby, BrAPI - An application programming interface for plant breeding applications, Bioinformatics, https://doi.org/10.1093/bioinformatics/190"
+            }
+          ],
+          "startDate": "2021-03-27",
+          "trialDescription": "General drought resistance trial initiated in Peru before duplication in Africa",
+          "trialName": "Peru Yield Trial 1",
+          "trialPUI": "https://doi.org/101093190",
+          "trialDbId": "1883b402"
+        }
+      ]
+    }
+  },
+  "/studies":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "active": true,
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "commonCropName": "Grape",
+          "contacts": [
+            {
+              "contactDbId": "5f4e5509",
+              "email": "bob@bob.com",
+              "instituteName": "The BrAPI Institute",
+              "name": "Bob Robertson",
+              "orcid": "http://orcid.org/0000-0001-8640-1750",
+              "type": "PI"
+            }
+          ],
+          "culturalPractices": "Irrigation was applied according needs during summer to prevent water stress.",
+          "dataLinks": [
+            {
+              "dataFormat": "Image Archive",
+              "description": "Raw drone images collected for this study",
+              "fileFormat": "application/zip",
+              "name": "image-archive.zip",
+              "provenance": "Image Processing Pipeline, built at the University of Antarctica: https://github.com/antarctica/pipeline",
+              "scientificType": "Environmental",
+              "url": "https://brapi.org/image-archive.zip",
+              "version": "1.0.3"
+            }
+          ],
+          "documentationURL": "https://wiki.brapi.org",
+          "endDate": "2021-03-27T22:31:01.030Z",
+          "environmentParameters": [
+            {
+              "description": "the soil type was clay",
+              "parameterName": "soil type",
+              "parameterPUI": "PECO:0007155",
+              "unit": "pH",
+              "unitPUI": "PECO:0007059",
+              "value": "clay soil",
+              "valuePUI": "ENVO:00002262"
+            }
+          ],
+          "experimentalDesign": {
+            "PUI": "CO_715:0000145",
+            "description": "Lines were repeated twice at each location using a complete block design. In order to limit competition effects, each block was organized into four sub-blocks corresponding to earliest groups based on a prior information."
+          },
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "growthFacility": {
+            "PUI": "CO_715:0000162",
+            "description": "field environment condition, greenhouse"
+          },
+          "lastUpdate": {
+            "timestamp": "2021-03-27T22:31:01.031Z",
+            "version": "1.2.3"
+          },
+          "license": "MIT License",
+          "locationDbId": "3cfdd67d",
+          "locationName": "Location 1",
+          "observationLevels": [
+            {
+              "levelName": "field",
+              "levelOrder": 0
+            },
+            {
+              "levelName": "block",
+              "levelOrder": 1
+            },
+            {
+              "levelName": "plot",
+              "levelOrder": 2
+            }
+          ],
+          "observationUnitsDescription": "Observation units consisted in individual plots themselves consisting of a row of 15 plants at a density of approximately six plants per square meter.",
+          "seasons": [
+            "Spring_2018"
+          ],
+          "startDate": "2021-03-27T22:31:01.031Z",
+          "studyCode": "Grape_Yield_Spring_2018",
+          "studyDescription": "This is a yield study for Spring 2018",
+          "studyName": "INRA's Walnut Genetic Resources Observation at Kenya",
+          "studyPUI": "doi:10.155454/12349537312",
+          "studyType": "Phenotyping",
+          "trialDbId": "48b327ea",
+          "trialName": "Grape_Yield_Trial",
+          "studyDbId": "175ac75a"
+        }
+      ]
+    }
+  },
+  "/studytypes":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ],
+      "pagination": {
+        "pageSize": 1000,
+        "totalCount": 10,
+        "totalPages": 1,
+        "currentPage": 0
+      }
+    },
+    "result": {
+      "data": [
+        "Crossing Nursery",
+        "Yield study"
+      ]
+    }
+  },
+  "/locations":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "abbreviation": "L1",
+          "additionalInfo": {},
+          "coordinateDescription": "North East corner of greenhouse",
+          "coordinateUncertainty": "20",
+          "coordinates": {
+            "geometry": {
+              "coordinates": [
+                -76.506042,
+                42.417373,
+                123
+              ],
+              "type": "Point"
+            },
+            "type": "Feature"
+          },
+          "countryCode": "PER",
+          "countryName": "Peru",
+          "documentationURL": "https://brapi.org",
+          "environmentType": "Nursery",
+          "exposure": "Structure, no exposure",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "instituteAddress": "71 Pilgrim Avenue Chevy Chase MD 20815",
+          "instituteName": "Plant Science Institute",
+          "locationName": "Location 1",
+          "locationType": "Storage Location",
+          "siteStatus": "Private",
+          "slope": "0",
+          "topography": "Valley",
+          "locationDbId": "3cfdd67d"
+        }
+      ]
+    }
+  },
+  "/seasons":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "seasonDbId": "Spring_2018",
+          "seasonName": "Spring",
+          "year": 2018
+        }
+      ]
+    }
+  },
+  "/lists":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {},
+          "dateCreated": "2021-03-27T22:41:57.343Z",
+          "dateModified": "2021-03-27T22:41:57.343Z",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "listDescription": "This is a list of germplasm I would like to investigate next season",
+          "listName": "MyGermplasm_Sept_2020",
+          "listOwnerName": "Bob Robertson",
+          "listOwnerPersonDbId": "58db0628",
+          "listSize": 53,
+          "listSource": "GeneBank Repository 1.3",
+          "listType": "germplasm",
+          "listDbId": "6f621cfa"
+        }
+      ]
+    }
+  },
+  "/people":{
+    "@context": [
+      "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+      "datafiles": [
+        {
+          "fileDescription": "This is an Excel data file",
+          "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+          "fileName": "datafile.xlsx",
+          "fileSize": 4398,
+          "fileType": "application/vnd.ms-excel",
+          "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+        }
+      ],
+      "status": [
+        {
+          "message": "Request accepted, response successful",
+          "messageType": "INFO"
+        }
+      ]
+    },
+    "result": {
+      "data": [
+        {
+          "additionalInfo": {
+            "additionalProp1": "string",
+            "additionalProp2": "string",
+            "additionalProp3": "string"
+          },
+          "description": "Bob likes pina coladas and getting caught in the rain.",
+          "emailAddress": "bob@bob.com",
+          "externalReferences": [
+            {
+              "referenceID": "doi:10.155454/12341234",
+              "referenceSource": "DOI"
+            },
+            {
+              "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+              "referenceSource": "OBO Library"
+            },
+            {
+              "referenceID": "75a50e76",
+              "referenceSource": "Remote Data Collection Upload Tool"
+            }
+          ],
+          "firstName": "Bob",
+          "lastName": "Robertson",
+          "mailingAddress": "123 Street Ave, City, State, Country",
+          "middleName": "Danger",
+          "phoneNumber": "+1-555-555-5555",
+          "userID": "bob-23",
+          "personDbId": "14340a54"
+        }
+      ]
+    }
+  }     
+
+
+
+}
