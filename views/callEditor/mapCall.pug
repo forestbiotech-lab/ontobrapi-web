@@ -3,6 +3,7 @@ block content
   script(src="/javascripts/callEditor.js" async defer)
   include menu
   h2=callName
+  a.btn.btn-danger.btn-block(href="result") Call Result
   table.table
     each attr in Object.entries(json.result.data[0])
       tr

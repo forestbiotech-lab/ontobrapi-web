@@ -4,6 +4,11 @@ var jsonld = require('.././componentes/sparql/jsonld')
 
 // raiz/
 
+
+router.get('/', (req,res)=>{
+  res.json("RAIZ")
+})
+
 router.get('/:ontoTerm',async function(req,res,next){
   let ontoTerm = req.params.ontoTerm
   let queryResults=await jsonld(ontoTerm)

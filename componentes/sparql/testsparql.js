@@ -1,12 +1,16 @@
 const SparqlClient = require('sparql-http-client')
 
-server="localhost" //db 
-const endpointUrl = `http://${server}:8890/sparql`
+const sparql=require('./../../.config').sparql
+
+let host=sparql.host
+let port=sparql.port
+
+const endpointUrl = `http://${host}:${port}/sparql`
 let subject = 's'
 let object = 'o'
 let predicate = 'p'
 const brapi="http://brapi.biodata.pt/"
-const devServer="http://localhost:3000/"
+let devServer="http://localhost:3000/"
 
 const pageSize=10
 
@@ -68,9 +72,10 @@ function getObservations(queryParms,triples){
   return sparqlQuery(queryParms,triples)
 }
 
-async function getAnchors(requestTrip){
+async function getAnchors(server,moduleName,callName,requestTrip){
+  devServer=server
   //Define class and property
-  let callStructure=Object.assign({},getCallStructure("Observation"))
+  let callStructure=Object.assign({},getCallStructure(moduleName,callName))
   let subject,predicate,object
   if(callStructure['_anchor']){
     subject=callStructure['_anchor'].s
@@ -163,14 +168,17 @@ function isOntologicalTerm(value){
   }else{result=false}
   return result
 }
-function getCallStructure(name){
+function getCallStructure(moduleName,callName){
   //Get from componetes/modules/genotyping/schemes/${name}
-  name="observations.json"
   let path="./../modules"
-  let module="genotyping"
-  let callStructurePath=`${path}/${module}/schemes/${name}`
-  let callStructure=require(callStructurePath)
   
+  let callStructurePath=`${path}/${moduleName}/schemes/${callName}`
+  let callStructure
+  try{
+    callStructure=require(callStructurePath)
+  }catch(err){
+    let callStructure={}
+  }
   return callStructure
 }
 

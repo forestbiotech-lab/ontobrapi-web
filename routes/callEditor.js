@@ -10,7 +10,11 @@ const fs = require('fs')
 
 router.get('/',async function(req,res,next){
   try{
-    let queryResults=await testsparql()
+    let server=`${req.protocol}://${req.headers.host}/`
+    let moduleName,callName
+    moduleName="genotyping"
+    callName="observations.json"
+    let queryResults=await testsparql(server,moduleName,callName)
     Promise.all(queryResults.results).then(result=>{
       queryResults.callStructure.result.data=result
       res.json(queryResults.callStructure)
@@ -64,6 +68,25 @@ router.get('/listcalls/:moduleName/:callName/map', async function(req, res, next
   let mapCall="block"
   res.render('callEditor/mapCall', { title: 'Onto BrAPI - Call List',json,callName,anchorProperties,html,mapCall,listCalls,listModules,moduleName})
 });
+
+
+router.get('/listCalls/:moduleName/:callName/result',async function(req,res,next){
+  try{
+    let server=`${req.protocol}://${req.headers.host}/`
+    let {moduleName,callName}=req.params
+    let queryResults=await testsparql(server,moduleName,callName)
+    Promise.all(queryResults.results).then(result=>{
+      queryResults.callStructure.result.data=result
+      res.json(queryResults.callStructure)
+    }).catch(err=>{
+      throw err
+    })  
+  }catch(err){
+    res.json(err)
+  }
+  
+})
+
 
 router.get('/listcalls/:moduleName/:callName/json', function(req, res, next) {
   let moduleName=req.params.moduleName

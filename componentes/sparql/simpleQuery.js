@@ -1,7 +1,14 @@
-var sparql = require('sparql')
-const PORT = 8890
+var sparqlServer = require('sparql')
+const sparql=require('./../../.config').sparql
 
-client = new sparql.Client(`http://localhost:${PORT}/sparql/`)
+let host=sparql.host
+let port=sparql.port
+
+const endpointUrl = `http://${host}:${port}/sparql`
+
+
+
+client = new sparqlServer.Client(endpointUrl)
 
 var query=`SPARQL
 DEFINE get:soft "replace" 

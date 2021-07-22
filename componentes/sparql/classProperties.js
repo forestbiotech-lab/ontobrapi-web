@@ -1,14 +1,15 @@
 const SparqlClient = require('sparql-http-client')
 
-server="localhost" //db 
-const endpointUrl = `http://${server}:8890/sparql`
+const sparql=require('./../../.config').sparql
+
+let host=sparql.host
+let port=sparql.port
+
+const endpointUrl = `http://${host}:${port}/sparql`
+
 let subject = 's'
 let object = 'o'
 let predicate = 'p'
-
-const pageSize=10
-const brapi="http://brapi.biodata.pt/"
-const devServer="http://localhost:3000/"
 
 //Possible solution
 Array.prototype.forEachAsync = async function (fn) {
