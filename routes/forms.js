@@ -7,12 +7,14 @@ const uploadFile=require('./../componentes/helpers/uploadfile')
 const uploadDir=path.join(__dirname,"../uploads/")
 const destination="uploadedfiles"
 const nt=require('./../componentes/generators/nt')
-
+const convertXlsx2json=require('.././componentes/xlsx/convert-xlsx2json')
 
 // forms/
 
 router.post('/datafile/upload',(req,res)=>{
   uploadFile.uploadFileGetPreview(req,uploadDir,destination).then(data=>{
+    //Action is now for jsheet
+    data.jsheet=convertXlsx2json(data.file)
     res.json(data)
   }).catch(err=>{
     let message=err.message
