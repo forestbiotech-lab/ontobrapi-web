@@ -3,7 +3,7 @@ extends layout
 block content
   .container-fluid
     .row
-      .col-8
+      .col-8#app
         .card.bg-light
           .card-header
             h5 Upload 
@@ -12,7 +12,7 @@ block content
             .form-group
               .pocket-progress
               label.sr-only(for="augment-file") Upload file
-              input(hidden,type="file",id="augment-file",placeholder="tsv file",required="",autofocus="",autocomplete="off",name="uploads[]", accept="mime/*,.tsv",study-id=study_id)
+              input(hidden,type="file",id="augment-file",placeholder="tsv file",required="",autofocus="",autocomplete="off",name="uploads[]", accept="mime/*,.tsv,.xlsx",study-id=study_id)
             button.btn.btn-success.btn-block.upload-augment-file(type="button") 
               span.glyphicon.glyphicon-floppy-open
               | &nbsp;upload file
@@ -20,9 +20,23 @@ block content
               .scroll(style="overflow-x:scroll")
                 .dummy(style="width:1000px;height:20px")
               .table-div(style="overflow-x:scroll")
+                .grid#grid
+                  ul.nav nav-tabs")
+                    li.nav-item(v-for="worksheet in worksheets" "v-bind:content"="worksheet.name")
+                      a(class="nav-link active",href="#") Active
+                  canvas-datagrid("v-bind.prop"="grid")
               button.btn.btn-success.btn-block.generate-nt 
                 |Generate N-Triples (NT)
               textarea(cols="120",rows="10").d-none
+        button.btn.btn-secondary(v-on:click="loadXLSX") Load XLSX
+        p {{ message }}
+        #app-test
+          my-tab
+        ul.d-none.nav.nav-tabs#myTab(role="tablist")
+          li.nav-item(v-for="worksheet in worksheets" role="presentation")
+            a.nav-link(v-bind:id="worksheet.tab" v-bind:class="{ active: worksheet.isActive }" v-bind:href="worksheet.ref" role="tab" data-toggle="tab" ) {{ worksheet.name }}
+        .d-none#myTabContent.tab-content
+          .tab-pane.fade(v-bind:id="worksheet.id" v-bind:class="{ active: worksheet.isActive, show: worksheet.isActive }" role="tabpanel" v-bind:aria-labelledby="worksheet.tab" v-for="worksheet in worksheets") {{ worksheet.data }}
       .col-4
         .card.bg-light.menu
           .card-header
