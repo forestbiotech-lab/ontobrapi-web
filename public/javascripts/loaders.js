@@ -63,12 +63,46 @@ $('document').ready(function(){
         displayToast("Warning!","Unsupported file type! Please try again with another file. Should be a tab seperated value (.tsv) file.")
         resetProgressBar(".progress-augment-dynamic")
       }else if( filename.endsWith(".xlsx") ){
-        /*var grid = canvasDatagrid();
-          document.getElementById('grid').appendChild(grid);
-          grid.data = [
-            { col1: 'row 1 column 1', col2: 'row 1 column 2', col3: 'row 1 column 3' },
-            { col1: 'row 2 column 1', col2: 'row 2 column 2', col3: 'row 2 column 3' },
-          ];*/
+        let jSheet=data.jsheet
+        //Set first tab as active
+        jSheet.Workbook.Sheets[0].isActive=true
+        Vue.component('worksheet-tabs',{
+          data:function(){
+            return {
+              sheets:jSheet.Workbook.Sheets,
+              currentTab:"home",
+              worksheets:[
+                {
+                  id:"home",
+                  ref:"#home",
+                  name:"First sheet",
+                  isActive:true,
+                  //tab:"sec-tab",
+                  data:``
+
+                },
+                { 
+                  id:"sec",
+                  ref:"#sec",
+                  name:"second sheet",
+                  //isActive:false,
+                  //tab:"sec-tab",
+                  data: "2- fsfsdf"
+                }
+              ]        
+            }
+          },
+          computed: {
+            currentTabComponent: function() {
+              return "tab-" + this.currentTab.toLowerCase();
+            }
+          },
+          template:vTab()
+        })
+        new Vue({
+          el:"#preview-table"
+        })
+
         self.closest('div').nextAll('.preview-table').removeClass('d-none')
         let gridEl=$('.grid')
         let dummyScrollDiv=self.closest('div').nextAll('.preview-table').find('.scroll .dummy')
@@ -212,10 +246,16 @@ $('document').ready(function(){
   })
 
 
-  function loadXLSX(){
-    
+  function vTab(){
+    return `<ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" v-for="worksheet in sheets" role="presentation">
+                <a class="nav-link" v-bind:click="currentTab" v-bind:id="worksheet.id" v-bind:class="{ active: worksheet.isActive }" role="tab" data-toggle="tab">{{ worksheet.name }}</a>
+              </li>
+            </ul>
+    `
   }
 
+/**
   Vue.component("my-tab",{
     data: function () {
       return {
@@ -247,19 +287,16 @@ $('document').ready(function(){
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade" v-bind:id="worksheet.id" v-bind:class="{ active: worksheet.isActive, show: worksheet.isActive }" role="tabpanel" v-bind:aria-labelledby="worksheet.tab" v-for="worksheet in worksheets">{{ worksheet.data }}
-            <datagrid-wrapper></datagrid-wrapper>
+          <div class="tab-pane fade" v-bind:id="worksheet.id" v-bind:class="{ active: worksheet.isActive, show: worksheet.isActive }" role="tabpanel" v-bind:aria-labelledby="worksheet.tab" v-for="worksheet in worksheets">
+            <component v-bind:is="worksheet.id"></datagrid-wrapper>
           </div>
         </div>  
       </div>
     `}
   )  
-  /*Vue.component("my-tab-content",{template:`
-      <div class="tab-pane fade" v-bind:id="worksheet.id" v-bind:class="{ active: worksheet.isActive, show: worksheet.isActive }" role="tabpanel" v-bind:aria-labelledby="worksheet.tab" v-for="worksheet in worksheets">{{ worksheet.data }}</div>
-  `}
-  )*/
+
   
-  Vue.component("datagrid-wrapper",{
+  Vue.component("home",{
     data:function(){
       return { 
         grid: {
@@ -272,11 +309,18 @@ $('document').ready(function(){
       }
     },  
     template:`<canvas-datagrid v-bind.prop="grid"></canvas-datagrid>`
-  })
+  }) 
 
   var app2= new Vue({
     el:"#app-test",
     data:{
+    }
+  })     
+
+Vue.component('my-tab-test',{
+  data: function () {
+    return {
+      currentTab:"home",
       worksheets:[
         {
           id:"home",
@@ -284,7 +328,7 @@ $('document').ready(function(){
           name:"First sheet",
           isActive:true,
           //tab:"sec-tab",
-          data:`canvas-datagrid("v-bind.prop"="grid")`
+          data:``
 
         },
         { 
@@ -297,45 +341,59 @@ $('document').ready(function(){
         }
       ]        
     }
-  })     
+  },
+  computed: {
+    currentTabComponent: function() {
+      return "tab-" + this.currentTab.toLowerCase();
+    }
+  },
+  template:
+    `<div id="dynamic-component-demo" class="demo">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" v-for="worksheet in worksheets" role="presentation">
+          <a class="nav-link" v-on:click="currentTab = worksheet.id" v-bind:id="worksheet.tab" v-bind:class="{ active: worksheet.isActive }" role="tab" data-toggle="tab">{{ worksheet.name }}</a>
+        </li>
+      </ul>      
+      <component v-bind:is="currentTabComponent" class="tab"></component>
+    </div>`
+  }
+)
 
-
-})
-  Vue.config.ignoredElements = ['canvas-datagrid'];
-  var app = new Vue({
-    el: "#app",
-    data:{
-      message: "Hello Vue!",
+Vue.component("tab-sec",{
+  data:function(){
+    return { 
       grid: {
         data: [
           {col1: 'foo', col2: 0, col3: 'a'},
           {col1: 'bar', col2: 1, col3: 'b'},
           {col1: 'baz', col2: 2, col3: 'c'}
         ]
-      },
-      worksheets:[
-        {
-          id:"home",
-          ref:"#home",
-          name:"First sheet",
-          isActive:true,
-          //tab:"sec-tab",
-          data:"1- fdsfsdfsdfsdfsd"
-
-        },
-        { 
-          id:"sec",
-          ref:"#sec",
-          name:"second sheet",
-          //isActive:false,
-          //tab:"sec-tab",
-          data: "2- fsfsdf"
-        }
-      ]  
-    },
-    methods:{
-      loadXLSX: function(event){
-        loadXLSX()
       }
-    }  
-  })
+    }
+  },  
+  template:`<canvas-datagrid v-bind.prop="grid"></canvas-datagrid>`
+})
+   
+      Vue.component("tab-home", {
+        template: "<div>Home component</div>"
+      });
+
+*/
+Vue.config.ignoredElements = ['canvas-datagrid','my-tab-test'];
+var app = new Vue({
+  el: "#app-test",
+  data:{
+    message: "Hello Vue!",
+  },
+  methods:{
+    loadXLSX: function(event){
+      loadXLSX()
+    }
+  }  
+})
+
+
+
+
+})
+

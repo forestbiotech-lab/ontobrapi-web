@@ -16,27 +16,20 @@ block content
             button.btn.btn-success.btn-block.upload-augment-file(type="button") 
               span.glyphicon.glyphicon-floppy-open
               | &nbsp;upload file
-            .preview-table.d-none
+            .preview-table#preview-table.d-none
+              worksheet-tabs
               .scroll(style="overflow-x:scroll")
                 .dummy(style="width:1000px;height:20px")
               .table-div(style="overflow-x:scroll")
                 .grid#grid
-                  ul.nav nav-tabs")
-                    li.nav-item(v-for="worksheet in worksheets" "v-bind:content"="worksheet.name")
-                      a(class="nav-link active",href="#") Active
-                  canvas-datagrid("v-bind.prop"="grid")
+                  component(v-bind:is="currentTabComponent")
               button.btn.btn-success.btn-block.generate-nt 
                 |Generate N-Triples (NT)
               textarea(cols="120",rows="10").d-none
         button.btn.btn-secondary(v-on:click="loadXLSX") Load XLSX
         p {{ message }}
         #app-test
-          my-tab
-        ul.d-none.nav.nav-tabs#myTab(role="tablist")
-          li.nav-item(v-for="worksheet in worksheets" role="presentation")
-            a.nav-link(v-bind:id="worksheet.tab" v-bind:class="{ active: worksheet.isActive }" v-bind:href="worksheet.ref" role="tab" data-toggle="tab" ) {{ worksheet.name }}
-        .d-none#myTabContent.tab-content
-          .tab-pane.fade(v-bind:id="worksheet.id" v-bind:class="{ active: worksheet.isActive, show: worksheet.isActive }" role="tabpanel" v-bind:aria-labelledby="worksheet.tab" v-for="worksheet in worksheets") {{ worksheet.data }}
+          my-tab-test  
       .col-4
         .card.bg-light.menu
           .card-header
