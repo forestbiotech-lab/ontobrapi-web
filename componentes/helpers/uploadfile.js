@@ -118,7 +118,33 @@ function uploadFileGetPreview(req,uploadDir,destination){
                 }
               });
             }
-          })          
+          })
+        }else if(result.ext=="zip" && result.mime=="application/zip"){
+          let destinationDir=path.join(uploadDir,`/${destination}`)
+          let destinationFile=path.join(destinationDir, file.name)
+          fs.exists(destinationDir, (exists)=>{
+            if(exists){
+             rename(file.path, destinationFile) 
+            }else{
+              fs.mkdir(destinationDir, { recursive: true }, (err)=>{
+                if (err){ 
+                  rej(err);
+                }else{
+                  rename(file.path, destinationFile)  
+                }
+              })  
+            }
+            function rename(inFile,outFile){
+              fs.rename(inFile,outFile, (err)=>{
+                if(err){
+                  rej(err);
+                }else{
+                  file={hash:form.openedFiles[0].hash, name:form.openedFiles[0].name,filePath:destinationDir}
+                  res({filePreview:"",file});             
+                }
+              });
+            }
+          })                        
         }else{
           fs.unlink(file.path, (err)=>{
             err ? rej(err) : res({hash:'',name:"UnsupportedFile"})
