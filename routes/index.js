@@ -34,4 +34,5 @@ router.get('/sparql/raiz/:file',(req,res)=>{
 })
 
 
+
 module.exports = router;
