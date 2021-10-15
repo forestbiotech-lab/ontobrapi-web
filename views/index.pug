@@ -18,16 +18,10 @@ block content
               | &nbsp;upload file
             .preview-table#preview-table.d-none
               worksheet-tabs
-              .scroll(style="overflow-x:scroll")
-                .dummy(style="width:1000px;height:20px")
-              .table-div(style="overflow-x:scroll")
-                .grid#grid
-                  component(v-bind:is="currentTabComponent")
+
               button.btn.btn-success.btn-block.generate-nt 
                 |Generate N-Triples (NT)
               textarea(cols="120",rows="10").d-none
-        button.btn.btn-secondary(v-on:click="loadXLSX") Load XLSX
-        p {{ message }}
         #app-test
           my-tab-test  
       .col-4

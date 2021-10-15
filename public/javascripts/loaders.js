@@ -66,62 +66,83 @@ $('document').ready(function(){
         let jSheet=data.jsheet
         //Set first tab as active
         jSheet.Workbook.Sheets[0].isActive=true
+        
+   //---------------- Load Tabs ----------------//  
         Vue.component('worksheet-tabs',{
           data:function(){
             return {
               sheets:jSheet.Workbook.Sheets,
-              currentTab:"home",
-              worksheets:[
-                {
-                  id:"home",
-                  ref:"#home",
-                  name:"First sheet",
-                  isActive:true,
-                  //tab:"sec-tab",
-                  data:``
-
-                },
-                { 
-                  id:"sec",
-                  ref:"#sec",
-                  name:"second sheet",
-                  //isActive:false,
-                  //tab:"sec-tab",
-                  data: "2- fsfsdf"
-                }
-              ]        
+              currentTab:jSheet.SheetNames[0],
             }
           },
           computed: {
             currentTabComponent: function() {
-              return "tab-" + this.currentTab.toLowerCase();
+              return "tab-" + this.currentTab.replace(/ /g,"-").toLowerCase();
             }
           },
+          mounted: function () {
+            //The first load takes some extra time since it is still loading the grid canvas 
+            setTimeout(function(){syncHorizontalScrolls($('input#augment-file'))},1000)
+          },                     
           template:vTab()
         })
-        new Vue({
-          el:"#preview-table"
+   //---------------- Componets worksheet 0 -----------------------------------------------------//
+     
+        
+        jSheet.SheetNames.forEach(function(sheet){
+          //Don't use a for loop for this. 
+          tabName=sheet.replace(/ /g,"-").toLowerCase()
+          Vue.component(`tab-${tabName}`,{
+            data:function(){
+              return {            
+                grid: {
+                  data: jSheet.jsonSheets[sheet].slice(0,52) //Only first 50 lines //Last 2 are hidden.
+                }
+              }
+            },
+            mounted: function () {
+              syncHorizontalScrolls($('input#augment-file'))
+            },              
+            template:`<canvas-datagrid v-bind.prop="grid"></canvas-datagrid>`
+          })
         })
 
+        Vue.config.ignoredElements = ['canvas-datagrid'];
+        new Vue({                                                  //Anonymous can't get back to it if necessary!!!!
+          el:"#preview-table",
+          data:{
+          },   
+        })
+        
         self.closest('div').nextAll('.preview-table').removeClass('d-none')
-        let gridEl=$('.grid')
-        let dummyScrollDiv=self.closest('div').nextAll('.preview-table').find('.scroll .dummy')
-        let tableScroll=self.closest('div').nextAll('.preview-table').children('.table-div')
-        tableScroll.html(gridEl)//gridEl
+        
+        function syncHorizontalScrolls(self){  //
+            
+          let gridEl=$('.grid')
+          let dummyScrollDiv=self.closest('div').nextAll('.preview-table').find('.scroll .dummy')
+          let tableScroll=self.closest('div').nextAll('.preview-table').find('.table-div')
+          tableScroll.html(gridEl)//gridEl
 
-        dummyScrollDiv.width(self.closest('div').nextAll('.preview-table').find('canvas-datagrid').width())
-        $(function(){
-          let dummyScroll=dummyScrollDiv.closest('.scroll');
-          dummyScroll.scroll(function(){
-              tableScroll.scrollLeft(dummyScroll.scrollLeft());
+          dummyScrollDiv.width(self.closest('div').nextAll('.preview-table').find('canvas-datagrid').width())
+          $(function(){
+            let dummyScroll=dummyScrollDiv.closest('.scroll');
+            dummyScroll.scroll(function(){
+                tableScroll.scrollLeft(dummyScroll.scrollLeft());
+            });
+            tableScroll.scroll(function(){
+                dummyScroll.scrollLeft(tableScroll.scrollLeft());
+            });
           });
-          tableScroll.scroll(function(){
-              dummyScroll.scrollLeft(tableScroll.scrollLeft());
-          });
-        });
+          
+          
+        }
 
+        function resetUploadAbility(){
+          $(".upload-augment-file").text("Upload another file")  
+        }
+        resetUploadAbility()  
 
-
+        
 
       }else{
         let table=makePreviewTable(self,data)
@@ -246,13 +267,27 @@ $('document').ready(function(){
   })
 
 
+/// TODO!! ---- Compile templates and get them via ajax -----///
   function vTab(){
-    return `<ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item" v-for="worksheet in sheets" role="presentation">
-                <a class="nav-link" v-bind:click="currentTab" v-bind:id="worksheet.id" v-bind:class="{ active: worksheet.isActive }" role="tab" data-toggle="tab">{{ worksheet.name }}</a>
-              </li>
-            </ul>
-    `
+    return `<div id="worksheets">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" v-for="worksheet in sheets" role="presentation">
+                  <a class="nav-link" v-bind:key="worksheet.name" v-on:click=" currentTab = worksheet.name " v-bind:id="worksheet.id" v-bind:class="{ active: worksheet.name === currentTab }" role="tab" data-toggle="tab">{{ worksheet.name }}</a>
+                </li>
+              </ul>
+              <div class="scroll" style="overflow-x:scroll">
+                <div class="dummy" style="width:1000px;height:20px"></div>
+              </div>
+              <div class="table-div" style="overflow-x:scroll;overflow-y:scroll;height:500px;">
+                <div class="grid" id="grid">
+                  <component v-bind:is="currentTabComponent"></component>
+                  <div class="alert alert-info" role="alert" style="position:absolute;bottom:55px;left:21px;width:91%">
+                    Only loaded first 50 lines into this preview!
+                  </div>
+                </div>
+              </div>
+            </div>
+            `
   }
 
 /**
@@ -315,7 +350,7 @@ $('document').ready(function(){
     el:"#app-test",
     data:{
     }
-  })     
+  })    
 
 Vue.component('my-tab-test',{
   data: function () {
@@ -351,7 +386,7 @@ Vue.component('my-tab-test',{
     `<div id="dynamic-component-demo" class="demo">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" v-for="worksheet in worksheets" role="presentation">
-          <a class="nav-link" v-on:click="currentTab = worksheet.id" v-bind:id="worksheet.tab" v-bind:class="{ active: worksheet.isActive }" role="tab" data-toggle="tab">{{ worksheet.name }}</a>
+          <a class="nav-link" v-bind:key="worksheet.name" v-on:click="currentTab = worksheet.id" v-bind:id="worksheet.tab" v-bind:class="{ active: worksheet.isActive }" role="tab" data-toggle="tab">{{ worksheet.name }}</a>
         </li>
       </ul>      
       <component v-bind:is="currentTabComponent" class="tab"></component>
@@ -374,12 +409,12 @@ Vue.component("tab-sec",{
   template:`<canvas-datagrid v-bind.prop="grid"></canvas-datagrid>`
 })
    
-      Vue.component("tab-home", {
-        template: "<div>Home component</div>"
-      });
+Vue.component("tab-home", {
+   template: "<div>Home component</div>"
+});*/
 
-*/
-Vue.config.ignoredElements = ['canvas-datagrid','my-tab-test'];
+
+/*Vue.config.ignoredElements = ['canvas-datagrid','my-tab-test'];
 var app = new Vue({
   el: "#app-test",
   data:{
@@ -391,7 +426,7 @@ var app = new Vue({
     }
   }  
 })
-
+*/
 
 
 
