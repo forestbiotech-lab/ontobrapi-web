@@ -15,7 +15,8 @@ block content
               input(hidden,type="file",id="augment-file",placeholder="tsv file",required="",autofocus="",autocomplete="off",name="uploads[]", accept="mime/*,.tsv,.xlsx",study-id=study_id)
             button.btn.btn-success.btn-block.upload-augment-file(type="button")
               span.glyphicon.glyphicon-floppy-open
-              | &nbsp;upload file
+                i.bi-folder2-open  &nbsp; upload file &nbsp;
+                i.bi-file-earmark-excel-fill
             .preview-table#preview-table.d-none
               worksheet-tabs
               button.btn.btn-success.btn-block.generate-nt
@@ -26,7 +27,10 @@ block content
           #mapping-column
             .card
               .card-header
-                h3 Mapping
+                h3 Mapping&nbsp;
+                  span.d-inline-block(tabindex='0' data-toggle='tooltip' v-bind:title="info.mappingHeader")
+                    button.btn.btn-primary(style='pointer-events: none;' type='button' disabled='')
+                      i.bi-info-lg(role="img" aria-label="Information")
                   button.btn.btn-success(v-on:click="downloadMapping" style="float:right;") Download Mapping
                   button.btn.btn-success(type='button' data-toggle='collapse' data-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
                 #loadingPanel.collapse
@@ -36,28 +40,40 @@ block content
               .card-body
                 .form-group
                   label(for="column-selection") Column selection
-                  v-select(:options="columns",v-model="column",id="column-selection" )
+                   information-tooltip(:info="info" label="column-selection")
+                  v-select(:options="columns",v-model="column",id="column-selection" @input="updateCompleteness")
                     template(v-slot:option="option")
                       | {{ option.label }} &nbsp;
-                      span.badge.badge-success
+                      span.badge.badge-success(v-if="completeness[worksheet].columns[option.label].complete")
                         i.bi-check-lg
-              mapping-form(:form-options="formOptions" :selection="selection",:worksheet="worksheet",:column="column",:named-individuals="namedIndividuals")
+                      span.badge.badge-primary(v-if="completeness[worksheet].columns[option.label].complete")
+                        | OPs:{{ completeness[worksheet].columns[option.label].objectProperties }}
+                      span.badge.badge-primary(v-if="completeness[worksheet].columns[option.label].complete")
+                        | DPs:{{ completeness[worksheet].columns[option.label].dataProperties }}
+              mapping-form(:form-options="formOptions" :selection="selection",:worksheet="worksheet",:column="column",:named-individuals="namedIndividuals" :completeness="completeness" :info="info")
           #mapping-select
             .card-body(v-if="column != ''")
-              simple-select(:label="'type'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection")
-              simple-property-select(:label="'name'" :term-type="'Class'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" v-if="selection[worksheet][column].type.name === 'class'")
-              simple-property-select(:label="'name'" :term-type="'DataProperty'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" v-if="selection[worksheet][column].type.name === 'dataProperty'")
-              simple-property-select(:label="'name'" :term-type="'ObjectProperty'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" v-if="selection[worksheet][column].type.name === 'objectProperty'")
-              simple-select(:label="'valueType'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection")
+              simple-select(:label="'type'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" :info="info")
+              simple-property-select(:info="info" :label="'name'" :term-type="'Class'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" v-if="selection[worksheet][column].type.name === 'class'")
+              simple-property-select(:info="info" :label="'name'" :term-type="'DataProperty'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" v-if="selection[worksheet][column].type.name === 'dataProperty'")
+              simple-property-select(:info="info" :label="'name'" :term-type="'ObjectProperty'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" v-if="selection[worksheet][column].type.name === 'objectProperty'")
+              simple-select(:label="'valueType'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" :info="info")
               .form-group(v-bind:input='label = "naming_scheme"')
                 label(v-bind:for="label") {{ getDisplayLabel }}
-                p(v-html="displayTextWithBadges")
-                input.form-control(:id="label" type="text" title="How to call the indivual generated by this" v_bind:name="label" v-model="selection[worksheet][column].naming_scheme")
-                .form-group
+                  information-tooltip(:info="info" :label="label")
                   button.btn.btn-info(v-on:click="setAutoIncrement()" ) auto increment
                   button.btn.btn-info(v-on:click="setValueAttribute()") value
+                p
+                  span.badge.badge-secondary Preview:
+                  span(v-html="displayTextWithBadges")
+                input.form-control(:id="label" type="text" title="How to call the individual generated by this" v_bind:name="label" v-model="selection[worksheet][column].naming_scheme")
+                .form-group
+                  //TODO this isn't properly formatted
                   label(for="refSelector") Reference a Column
+                    information-tooltip(:info="info" label="refSelector")
                   v-select#refSelector(:options="namedIndividuals",@input="setReferenceAttribute")
+              .form-group(v-if="typeof selection[worksheet][column].type == 'object' && typeof selection[worksheet][column].valueType == 'object' && selection[worksheet][column].naming_scheme.length !== 0" )
+                p This is complete
               .card(v-if="selection[worksheet][column].type.name === 'class'")
                 .card-header
                   h4 Properties
@@ -67,7 +83,7 @@ block content
                     .card
                       .card-body(v-for="objectPropertyForm in selection[worksheet][column].objectProperties")
                         .visbility-wrapper(v-if=" objectPropertyForm.show == true ")
-                          property-select(:label="'objectProperty'" :term-type="'ObjectProperty'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm")
+                          property-select(:label="'objectProperty'" :term-type="'ObjectProperty'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info")
                           .form-group
                             label Individuals
                             v-select(:options="namedIndividuals",v-model="selection[worksheet][column].objectProperties[objectPropertyForm.id].refenceNode")
@@ -80,29 +96,64 @@ block content
                   .card
                     .card-body(v-for="dataPropertyForm in selection[worksheet][column].dataProperties")
                       .visbility-wrapper(v-if=" dataPropertyForm.show == true ")
-                        property-select(:label="'dataProperty'" :term-type="'DataProperty'" :property-type="'dataProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="dataPropertyForm")
+                        property-select(:label="'dataProperty'"
+                          :term-type="'DataProperty'"
+                          :property-type="'dataProperties'"
+                          :selection="selection"
+                          :form-options="formOptions"
+                          :worksheet="worksheet"
+                          :column="column"
+                          :data-property-form="dataPropertyForm"
+                          :info="info")
                         .form-group
                           label Value
-                          input.form-control(type="text",v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].data.value")
+                          input.form-control(id="dataPropertyValue" type="text",v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].data.value")
                           button.btn.btn-info(v-on:click="setValueAttribute()") Cell value
                           button.btn.btn-info Data format from cell??
                           label type
-                          v-select(:options='["xsd:integer","xsd:string","xsd:float","xsd:dateTime"]',v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].data.type")
+                          v-select(id="dataPropertyType" :options='["xsd:integer","xsd:string","xsd:float","xsd:dateTime"]',v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].data.type")
                           button.btn.btn-danger.btn-block(v-on:click="removeProperty(dataPropertyForm.id,'dataProperties')") remove property
 
-        #mapping-example.d-none
+        #mapping-templates.d-none
+          #worksheets
+            #worksheets-wrapper
+              ul#myTab.nav.nav-tabs(role='tablist')
+                li.nav-item(v-for='worksheet in sheets' role='presentation')
+                  a.nav-link(v-bind:key='worksheet.name' v-on:click=' currentTab = worksheet.name ' v-bind:id='worksheet.id' v-bind:class='{ active: worksheet.name === currentTab }' role='tab' data-toggle='tab')
+                    | {{ worksheet.name }}
+                    span.badge(v-bind:class="{ 'badge-success': completeness[worksheet.name].complete === completeness[worksheet.name].total, 'badge-danger': completeness[worksheet.name].complete !== completeness[worksheet.name].total  }") {{completeness[worksheet.name].complete}}/{{completeness[worksheet.name].total}}
+              mapping-worksheet#mapping(:worksheet='currentWorkSheet' :columns='currentColumns' :column='column' :completeness='completeness' :info="info")
+              .scroll(style='overflow-x:scroll')
+                .dummy(style='width:1000px;height:20px')
+              .table-div(style='overflow-x:scroll;overflow-y:scroll;height:500px;')
+                #grid.grid
+                  component(v-bind:is='currentTabComponent')
+                  .alert.alert-info(role='alert' style='position:absolute;bottom:55px;left:21px;width:91%')
+                    | Only loaded first 50 lines into this preview!
           #template-property-select
             .form-group
               label(v-bind:for='label') {{ getDisplayLabel }}
+                information-tooltip(:info="info" :label="label")
               v-select(:options="formOptions['name'][termType]" v-bind:id="label" v-model="selection[worksheet][column][propertyType][dataPropertyForm.id].property")
           #template-simple-property-select
             .form-group
               label(v-bind:for="label") {{ getDisplayLabel }}
+                information-tooltip(:info="info" :label="label")
               v-select(:options='formOptions[label][termType]' v-bind:id="label", v-model="selection[worksheet][column][label]" )
           #template-simple-select
             .form-group
               label(v-bind:for="label") {{ getDisplayLabel }}
+                information-tooltip(:label="label" :info="info")
               v-select(:options='formOptions[label]' v-bind:id="label", v-model="selection[worksheet][column][label]" )
+          #template-information-tooltip
+            span.d-inline-block(tabindex='0' data-toggle='tooltip' v-bind:title='info[label]') &nbsp;
+              button.btn.btn-secondary.btn-sm(style='pointer-events: none;' type='button' disabled='')
+                i.bi-info(role="img" aria-label="Information")
+          #template-load-previous-selection
+            .form-group
+              p Do you wish to load your previous selection for this file?
+              button.btn.btn-success.btn-sm#yes(v-on:click="yes") yes
+              button.btn.btn-danger.btn-sm#no(v-on:click="no") no
       .col-4
         .card.bg-light.menu
           .card-header

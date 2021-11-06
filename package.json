@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev-start":"/home/brunocosta/.npm-global/bin/nodemon ./bin/wwww",
+    "test": "/home/brunocosta/.npm-global/bin/nodemon SELENIUM=TRUE ./bin/wwww"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -18,9 +20,11 @@
     "morgan": "~1.9.1",
     "object-hash": "^2.1.1",
     "pug": "^3.0.2",
-    "selenium-webdriver": "^4.0.0",
     "sparql-http-client": "^2.3.0",
     "vue": "^2.6.14",
     "xlsx": "^0.17.3"
+  },
+  "devDependencies": {
+    "selenium-webdriver": "^4.0.0"
   }
 }

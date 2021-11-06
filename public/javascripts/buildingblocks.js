@@ -75,7 +75,7 @@ function makeRow(attributes,contents,metadata,header){
 }
 
 function makeToast(title,body){
-  let toast=mkel('div',{class:"toast",role:"alert","aria-live":"assertive","aria-atomic":"true","data-delay":"20000"})
+  let toast=mkel('div',{class:"toast",id:"toast",role:"alert","aria-live":"assertive","aria-atomic":"true","data-delay":"20000"})
   let toastHeader=mkel('div',{class:"toast-header"})
   let toastBody=mkel('div',{class:"toast-body"})
   toast.append(toastHeader)
@@ -134,6 +134,7 @@ function displayToast(title,body,displayTime,destinationSelector){
   function makeLocation(destinationSelector){
     let attributes=parseJQstring(destinationSelector)
     attributes['style']="position:fixed;top:0;right:0"
+    attributes['id']="toaster"
     mkel('div',attributes,$('body'))
   }  
   function initializeToaster(toaster,delay){
