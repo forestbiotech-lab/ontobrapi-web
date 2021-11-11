@@ -12,7 +12,7 @@ function formatName(text){
     return text.replace(/ /g,"_").toLowerCase()
 }
 
-function traverseWorkSheets(data){
+function traverseWorkSheets(data){  //TODO is it used? For any thing?
     let result={}
 
     Object.entries(data).forEach(([worksheetName,worksheetData])=>{
@@ -52,6 +52,13 @@ function identifyCompleteness(completeness,currentWorksheet,column,columnData){
     completeness[currentWorksheet].columns[column].dataProperties=columnData.dataProperties.length
 }
 
+function getWorksheets(jSheet){
+    return jSheet.SheetNames
+}
+function getColumns(jSheet,worksheet){
+    return jSheet.headers[worksheet]
+}
+
 function makeCompleteness(jSheet){
     let workSheetStructure={
         complete:0,
@@ -64,12 +71,7 @@ function makeCompleteness(jSheet){
         dataProperties:0,
         objectProperties:0
     }
-    function getWorksheets(jSheet){
-        return jSheet.SheetNames
-    }
-    function getColumns(jSheet,worksheet){
-        return Object.keys(jSheet.jsonSheets[worksheet][0])
-    }
+
     function loadColumns(workSheetStructure,columnStructure,jSheet){
         let result={}
         getWorksheets(jSheet).map(worksheet=>{
@@ -185,6 +187,7 @@ function loadOntoTerms(data){
         cardBody.append(makeOntoCard(key,value))
     })  
 }
+//TODO get the xsd properties
 function loadOntologyDataToFormOptions(formOptions){
     try{
         //Classes
@@ -207,7 +210,45 @@ function loadOntologyDataToFormOptions(formOptions){
         displayToast("Ontologies haven't loaded!",err,4000)
     }
 }
-
+function updateGraph(selection,formOptions,worksheet,graph){
+    extractNodes(graph,selection,formOptions,worksheet)
+    extractLinks(graph,selection,formOptions,worksheet)
+    loadChart(graph,"graph-demo")
+    function extractNodes(graph,selection,formOptions,worksheet){
+        graph.nodes=[]
+        Object.entries(selection[worksheet]).forEach(([column,columnAttributes])=>{
+            try {
+                if(columnAttributes.type.name==="class" && columnAttributes.name.name){
+                    let nodeName=columnAttributes.name.name
+                    if(nodeName.length>0){
+                        let nodeIndex=formOptions.name.Class.findIndex(term=> term.name==nodeName)
+                        graph.nodes.push({id:nodeName,group:nodeIndex})
+                    }
+                }
+            }catch(err){
+                displayToast("Error loading a node for graph",err)
+            }
+        })
+    }
+    function extractLinks(graph,selection,formOptions,worksheet){
+        graph.links=[]
+        Object.entries(selection[worksheet]).forEach(([column,columnAttributes])=>{
+            columnAttributes.objectProperties.forEach(property=>{
+                try{
+                    let source=selection[worksheet][column].name.label
+                    let target=selection[worksheet][property.referenceNode].name.label
+                    let selectedObjectProperty=property.property.name
+                    let valueIndex=formOptions.name.ObjectProperty.findIndex(property=>property.name===selectedObjectProperty)
+                    if(typeof source === "string" && typeof target === "string" && typeof valueIndex=== "number"){
+                        graph.links.push({source,target,value:valueIndex})
+                    }
+                }catch(err){
+                    displayToast("Unable to load one of your object properties")
+                }
+            })
+        })
+    }
+}
 function makeOntoCard(header,body){
     let rdfType=header.split("#")[1]
     let title=mkel('button',{

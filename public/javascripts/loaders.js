@@ -62,11 +62,10 @@ $('document').ready(function(){
       if(filename=="UnsupportedFile"){
         displayToast("Warning!","Unsupported file type! Please try again with another file. Should be a tab seperated value (.tsv) file.")
         resetProgressBar(".progress-augment-dynamic")
-      }else if( filename.endsWith(".xlsx") ){
+      }else if( filename.endsWith(".xlsx") || filename.endsWith(".xls") || filename.endsWith(".ods") ){
         let jSheet=data.jsheet
+        window.jSheet=jSheet
         jSheet.file=data.file
-        //Set first tab as active //removable I think
-        jSheet.Workbook.Sheets[0].isActive=true
         let completeness=makeCompleteness(jSheet)
     //---------------- Load Tabs ----------------//
         loadWorksheetTabs(jSheet,completeness) //vue-components.js
@@ -88,7 +87,7 @@ $('document').ready(function(){
           $(".upload-augment-file").text("Upload another file")  
         }
         resetUploadAbility()  
-
+        ntGenerationButton()
         
 
       }else{
@@ -115,12 +114,40 @@ $('document').ready(function(){
   getOntoterms()
   
   
-
-  $('button.generate-nt').click(function(){
-    $('textarea').removeClass('d-none')
-    $('textarea').text("<raiz:study_353> <rdf:type> <ppeo:study>")
-  })
-
+  //TODO transform into FUNCTION. This has to be run when it's loaded. 
+  function ntGenerationButton(){  
+    $('button.generate-nt').click(function(){
+      try{
+        let selection=window.app.$children[0].$children[0].selection
+        let jSheet=window.jSheet
+        let payload=JSON.stringify({selection,jSheet},null, 2)
+        
+        let formData = new FormData();
+        formData.set('payload', payload, );
+        
+        $.ajax({
+          url:"/forms/parse/file/xlsx",
+          method:"POST",
+          contentType:false,
+          processData:false,
+          data:formData,
+          success:function(data,textStatus,jqXHR){
+            loadNTriples(data)
+          },
+          error:function(jqXHR,textStatus,data){
+            displayToast("Some error while generating N-Triples!",data,4000)
+          }
+        })                
+      }catch(err){
+        displayToast("Unable to load data to process!",err,4000)
+      }
+    })
+  }
+  function loadNTriples(data){
+      console.log("Loading NT!")
+      $('textarea').removeClass('d-none')
+      $('textarea').text("<raiz:study_353> <rdf:type> <ppeo:study>")    
+  }
 
 })
 

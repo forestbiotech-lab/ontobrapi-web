@@ -11,10 +11,11 @@ function loadWorksheetTabs(jSheet,completeness){
     refSelector:"Reference Selector information text."
   };
   Vue.component('worksheet-tabs', {
+    template: $('#worksheets').clone()[0],
     data: function () {
       return {
-        sheets: jSheet.Workbook.Sheets,
-        currentTab: jSheet.SheetNames[0],
+        sheets: jSheet.Workbook.Sheets,  //Not available in .ods 
+        currentTab: jSheet.SheetNames[0], //Sets first as active //also known as WorkSheet
         column: "",
         completeness,
         info
@@ -22,13 +23,15 @@ function loadWorksheetTabs(jSheet,completeness){
     },
     computed: {
       currentColumns: function () {
-        return Object.keys(jSheet.jsonSheets[this.currentTab][0])
+        return getColumns(jSheet,this.currentTab)
       },
       currentTabComponent: function () {
         return "tab-" + this.currentTab.replace(/ /g, "-").toLowerCase();
       },
       currentWorkSheet: function () {
-        //this.column=""; //Unnecessary
+        if(this.$children[0]){
+          updateGraph(this.$children[0]._data.selection,this.$children[0]._data.formOptions,this.currentTab,this.$children[0]._data.graph)
+        }
         return this.currentTab
       }
     },
@@ -37,8 +40,7 @@ function loadWorksheetTabs(jSheet,completeness){
       setTimeout(function () {
         syncHorizontalScrolls($('input#augment-file'))
       }, 1000)
-    },
-    template: $('#worksheets').clone()[0] //vTab()//
+    }
   })
 }
 function loadWorksheetGrids(jSheet){
@@ -46,17 +48,19 @@ function loadWorksheetGrids(jSheet){
     //Don't use a for loop for this.
     tabName=sheet.replace(/ /g,"-").toLowerCase()
     Vue.component(`tab-${tabName}`,{
+      template:`<canvas-datagrid v-bind.prop="grid"></canvas-datagrid>`,
       data:function(){
         return {
           grid: {
+            //TODO 
+            // rebuild this based on a header extracted from the csv accounting for empty cells.
             data: jSheet.jsonSheets[sheet].slice(0,52) //Only first 50 lines //Last 2 are hidden.
           }
         }
       },
       mounted: function () {
         syncHorizontalScrolls($('input#augment-file'))
-      },
-      template:`<canvas-datagrid v-bind.prop="grid"></canvas-datagrid>`
+      }
     })
   })
 }
@@ -111,10 +115,14 @@ function loadMapping(jSheet) {
     dataProperties: "",
     objectProperties: "",
   }
-
+  
+  //TODO columns are not calculated properly 
+  //  Columns are not present in JSON if they do not have data.
+  //  Use csv to correct at lest header
+  //  Redo grid data for first 50 lines
   worksheets.map(worksheet => {
     $data[worksheet] = {}
-    Object.keys(jSheet.jsonSheets[worksheet][0]).map(column => {
+    getColumns(jSheet,worksheet).map(column => {
       {
         $data[worksheet][column] = Object.assign({}, selectionStructure)
         $data[worksheet][column].dataProperties=[]
@@ -191,6 +199,7 @@ function componentMappingForm(){
       namedIndividuals:{type:Array},
       completeness:{type:Object},
       info:{type:Object},
+      graph:{type:Object}
     },
     data:function(){
       return {
@@ -230,6 +239,9 @@ function componentMappingForm(){
           console.log("Unable to update reference")
         }
       },
+      updateGraphModel(objectPropertyForm) {
+        updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
+      },
       addPropertyForm:function(propertyType){
         try{
           this.selection[this.worksheet][this.column][propertyType].push({
@@ -262,11 +274,19 @@ function componentSimplePropertySelect() {
       termType: {type: String},
       formOptions: {type: Object},
       selection: {type: Object},
-      info:{type:Object}
+      info:{type:Object},
+      graph:{type:Object},
     },
     computed: {
       getDisplayLabel() {
         return capitalize(this.label)
+      },
+    },
+    methods:{
+      updateGraphModel(){  //How to get this to work
+        if(this.termType=="Class"){
+          updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
+        }
       }
     },
     template: $('#template-simple-property-select').clone()[0]
@@ -274,20 +294,28 @@ function componentSimplePropertySelect() {
 }
 function componentSimpleSelect() {
   Vue.component('simple-select', {
+    template: $('#template-simple-select').clone()[0],
     props: {
       worksheet: {type: String},
       column: {type: String},
       label: {type: String},
       formOptions: {type: Object},
       selection: {type: Object},
-      info:{type:Object}
+      info:{type:Object},
+      graph:{type:Object}
     },
     computed: {
       getDisplayLabel() {
         return capitalize(this.label)
-      }
+      },
     },
-    template: $('#template-simple-select').clone()[0]
+    methods:{
+      updateGraphModel(value){
+        if(value.name!="class" &&  this.label=="type"){
+          updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
+        }
+      }
+    }
   })
 }
 function componentPropertySelect(){
@@ -307,6 +335,9 @@ function componentPropertySelect(){
       getDisplayLabel(){
         return capitalize(this.label)
       }
+    },
+    methods:{
+
     },
     mounted:function(){
       //Loads tooltips
@@ -336,20 +367,27 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
       columns:{type:Array},
       column:{type:String},
       completeness:{type: Object},
-      info:{type:Object}
+      info:{type:Object},
     },
     data:function(){
       return {
         uploadedJSON:"",
         formOptions,
         namedIndividuals:this.columns,  //!! ATTENTION --- This might not be updated
-        selection:$data //Change this to data
+        selection:$data, //Change this to data
+        graph:{
+          links:[],
+          nodes:[]
+        }
       }
     },
     computed:{
 
     },
     methods:{
+      updateGraphModel(){
+        updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
+      },
       updateCompleteness(value){
         if(localStorage){
           localStorage.selection=JSON.stringify(this.selection)  //Save current Selection
@@ -378,6 +416,7 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
           //remove infiltrated functions
           this.selection=parsedJSON
           updateCompleteness(this.selection,this.completeness)
+          this.updateGraphModel()
           $('#loadingPanel.collapse').collapse('hide')
         }catch(err){
           displayToast("Invalid JSON Error",err,4000)
