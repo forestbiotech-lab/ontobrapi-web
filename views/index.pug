@@ -88,13 +88,9 @@ block content
                             label Individuals
                             v-select(:options="namedIndividuals",v-model="selection[worksheet][column].objectProperties[objectPropertyForm.id].referenceNode" @input="updateGraphModel(objectPropertyForm)")
                               template(v-slot:option="option")
-                                | {{ option }} &nbsp;
-                                span.badge.badge-success(v-if="completeness[worksheet].columns[option.label].complete")
-                                //  i.bi-check-lg
-                                //span.badge.badge-primary(v-if="completeness[worksheet].columns[option.label].complete")
-                                //  | OPs:{{ completeness[worksheet].columns[option.label].objectProperties }}
-                                //span.badge.badge-primary(v-if="completeness[worksheet].columns[option.label].complete")
-                                //  | DPs:{{ completeness[worksheet].columns[option.label].dataProperties }}
+                                | {{ option.label }} &nbsp;
+                                span.badge.badge-primary(v-if="selection[worksheet][option.label].type.label") {{ selection[worksheet][option.label].type.label }}
+                                span.badge.badge-success(v-if="selection[worksheet][option.label].name.label") {{ selection[worksheet][option.label].name.label }}
                             button.btn.btn-danger.btn-block(v-on:click="removeProperty(objectPropertyForm.id,'objectProperties')") remove property
 
                 .card-body.dataProperties
