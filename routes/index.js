@@ -10,7 +10,8 @@ var fs = require('fs')
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Onto BrAPI'})
 });
-/* GET home page. */
+
+// Shows and example of the sqarl quary output.
 router.get('/query', function(req, res, next) {
   sparqlQuery().then(queryRes=>{
   	result=queryRes.split('\n')
@@ -20,11 +21,13 @@ router.get('/query', function(req, res, next) {
   })
 });
 
+//Just shows and output example of a JSON file.
 router.get('/parse', function(req, res, next) {
   let attr=require('./../componentes/attrlist.js')
   res.json(attr)
 });
 
+//Sends a file in the upload dir based on the URL parameter file
 router.get('/sparql/raiz/:file',(req,res)=>{
   let fileName=req.params.file
   let data = fs.readFileSync(`${__dirname}/../uploads/uploadedfiles/${fileName}.nt`)
