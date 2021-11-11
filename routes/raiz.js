@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jsonld = require('.././componentes/sparql/jsonld')
 
-// raiz/
+// raiz ontological terms
 
 
 router.get('/', (req,res)=>{
