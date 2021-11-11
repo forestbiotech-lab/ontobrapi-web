@@ -1,4 +1,4 @@
-var height=600
+var height=300
 var width=300
 
 function chart(data,id) {
