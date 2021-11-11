@@ -24,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use('/', indexRouter);
 app.use('/raiz', raizRouter);
 app.use('/users', usersRouter);
@@ -47,4 +48,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+if(process.env.SELENIUM=="TRUE"){
+  require("./test/testUpload")
+}
 module.exports = app;
