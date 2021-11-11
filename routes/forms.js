@@ -60,6 +60,50 @@ router.get('/ontologycomments/:ontology/',(req,res)=>{
     res.end(message)
   })
 })
+
+router.post('/parse/file/xlsx',async (req,res)=>{
+  try{
+    let payload=await new Promise((resolve,rej)=>{
+        const formidable=require("formidable")
+        // create an incoming form object
+        var form = new formidable.IncomingForm();
+        form.multiples = false;
+        // log any errors that occur
+        form.on('error', function(err) {
+          console.log('An error has occured: \n' + err);
+          rej(err);
+        });
+        // once all the files have been uploaded, send a response to the client
+        form.on('end', function() {
+          //Not necessary for single file
+        });
+        // parse the incoming request containing the form data
+        form.parse(req,(err,field,files)=>{
+          if(err) rej(err)
+          if(field){
+            resolve(JSON.parse(field.payload))
+          }else{
+            rej(new Error("Something failed while retreiving data from client!"))
+          }
+          
+        });
+    })
+    let selection=payload.selection
+    let jSheet=payload.jSheet
+    nt.json(jSheet,selection).then(data=>{
+      res.json(data)
+    }).catch(err=>{
+      let message=err.message
+      res.writeHead( 400, message, {'content-type' : 'text/plain'});
+      res.end(message)
+    })
+  }catch(err){
+    let message=err.message
+    res.writeHead( 400, message, {'content-type' : 'text/plain'});
+    res.end(message)
+  }
+})
+
 router.get('/parse/file/json',(req,res)=>{
   try{
     let files=[]
