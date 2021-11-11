@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev-start":"/home/brunocosta/.npm-global/bin/nodemon ./bin/wwww",
-    "test": "/home/brunocosta/.npm-global/bin/nodemon SELENIUM=TRUE ./bin/wwww"
+    "dev-start-debug": "SELENIUM=TRUE PORT=3000 mode=DEVELOPMENT /home/brunocosta/.npm-global/bin/nodemon --inspect ./bin/wwww",
+    "test": "SELENIUM=TRUE PORT=3002 mode=DEVELOPMENT /home/brunocosta/.npm-global/bin/nodemon ./bin/wwww"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
