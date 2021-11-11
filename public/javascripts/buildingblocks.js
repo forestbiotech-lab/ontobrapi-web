@@ -81,7 +81,7 @@ function makeToast(title,body){
   toast.append(toastHeader)
   toast.append(toastBody)
 
-  let img=mkel('img',{class:"rounded mr-2",src:"...",alt:"..."})
+  //let img=mkel('img',{class:"rounded mr-2",src:"...",alt:"..."})
   let strong=mkel('strong',{class:"mr-auto pr-4"})
   let small=mkel('small',{class:"text-muted"})
   strong.textContent=title
@@ -112,7 +112,7 @@ function displayToast(title,body,displayTime,destinationSelector){
   let toaster=getToaster(destinationSelector)
   initializeToaster(toaster,displayTime)  //How to test if necessary?
   throwToast(toaster,toast)  //Not JS element
-
+  
   function selectDestinationSelector(destinationSelector){
     let defaultSelector='.toaster.toaster-default.building-blocks'
     if(destinationSelector){
@@ -146,7 +146,25 @@ function displayToast(title,body,displayTime,destinationSelector){
   function throwToast(toaster,toast){
     if(toast){
       toaster.append(toast)
-      toaster.children().last().toast('show')
+      let jQueryToast=toaster.children().last()
+      jQueryToast.toast('show')
+      
+      let startTime=new Date()
+      updateLaunchTime(startTime,jQueryToast,2000)
+
+      function updateLaunchTime(startTime,toast,updateFrequency){
+        if(toast.hasClass("showing") || toast.hasClass("show")){
+          setTimeout(function(){
+            setToastLaunchedTime(startTime,toast,updateFrequency)    
+          },updateFrequency)
+        }
+      }
+      function setToastLaunchedTime(startTime,toast,updateFrequency){
+        let now=new Date()
+        let elapsedTime=new Date(now-startTime).getSeconds()
+        updateLaunchTime(startTime,toast,updateFrequency)
+        toast.find('small').text(`${elapsedTime}s ago`)
+      }      
       //Update timer on toast
       //While shown
       //TODO
