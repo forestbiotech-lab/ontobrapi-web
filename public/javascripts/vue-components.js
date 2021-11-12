@@ -218,7 +218,7 @@ function componentMappingForm(){
         return this.selection[this.worksheet][this.column][this.label]
             .replace("@{auto_increment}",`<span class="badge badge-info">Auto Increment</span>`)
             .replace("@{value}",`<span class="badge badge-success">Value</span>`)
-            .replace(/#{([\w *\w*]*)}/g,`<span class="badge badge-danger">$1</span>`)
+            .replace(/@{([\w *\w*]*)}/g,`<span class="badge badge-danger">$1</span>`)
 
       }
     },
@@ -234,7 +234,7 @@ function componentMappingForm(){
       },
       setReferenceAttribute(value){
         try{
-          this.selection[this.worksheet][this.column].naming_scheme+="#{"+value+"}"
+          this.selection[this.worksheet][this.column].naming_scheme+="@{"+value+"}"
         }catch(err){
           console.log("Unable to update reference")
         }

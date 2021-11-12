@@ -146,7 +146,7 @@ $('document').ready(function(){
   function loadNTriples(data){
       console.log("Loading NT!")
       $('textarea').removeClass('d-none')
-      $('textarea').text("<raiz:study_353> <rdf:type> <ppeo:study>")    
+      $('textarea').text(data)
   }
 
 })

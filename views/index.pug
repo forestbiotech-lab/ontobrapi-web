@@ -21,7 +21,7 @@ block content
               worksheet-tabs
               button.btn.btn-success.btn-block.generate-nt
                 |Generate N-Triples (NT)
-              textarea(cols="120",rows="10").d-none
+              textarea(cols="120",rows="10" style="width:100%;").d-none
         #template.d-none
         #mapping.d-none
           #mapping-column
@@ -120,7 +120,7 @@ block content
 
         #mapping-templates.d-none
           #worksheets
-            #worksheets-wrapper
+            #worksheets-wrapper(style="position:relative;")
               ul#myTab.nav.nav-tabs(role='tablist')
                 li.nav-item(v-for='worksheet in sheets' role='presentation')
                   a.nav-link(v-bind:key='worksheet.name' v-on:click=' currentTab = worksheet.name ' v-bind:id='worksheet.id' v-bind:class='{ active: worksheet.name === currentTab }' role='tab' data-toggle='tab')
@@ -132,7 +132,7 @@ block content
               .table-div(style='overflow-x:scroll;overflow-y:scroll;height:500px;')
                 #grid.grid
                   component(v-bind:is='currentTabComponent')
-                  .alert.alert-info(role='alert' style='position:absolute;bottom:55px;left:21px;width:91%')
+                  .alert.alert-info(role='alert' style='position:absolute;bottom:0px;left:21px;width:91%')
                     | Only loaded first 50 lines into this preview!
           #template-property-select
             .form-group

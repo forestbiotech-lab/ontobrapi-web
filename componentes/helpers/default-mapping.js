@@ -139,7 +139,7 @@ let mapping={
         DataProperties:[
           {hasSpecies:{value:"globulus", type:"xsd:string"}},
           {hasGenus:{value:"Eucalyptus",type:"xsd:string"}},
-          {hasTaxonIdentifier:{value:"http://purl.bioontology.org/ontology/NCBITAXON/34317",type:"xsd:anyURI"}},
+          {hasTaxonIdentifier:{value:"http://purl.bioontology.org/ontology/NCBITAXON/34317",type:"xsd:anyURI"}},  //incorrect
           {hasInternalIdentifier:{value:"@{value}",type:"xsd:integer"}},
           //{hasDescription:{value:"unknown parents#{mustbecodedsomehow}",type:"xsd:string"}} //
         ]
@@ -267,7 +267,7 @@ let mapping={
       properties:{
         ObjectProperties:[],
         DataProperties:[
-          { hasEnvironmentParameter: "#{solo_fao}"},
+          { hasEnvironmentParameter: "#{solo_fao}"},  //Probably ObjectProperties
           { hasEnvironmentParameter: "#{PMA}"}, 
           { hasEnvironmentParameter: "#{P678}"},
           { hasEnvironmentParameter: "#{DPS1mm}"},

@@ -63,6 +63,8 @@ router.get('/ontologycomments/:ontology/',(req,res)=>{
 
 router.post('/parse/file/xlsx',async (req,res)=>{
   try{
+    //TODO refactor this whole logic elsewhere. 
+    // encasulate "req" to send. 
     let payload=await new Promise((resolve,rej)=>{
         const formidable=require("formidable")
         // create an incoming form object
@@ -90,7 +92,7 @@ router.post('/parse/file/xlsx',async (req,res)=>{
     })
     let selection=payload.selection
     let jSheet=payload.jSheet
-    nt.json(jSheet,selection).then(data=>{
+    nt.str(jSheet,selection).then(data=>{
       res.json(data)
     }).catch(err=>{
       let message=err.message

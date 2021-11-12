@@ -1,6 +1,6 @@
 const fs=require('fs')
 const path=require('path')
-const mapping=require('./../helpers/default-mapping')
+//const mapping=require('./../helpers/default-mapping')
 const Triples=require('./../helpers/triples')
 
 
@@ -10,35 +10,22 @@ module.exports={str,json}
 function str(files,mapping){
   return openAndSort(files,mapping,type="str")
 }
-function json(files,mapping){
-  return openAndSort(files,mapping,type="json")
+function json(jSheet,mapping){
+  return openAndSort(jSheet,mapping,type="json")
 }
-function openAndSort(files,mappings,type){
+function openAndSort(jSheet,mappings,type){
   return new Promise((res,rej)=>{
-    let openFiles={}
-    //Might be better with async or opening files as buffer
-    files.forEach(file=>{
-      let basename=path.basename(file,'.tsv')
-      let data=fs.readFileSync(file,'utf8')
-      openFiles[basename]={filename:file,contents:({parsedFile,header,distinctElements}=getDistintElementsFromEachColumn(data,headerLineNumber=0))}
+    let spreadSheet={}
+    jSheet.SheetNames.forEach(sheet=>{
+      let data=jSheet.jsonSheets[sheet] 
+      let csvData=jSheet.csvSheets[sheet]
+      spreadSheet[sheet]={sheet,contents:({parsedFile,header,distinctElements}=getDistintElementsFromEachColumn(data,csvData,headerLineNumber=0))}
     })
-    res(makeTriples(openFiles,type))
-    
-/*  fs.readFile(file,'utf8',(err,data)=>{
-      if (err){
-        rej(err)
-      }else{
-        var parsedFile,distinctElements,header;
-        ({parsedFile,header,distinctElements}=getDistintElementsFromEachColumn(data,headerLineNumber=0))
-        res(makeTriples(parsedFile,header,distinctElements,type))
-      }
-    })
-  */
-
+    res(makeTriples(spreadSheet,mappings,type))
   })
 }
 
-function makeTriples(openFiles,type){
+function makeTriples(spreadSheet,mapping,type){
 
   //START HARDCODED BLOCK ------------------------------------------------------------------------------------------------------
   let prefixes={}
@@ -127,38 +114,45 @@ function makeTriples(openFiles,type){
   
   parsedFile,header,distinctElements
   
-  Object.entries(openFiles).forEach(([file,data])=>{
+  Object.entries(spreadSheet).forEach(([sheetName,data])=>{
     let parsedFile,header,distinctElements
     ({parsedFile,header,distinctElements}=data.contents)
-    let fileName=file.split(" - ")[1]
-    makeNamedNodes(triples,distinctElements,dependentClasses,fileName)
+    makeNamedNodes(triples,distinctElements,dependentClasses,sheetName)
   })
-  Object.entries(openFiles).forEach(([file,data])=>{
+  Object.entries(spreadSheet).forEach(([sheetName,data])=>{
     let parsedFile,header,distinctElements
     ({parsedFile,header,distinctElements}=data.contents)
-    let fileName=file.split(" - ")[1]
-    addProperties(parsedFile,fileName,header,triples)
+    addProperties(parsedFile,sheetName,header,triples)
   })
 
-  function makeNamedNodes(triples,distinctElements,dependentClasses,fileName){
+  function makeNamedNodes(triples,distinctElements,dependentClasses,sheetName){
     Object.entries(distinctElements).forEach(([columnHeader,values])=>{
-      let valueMap=mapping[fileName][columnHeader]
-      if(!dependentClasses.includes(valueMap.name)){
+      let valueMap=mapping[sheetName][columnHeader]
+      refactor(valueMap) //Object added by vue are no longer strings, this converts them to strings except the arrays
+      if(!dependentClasses.includes(valueMap.name)){  //TODO fix this name=Object not string
         values.forEach(value=>{
           triples.makeNamedNode(valueMap,value)
         })
       }//Observation namednodes are generated when the line is being parsed.
     })
   }
-  function addProperties(parsedFile,fileName,header,triples){
+  function addProperties(parsedFile,sheetName,header,triples){
     parsedFile.forEach((line)=>{
-      line.forEach((value,column)=>{
-        let columnHeader=header[column]
-        mapping[fileName][columnHeader].currentLine=line
-        mapping[fileName][columnHeader].header=header
-        mapping[fileName][columnHeader].mapping=mapping[fileName]
-        triples.parseLineItem(mapping[fileName][columnHeader],value)
+      Object.entries(line).forEach(([column,value])=>{  //column == index ??? value== value  
+        mapping[sheetName][column].currentLine=line
+        mapping[sheetName][column].header=header
+        mapping[sheetName][column].mapping=mapping[sheetName]
+        triples.parseLineItem(mapping[sheetName][column],value)
       })
+    })
+  }
+  function refactor(valueMap){
+    Object.entries(valueMap).forEach(([attributeName,attributeValue])=>{
+      if ((attributeValue instanceof Object) && !(attributeValue instanceof Array)){
+        if(attributeValue.name){
+          valueMap[attributeName]=attributeValue.name
+        }
+      } 
     })
   }
 
@@ -166,26 +160,41 @@ function makeTriples(openFiles,type){
   return triples[typeFunctions[type]]()
 }
 
-function getDistintElementsFromEachColumn(data,headerLineNumber){
+function getDistintElementsFromEachColumn(data,csvData,headerLineNumber){
   let result={}
   let header=[]
   let parsedFile=[]
-  data.split("\n").forEach((line,index)=>{
-    line=line.replace(/\t/g,"@£@")
-    line=line.trim()
-    line=line.replace(/@£@/g,"\t")
-    if(index==headerLineNumber){
-      header=line.split('\t')
-      header.forEach(column=>{
+  data.forEach((line,index)=>{
+    //line=line.replace(/\t/g,"@£@")
+    //line=line.replace(/@£@/g,"\t")
+
+    if(index<=headerLineNumber){ //Might rewrite a couple of time if number is big but usally it should be small. 
+      header=csvData.split("\n")[index].split(",")
+      let emptyNumber=""
+      header.forEach((column,index)=>{
+        if(column==""){
+          column="__EMPTY"+emptyNumber 
+          if(emptyNumber==""){
+            emptyNumber="_1"
+          }else{
+            emptyNumber="_"+(parseInt(emptyNumber.replace(/_+/g,""))+1)
+          }
+        }
         result[column]={}
       })
     }else{
-      parsedFile.push(line.split('\t'))
-      line.split('\t').forEach((column,index)=>{
-        result[header[index]][column]=""
+      let newLine={}
+      //Renaming the columns if we change the header
+      Object.entries(line).map(([key,value],index)=>{Object.assign(newLine,{[header[index]]:value})})
+      parsedFile.push(newLine)
+      
+      //Store unique value only as the key. 
+      Object.entries(line).forEach(([column,data])=>{
+        result[column][data]=""
       })
     }
   })
+  //Restructure the entries to only have the array of unique value
   Object.entries(result).forEach(([key,value])=>{
     result[key]=Object.keys(value)
   })

@@ -235,12 +235,14 @@ function updateGraph(selection,formOptions,worksheet,graph){
         Object.entries(selection[worksheet]).forEach(([column,columnAttributes])=>{
             columnAttributes.objectProperties.forEach(property=>{
                 try{
-                    let source=selection[worksheet][column].name.label
-                    let target=selection[worksheet][property.referenceNode].name.label
-                    let selectedObjectProperty=property.property.name
-                    let valueIndex=formOptions.name.ObjectProperty.findIndex(property=>property.name===selectedObjectProperty)
-                    if(typeof source === "string" && typeof target === "string" && typeof valueIndex=== "number"){
-                        graph.links.push({source,target,value:valueIndex})
+                    if (property.show===true) {
+                        let source = selection[worksheet][column].name.label
+                        let target = selection[worksheet][property.referenceNode].name.label
+                        let selectedObjectProperty = property.property.name
+                        let valueIndex = formOptions.name.ObjectProperty.findIndex(property => property.name === selectedObjectProperty)
+                        if (typeof source === "string" && typeof target === "string" && typeof valueIndex === "number") {
+                            graph.links.push({source, target, value: valueIndex})
+                        }
                     }
                 }catch(err){
                     displayToast("Unable to load one of your object properties")
