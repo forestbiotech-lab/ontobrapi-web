@@ -68,7 +68,7 @@ $('document').ready(function(){
         jSheet.file=data.file
         let completeness=makeCompleteness(jSheet)
     //---------------- Load Tabs ----------------//
-        loadWorksheetTabs(jSheet,completeness) //vue-components.js
+        await loadWorksheetTabs(jSheet,completeness) //vue-components.js
     //---------------- Components worksheets -----------------------------------------------------//
 
         loadWorksheetGrids(jSheet)

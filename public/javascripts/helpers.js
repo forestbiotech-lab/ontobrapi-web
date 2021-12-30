@@ -225,6 +225,21 @@ async function loadXSDdatatypes(){
         })
     })
 }
+async function loadDataStructure(name){
+    return new Promise((res,rej)=>{
+        $.ajax({
+            url:`/query/dataStructures/${name}`,
+            method:"GET",
+            success:function(data,textStatus,jqXHR){
+                res(data)
+            },
+            error:function(jqXHR,textStatus,err){
+                displayToast("Error loading dataStructure",err,4000)
+                rej(err)
+            }
+        })
+    })
+}
 function updateGraph(selection,formOptions,worksheet,graph){
     extractNodes(graph,selection,formOptions,worksheet)
     extractLinks(graph,selection,formOptions,worksheet)

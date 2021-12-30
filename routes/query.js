@@ -3,7 +3,8 @@ var router = express.Router();
 var xsd = require("@ontologies/xsd")
 var classProperties = require('./../componentes/sparql/classProperties')
 var formOptions=require('./../componentes/dataStructures/formOptions')
-
+var info=require('./../componentes/dataStructures/info')
+var formOptions=require('./../componentes/dataStructures/formOptions')
 // query/
 
 /* GET users listing. */
@@ -21,7 +22,12 @@ router.get('/xsd/datatypes/', function(req, res) {
   res.json(xsd)
 });
 
-
+router.get('/dataStructures/info/', function(req, res) {
+  res.json(info)
+});
+router.get('/dataStructures/formOptions/', function(req, res) {
+  res.json(formOptions)
+});
 
 
 module.exports = router;
