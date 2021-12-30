@@ -1,3 +1,9 @@
+## NGINX
+add the following line to location section of your server in nginx config file. To allow body size to be larger. This is for the ajax request to send mapping and jsheet
+
+```bash
+client_max_body_size 2M;
+````
 # ontoBrAPI-node-docker
 Docker file for the webserver running on Node JS
 
