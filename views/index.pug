@@ -46,7 +46,7 @@ block content
                   v-select(:options="columns",v-model="column",id="column-selection" @input="updateCompleteness")
                     template(v-slot:option="option")
                       | {{ option.label }} &nbsp;
-                      span.badge.bg-success(v-if="completeness[worksheet].columns[option.label].complete")
+                      span.badge.bg-success(v-if="completeness[worksheet].columns[option.label].complete")  //TODO discriminate between classes and dataProperties
                         i.bi-check-lg
                       span.badge.bg-primary(v-if="completeness[worksheet].columns[option.label].complete")
                         | OPs:{{ completeness[worksheet].columns[option.label].objectProperties }}
@@ -91,13 +91,14 @@ block content
                           property-select(:label="'objectProperty'" :term-type="'ObjectProperty'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info")
                           .form-group
                             label Individuals
+                            //TODO selectable for classes only make a new method in component
                             v-select(:options="namedIndividuals",v-model="selection[worksheet][column].objectProperties[objectPropertyForm.id].referenceNode" @input="updateGraphModel(objectPropertyForm)")
                               template(v-slot:option="option")
                                 | {{ option.label }} &nbsp;
                                 span.badge.bg-primary(v-if="selection[worksheet][option.label].type.label") {{ selection[worksheet][option.label].type.label }}
                                 span.badge.bg-success(v-if="selection[worksheet][option.label].name.label") {{ selection[worksheet][option.label].name.label }}
-                            .d-grid
-                              button.btn.btn-danger(v-on:click="removeProperty(objectPropertyForm.id,'objectProperties')") remove property
+                          .d-grid
+                            button.btn.btn-danger(v-on:click="removeProperty(objectPropertyForm.id,'objectProperties')") remove property
 
                 .card-body.dataProperties
                   .d-grid
@@ -107,24 +108,32 @@ block content
                   .card
                     .card-body(v-for="dataPropertyForm in selection[worksheet][column].dataProperties")
                       .visibility-wrapper(v-if=" dataPropertyForm.show == true ")
-                        property-select(:label="'dataProperty'"
-                          :term-type="'DataProperty'"
-                          :property-type="'dataProperties'"
-                          :selection="selection"
-                          :form-options="formOptions"
-                          :worksheet="worksheet"
-                          :column="column"
-                          :data-property-form="dataPropertyForm"
-                          :info="info")
+                        //TODO remove this
+                        //property-select(:label="'dataProperty'"
+                        //  :term-type="'DataProperty'"
+                        //  :property-type="'dataProperties'"
+                        //  :selection="selection"
+                        //  :form-options="formOptions"
+                        //  :worksheet="worksheet"
+                        //  :column="column"
+                        //  :data-property-form="dataPropertyForm"
+                        //  :info="info")
+                        //.form-group
+                        //  label Value
+                        //  input.form-control(id="dataPropertyValue" type="text",v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].data.value")
+                        //  button.btn.btn-info(v-on:click="setValueAttribute()") Cell value
+                        //  button.btn.btn-info Data format from cell??
+                        //  label type
+                        //  v-select(id="dataPropertyType" :options='["xsd:integer","xsd:string","xsd:float","xsd:dateTime","xsd:anyURL"]',v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].data.type") //TODO import xsd values
                         .form-group
-                          label Value
-                          input.form-control(id="dataPropertyValue" type="text",v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].data.value")
-                          button.btn.btn-info(v-on:click="setValueAttribute()") Cell value
-                          button.btn.btn-info Data format from cell??
-                          label type
-                          v-select(id="dataPropertyType" :options='["xsd:integer","xsd:string","xsd:float","xsd:dateTime","xsd:anyURL"]',v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].data.type") //TODO import xsd values
-                          .d-grid
-                            button.btn.btn-danger(v-on:click="removeProperty(dataPropertyForm.id,'dataProperties')") remove property
+                          label Properties
+                          v-select(:options="namedIndividuals",:selectable="disableClasses",v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].referenceNode" @input="updateGraphModel(dataPropertyForm)")
+                            template(v-slot:option="option")
+                              | {{ option.label }} &nbsp;
+                              span.badge.bg-primary(v-if="selection[worksheet][option.label].type.label") {{ selection[worksheet][option.label].type.label }}
+                              span.badge.bg-success(v-if="selection[worksheet][option.label].name.label") {{ selection[worksheet][option.label].name.label }}
+                        .d-grid
+                          button.btn.btn-danger(v-on:click="removeProperty(dataPropertyForm.id,'dataProperties')") remove property
 
         #mapping-templates.d-none
           #worksheets
