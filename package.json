@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev-start":"/home/brunocosta/.npm-global/bin/nodemon ./bin/wwww",
+    "dev-start": "/home/brunocosta/.npm-global/bin/nodemon ./bin/wwww",
     "dev-start-debug": "SELENIUM=TRUE PORT=3000 mode=DEVELOPMENT /home/brunocosta/.npm-global/bin/nodemon --inspect ./bin/wwww",
     "test": "SELENIUM=TRUE PORT=3002 mode=DEVELOPMENT /home/brunocosta/.npm-global/bin/nodemon ./bin/wwww"
   },
   "dependencies": {
+    "@ontologies/core": "^2.0.2",
+    "@ontologies/xsd": "^2.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "detect-file-type": "^0.2.8",

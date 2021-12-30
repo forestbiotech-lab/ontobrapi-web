@@ -56,7 +56,7 @@ $('document').ready(function(){
         return xhr;
       }
     }
-    function success(data){
+    async function success(data){
       filename=data.file.name
       hash=data.file.hash
       if(filename=="UnsupportedFile"){
@@ -73,12 +73,12 @@ $('document').ready(function(){
 
         loadWorksheetGrids(jSheet)
         //Loads the other components
-        loadMapping(jSheet)
+        await loadMapping(jSheet)
         Vue.config.ignoredElements = ['canvas-datagrid'];
         window.app = new Vue({                                                  //Anonymous can't get back to it if necessary!!!!
           el:"#preview-table",
           data:{
-          },   
+          },
         })
 
         self.closest('div').nextAll('.preview-table').removeClass('d-none')
@@ -92,9 +92,9 @@ $('document').ready(function(){
             }
           })
         }
-        resetUploadAbility()  
+        resetUploadAbility()
         ntGenerationButton()
-        
+
 
       }else{
         let table=makePreviewTable(self,data)

@@ -210,6 +210,21 @@ function loadOntologyDataToFormOptions(formOptions){
         displayToast("Ontologies haven't loaded!",err,4000)
     }
 }
+async function loadXSDdatatypes(){
+    return new Promise((res,rej)=>{
+        $.ajax({
+            url:"/query/xsd/datatypes",
+            method:"GET",
+            success:function(data,textStatus,jqXHR){
+                res(data)
+            },
+            error:function(jqXHR,textStatus,err){
+                displayToast("Error",err,4000)
+                rej(err)
+            }
+        })
+    })
+}
 function updateGraph(selection,formOptions,worksheet,graph){
     extractNodes(graph,selection,formOptions,worksheet)
     extractLinks(graph,selection,formOptions,worksheet)

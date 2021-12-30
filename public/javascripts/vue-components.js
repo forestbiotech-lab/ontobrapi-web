@@ -16,7 +16,6 @@ function loadWorksheetTabs(jSheet,completeness){
       return {
         sheets: jSheet.Workbook.Sheets,  //Not available in .ods 
         currentTab: jSheet.SheetNames[0], //Sets first as active //also known as WorkSheet
-        column: "",
         completeness,
         info
       }
@@ -33,6 +32,11 @@ function loadWorksheetTabs(jSheet,completeness){
           updateGraph(this.$children[0]._data.selection,this.$children[0]._data.formOptions,this.currentTab,this.$children[0]._data.graph)
         }
         return this.currentTab
+      }
+    },
+    methods: {
+      resetColumnSelection(){
+        this.$children[0].column=""
       }
     },
     mounted: function () {
@@ -69,7 +73,7 @@ Vue.component('v-select', VueSelect.VueSelect);
 
 //TODO
 // Split all the components into individual loader functions
-function loadMapping(jSheet) {
+async function loadMapping(jSheet) {
 
   //TODO AJAX this as JSON file
   let formOptions = {
@@ -92,8 +96,8 @@ function loadMapping(jSheet) {
       label: "String (xsd:string)",
       name: "xsd:string"
     }, {
-      label: "Integer (xsd:integer??)",
-      name: "integer"   //Possibly a xsd:integer
+      label: "Integer (xsd:integer)",
+      name: "integer"
     }, {
       label: "Not Applicable",
       name: "NA"
@@ -112,52 +116,64 @@ function loadMapping(jSheet) {
     dataProperties: "",
     objectProperties: "",
   }
-  
+
   //TODO columns are not calculated properly 
   //  Columns are not present in JSON if they do not have data.
   //  Use csv to correct at lest header
   //  Redo grid data for first 50 lines
   worksheets.map(worksheet => {
     $data[worksheet] = {}
-    getColumns(jSheet,worksheet).map(column => {
+    getColumns(jSheet, worksheet).map(column => {
       {
         $data[worksheet][column] = Object.assign({}, selectionStructure)
-        $data[worksheet][column].dataProperties=[]
-        $data[worksheet][column].objectProperties=[]
+        $data[worksheet][column].dataProperties = []
+        $data[worksheet][column].objectProperties = []
       }
     })
   })
 
-  function loadPreviousSelectionFromLocalStorage(jSheet,$data){
-    let result=null
-    if(localStorage){
+  function loadPreviousSelectionFromLocalStorage(jSheet, $data) {
+    let result = null
+    if (localStorage) {
       if (localStorage.selection && localStorage.fileHash) {
         if (localStorage.fileHash === jSheet.file.hash) {
-          let timeout=4000
+          let timeout = 4000
           displayToast("Previous Selection Available", document.createElement("load-previous-selection"), timeout)
-          result=JSON.parse(localStorage.selection)
-          componentPreviousSelection(result,timeout)
+          result = JSON.parse(localStorage.selection)
+          componentPreviousSelection(result, timeout)
 
         }
       }
       localStorage.fileHash = jSheet.file.hash
     }
   }
-  loadPreviousSelectionFromLocalStorage(jSheet,$data)
-  
-  $data=validateSelectionJSON(jSheet,$data,selectionStructure)
+
+  loadPreviousSelectionFromLocalStorage(jSheet, $data)
+
+  $data = validateSelectionJSON(jSheet, $data, selectionStructure)
 
   loadOntologyDataToFormOptions(formOptions)
+
+  try {
+    let xsdDatatypes = await loadXSDdatatypes()
+    formOptions.valueType=Object.keys(xsdDatatypes).map(value=>{return {"name":value,"label":value}})
+    formOptions.valueType.unshift({
+      label: "Named Node",
+      name: "named_node"
+    })
+  } catch (e) {
+    displayToast("Unable to load!","There was a problem while attempting to load xsd data types!")
+  }
 
   componentMappingForm()
   componentSimplePropertySelect()
   componentSimpleSelect()
   componentPropertySelect()
-  componentMappingWorksheet(formOptions,$data)
+  componentMappingWorksheet(formOptions, $data)
   componentInformationTooltip()
 
-  Vue.config.warnHandler= function(msg,vm,trace){
-    if(msg === `Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "column"`){
+  Vue.config.warnHandler = function (msg, vm, trace) {
+    if (msg === `Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "column"`) {
       //Do nothing
     }
   }
@@ -213,13 +229,16 @@ function componentMappingForm(){
       },
       displayTextWithBadges(){
         return this.selection[this.worksheet][this.column][this.label]
-            .replace("@{auto_increment}",`<span class="badge badge-info">Auto Increment</span>`)
-            .replace("@{value}",`<span class="badge badge-success">Value</span>`)
-            .replace(/@{([\w *\w*]*)}/g,`<span class="badge badge-danger">$1</span>`)
+            .replace("@{auto_increment}",`<span class="badge bg-info">Auto Increment</span>`)
+            .replace("@{value}",`<span class="badge bg-success">Value</span>`)
+            .replace(/@{([\w *\w*]*)}/g,`<span class="badge bg-danger">$1</span>`)
 
       }
     },
     methods:{
+      disableClasses(value){
+        return this.selection[this.worksheet][value].type.name=="dataProperty"
+      },
       removeProperty(index,propertyType){
         this.selection[this.worksheet][this.column][propertyType][index].show=false
       },
@@ -236,7 +255,11 @@ function componentMappingForm(){
           console.log("Unable to update reference")
         }
       },
-      updateGraphModel(objectPropertyForm) {
+      updateDataProperty(propertyForm){
+        this.selection[this.worksheet][this.column].dataProperties[propertyForm.id].data.value=this.selection[this.worksheet][propertyForm.referenceNode].name.name
+        this.selection[this.worksheet][this.column].dataProperties[propertyForm.id].data.type=this.selection[this.worksheet][propertyForm.referenceNode].valueType.name
+      },
+      updateGraphModel(PropertyForm) {  //TODO is this ok for dataProperties?
         updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
       },
       addPropertyForm:function(propertyType){
@@ -374,15 +397,14 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
     props:{
       worksheet:{type:String},
       columns:{type:Array},
-      column:{type:String},
       completeness:{type: Object},
       info:{type:Object},
     },
     data:function(){
       return {
+        column:"",
         uploadedJSON:"",
         formOptions,
-        namedIndividuals:this.columns,  //!! ATTENTION --- This might not be updated
         selection:$data, //Change this to data
         graph:{
           links:[],
@@ -391,7 +413,9 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
       }
     },
     computed:{
-
+      namedIndividuals(){
+        return this.columns
+      }
     },
     methods:{
       updateGraphModel(){

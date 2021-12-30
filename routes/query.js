@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var xsd = require("@ontologies/xsd")
 var classProperties = require('./../componentes/sparql/classProperties')
+var formOptions=require('./../componentes/dataStructures/formOptions')
 
 // query/
 
@@ -14,6 +16,11 @@ router.get('/ppeo/class/:class/properties/', async function(req, res, next) {
   let queryResult=await classProperties(className)
   res.json(queryResult)  
 });
+
+router.get('/xsd/datatypes/', function(req, res) {
+  res.json(xsd)
+});
+
 
 
 
