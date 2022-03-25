@@ -10,7 +10,7 @@ block content
         td
         - key=attr[0]
           p
-            button.btn.btn-primary(key=key,type='button' data-toggle='collapse' data-target=`#${key}` aria-expanded='false' aria-controls=`#${key}`) #{key} 
+            button.btn.btn-primary(key=key,type='button' data-bs-toggle='collapse' data-bs-target=`#${key}` aria-expanded='false' aria-controls=`#${key}`) #{key}
               span.badge.bg-success=attr[1]
           .collapse(id=`${key}`)
             .card.card-body(layer="0")
