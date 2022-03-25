@@ -287,8 +287,8 @@ function makeOntoCard(header,body){
       class:"btn btn-link btn-block text-left",
       title:header,
       type:'button',
-      "data-toggle":'collapse',
-      "data-target":`#${rdfType}`,
+      "data-bs-toggle":'collapse',
+      "data-bs-target":`#item-${rdfType}`,
       "aria-expanded":'false', 
       "aria-controls":rdfType,
       id:`drag-${rdfType}`
@@ -299,6 +299,7 @@ function makeOntoCard(header,body){
     body.forEach(item=>{
       let li=mkel('li',{
       class:"list-group-item",
+
       draggable:"true",
       title:item,
       ondragstart:"drag(event)",
@@ -310,13 +311,13 @@ function makeOntoCard(header,body){
     return card
 }
 function makeCard(header,body){
-    let card=mkel('div',{class:"card"})
+    let card=mkel('div',{class:"card accordion",id:`parent-${header.textContent}`})
     let cardHeader=mkel('div',{class:"card-header",id:header.textContent},card)
     let collapse=mkel('div',{
-      id:header.textContent,
+      id:`item-${header.textContent}`,
       class:"collapse",
       "aria-labelledby":header.textContent,
-      "data-parent":'#accordian-rdf-type'
+      "data-bs-parent":`parent-${header.textContent}`,
     },card)
     let cardBody=mkel('div',{class:"card-body"},collapse)
     cardHeader.append(header)

@@ -29,13 +29,13 @@ block content
           #mapping-column
             .card
               .card-header
-                h3 Mapping&nbsp;
+                h3#mapping-loading-options Mapping&nbsp;
                   span.d-inline-block(tabindex='0' data-toggle='tooltip' v-bind:title="info.mappingHeader")
                     button.btn.btn-primary(style='pointer-events: none;' type='button' disabled='')
                       i.bi-info-lg(role="img" aria-label="Information")
                   button.btn.btn-success(v-on:click="downloadMapping" style="float:right;") Download Mapping
-                  button.btn.btn-success(type='button' data-toggle='collapse' data-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
-                #loadingPanel.collapse
+                  button.btn.btn-success(type='button' data-bs-toggle='collapse' data-bs-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
+                #loadingPanel.collapse(aria-labelledby="load-mapping", data-bs-parent="#mapping-loading-options")
                   .card.card-body
                     textarea(style="font-size: x-small;" col="120",rows="10" v-model="uploadedJSON")
                     button.btn.btn-sm.btn-info(v-on:click="loadJSON") load
@@ -193,6 +193,6 @@ block content
         .card.bg-light.ontology-terms
           .card-header
             h5 Rdf Syntax Type
-          .card-body#accordian-rdf-type
+          .card-body#accordion-rdf-type
             .spinner-border(role='status')
             span.align-self-center &nbsp;Loading terms...
