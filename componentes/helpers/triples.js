@@ -2,7 +2,7 @@ const hash = require('object-hash');
 
 class Triples{
   constructor(prefixes,dependentClasses,default_named_nodes){
-    this.type=["class","objectProperty"] //Unecessary 
+    this.type=["class","objectProperty"] //Unnecessary
     this.dependentClasses=dependentClasses //Possible rename 
     this.ontology={
                     base:"miappe",
@@ -175,7 +175,7 @@ class Triples{
 
       //Subject
       naming_scheme=this.interpolator(mapping.naming_scheme,context)
-      triple.s=`<raiz:${naming_scheme}>`
+      triple.s=`<raiz:${encodeURI(naming_scheme)}>`  //Sanitize node names as URIs
       if(mapping.name=="observation"){
         mapping.node_name=naming_scheme
       }
@@ -228,11 +228,11 @@ class Triples{
     }
   }
   isReferencedSubject(string){
-    let re = new RegExp(/[#@]{[\w \(\)\/-]+}/g)
+    let re = new RegExp(/[#@]{[\w \(\)\/-\\*]+}/g)
     return string.match(re)
   }
   isReference(string){
-    let re = new RegExp(/#{[\w \(\)\/-]+}/g)
+    let re = new RegExp(/#{[\w \(\)\/-\\*]+}/g)
     return string.match(re)
   }
   makeObservationFromSubject(isSubject,value,mapping,context){
@@ -348,6 +348,7 @@ class Triples{
   }
   complete(element,that,recusion){
     let prefixes=Object.keys(that.triples.prefix)
+
     let re=new RegExp(/<(\w+):/)
     let match=element.match(re)
     if(match){
