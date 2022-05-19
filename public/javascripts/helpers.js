@@ -12,14 +12,6 @@ function formatName(text){
     return text.replace(/ /g,"_").toLowerCase()
 }
 
-function traverseWorkSheets(data){  //TODO is it used? For any thing?
-    let result={}
-
-    Object.entries(data).forEach(([worksheetName,worksheetData])=>{
-        result[worksheetName]=getWorksheetColumns(worksheetData)
-    })
-    return result
-}
 function updateWorksheetCompleteness(selection,completeness,currentWorksheet){
     let countCompleteColumns=0
     Object.entries(selection[currentWorksheet]).forEach(([column,columnData])=>{
@@ -60,17 +52,8 @@ function getColumns(jSheet,worksheet){
 }
 
 function makeCompleteness(jSheet){
-    let workSheetStructure={
-        complete:0,
-        total:0,
-        columnNames:[],
-        columns:{}
-    }
-    let columnStructure={
-        complete:false,
-        dataProperties:0,
-        objectProperties:0
-    }
+    let workSheetStructure=window.structures.completeness.worksheet
+    let columnStructure=window.structures.completeness.column
 
     function loadColumns(workSheetStructure,columnStructure,jSheet){
         let result={}
@@ -90,7 +73,8 @@ function makeCompleteness(jSheet){
 }
 //TODO
 // not finished
-function validateSelectionJSON(jSheet,$data,selectionScheme){
+function validateSelectionJSON(jSheet,$data){
+    //TODO overwrites the saved Selection
     window.selection=$data
     try{
         let worksheets=jSheet.SheetNames
@@ -98,14 +82,32 @@ function validateSelectionJSON(jSheet,$data,selectionScheme){
         //add missing
         let missingWorksheets=[]
         let extraWorksheets=[]
-        Object.entries($data).forEach(([worksheet,sheetMeta])=>{
+        Object.entries($data).forEach(([worksheet,selectionSheetMeta])=>{
             if ( worksheets.indexOf(worksheet) === -1 ){
                 extraWorksheets.push(worksheet)
             }else{
-                let extraColumns=[]
-                Object.entries(sheetMeta).forEach(([column,selection])=>{
-                    //if( Object.keys(jSheet.jsonSheets[worksheet]) )
+                let selectionExtraColumns=[]
+                let selectionMissingColumns=[]
+                let jSheetColumns=getColumns(jSheet,worksheet)
+                let selectionColumns=Object.keys(selectionSheetMeta)
+
+                Object.entries(selectionSheetMeta).forEach(([selectionColumn,selectionColumnEntries])=>{
+                    if (jSheetColumns.indexOf(selectionColumn) === -1){
+                        selectionExtraColumns.push(selectionColumn)
+                    }
                 })
+
+                jSheetColumns.forEach(jSheetColumn=>{
+                    if(selectionColumns.indexOf(jSheetColumn) === -1 ){
+                        selectionMissingColumns.push(jSheetColumn)
+                    }
+                })
+                if(selectionExtraColumns.length > 0 || selectionMissingColumns.length > 0){
+                    displayToast("Mismatch between Mapping and SpreadSheet",`Uploaded mapping has <${worksheet}> with the following missing columns: << ${selectionMissingColumns} >>. And your spreadsheet doesn't have the following columns: << ${selectionExtraColumns} >> present in your mapping.`,600000)
+                }
+
+
+                selectionMissingColumns.forEach( column=>$data=window.structures.addColumnToSelection($data,worksheet,column) )
             }
 
         })
@@ -116,9 +118,11 @@ function validateSelectionJSON(jSheet,$data,selectionScheme){
         extraWorksheets.forEach(worksheet=>delete $data[worksheet])
         //adds Missing worksheets
         missingWorksheets.forEach(worksheet=>{
-            Object.keys(jSheet.jsonSheets[worksheet][0]).map(column=>{{$data[worksheet][column]=Object.assign({},selectionScheme)}})
+            $data[worksheet]={}
+            getColumns(jSheet,worksheet).forEach( column=>{
+                $data=window.structures.addColumnToSelection($data,worksheet,column)
+            })
         })
-
         return $data
     }catch(err){
         console.log("Invalid Selection JSON!")
@@ -265,7 +269,7 @@ function updateGraph(selection,formOptions,worksheet,graph){
         Object.entries(selection[worksheet]).forEach(([column,columnAttributes])=>{
             columnAttributes.objectProperties.forEach(property=>{
                 try{
-                    if (property.show===true) {
+                    if (property.show===true && property.referenceNode !== '') {
                         let source = selection[worksheet][column].name.label
                         let target = selection[worksheet][property.referenceNode].name.label
                         let selectedObjectProperty = property.property.name
@@ -326,12 +330,6 @@ function makeCard(header,body){
 }
 
 
-//Possible removal
-function listCompleteAttributesAndProperties(data){
-    traverseWorkSheets(data)
-    //TODO load completeness template
-
-}
 window.allowDrop=function(ev) {
     ev.preventDefault();
 }

@@ -40,19 +40,26 @@ block content
                     textarea(style="font-size: x-small;" col="120",rows="10" v-model="uploadedJSON")
                     button.btn.btn-sm.btn-info(v-on:click="loadJSON") load
               .card-body
-                .form-group
-                  label(for="column-selection") Column selection
-                   information-tooltip(:info="info" label="column-selection")
-                  v-select(:options="columns",v-model="column",id="column-selection" @input="updateCompleteness")
-                    template(v-slot:option="option")
-                      | {{ option.label }} &nbsp;
-                      span.badge.bg-success(v-if="completeness[worksheet].columns[option.label].complete")
-                        i.bi-check-lg
-                      span.badge.bg-dark(v-if="completeness[worksheet].columns[option.label].complete") {{ selection[worksheet][option.label].type.label }}
-                      span.badge.bg-primary(v-if="completeness[worksheet].columns[option.label].complete")
-                        | OPs:{{ completeness[worksheet].columns[option.label].objectProperties }}
-                      span.badge.bg-primary(v-if="completeness[worksheet].columns[option.label].complete")
-                        | DPs:{{ completeness[worksheet].columns[option.label].dataProperties }}
+                .form-group.row.gy-2.gx-3.align.items-center
+                  .col-auto
+                    label(for="column-selection") Column selection
+                     information-tooltip(:info="info" label="column-selection")
+                  .col-auto
+                    v-select(:options="columns",v-model="column",id="column-selection" @input="updateCompleteness",style="min-width:300px;")
+                      template(v-slot:option="option")
+                        | {{ option.label }} &nbsp;
+                        span.badge.bg-success(v-if="completeness[worksheet].columns[option.label].complete")
+                          i.bi-check-lg
+                        span.badge.bg-dark(v-if="completeness[worksheet].columns[option.label].complete") {{ selection[worksheet][option.label].type.label }}
+                        span.badge.bg-primary(v-if="completeness[worksheet].columns[option.label].complete")
+                          | OPs:{{ completeness[worksheet].columns[option.label].objectProperties }}
+                        span.badge.bg-primary(v-if="completeness[worksheet].columns[option.label].complete")
+                          | DPs:{{ completeness[worksheet].columns[option.label].dataProperties }}
+                  .col-auto
+                    input.form-control(type="text",placeholder="Name missing class" v-model="missingClass" :style="{ 'background-color': missingClassBGcolor }",@keyup.enter="addMissingClass" )
+                    //Todo validate if column exists
+                  .col-auto
+                    button.btn.btn-primary(@click="addMissingClass") Add missing Class
               mapping-form(:form-options="formOptions" :selection="selection",:worksheet="worksheet",:column="column",:named-individuals="namedIndividuals" :completeness="completeness" :info="info", :graph="graph")
           #mapping-select
             .card-body(v-if="column != ''")
@@ -105,27 +112,11 @@ block content
                   .d-grid
                     button.btn.btn-secondary(v-on:click="addPropertyForm('dataProperties')") Add data Properties
                   .d-properties-wrapper
+                  //TODO check if necessary or if should be nested
                   #mapping-properties.d-none
                   .card
                     .card-body(v-for="dataPropertyForm in selection[worksheet][column].dataProperties")
                       .visibility-wrapper(v-if=" dataPropertyForm.show == true ")
-                        //TODO remove this
-                        //property-select(:label="'dataProperty'"
-                        //  :term-type="'DataProperty'"
-                        //  :property-type="'dataProperties'"
-                        //  :selection="selection"
-                        //  :form-options="formOptions"
-                        //  :worksheet="worksheet"
-                        //  :column="column"
-                        //  :data-property-form="dataPropertyForm"
-                        //  :info="info")
-                        //.form-group
-                        //  label Value
-                        //  input.form-control(id="dataPropertyValue" type="text",v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].data.value")
-                        //  button.btn.btn-info(v-on:click="setValueAttribute()") Cell value
-                        //  button.btn.btn-info Data format from cell??
-                        //  label type
-                        //  v-select(id="dataPropertyType" :options='["xsd:integer","xsd:string","xsd:float","xsd:dateTime","xsd:anyURL"]',v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].data.type") //TODO import xsd values
                         .form-group
                           label Properties
                           v-select(:options="namedIndividuals",:selectable="disableClasses",v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].referenceNode" @input="updateGraphModel(dataPropertyForm);updateDataProperty(dataPropertyForm)")

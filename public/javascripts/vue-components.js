@@ -66,16 +66,10 @@ Vue.component('v-select', VueSelect.VueSelect);
 async function loadMapping(jSheet) {
 
   let formOptions=await loadDataStructure("formOptions")
-
   let worksheets = jSheet.SheetNames
   let $data = {}
-  let selectionStructure = {
-    type: "",
-    name: "",
-    naming_scheme: "",
-    dataProperties: "",
-    objectProperties: "",
-  }
+  //TODO maybe not here but these things should be set all in the same place and globally accessible but immutable except through copy.
+
 
   //TODO columns are not calculated properly 
   //  Columns are not present in JSON if they do not have data.
@@ -85,9 +79,7 @@ async function loadMapping(jSheet) {
     $data[worksheet] = {}
     getColumns(jSheet, worksheet).map(column => {
       {
-        $data[worksheet][column] = Object.assign({}, selectionStructure)
-        $data[worksheet][column].dataProperties = []
-        $data[worksheet][column].objectProperties = []
+        $data = window.structures.addColumnToSelection($data,worksheet,column)
       }
     })
   })
@@ -101,7 +93,6 @@ async function loadMapping(jSheet) {
           displayToast("Previous Selection Available", document.createElement("load-previous-selection"), timeout)
           result = JSON.parse(localStorage.selection)
           componentPreviousSelection(result, timeout)
-
         }
       }
       localStorage.fileHash = jSheet.file.hash
@@ -110,7 +101,7 @@ async function loadMapping(jSheet) {
 
   loadPreviousSelectionFromLocalStorage(jSheet, $data)
 
-  $data = validateSelectionJSON(jSheet, $data, selectionStructure)
+  $data = validateSelectionJSON(jSheet, $data)
 
   loadOntologyDataToFormOptions(formOptions)
 
@@ -363,6 +354,7 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
     data:function(){
       return {
         column:"",
+        missingClass:"",
         uploadedJSON:"",
         formOptions,
         selection:$data, //Change this to data
@@ -375,9 +367,30 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
     computed:{
       namedIndividuals(){
         return this.columns
+      },
+      validMissingClass(){
+        return this.columns.indexOf(this.missingClass) === -1
+      },
+      missingClassBGcolor(){
+        return this.validMissingClass ? "white" : "red"
       }
     },
     methods:{
+      addMissingClass(){
+        if(this.validMissingClass === true){
+          //TODO Why does this duplicate?
+          //this.columns.push(this.missingClass)
+
+          //TODO verify that this works with vue or if I have to do it property
+          this.completeness[this.worksheet].total++
+          this.completeness[this.worksheet].columnNames.push(this.missingClass)
+
+          Vue.set(this.completeness[this.worksheet].columns,this.missingClass,window.structures.completeness.column)
+          window.structures.addColumnToSelection(this.selection,this.worksheet,this.missingClass)
+          this.missingClass=""
+          //TODO add to selection, and possibly some other data structures. Export function to add column to <<selection>> in validateSelection.
+        }
+      },
       updateGraphModel(){
         updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
       },
@@ -401,7 +414,7 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
         try{
           let parsedJSON=JSON.parse(this.uploadedJSON)
           //Ensure this works!
-          //validateSelectionJSON(jSheet,this.uploadedJSON,selectionStructure)
+          parsedJSON=validateSelectionJSON(window.jSheet,parsedJSON)
           //validateWorksheets()  //add missing worksheets
           //validateColumns()      //add missing columns
           //validateStructure()   //add missing structure
