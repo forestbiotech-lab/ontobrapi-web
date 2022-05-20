@@ -1,4 +1,4 @@
-const {Builder, By, Key, until} = require('selenium-webdriver');
+const {Builder, By, until} = require('selenium-webdriver');
 const chrome = require("selenium-webdriver/chrome");
 const firefox = require("selenium-webdriver/firefox")
 const {Keyboard} = require("selenium-webdriver/lib/input");
@@ -66,7 +66,7 @@ let switchColumn=true;
             //await driver.wait(until.elementLocated(By.id("vs1__option-1"))).click()
             //await driver.findElement(By.css('body')).sendKeys(Key.F12)  //Try to open console not working like this
         }
-        //await driver.wait(sleep(20000))
+        await driver.wait(sleep(20000))
         await driver.wait(until.elementLocated(By.css(".visibility-wrapper #objectProperty")));   //does nothing
     } finally {
         await driver.quit();
