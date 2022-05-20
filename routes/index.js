@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var sparqlQuery = require('.././componentes/sparql/sparqlQuery')
-var path=require('path')
-var fs = require('fs')
+const express = require('express');
+const router = express.Router();
+let sparqlQuery = require('.././componentes/sparql/sparqlQuery')
+const path=require('path')
+const fs = require('fs')
 
 // / no previous route 
 

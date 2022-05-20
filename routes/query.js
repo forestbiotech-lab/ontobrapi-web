@@ -1,10 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var xsd = require("@ontologies/xsd")
-var classProperties = require('./../componentes/sparql/classProperties')
-var formOptions=require('./../componentes/dataStructures/formOptions')
-var info=require('./../componentes/dataStructures/info')
-var formOptions=require('./../componentes/dataStructures/formOptions')
+const express = require('express');
+const router = express.Router();
+let xsd = require("@ontologies/xsd")
+let classProperties = require('./../componentes/sparql/classProperties')
+let formOptions=require('./../componentes/dataStructures/formOptions')
+let info=require('./../componentes/dataStructures/info')
+
 // query/
 
 /* GET users listing. */
