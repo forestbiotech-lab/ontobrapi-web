@@ -45,7 +45,7 @@ block content
                     label(for="column-selection") Column selection
                      information-tooltip(:info="info" label="column-selection")
                   .col-auto
-                    v-select(:options="columns",v-model="column",id="column-selection" @input="updateCompleteness",style="min-width:300px;")
+                    v-select(:options="columns",v-model="column",id="column-selection" @input="updateCompleteness",style="min-width:400px;")
                       template(v-slot:option="option")
                         | {{ option.label }} &nbsp;
                         span.badge.bg-success(v-if="completeness[worksheet].columns[option.label].complete")
@@ -96,6 +96,7 @@ block content
                     .card
                       .card-body(v-for="objectPropertyForm in selection[worksheet][column].objectProperties")
                         .visibility-wrapper(v-if=" objectPropertyForm.show == true ")
+                          property-select(:label="'objectProperty'" :term-type="'ObjectProperty'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info")
                           property-select(:label="'objectProperty'" :term-type="'ObjectProperty'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info")
                           .form-group
                             label Individuals

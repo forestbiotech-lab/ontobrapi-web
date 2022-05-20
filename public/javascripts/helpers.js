@@ -32,6 +32,7 @@ function identifyCompleteness(completeness,currentWorksheet,column,columnData){
     let attributes=["type","name","naming_scheme"]
     let result=true
     attributes.forEach(attr=>{
+
         if(typeof columnData[attr] === "string"){
             //if string and length == 0 result will become false
             result= result && columnData[attr].length > 0
@@ -40,8 +41,14 @@ function identifyCompleteness(completeness,currentWorksheet,column,columnData){
         }
     })
     completeness[currentWorksheet].columns[column].complete=result
-    completeness[currentWorksheet].columns[column].objectProperties=columnData.objectProperties.length
-    completeness[currentWorksheet].columns[column].dataProperties=columnData.dataProperties.length
+    //TODO check if it's filled
+    // property.name !=== "" can't do thing on a oneliner because if property doen't exist it will induce an error. But this is incomplete
+    completeness[currentWorksheet].columns[column].objectProperties=columnData.objectProperties.reduce( (amount ,objectProperty)=>{
+        return amount + (objectProperty.property !== "" && objectProperty.referenceNode !== "") ? 1:0} , 0
+    )
+    completeness[currentWorksheet].columns[column].dataProperties=columnData.dataProperties.reduce( (amount, dataProperty)=>{
+        return amount + dataProperty.referenceNode !== "" ? 1:0 }, 0
+    )
 }
 
 function getWorksheets(jSheet){
