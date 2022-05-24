@@ -1,6 +1,8 @@
-// This is a test for this module
-// Not actively in use
 
+   ////////////////////////////////////
+  // This is a test for this module //
+ // Not actively in use            //
+////////////////////////////////////
 
 var sparqlServer = require('sparql')
 const sparql=require('./../../.config').sparql
