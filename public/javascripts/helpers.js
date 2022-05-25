@@ -42,7 +42,7 @@ function identifyCompleteness(completeness,currentWorksheet,column,columnData){
     })
     completeness[currentWorksheet].columns[column].complete=result
     //TODO check if it's filled
-    // property.name !=== "" can't do thing on a oneliner because if property doen't exist it will induce an error. But this is incomplete
+    // property.name !=== "" can't do thing on a oneliner because if property doesn't exist it will induce an error. But this is incomplete
     completeness[currentWorksheet].columns[column].objectProperties=columnData.objectProperties.reduce( (amount ,objectProperty)=>{
         return amount + (objectProperty.property !== "" && objectProperty.referenceNode !== "") ? 1:0} , 0
     )

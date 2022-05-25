@@ -120,6 +120,7 @@ async function loadMapping(jSheet) {
   componentSimplePropertySelect()
   componentSimpleSelect()
   componentPropertySelect()
+  componentInferredPropertySelect()
   componentMappingWorksheet(formOptions, $data)
   componentInformationTooltip()
 
@@ -170,7 +171,7 @@ function componentMappingForm(){
       return {
         displayLabel:"",
         label:"",
-        currentSelectOptions:[{}],  //Removable???
+        //currentSelectOptions:[{}],  //TODO Removable???
         termType:"",
         formType:"",
       }
@@ -321,7 +322,85 @@ function componentPropertySelect(){
       }
     },
     methods:{
+      async queryInferredProperties(){
+        let type=this.selection[this.worksheet][this.column].type.name
+        let name=this.selection[this.worksheet][this.column].name.name
+        let vselectVM=this.$children[1]
+        let loading=vselectVM.loading
+        if(type === "class" && name !== "" && this.termType=="objectPropertyInferred"){
+          loading=true
+          this.formOptions.name.objectPropertyInferred=await $.get(`/query/inferred/objectProperty/${name}`)
+          vselectVM.options=this.formOptions.name.objectPropertyInferred
+          loading=false
+        }else{
+          this.formOptions.name.objectPropertyInferred=[]
 
+          loading=false
+        }
+      },
+      loadInferredDestinationClass(options){
+        try {
+          let destinationClass = options.destination.split("#")[1]
+          let destinationColumn = Object.entries(this.selection[this.worksheet]).find(value=> {
+            return value[1].name.name == destinationClass
+          })
+          if(destinationColumn !== undefined ){
+            this.selection[this.worksheet][this.column].objectProperties[this.dataPropertyForm.id].referenceNode=destinationColumn[0]
+          }else{
+            this.selection[this.worksheet][this.column].objectProperties[this.dataPropertyForm.id].referenceNode=""
+          }
+        }catch (e) {
+          //TODO something if necessary, but be careful because one of the exceptions is the lack of options.destination to split typeError
+          this.selection[this.worksheet][this.column].objectProperties[this.dataPropertyForm.id].referenceNode=""
+        }
+      }
+    },
+    mounted:function(){
+      //Loads tooltips
+      $('[data-toggle="tooltip"]').tooltip()
+    }
+  })
+}
+//TODO Remove Or Repurpose. !!!NOT USED!!
+function componentInferredPropertySelect(){
+  Vue.component('inferred-property-select',{
+    template:$('#template-inferred-property-select').clone()[0],
+    props:{
+      worksheet:{type:String},
+      column:{type:String},
+      label:{type:String},
+      termType:{type:String},
+      propertyType:{type:String},
+      formOptions:{type:Object},
+      selection:{type:Object},
+      dataPropertyForm:{type:Object},
+      info:{type:Object}
+    },
+    computed:{
+      getDisplayLabel(){
+        return capitalize(this.label)
+      }
+    },
+    methods:{
+      async queryInferredProperties(){
+        let type=this.selection[this.worksheet][this.column].type.name
+        let name=this.selection[this.worksheet][this.column].name.name
+        let vselectVM=this.$children[1]
+        let loading=vselectVM.loading
+        if(type === "class" && name !== "" ){
+          loading=true
+          this.formOptions.name.objectPropertyInferred=await $.get(`/query/inferred/objectProperty/${name}`)
+          vselectVM.options=this.formOptions.name.objectPropertyInferred
+          this.loadInferredDestinationClass(vselectVM.options)
+          loading=false
+        }else{
+          this.formOptions.name.objectPropertyInferred=[]
+        }
+      },
+      loadInferredDestinationClass(options){
+        let vselectIndividuals=this.$parent.$children[2]
+        //if(this.selection[worksheet][option.label].name.label") {{ selection[worksheet][option.label].name.label }}
+      }
     },
     mounted:function(){
       //Loads tooltips

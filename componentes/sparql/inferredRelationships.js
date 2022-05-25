@@ -49,7 +49,16 @@ function objectProperties(className) {
             ?node               owl:someValuesFrom         ?destination               .
         }}`
     //TODO Check if this has the right origin ou destination
-    return sparqlQuery(query)
+    return sparqlQuery(query).then(result=>{
+        result.map(value=> {
+            value.name = value.ObjectProperty.split("#")[1]
+            value.label = value.ObjectProperty.split("#")[1]
+        })
+        return result
+    }).catch(err=>{
+        return ["Error",err]
+    })
+
 
 }
 
@@ -94,6 +103,7 @@ function dataProperties(className,objectProperty) {
             FILTER ( !isBlank(?range) && ?range != rdf:nil ) 
          }`
     //TODO Check if this has the right origin ou destination
+
     return sparqlQuery(query)
 
 }

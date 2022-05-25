@@ -36,7 +36,6 @@ router.get('/inferred/objectProperty/:class',(req,res)=>{
       res.json(result)
   }).catch(err=>{
     let message=err.msg
-    let stack=err.stack
     res.json({err,message,stack})
   })
 
@@ -47,7 +46,6 @@ router.get('/inferred/dataProperty/:class',(req,res)=>{
     res.json(result)
   }).catch(err=>{
     let message=err.msg
-    let stack=err.stack
     res.json({err,message,stack})
   })
 

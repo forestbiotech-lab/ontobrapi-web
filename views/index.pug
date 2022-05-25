@@ -33,12 +33,17 @@ block content
                   span.d-inline-block(tabindex='0' data-toggle='tooltip' v-bind:title="info.mappingHeader")
                     button.btn.btn-primary(style='pointer-events: none;' type='button' disabled='')
                       i.bi-info-lg(role="img" aria-label="Information")
-                  button.btn.btn-success(v-on:click="downloadMapping" style="float:right;") Download Mapping
-                  button.btn.btn-success(type='button' data-bs-toggle='collapse' data-bs-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
+                  button.btn.btn-success.download-mapping-button(v-on:click="downloadMapping" style="float:right;") Download Mapping
+                  button.btn.btn-success.load-mapping-button(type='button' data-bs-toggle='collapse' data-bs-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
                 #loadingPanel.collapse(aria-labelledby="load-mapping", data-bs-parent="#mapping-loading-options")
                   .card.card-body
                     textarea(style="font-size: x-small;" col="120",rows="10" v-model="uploadedJSON")
-                    button.btn.btn-sm.btn-info(v-on:click="loadJSON") load
+                    .row.mt-2.mx-0
+                      button.col.me-2.load-mapping-file.btn.btn-sm.btn-primary open mapping file
+                      button.col.ms-2.load-mapping-text.btn.btn-sm.btn-primary(v-on:click="loadJSON") load
+                      label.visually-hidden(for="augment-file") Upload file
+                      //TODO maybe change uploads in name. This is not implemented on the backend
+                      input(hidden,type="file",id="open-mapping-file",placeholder="json file",required="",autofocus="",autocomplete="off",name="uploads[]", accept="mime/*,.json")
               .card-body
                 .form-group.row.gy-2.gx-3.align.items-center
                   .col-auto
@@ -96,8 +101,8 @@ block content
                     .card
                       .card-body(v-for="objectPropertyForm in selection[worksheet][column].objectProperties")
                         .visibility-wrapper(v-if=" objectPropertyForm.show == true ")
-                          property-select(:label="'objectProperty'" :term-type="'ObjectProperty'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info")
-                          property-select(:label="'objectProperty'" :term-type="'ObjectProperty'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info")
+                          property-select(:label="'objectProperty (all)'" :term-type="'ObjectProperty'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info")
+                          property-select(:label="'objectProperty (inferred)'" :term-type="'objectPropertyInferred'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info")
                           .form-group
                             label Individuals
                             //TODO selectable for classes only make a new method in component
@@ -148,7 +153,13 @@ block content
             .form-group
               label(v-bind:for='label') {{ getDisplayLabel }}
                 information-tooltip(:info="info" :label="label")
-              v-select(:options="formOptions['name'][termType]" v-bind:id="label" v-model="selection[worksheet][column][propertyType][dataPropertyForm.id].property")
+              v-select(@open="queryInferredProperties",@input="loadInferredDestinationClass",:options="formOptions['name'][termType]" v-bind:id="label" v-model="selection[worksheet][column][propertyType][dataPropertyForm.id].property")
+          #template-inferred-property-select
+            //TODO add the @open attr to the template above and transfer methods to that component
+            .form-group(:loaded="propertiesUpdated")
+              label(v-bind:for='label') {{ getDisplayLabel }}
+                information-tooltip(:info="info" :label="label")
+              v-select(@open="queryInferredProperties",:options="formOptions['name'][termType]" v-bind:id="label" v-model="selection[worksheet][column][propertyType][dataPropertyForm.id].property")
           #template-simple-property-select
             .form-group
               label(v-bind:for="label") {{ getDisplayLabel }}
