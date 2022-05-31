@@ -108,7 +108,7 @@ function dataPropertyRange(dataProperty){
         })
     })
 }
-function dataProperties(className,dataProperty) {
+function dataProperties(className) {
 
     let query=`
          PREFIX miappe:  <http://purl.org/ppeo/PPEO.owl#>
@@ -146,9 +146,19 @@ function dataProperties(className,dataProperty) {
             }
             FILTER ( !isBlank(?range) && ?range != rdf:nil ) 
          }`
-    //TODO Check if this has the right origin ou destination
 
-    return sparqlQuery(query)
+    return sparqlQuery(query).then(result=>{
+        return result.map(dataProperty=>{
+            return {
+                term:dataProperty.dataProperty,
+                name:dataProperty.dataProperty.split("#")[1],
+                label:dataProperty.dataProperty.split("#")[1],
+                ontology:dataProperty.dataProperty.split("#")[0],
+                range:dataProperty.range,
+                class:dataProperty.class
+            }
+        })
+    })
 
 }
 
