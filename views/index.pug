@@ -50,7 +50,7 @@ block content
                     label(for="column-selection") Column selection
                      information-tooltip(:info="info" label="column-selection")
                   .col-auto
-                    v-select(:options="columns",v-model="column",id="column-selection" @input="updateCompleteness",style="min-width:400px;")
+                    v-select(@close="loadDataProperties",:options="columns",v-model="column",id="column-selection" @input="updateCompleteness",style="min-width:400px;")
                       template(v-slot:option="option")
                         | {{ option.label }} &nbsp;
                         span.badge.bg-success(v-if="completeness[worksheet].columns[option.label].complete")
@@ -65,7 +65,7 @@ block content
                     //Todo validate if column exists
                   .col-auto
                     button.btn.btn-primary(@click="addMissingClass") Add missing Class
-              mapping-form(:form-options="formOptions" :selection="selection",:worksheet="worksheet",:column="column",:named-individuals="namedIndividuals" :completeness="completeness" :info="info", :graph="graph")
+              mapping-form(:form-options="formOptions" :data-properties-cache="dataPropertiesCache" :selection="selection",:worksheet="worksheet",:column="column",:named-individuals="namedIndividuals" :completeness="completeness" :info="info", :graph="graph")
           #mapping-select
             .card-body(v-if="column != ''")
               simple-select(:label="'type'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" :info="info" :graph="graph")
@@ -154,17 +154,11 @@ block content
               label(v-bind:for='label') {{ getDisplayLabel }}
                 information-tooltip(:info="info" :label="label")
               v-select(@open="queryInferredProperties",@input="loadInferredDestinationClass",:options="formOptions['name'][termType]" v-bind:id="label" v-model="selection[worksheet][column][propertyType][dataPropertyForm.id].property")
-          #template-inferred-property-select
-            //TODO add the @open attr to the template above and transfer methods to that component
-            .form-group(:loaded="propertiesUpdated")
-              label(v-bind:for='label') {{ getDisplayLabel }}
-                information-tooltip(:info="info" :label="label")
-              v-select(@open="queryInferredProperties",:options="formOptions['name'][termType]" v-bind:id="label" v-model="selection[worksheet][column][propertyType][dataPropertyForm.id].property")
           #template-simple-property-select
             .form-group
               label(v-bind:for="label") {{ getDisplayLabel }}
                 information-tooltip(:info="info" :label="label")
-              v-select(@close="queryInferredProperties",:options='formOptions[label][termType]' v-bind:id="label", v-model="selection[worksheet][column][label]"  @input="updateGraphModel")
+              v-select(@close="queryInferredProperties; loadDataProperties;",:options='formOptions[label][termType]' v-bind:id="label", v-model="selection[worksheet][column][label]"  @input="updateGraphModel")
           #template-simple-select
             .form-group
               label(v-bind:for="label") {{ getDisplayLabel }}

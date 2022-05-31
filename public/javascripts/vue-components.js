@@ -122,7 +122,6 @@ async function loadMapping(jSheet) {
   componentSimplePropertySelect()
   componentSimpleSelect()
   componentPropertySelect()
-  componentInferredPropertySelect()
   componentMappingWorksheet(formOptions, $data)
   componentInformationTooltip()
 
@@ -167,15 +166,15 @@ function componentMappingForm(){
       namedIndividuals:{type:Array},
       completeness:{type:Object},
       info:{type:Object},
-      graph:{type:Object}
+      graph:{type:Object},
+      dataPropertiesCache:{type:Object}
     },
     data:function(){
       return {
         displayLabel:"",
         label:"",
-        //currentSelectOptions:[{}],  //TODO Removable???
         termType:"",
-        formType:"",
+        formType:""
       }
     },
     computed:{
@@ -188,11 +187,51 @@ function componentMappingForm(){
             .replace("@{value}",`<span class="badge bg-success">Value</span>`)
             .replace(/@{([\w *\w*]*)}/g,`<span class="badge bg-danger">$1</span>`)
 
+      },
+      //TODO Not working async. Must load before hand
+      // Should be copied from the other component MappingWorksheet
+      dataProperties(){
+        return new Promise(async (res,rej)=>{
+          if(this.dataPropertiesCache.loaded === true ){
+            res(this.dataPropertiesCache.dataProperties)
+          }else{
+            try {
+              let className = this.selection[this.worksheet][this.column].name.name
+              this.dataPropertiesCache.dataProperties[this.column] = await $.get(`/query/inferred/dataProperty/${className}`)
+              this.dataPropertiesCache.loaded = true
+            }catch (e) {
+
+            }finally {
+              res(this.dataPropertiesCache.dataProperties)
+            }
+          }
+        })
       }
     },
     methods:{
+      //TODO Not working async must be done beforehand on name choice
+      async loadDataProperties(){
+        this.dataPropertiesCache.loaded=false
+        this.dataPropertiesCache.dataProperties[this.column]={}
+        let dataProperties= await this.dataProperties
+      },
       disableClasses(value){
-        return this.selection[this.worksheet][value].type.name=="dataProperty"
+        let result=false
+        try{
+          let dataProperties=this.dataPropertiesCache.dataProperties[this.column]
+          if(dataProperties.length>0){
+            result=dataProperties.find(dataProperty=> {
+                  return dataProperty.name === this.selection[this.worksheet][value].name.label
+                }
+            ) !== undefined
+          }else{
+            throw new Error("No data properties found")
+          }
+        }catch (e) {
+          result=this.selection[this.worksheet][value].type.name=="dataProperty"
+        }
+        return result
+
       },
       removeProperty(index,propertyType){
         this.selection[this.worksheet][this.column][propertyType][index].show=false
@@ -371,53 +410,6 @@ function componentPropertySelect(){
     }
   })
 }
-//TODO Remove Or Repurpose. !!!NOT USED!!
-function componentInferredPropertySelect(){
-  Vue.component('inferred-property-select',{
-    template:$('#template-inferred-property-select').clone()[0],
-    props:{
-      worksheet:{type:String},
-      column:{type:String},
-      label:{type:String},
-      termType:{type:String},
-      propertyType:{type:String},
-      formOptions:{type:Object},
-      selection:{type:Object},
-      dataPropertyForm:{type:Object},
-      info:{type:Object}
-    },
-    computed:{
-      getDisplayLabel(){
-        return capitalize(this.label)
-      }
-    },
-    methods:{
-      async queryInferredProperties(){
-        let type=this.selection[this.worksheet][this.column].type.name
-        let name=this.selection[this.worksheet][this.column].name.name
-        let vselectVM=this.$children[1]
-        let loading=vselectVM.loading
-        if(type === "class" && name !== "" ){
-          loading=true
-          this.formOptions.name.objectPropertyInferred=await $.get(`/query/inferred/objectProperty/${name}`)
-          vselectVM.options=this.formOptions.name.objectPropertyInferred
-          this.loadInferredDestinationClass(vselectVM.options)
-          loading=false
-        }else{
-          this.formOptions.name.objectPropertyInferred=[]
-        }
-      },
-      loadInferredDestinationClass(options){
-        let vselectIndividuals=this.$parent.$children[2]
-        //if(this.selection[worksheet][option.label].name.label") {{ selection[worksheet][option.label].name.label }}
-      }
-    },
-    mounted:function(){
-      //Loads tooltips
-      $('[data-toggle="tooltip"]').tooltip()
-    }
-  })
-}
 function componentInformationTooltip(){
   Vue.component('information-tooltip',{
     template:$("#template-information-tooltip").clone()[0],
@@ -451,7 +443,8 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
         graph:{
           links:[],
           nodes:[]
-        }
+        },
+        dataPropertiesCache:{loaded:false,dataProperties: {}}
       }
     },
     computed:{
@@ -466,9 +459,33 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
       },
       missingClassBGcolor(){
         return this.validMissingClass ? "white" : "red"
+      },
+      dataProperties(){
+        return new Promise(async (res,rej)=>{
+          if(this.dataPropertiesCache.loaded === true ){
+            res(this.dataPropertiesCache.dataProperties[this.column])
+          }else{
+            try {
+              let className = this.selection[this.worksheet][this.column].name.name
+              let type= this.selection[this.worksheet][this.column].type.name
+              if(className!== undefined && type === "class") {
+                this.dataPropertiesCache.dataProperties[this.column] = await $.get(`/query/inferred/dataProperty/${className}`)
+              }
+              this.dataPropertiesCache.loaded = true
+              res(this.dataPropertiesCache.dataProperties[this.column])
+            }catch (e) {
+              res(this.dataPropertiesCache.dataProperties)
+            }
+          }
+        })
       }
     },
     methods:{
+      async loadDataProperties(){
+        this.dataPropertiesCache.loaded=false
+        this.dataPropertiesCache.dataProperties[this.column]=[]
+        let dataProperties= await this.dataProperties
+      },
       addMissingClass(){
         if(this.validMissingClass === true){
           //TODO Why does this duplicate?
@@ -506,11 +523,7 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
       loadJSON(){
         try{
           let parsedJSON=JSON.parse(this.uploadedJSON)
-          //Ensure this works!
           parsedJSON=validateSelectionJSON(window.jSheet,parsedJSON,this.completeness)
-
-
-
           this.selection=parsedJSON
           //TODO calculate completeness Still has error for  Biological material which is empty
           // Study in study not showing then one but nothing on screen (Because false) Exclude show:false from count Requires a if not a oneliner anymore
