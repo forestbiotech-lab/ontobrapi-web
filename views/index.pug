@@ -158,7 +158,7 @@ block content
             .form-group
               label(v-bind:for="label") {{ getDisplayLabel }}
                 information-tooltip(:info="info" :label="label")
-              v-select(@close="queryInferredProperties; loadDataProperties;",:options='formOptions[label][termType]' v-bind:id="label", v-model="selection[worksheet][column][label]"  @input="updateGraphModel")
+              v-select(@close="queryInferredProperties",:options='formOptions[label][termType]' v-bind:id="label", v-model="selection[worksheet][column][label]"  @input="updateGraphModel")
           #template-simple-select
             .form-group
               label(v-bind:for="label") {{ getDisplayLabel }}

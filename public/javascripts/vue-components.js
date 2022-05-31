@@ -156,6 +156,7 @@ function componentPreviousSelection(result,timeout){
   })
 }
 function componentMappingForm(){
+  //TODO Add a watcher to updateRestrictions on name change. For dataproperties in classes
   Vue.component('mapping-form',{
     template:$("#mapping-select").clone()[0],
     props:{
