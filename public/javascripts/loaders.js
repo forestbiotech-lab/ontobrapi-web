@@ -124,6 +124,8 @@ $('document').ready(function(){
   function ntGenerationButton(){  
     $('button.generate-nt').click(function(){
       try{
+        let button=$(this)
+        let spinner=mkel('span',{class:"spinner-border spinner-border-sm",role:"status","aria-hidden":"true"},button)
         let selection=window.app.$children[0].$children[0].selection
         let jSheet=window.jSheet
         let payload=JSON.stringify({selection,jSheet},null, 2)
@@ -138,6 +140,7 @@ $('document').ready(function(){
           processData:false,
           data:formData,
           success:function(data,textStatus,jqXHR){
+            spinner.remove()
             loadNTriples(data)
           },
           error:function(jqXHR,textStatus,data){
