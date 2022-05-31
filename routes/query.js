@@ -5,6 +5,7 @@ let classProperties = require('./../componentes/sparql/classProperties')
 let inferredRelationship = require('./../componentes/sparql/inferredRelationships')
 let formOptions=require('./../componentes/dataStructures/formOptions')
 let info=require('./../componentes/dataStructures/info')
+const {dataProperty} = require("../componentes/dataStructures/info");
 
 // query/
 
@@ -51,4 +52,14 @@ router.get('/inferred/dataProperty/:class',(req,res)=>{
 
 })
 
+router.get('/inferred/dataPropertyRange/:dataProperty',(req,res)=>{
+  let dataProperty=req.params.dataProperty
+  inferredRelationship.dataPropertyRange(dataProperty).then(result=>{
+    res.json(result)
+  }).catch(err=>{
+    let message=err.msg
+    res.json({err,message,stack})
+  })
+
+})
 module.exports = router;

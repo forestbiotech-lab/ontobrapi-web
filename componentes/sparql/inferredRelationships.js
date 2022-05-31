@@ -63,8 +63,52 @@ function objectProperties(className) {
 }
 
 
+function dataPropertyRange(dataProperty){
+    let query=`
+         PREFIX miappe:  <http://purl.org/ppeo/PPEO.owl#>
+         PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+         PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+         PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+         PREFIX schema:  <http://www.w3.org/2001/XMLSchema#>
 
-function dataProperties(className,objectProperty) {
+         SELECT DISTINCT  ?range
+         FROM <http://purl.org/ppeo/PPEO.owl#> 
+         WHERE {
+            VALUES ?dataProperty { miappe:${dataProperty} } .
+            {
+               ?dataProperty     rdf:type          owl:DatatypeProperty   . 
+               ?dataProperty     rdfs:range        ?range                 .
+            } UNION {
+               ?node             owl:onProperty    ?dataProperty          .
+               ?node             owl:onDataRange   ?range                 .
+
+            } UNION {
+               ?node             owl:onProperty     ?dataProperty          .
+               ?node             owl:onDataRange    ?node2                 .
+               ?node2            owl:unionOf        ?node3                 .
+               ?node3            ?rangeType        ?range                  .
+            }UNION {
+               ?node             owl:onProperty     ?dataProperty          .
+               ?node             owl:onDataRange    ?node2                 .
+               ?node2            owl:unionOf        ?node3                 .
+               ?node3            ?rangeType1        ?range4                .
+               ?range4           ?rangeType2        ?range                 .
+            }
+            FILTER ( !isBlank(?range) && ?range != rdf:nil ) 
+         }
+    `
+    return sparqlQuery(query).then(result=>{
+        return result.map(dataProperty=>{
+            return {
+                term:dataProperty.range,
+                name:dataProperty.range.split("#")[1],
+                label:dataProperty.range.split("#")[1],
+                ontology:dataProperty.range.split("#")[0]
+            }
+        })
+    })
+}
+function dataProperties(className,dataProperty) {
 
     let query=`
          PREFIX miappe:  <http://purl.org/ppeo/PPEO.owl#>
@@ -138,7 +182,7 @@ function sparqlQuery(query){
 
 module.exports = {
     objectProperties,
-    dataProperties
-
+    dataProperties,
+    dataPropertyRange
 };
 
