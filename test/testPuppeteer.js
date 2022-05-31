@@ -19,7 +19,7 @@ const fs=require('fs');
         userDataDir: "/Users/brunocosta/Library/Application Support/Google/Chrome"
     }
     const setTextInputValue =(async (page,selector,value)=> {
-        await page.waitFor(selector);
+        await page.waitForSelector(selector);
         await page.evaluate((data) => {
             return document.querySelector(data.selector).value = data.value
         }, {selector, value})
@@ -62,7 +62,9 @@ const fs=require('fs');
         element = await firstPage.waitForSelector('.v-select#column-selection input')
         await element.click()
         await firstPage.waitForTimeout(1500);
-        element = await firstPage.waitForSelector('.v-select#column-selection li[id$=\'__option-2\'')
+        element = await firstPage.waitForSelector('.v-select#column-selection li[id$=\'__option-20\'')
+        await firstPage.waitForTimeout(1500);
+        element = await firstPage.waitForSelector('.v-select#column-selection li[id$=\'__option-20\'')
         await element.click()
     }
 
