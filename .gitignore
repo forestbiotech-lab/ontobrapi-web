@@ -105,3 +105,9 @@ dist
 
 #upload directory
 uploads/
+
+#Apple
+.DS_Store
+
+#WebStorm
+.idea/
