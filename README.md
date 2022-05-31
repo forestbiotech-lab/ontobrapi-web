@@ -34,7 +34,7 @@ Docker file for the webserver running on Node JS
 
 ## Connecting to the SPARQL endpoint mas be done through the service name
 
-In this case db should be used instead of localhost to refere to network on another container
+In this case db should be used instead of localhost to refer to network on another container
 
 
 
