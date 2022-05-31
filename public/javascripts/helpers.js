@@ -43,11 +43,20 @@ function identifyCompleteness(completeness,currentWorksheet,column,columnData){
     completeness[currentWorksheet].columns[column].complete=result
     //TODO check if it's filled
     // property.name !=== "" can't do thing on a oneliner because if property doesn't exist it will induce an error. But this is incomplete
-    completeness[currentWorksheet].columns[column].objectProperties=columnData.objectProperties.reduce( (amount ,objectProperty)=>{
-        return amount + (objectProperty.property !== "" && objectProperty.referenceNode !== "") ? 1:0} , 0
-    )
+    let initialAmount=0
+    completeness[currentWorksheet].columns[column].objectProperties=columnData.objectProperties.reduce( (amount ,objectProperty)=> {
+        if (objectProperty.property !== "" && objectProperty.referenceNode !== "" && objectProperty.show == true){
+            return amount + ( objectProperty.property.name !== "" ? 1 : 0 )
+        }else{
+            return amount
+        }
+    }, initialAmount=0)
+
     completeness[currentWorksheet].columns[column].dataProperties=columnData.dataProperties.reduce( (amount, dataProperty)=>{
-        return amount + dataProperty.referenceNode !== "" ? 1:0 }, 0
+        amount = amount + ( ( dataProperty.referenceNode !== ""  && dataProperty.show ) == true ? 1:0)
+        return amount
+        }, initialAmount=0
+
     )
 }
 
@@ -80,16 +89,23 @@ function makeCompleteness(jSheet){
 }
 //TODO
 // not finished
-function validateSelectionJSON(jSheet,$data){
+function validateSelectionJSON(jSheet,$data,completeness){
     //TODO overwrites the saved Selection
     window.selection=$data
+
     try{
         let worksheets=jSheet.SheetNames
         //check if all are present
         //add missing
         let missingWorksheets=[]
         let extraWorksheets=[]
-        Object.entries($data).forEach(([worksheet,selectionSheetMeta])=>{
+        //Each WorkSheet
+        function forEach(object,callback){
+            Object.entries(object).forEach(([key,value])=>{
+                callback(key,value)
+            })
+        }
+        forEach($data,(worksheet,selectionSheetMeta)=>{
             if ( worksheets.indexOf(worksheet) === -1 ){
                 extraWorksheets.push(worksheet)
             }else{
@@ -98,24 +114,44 @@ function validateSelectionJSON(jSheet,$data){
                 let jSheetColumns=getColumns(jSheet,worksheet)
                 let selectionColumns=Object.keys(selectionSheetMeta)
 
-                Object.entries(selectionSheetMeta).forEach(([selectionColumn,selectionColumnEntries])=>{
+                //Each Column in worksheet
+                forEach(selectionSheetMeta,(selectionColumn,selectionColumnEntries)=>{
                     if (jSheetColumns.indexOf(selectionColumn) === -1){
                         selectionExtraColumns.push(selectionColumn)
                     }
                 })
 
+                //Make named Function out of it
                 jSheetColumns.forEach(jSheetColumn=>{
+                    //TODO fix completeness
                     if(selectionColumns.indexOf(jSheetColumn) === -1 ){
                         selectionMissingColumns.push(jSheetColumn)
                     }
                 })
+                function syncColumnsInCompletenessAndSelection(selection,completeness){
+                    let completenessMissingColumns=[]
+                    Object.keys(selection[worksheet]).forEach(column=>{
+                        if(completeness[worksheet].columnNames.indexOf(column) === -1){
+                            completenessMissingColumns.push(column)
+                        }
+                    })
+                    completenessMissingColumns.forEach(column=>{
+                        window.structures.addColumnToCompleteness(completeness,worksheet,column)
+                    })
+                }
+
                 if(selectionExtraColumns.length > 0 || selectionMissingColumns.length > 0){
                     displayToast("Mismatch between Mapping and SpreadSheet",`Uploaded mapping has <${worksheet}> with the following missing columns: << ${selectionMissingColumns} >>. And your spreadsheet doesn't have the following columns: << ${selectionExtraColumns} >> present in your mapping.`,600000)
                 }
 
 
+                //AddsMissingColumnsToSelection
                 selectionMissingColumns.forEach( column=>$data=window.structures.addColumnToSelection($data,worksheet,column) )
+                if(completeness) syncColumnsInCompletenessAndSelection(selection,completeness)
             }
+        })
+        Object.entries($data).forEach(([worksheet,selectionSheetMeta])=>{
+
 
         })
         worksheets.forEach(worksheet=>{

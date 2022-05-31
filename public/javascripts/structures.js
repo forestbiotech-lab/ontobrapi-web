@@ -38,6 +38,15 @@ class Structures{
         selection[worksheet][column].objectProperties = []
         return selection
     }
+    addColumnToCompleteness(completeness,worksheet,column){
+        let workSheetStructure=this.completeness.worksheet
+        let columnStructure=this.completeness.column
+
+        completeness[worksheet].columnNames.push(column)
+        completeness[worksheet].total=completeness[worksheet].columnNames.length
+        Vue.set(completeness[worksheet].columns,column,columnStructure)
+        return completeness
+    }
 }
 
 

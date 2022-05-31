@@ -71,7 +71,7 @@ block content
               simple-select(:label="'type'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" :info="info" :graph="graph")
               simple-property-select(:info="info" :label="'name'" :term-type="'Class'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" v-if="selection[worksheet][column].type.name === 'class'" :graph="graph")
               simple-property-select(:info="info" :label="'name'" :term-type="'DataProperty'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" v-if="selection[worksheet][column].type.name === 'dataProperty'")
-              simple-select(:selectable="true",:label="'valueType'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" :info="info")
+              simple-select(:key="formOptions" :selectable="true",:label="'valueType'" :worksheet="worksheet" :column="column" :form-options="formOptions" :selection="selection" :info="info")
               .card(v-bind:input='label = "naming_scheme"')
                 .card-header
                   label(v-bind:for="label") {{ getDisplayLabel }}
@@ -141,7 +141,7 @@ block content
                   a.nav-link(v-bind:key='worksheet.name' v-on:click=' currentTab = worksheet.name;resetColumnSelection() ' v-bind:id='worksheet.id' v-bind:class='{ active: worksheet.name === currentTab }' role='tab' data-toggle='tab')
                     | {{ worksheet.name }}&nbsp;
                     span.badge(v-bind:class="{ 'bg-success': completeness[worksheet.name].complete === completeness[worksheet.name].total, 'bg-danger': completeness[worksheet.name].complete !== completeness[worksheet.name].total  }") {{completeness[worksheet.name].complete}}/{{completeness[worksheet.name].total}}
-              mapping-worksheet#mapping(:worksheet='currentWorkSheet' :columns='currentColumns'  :completeness='completeness' :info="info")
+              mapping-worksheet#mapping(:worksheet='currentWorkSheet' :completeness='completeness' :info="info")
               .scroll(style='overflow-x:scroll')
                 .dummy(style='width:1000px;height:20px')
               .table-div(style='overflow-x:scroll;overflow-y:scroll;height:500px;')
@@ -164,7 +164,7 @@ block content
             .form-group
               label(v-bind:for="label") {{ getDisplayLabel }}
                 information-tooltip(:info="info" :label="label")
-              v-select(:options='formOptions[label][termType]' v-bind:id="label", v-model="selection[worksheet][column][label]"  @input="updateGraphModel")
+              v-select(@close="queryInferredProperties",:options='formOptions[label][termType]' v-bind:id="label", v-model="selection[worksheet][column][label]"  @input="updateGraphModel")
           #template-simple-select
             .form-group
               label(v-bind:for="label") {{ getDisplayLabel }}

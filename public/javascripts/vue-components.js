@@ -1,4 +1,7 @@
 async function loadWorksheetTabs(jSheet,completeness){
+  // Children:
+  // - MappingWorkSheet Last Function
+
   let info=await loadDataStructure("info")
   Vue.component('worksheet-tabs', {
     template: $('#worksheets').clone()[0],
@@ -11,9 +14,6 @@ async function loadWorksheetTabs(jSheet,completeness){
       }
     },
     computed: {
-      currentColumns: function () {
-        return getColumns(jSheet,this.currentTab)
-      },
       currentTabComponent: function () {
         return "tab-" + this.currentTab.replace(/ /g, "-").toLowerCase();
       },
@@ -26,7 +26,9 @@ async function loadWorksheetTabs(jSheet,completeness){
     },
     methods: {
       resetColumnSelection(){
-        this.$children[0].column=""
+        let mappingWorksheet=this.$children[0]
+        mappingWorksheet.column=""
+        mappingWorksheet.loadWorkSheetColumns
       }
     },
     mounted: function () {
@@ -260,6 +262,14 @@ function componentSimplePropertySelect() {
         if(this.termType=="Class"){
           updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
         }
+      },
+      async queryInferredProperties(){
+        let type=this.selection[this.worksheet][this.column].type.name
+        let name=this.selection[this.worksheet][this.column].name.name
+        if(type === "dataProperty" && name !== "" ){
+          this.formOptions.valueType=await $.get(`/query/inferred/dataPropertyRange/${name}`)
+          this.selection[this.worksheet][this.column].valueType.label=""
+        }
       }
     }
   })
@@ -422,11 +432,12 @@ function componentInformationTooltip(){
   })
 }
 function componentMappingWorksheet(formOptions,$data,jSheet){
+  //PARENT WorkSheetTabs (LoadWorkSheetTabs) 1st Function
   Vue.component("mapping-worksheet",{
     template:$("#mapping-column").clone()[0],
     props:{
       worksheet:{type:String},
-      columns:{type:Array},
+      //columns:{type:Array},
       completeness:{type: Object},
       info:{type:Object},
     },
@@ -444,6 +455,9 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
       }
     },
     computed:{
+      columns(){
+        return Object.keys(this.selection[this.worksheet])
+      },
       namedIndividuals(){
         return this.columns
       },
@@ -493,13 +507,13 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
         try{
           let parsedJSON=JSON.parse(this.uploadedJSON)
           //Ensure this works!
-          parsedJSON=validateSelectionJSON(window.jSheet,parsedJSON)
-          //validateWorksheets()  //add missing worksheets
-          //validateColumns()      //add missing columns
-          //validateStructure()   //add missing structure
-          //calculate completeness
-          //remove infiltrated functions
+          parsedJSON=validateSelectionJSON(window.jSheet,parsedJSON,this.completeness)
+
+
+
           this.selection=parsedJSON
+          //TODO calculate completeness Still has error for  Biological material which is empty
+          // Study in study not showing then one but nothing on screen (Because false) Exclude show:false from count Requires a if not a oneliner anymore
           updateCompleteness(this.selection,this.completeness)
           this.updateGraphModel()
           $('#loadingPanel.collapse').collapse('hide')
