@@ -183,10 +183,20 @@ function componentMappingForm(){
         return capitalize(this.label)
       },
       displayTextWithBadges(){
-        return this.selection[this.worksheet][this.column][this.label]
-            .replace("@{auto_increment}",`<span class="badge bg-info">Auto Increment</span>`)
-            .replace("@{value}",`<span class="badge bg-success">Value</span>`)
-            .replace(/@{([\w *\w*]*)}/g,`<span class="badge bg-danger">$1</span>`)
+        try{
+          let cellValue=window.jSheet.jsonSheets[this.worksheet][0][this.column]
+          cellValue=cellValue.length>10 ? cellValue.substr(0,20).concat("...") : cellValue
+          return this.selection[this.worksheet][this.column][this.label]
+              .replace("@{auto_increment}",`<span class="badge bg-info">Auto Increment</span>`)
+              .replace("@{value}",`<span class="badge bg-success value">${cellValue}</span>`)
+              .replace(/@{([\w *\w*]*)}/g,`<span class="badge bg-danger">$1</span>`)
+        }catch(e){
+          return this.selection[this.worksheet][this.column][this.label]
+              .replace("@{auto_increment}",`<span class="badge bg-info">Auto Increment</span>`)
+              .replace("@{value}",`<span class="badge bg-success">Value</span>`)
+              .replace(/@{([\w *\w*]*)}/g,`<span class="badge bg-danger">$1</span>`)
+        }
+
 
       },
       //TODO Not working async. Must load before hand
@@ -308,7 +318,7 @@ function componentSimplePropertySelect() {
         let name=this.selection[this.worksheet][this.column].name.name
         if(type === "dataProperty" && name !== "" ){
           this.formOptions.valueType=await $.get(`/query/inferred/dataPropertyRange/${name}`)
-          this.selection[this.worksheet][this.column].valueType.label=""
+          Vue.set(this.selection[this.worksheet][this.column],valueType,{})
         }
       }
     }
