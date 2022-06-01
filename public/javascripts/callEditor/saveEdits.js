@@ -1,4 +1,4 @@
-$("document").ready(function(){
+
   let callStructure=""
   let callStructureLoaded = {
     aInternal: false,
@@ -19,6 +19,8 @@ $("document").ready(function(){
       loadValues()
     }
   })
+  //Export the function for laoder
+  window.callStructureLoaded=callStructureLoaded
   function loadValues(){
     for( [callAttribute,value] of Object.entries(callStructure.result.data[0])){
       if(typeof value === "object"){
@@ -42,33 +44,7 @@ $("document").ready(function(){
       }   
     }
   }
-  $.ajax({
-    url:"/calleditor/listcalls/genotyping/observations.json/json",
-    method:"get",
-    success:function(data,textStatus,jqXHR){
-      callStructure=data
-      callStructureLoaded.status=true
-    },
-    error:function(jqXHR,textStatus,error){
-      console.log(error)
-    }
-  })
-  
-  function getRelatedItems(ontoTerm){
-    url=`http://localhost:3000/query/ppeo/class/${ontoTerm}/properties`
-    return new Promise((res,rej)=>{
-      $.ajax({
-        url,
-        method:"get",
-        success:function(data,textStatus,jqXHR){
-          res(data)
-        },
-        error:function(jqXHR,textStatus,error){
-          rej(error)
-        }
-      })      
-    })
-  }
+
 
   $('.collapse').on("shown.bs.collapse",onInputChange)
   
@@ -86,25 +62,8 @@ $("document").ready(function(){
       saveCallStruture(target)
     })
   }
-  //TODO URL DATA  
-  function saveCallStruture(target){
-    $.ajax({
-      url:"/calleditor/listcalls/genotyping/observations.json/update",
-      method:"POST",
-      data:{data:JSON.stringify(callStructure)},
-      success:function(data,textStatus,jqXHR){
-        if(data=="ok"){
-          setTemporaryBadge("Saved!",target,{})
-        }else{
-          setTemporaryBadge("Not saved!",target,{type:"danger",duration:10000})  
-        }
-      },
-      error:function(jqXHR,textStatus,error){
-        setTemporaryBadge("Not saved!",target,{type:"danger",duration:10000})
-      }    
-    })
-  }
-  //Saved msg...
+
+
     
   function setTemporaryBadge(msg,target,options){
     let extraOptions={}
@@ -205,10 +164,10 @@ $("document").ready(function(){
   }
   
   async function loadOptionsForNextLayer(ontoTerm,target){
-   ontoTerm=ontoTerm.split(":")[1]
    let queryResults
    try{
-    queryResults=await getRelatedItems(ontoTerm)
+     ontoTerm=ontoTerm.split(":")[1]
+     queryResults=await getRelatedItems(ontoTerm)
     target.empty()  
    }catch(err){
     console.log(err)
@@ -224,4 +183,3 @@ $("document").ready(function(){
    })
   }
 
-})

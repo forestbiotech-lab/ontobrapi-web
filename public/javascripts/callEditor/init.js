@@ -5,7 +5,7 @@ var pathname=document.location.pathname
 var paths=pathname.split("/").splice(1)
 
   scriptName=[
-    'saveEdits'
+    'saveEdits','loader',
   ]
 
   if(paths[1]=="targets"){
