@@ -61,11 +61,11 @@ const fs=require('fs');
         await firstPage.waitForTimeout(1500);
         element = await firstPage.waitForSelector('.v-select#column-selection input')
         await element.click()
-        await firstPage.waitForTimeout(1500);
-        element = await firstPage.waitForSelector('.v-select#column-selection li[id$=\'__option-20\'')
-        await firstPage.waitForTimeout(1500);
-        element = await firstPage.waitForSelector('.v-select#column-selection li[id$=\'__option-20\'')
-        await element.click()
+        await firstPage.waitForTimeout(1000);
+        element = await firstPage.waitForSelector('.v-select#column-selection li[id$=\'__option-2\'')
+        await firstPage.waitForTimeout(1000);
+        await  element.click();
+
     }
 
     await firstPage.waitForTimeout(1500);
