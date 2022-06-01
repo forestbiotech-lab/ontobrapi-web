@@ -8,6 +8,7 @@ class Structures{
         this.selectionStructure = {
             type: "",
             name: "",
+            valueType:"",
             naming_scheme: "",
             dataProperties: "",
             objectProperties: "",
