@@ -16,6 +16,7 @@
   }
   callStructureLoaded.registerListener(function(val){
     if(val=== true){
+      callStructure=window.callStructure
       loadValues()
     }
   })

@@ -2,11 +2,11 @@
 // Loads JSON
 //let url=
 $.ajax({
-    url:"/calleditor/listcalls/genotyping/observations.json/json",
+    url:window.location.pathname.replace(/map$/,"json"),
     method:"get",
     success:function(data,textStatus,jqXHR){
-        callStructure=data
-        callStructureLoaded.status=true
+        window.callStructure=data
+        window.callStructureLoaded.status=true
     },
     error:function(jqXHR,textStatus,error){
         console.log(error)
