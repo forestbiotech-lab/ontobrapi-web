@@ -1,6 +1,5 @@
-// TODO url must reflect the call mapping
-// Loads JSON
-//let url=
+
+// Loads JSON call spec
 $.ajax({
     url:window.location.pathname.replace(/map$/,"json"),
     method:"get",
@@ -29,10 +28,10 @@ function getRelatedItems(ontoTerm){
     })
 }
 
-//TODO URL DATA
+
 function saveCallStruture(target){
     $.ajax({
-        url:"/calleditor/listcalls/genotyping/observations.json/update",
+        url:window.location.pathname.replace(/map$/,"update"),
         method:"POST",
         data:{data:JSON.stringify(callStructure)},
         success:function(data,textStatus,jqXHR){
