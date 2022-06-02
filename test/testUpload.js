@@ -33,7 +33,7 @@ let loadMapping=true;
     try{
         await driver.get('http://localhost:3000');
 
-        await  driver.findElement(By.css('#augment-file')).sendKeys('/home/brunocosta/Downloads/ontobrapi/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx');
+        await  driver.findElement(By.css('#augment-file')).sendKeys('$HOME/Documents/Projectos/ontobrapi/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx');
         //Fill properties
         await driver.wait(until.elementLocated(By.xpath("//input[@type='search']"))).click() //Open Column Select
         await driver.wait(until.elementLocated(By.id("vs1__option-1"))).click() //Select Column
