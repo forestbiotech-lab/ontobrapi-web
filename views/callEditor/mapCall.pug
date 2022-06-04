@@ -3,17 +3,18 @@ block content
   script(src="/javascripts/callEditor.js" async defer)
   include menu
   h2=callName
-  a.btn.btn-danger.btn-block(href="result") Call Result
+  .d-grid.pb-5
+    a.btn.btn-danger.btn-block(href="result") Call Result
   table.table
     each attr in Object.entries(json.result.data[0])
       - key=attr[0]
       - value= ( typeof attr[1] === "object") ? attr[1]._value : attr[1]
       tr
-        td
+        td.pt-3
           p.d-grid
             button.btn.btn-primary.block(key=key,type='button' data-bs-toggle='collapse' data-bs-target=`#${key}` aria-expanded='false' aria-controls=`#${key}`) #{key}&nbsp;
               span.badge.bg-success=value
-          .collapse(id=`${key}`)
+          .collapse.card.mx-2.px-2.pt-3(id=`${key}`)
             .card.card-body(layer="0")
               h5.card-title(layer="0") Layer 0
               .form-group  
@@ -34,8 +35,8 @@ block content
                 label Property 
                   .badge-holder
                 input.form-control(id=`layer0-${key}-property` type="text",name="property")
-              .form-group
-                button.btn.btn-primary.btn-block.add-new-layer add new layer
+              .form-group.d-grid
+                button.btn.btn-secondary.btn-block.add-new-layer add new layer
 
   div !{html}
     //each moduleValue in modules
@@ -43,28 +44,35 @@ block content
        // td
        //   a(href="listcalls/"+moduleValue+"/list")=moduleValue
   .templates
-    tr.template-element
-      td
-        p
-          button.btn.btn-primary(key='',type='button' data-bs-toggle='collapse' data-bs-target=`#` aria-expanded='false' aria-controls=`#`)
-            span.button-text
-            span.button-space &nbsp;
-            span.badge.bg-success
-        .collapse(id="")
-        .card.card-body(layer="0")
-          h5.card-title(layer="0") Layer 0
-          .form-group
-            label Property
-            select.form-control.form-control-lg(id="layer0")
-              option
-              option(className=className,property=property,classNameShortHand=classNameShortHand,propertyShortHand=propertyShortHand) Property:[] | Class:[]
-          .form-group
-            label Class
-              .badge-holder
-            input.form-control(id=`layer0--class` type="text",name="class")
-          .form-group
-            label Property
-              .badge-holder
-            input.form-control(id=`layer0--property` type="text",name="property")
-          .form-group
-            button.btn.btn-primary.btn-block.add-new-layer add new layer
+    table
+      tr.template-element
+        td
+          p.d-grid
+            button.btn.btn-primary(key='',type='button' data-bs-toggle='collapse' data-bs-target=`#` aria-expanded='false' aria-controls=`#`)
+              span.button-text
+              span.button-space &nbsp;
+              span.badge.bg-success
+          .collapse.card.mx-5(id="")
+            .card.card-body(layer="0")
+              h5.card-title(layer="0") Layer 0
+              .form-group
+                label Property
+                select.form-control.form-control-lg(id="layer0")
+                  option
+                  each entryProp in Object.entries(anchorProperties)
+                    - property=entryProp[1].property
+                    - propertyShortHand=property.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
+                    - className=entryProp[1].class
+                    - classNameShortHand=className.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
+                    option(className=className,property=property,classNameShortHand=classNameShortHand,propertyShortHand=propertyShortHand)
+                     | Property:[#{propertyShortHand}] | Class:[#{classNameShortHand}]
+              .form-group
+                label Class
+                  .badge-holder
+                input.form-control(id=`layer0--class` type="text",name="class")
+              .form-group
+                label Property
+                  .badge-holder
+                input.form-control(id=`layer0--property` type="text",name="property")
+              .form-group.d-grid
+                button.btn.btn-secondary.btn-block.add-new-layer add new layer
