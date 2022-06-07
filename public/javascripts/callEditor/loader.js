@@ -1,11 +1,50 @@
+window.vmapping=new Vue({                                                  //Anonymous can't get back to it if necessary!!!!
+    el:"#mapping",
+    data:{
+        dataProperties:{},
+        objectProperties:{},
+        className:$('#mapping').attr('anchor')
+    },
+    methods:{
+      loadValues(id){
+          let that=this
+          this.$children.filter(child=> child.$attrs.attribute==id)
+              .forEach(vselect=>{
+                  let className=vselect.$attrs.classname
+                  let properties=that.objectProperties[className].concat(that.dataProperties[className])
+                  vselect.options=properties;vselect.loading=false
+              })
+      }
+    },
+    beforeMount:async function(){
+        this.objectProperties[this.className]=await $.get(`/query/inferred/objectProperty/${this.className}`)
+        this.dataProperties[this.className]=await $.get(`/query/inferred/dataProperty/${this.className}`)
+        //window.vmapping.$children.filter(child=> child.$vnode.tag.endsWith("v-select"))
+        //    .forEach(vselect=>{vselect.options=this.dataProperties[this.className],vselect.loading=false})
+    }
+})
+Vue.component('v-select', VueSelect.VueSelect);
+Vue.config.warnHandler = function (msg, vm, trace) {
+    if (msg === `Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "column"`) {
+        //Do nothing
+    }
+}
 
 // Loads JSON call spec
 $.ajax({
     url:window.location.pathname.replace(/map$/,"json"),
     method:"get",
     success:function(data,textStatus,jqXHR){
-        window.callStructure=data
-        window.callStructureLoaded.status=true
+        (function triggerLoadingOfCallStructure(data) {
+            if(window.callStructureLoaded){
+                window.callStructure = data
+                window.callStructureLoaded.status = true
+            }else{
+                setTimeout(function () {
+                    triggerLoadingOfCallStructure(data)
+                }, 1000)
+            }
+        })(data)
     },
     error:function(jqXHR,textStatus,error){
         console.log(error)
@@ -13,6 +52,7 @@ $.ajax({
 })
 
 function getRelatedItems(ontoTerm){
+    ////THIS is ClassProperties from
     url=`http://localhost:3000/query/ppeo/class/${ontoTerm}/properties`
     return new Promise((res,rej)=>{
         $.ajax({
@@ -54,7 +94,7 @@ function saveCallStruture(target){
 function iterObject(attributes,callAttribute,value){
     if(typeof value === "object"){
         if( value instanceof Array){
-            $(`button[key|='${attributes.string}']`).addClass('dropdown-toggle').removeClass('btn-primary').addClass('btn-warning')
+            $(`button[attribute|="${attributes.string}"]`).addClass('dropdown-toggle').removeClass('btn-primary').addClass('btn-warning')
 
             if(typeof value[0] === "string"){
 
@@ -63,12 +103,12 @@ function iterObject(attributes,callAttribute,value){
             }
         }else{
             if(Object.keys(value).length !== 2 ){
-                $(`button[key|='${attributes.string}']`).addClass('dropdown-toggle').removeClass('btn-primary').addClass('btn-secondary')
+                $(`button[attribute|="${attributes.string}"]`).addClass('dropdown-toggle').removeClass('btn-primary').addClass('btn-secondary')
             }else{
                 if(Object.keys(value).indexOf('_sparql')!==-1){
-                    $(`button[key|='${attributes.string}']`).addClass('dropdown-toggle').removeClass('btn-primary').addClass('btn-secondary')
+                    $(`button[attribute|="${attributes.string}"]`).addClass('dropdown-toggle').removeClass('btn-primary').addClass('btn-secondary')
                 }else{
-                    $(`button[key|='${attributes.string}']`).children('span.badge').text(value["_value"])
+                    $(`button[attribute|="${attributes.string}"]`).children('span.badge').text(value["_value"])
                 }
             }
             let target=$(`.collapse#${attributes.string}`)
@@ -116,7 +156,7 @@ function iterObject(attributes,callAttribute,value){
 
 
     }else if(typeof value === "string"){
-        $(`button[key|='${attributes.string}']`).children('span.badge').text(value)
+        $(`button[attribute|="${attributes.string}"]`).children('span.badge').text(value)
     }
 }
 

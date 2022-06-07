@@ -69,7 +69,18 @@ router.get('/listcalls/:moduleName/:callName/map', async function(req, res, next
   let listCalls="d-none"
   let listModules="d-none"
   let mapCall="block"
-  res.render('callEditor/mapCall', { title: 'Onto BrAPI - Call List',json,callName,anchorProperties,html,mapCall,listCalls,listModules,moduleName})
+  res.render('callEditor/mapCall', {
+    title: 'Onto BrAPI - Call List',
+    json,
+    callName,
+    anchorProperties,
+    html,
+    mapCall,
+    listCalls,
+    listModules,
+    moduleName,
+    className
+  })
 });
 
 

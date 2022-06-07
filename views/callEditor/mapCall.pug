@@ -5,20 +5,32 @@ block content
   h2=callName
   .d-grid.pb-5
     a.btn.btn-danger.btn-block(href="result") Call Result
-  table.table
+  table.table#mapping(anchor=className)
     each attr in Object.entries(json.result.data[0])
       - key=attr[0]
       - value= ( typeof attr[1] === "object") ? attr[1]._value : attr[1]
       tr
         td.pt-3
           p.d-grid
-            button.btn.btn-primary.block(key=key,type='button' data-bs-toggle='collapse' data-bs-target=`#${key}` aria-expanded='false' aria-controls=`#${key}`) #{key}&nbsp;
+            button.btn.btn-primary(attribute=`${key}`,type='button' data-bs-toggle='collapse' data-bs-target=`#${key}` aria-expanded='false' aria-controls=`#${key}`) #{key}&nbsp;
               span.badge.bg-success=value
           .collapse.card.mx-2.px-2.pt-3(id=`${key}`)
-            .card.card-body(layer="0",key=key)
+            .card.card-body(layer="0")
               h5.card-title(layer="0") Layer 0
               .form-group  
                 label Property
+                v-select(attribute=key,className=className,@open=`loadValues('${key}')`,:loading="true")
+                  template.row(v-slot:option="option")
+                    .row.objectProperty(v-if="option.ObjectProperty")
+                      span.col-1.badge.bg-success Object Property
+                      span.col-2 {{ option.label }}
+                      span.col-1.badge.bg-warning Class
+                      span.col {{ option.className }}
+                    .row.dataProperty(v-if="option.range")
+                      span.col-1.badge.bg-primary Data Property
+                      span.col-2 {{ option.label }}
+                      span.col-1.badge.bg-dark Range
+                      span.col {{ option.rangeName }}
                 select.form-control.form-control-lg(id="layer0")
                   option
                   - let properties=anchorProperties.objectProperties.concat(anchorProperties.dataProperties)
@@ -27,7 +39,8 @@ block content
                     - propertyShortHand=property.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
                     - className=entryProp[1].class
                     - classNameShortHand=className.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
-                    option(className=className,property=property,classNameShortHand=classNameShortHand,propertyShortHand=propertyShortHand) Property:[#{propertyShortHand}] | Class:[#{classNameShortHand}]
+                    option(className=className,property=property,classNameShortHand=classNameShortHand,propertyShortHand=propertyShortHand)
+                      | Property:[#{propertyShortHand}] | Class:[#{classNameShortHand}]
               .form-group
                 label Class
                   .badge-holder
@@ -60,14 +73,23 @@ block content
                 label Property
                 select.form-control.form-control-lg(id="layer0")
                   option
-                  - properties=anchorProperties.objectProperties.concat(anchorProperties.dataProperties)
-                  each entryProp in Object.entries(properties)
+                  each entryProp in Object.entries(anchorProperties.objectProperties)
                     - property=entryProp[1].term
                     - propertyShortHand=property.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
                     - className=entryProp[1].class
                     - classNameShortHand=className.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
                     option(className=className,property=property,classNameShortHand=classNameShortHand,propertyShortHand=propertyShortHand)
                      | Property:[#{propertyShortHand}] | Class:[#{classNameShortHand}]
+                  each entryProp in Object.entries(anchorProperties.dataProperties)
+                    - property=entryProp[1].term
+                    - propertyShortHand=property.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
+                    - className=entryProp[1].class
+                    - classNameShortHand=className.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
+                    - rangeName=entryProp[1].range
+                    - rangeShortHand=rangeName.replace(/^.*#/,"ppeo:")
+                    option(className=className,property=property,classNameShortHand=classNameShortHand,propertyShortHand=propertyShortHand,rangeShortHand=rangeShortHand)
+                      span.badge.bg-success Data Property
+                      | :[#{propertyShortHand}] | Range:[#{rangeShortHand}]
               .form-group
                 label Class
                   .badge-holder

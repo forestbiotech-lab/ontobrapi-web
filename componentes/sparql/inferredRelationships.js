@@ -55,6 +55,8 @@ function objectProperties(className) {
             value.label = value.ObjectProperty.split("#")[1]
             value.term=value.ObjectProperty
             value.class=value.destination
+            value.className=value.class.split("#")[1] || ""
+            value.classOntology=value.class.split("#")[0]
         })
         return result
     }).catch(err=>{
@@ -157,7 +159,11 @@ function dataProperties(className) {
                 label:dataProperty.dataProperty.split("#")[1],
                 ontology:dataProperty.dataProperty.split("#")[0],
                 range:dataProperty.range,
-                class:dataProperty.class
+                rangeName:dataProperty.range.split("#")[1],
+                rangeOntology:dataProperty.range.split("#")[0],
+                class:dataProperty.class,
+                className:dataProperty.class.split("#")[1] || "",
+                classOntology:dataProperty.class.split("#")[0]
             }
         })
     })
