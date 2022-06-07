@@ -1,0 +1,95 @@
+{
+  "_anchor": {
+    "class": "unsureWhichClass",
+    "s": "?investigation",
+    "p": "rdf:type",
+    "o": "ppeo:investigation"
+  },
+  "@context": [
+    "https://brapi.org/jsonld/context/metadata.jsonld"
+  ],
+  "metadata": {
+    "datafiles": [
+      {
+        "fileDescription": "This is an Excel data file",
+        "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+        "fileName": "datafile.xlsx",
+        "fileSize": 4398,
+        "fileType": "application/vnd.ms-excel",
+        "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+      }
+    ],
+    "pagination": {
+      "currentPage": 0,
+      "pageSize": 1000,
+      "totalCount": 10,
+      "totalPages": 1
+    },
+    "status": [
+      {
+        "message": "Request accepted, response successful",
+        "messageType": "INFO"
+      }
+    ]
+  },
+  "result": {
+    "data": [
+      {
+        "active": true,
+        "additionalInfo": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "commonCropName": "Wheat",
+        "contacts": [
+          {
+            "contactDbId": "5f4e5509",
+            "email": "bob@bob.com",
+            "instituteName": "The BrAPI Institute",
+            "name": "Bob Robertson",
+            "orcid": "http://orcid.org/0000-0001-8640-1750",
+            "type": "PI"
+          }
+        ],
+        "datasetAuthorships": [
+          {
+            "datasetPUI": "doi:10.15454/312953986E3",
+            "license": "https://CreativeCommons.org/licenses/by/4.0",
+            "publicReleaseDate": "2022-06-06",
+            "submissionDate": "2022-06-06"
+          }
+        ],
+        "documentationURL": "https://wiki.brapi.org",
+        "endDate": "2022-06-06",
+        "externalReferences": [
+          {
+            "referenceID": "doi:10.155454/12341234",
+            "referenceSource": "DOI"
+          },
+          {
+            "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+            "referenceSource": "OBO Library"
+          },
+          {
+            "referenceID": "75a50e76",
+            "referenceSource": "Remote Data Collection Upload Tool"
+          }
+        ],
+        "programDbId": "673f378a",
+        "programName": "Tomatillo_Breeding_Program",
+        "publications": [
+          {
+            "publicationPUI": "doi:10.15454/312953986E3",
+            "publicationReference": "Selby, BrAPI - An application programming interface for plant breeding applications, Bioinformatics, https://doi.org/10.1093/bioinformatics/190"
+          }
+        ],
+        "startDate": "2022-06-06",
+        "trialDbId": "1883b402",
+        "trialDescription": "General drought resistance trial initiated in Peru before duplication in Africa",
+        "trialName": "Peru Yield Trial 1",
+        "trialPUI": "https://doi.org/101093190"
+      }
+    ]
+  }
+}

@@ -1,0 +1,164 @@
+{
+    "_anchor": {
+        "class": "study",
+        "s": "?study",
+        "p": "rdf:type",
+        "o": "ppeo:study"
+    },
+    "@context": [
+        "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+        "datafiles": [
+            {
+                "fileDescription": "This is an Excel data file",
+                "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+                "fileName": "datafile.xlsx",
+                "fileSize": 4398,
+                "fileType": "application/vnd.ms-excel",
+                "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+            }
+        ],
+        "pagination": {
+            "currentPage": 0,
+            "pageSize": 1000,
+            "totalCount": 10,
+            "totalPages": 1
+        },
+        "status": [
+            {
+                "message": "Request accepted, response successful",
+                "messageType": "INFO"
+            }
+        ]
+    },
+    "result": {
+        "data": [
+            {
+                "active": true,
+                "additionalInfo": {
+                    "additionalProp1": "string",
+                    "additionalProp2": "string",
+                    "additionalProp3": "string"
+                },
+                "commonCropName": {
+                    "_sparQL": [
+                        {
+                            "class": "Grape_Yield_Trial",
+                            "property": "Grape_Yield_Trial"
+                        }
+                    ],
+                    "_value": "Grape"
+                },
+                "contacts": [
+                    {
+                        "contactDbId": "5f4e5509",
+                        "email": "bob@bob.com",
+                        "instituteName": "The BrAPI Institute",
+                        "name": "Bob Robertson",
+                        "orcid": "http://orcid.org/0000-0001-8640-1750",
+                        "type": "PI"
+                    }
+                ],
+                "culturalPractices": "Irrigation was applied according needs during summer to prevent water stress.",
+                "dataLinks": [
+                    {
+                        "dataFormat": "Image Archive",
+                        "description": "Raw drone images collected for this study",
+                        "fileFormat": "application/zip",
+                        "name": "image-archive.zip",
+                        "provenance": "Image Processing Pipeline, built at the University of Antarctica: https://github.com/antarctica/pipeline",
+                        "scientificType": "Environmental",
+                        "url": "https://brapi.org/image-archive.zip",
+                        "version": "1.0.3"
+                    }
+                ],
+                "documentationURL": "https://wiki.brapi.org",
+                "endDate": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:study",
+                            "property": "Grape_Yield_Trial"
+                        }
+                    ],
+                    "_value": "2022-06-06T22:37:31.237Z"
+                },
+                "environmentParameters": [
+                    {
+                        "description": "the soil type was clay",
+                        "parameterName": "soil type",
+                        "parameterPUI": "PECO:0007155",
+                        "unit": "pH",
+                        "unitPUI": "PECO:0007059",
+                        "value": "clay soil",
+                        "valuePUI": "ENVO:00002262"
+                    }
+                ],
+                "experimentalDesign": {
+                    "_sparQL": [
+                        {
+                            "class": "Grape_Yield_Trial",
+                            "property": "Grape_Yield_Trial"
+                        }
+                    ],
+                    "_value": {
+                        "PUI": "CO_715:0000145",
+                        "description": "Lines were repeated twice at each location using a complete block design. In order to limit competition effects, each block was organized into four sub-blocks corresponding to earliest groups based on a prior information."
+                    }
+                },
+                "externalReferences": [
+                    {
+                        "referenceID": "doi:10.155454/12341234",
+                        "referenceSource": "DOI"
+                    },
+                    {
+                        "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+                        "referenceSource": "OBO Library"
+                    },
+                    {
+                        "referenceID": "75a50e76",
+                        "referenceSource": "Remote Data Collection Upload Tool"
+                    }
+                ],
+                "growthFacility": {
+                    "PUI": "CO_715:0000162",
+                    "description": "field environment condition, greenhouse"
+                },
+                "lastUpdate": {
+                    "timestamp": "2022-06-06T22:37:31.237Z",
+                    "version": "1.2.3"
+                },
+                "license": "MIT License",
+                "locationDbId": "3cfdd67d",
+                "locationName": "Location 1",
+                "observationLevels": [
+                    {
+                        "levelName": "field",
+                        "levelOrder": 0
+                    },
+                    {
+                        "levelName": "block",
+                        "levelOrder": 1
+                    },
+                    {
+                        "levelName": "plot",
+                        "levelOrder": 2
+                    }
+                ],
+                "observationUnitsDescription": "Observation units consisted in individual plots themselves consisting of a row of 15 plants at a density of approximately six plants per square meter.",
+                "seasons": [
+                    "Spring_2018"
+                ],
+                "startDate": "2022-06-06T22:37:31.238Z",
+                "studyCode": "Grape_Yield_Spring_2018",
+                "studyDbId": "175ac75a",
+                "studyDescription": "This is a yield study for Spring 2018",
+                "studyName": "INRA's Walnut Genetic Resources Observation at Kenya",
+                "studyPUI": "doi:10.155454/12349537312",
+                "studyType": "Phenotyping",
+                "trialDbId": "48b327ea",
+                "trialName": "Grape_Yield_Trial"
+            }
+        ]
+    }
+}

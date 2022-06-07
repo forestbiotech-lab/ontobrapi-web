@@ -1,0 +1,68 @@
+{
+  "_anchor": {
+    "class": "investigation",
+    "s": "?investigation",
+    "p": "rdf:type",
+    "o": "ppeo:investigation"
+  },
+  "@context": [
+    "https://brapi.org/jsonld/context/metadata.jsonld"
+  ],
+  "metadata": {
+    "datafiles": [
+      {
+        "fileDescription": "This is an Excel data file",
+        "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+        "fileName": "datafile.xlsx",
+        "fileSize": 4398,
+        "fileType": "application/vnd.ms-excel",
+        "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+      }
+    ],
+    "pagination": {
+      "currentPage": 0,
+      "pageSize": 1000,
+      "totalCount": 10,
+      "totalPages": 1
+    },
+    "status": [
+      {
+        "message": "Request accepted, response successful",
+        "messageType": "INFO"
+      }
+    ]
+  },
+  "result": {
+    "data": [
+      {
+        "abbreviation": "P1",
+        "additionalInfo": {
+          "additionalProp1": "string",
+          "additionalProp2": "string",
+          "additionalProp3": "string"
+        },
+        "commonCropName": "Tomatillo",
+        "documentationURL": "https://wiki.brapi.org",
+        "externalReferences": [
+          {
+            "referenceID": "doi:10.155454/12341234",
+            "referenceSource": "DOI"
+          },
+          {
+            "referenceID": "http://purl.obolibrary.org/obo/ro.owl",
+            "referenceSource": "OBO Library"
+          },
+          {
+            "referenceID": "75a50e76",
+            "referenceSource": "Remote Data Collection Upload Tool"
+          }
+        ],
+        "leadPersonDbId": "fe6f5c50",
+        "leadPersonName": "Bob Robertson",
+        "objective": "Make a better tomatillo",
+        "programDbId": "f60f15b2",
+        "programName": "Tomatillo_Breeding_Program"
+      }
+    ]
+  }
+}
