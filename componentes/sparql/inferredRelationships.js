@@ -53,6 +53,8 @@ function objectProperties(className) {
         result.map(value=> {
             value.name = value.ObjectProperty.split("#")[1]
             value.label = value.ObjectProperty.split("#")[1]
+            value.term=value.ObjectProperty
+            value.class=value.destination
         })
         return result
     }).catch(err=>{
