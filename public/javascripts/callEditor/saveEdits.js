@@ -22,8 +22,10 @@
   })
   //Export the function for laoder
   window.callStructureLoaded=callStructureLoaded
-  function loadValues(){
-    for( [callAttribute,value] of Object.entries(callStructure.result.data[0])){
+
+  function loadValues(callStructureFragment){
+    let data = callStructureFragment || callStructure.result.data[0]
+    for( [callAttribute,value] of Object.entries(data)){
       let attributes={array:[callAttribute],string:callAttribute}
       iterObject(attributes, callAttribute, value)
     }

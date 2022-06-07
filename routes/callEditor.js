@@ -4,6 +4,7 @@ var glob = require('glob')
 var sparqlQuery = require('.././componentes/sparql/sparqlQuery')
 var testsparql = require('.././componentes/sparql/testsparql')
 var classProperties = require('./../componentes/sparql/classProperties')
+var inferredRelationships = require('./../componentes/sparql/inferredRelationships')
 const fs = require('fs')
 
 // calleditor/ 
@@ -56,9 +57,11 @@ router.get('/listcalls/:moduleName/:callName/map', async function(req, res, next
    
   prettyHtml=require('json-pretty-html').default
   let html=prettyHtml(json)
-  let anchorProperties
+  let anchorProperties={objectProperties:[],dataProperties:[]}
   try{
     anchorProperties=await classProperties(className)
+    anchorProperties.objectProperties=await inferredRelationships.objectProperties(className)
+    anchorProperties.dataProperties=await inferredRelationships.dataProperties(className)
   }catch(err){
     console.log(err)
     anchorProperties=[]

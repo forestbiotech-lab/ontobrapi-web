@@ -54,8 +54,13 @@ function saveCallStruture(target){
 function iterObject(attributes,callAttribute,value){
     if(typeof value === "object"){
         if( value instanceof Array){
-            //TODO process arrays
             $(`button[key|='${attributes.string}']`).addClass('dropdown-toggle').removeClass('btn-primary').addClass('btn-warning')
+
+            if(typeof value[0] === "string"){
+
+            }else{
+             //TODO Objects inside Array
+            }
         }else{
             if(Object.keys(value).length !== 2 ){
                 $(`button[key|='${attributes.string}']`).addClass('dropdown-toggle').removeClass('btn-primary').addClass('btn-secondary')
@@ -66,34 +71,32 @@ function iterObject(attributes,callAttribute,value){
                     $(`button[key|='${attributes.string}']`).children('span.badge').text(value["_value"])
                 }
             }
-
             let target=$(`.collapse#${attributes.string}`)
-            target.empty()
+            if(!Object.keys(value).includes("_sparQL") && Object.keys(value).length!=2)
+                target.empty()
             let table=mkel("table",{},target)
 
+
             for( var [subAttr,subValue] of Object.entries(value)) {
-                attributes.array.push(subAttr)
-                attributes.string=attributes['array'].join(attributeGlue)
+
                 if (subAttr === '_sparQL') {
                     value['_sparQL'].forEach((layerData, layer) => {
                         if (layer > 0) {
                             let data = {
                                 layerData,
-                                callAttribute,
+                                longAttribute:attributes.string,
                                 layer,
                                 callback: loadEntries,
                                 target: $(`.collapse[id|=${callAttribute}] .card-title[layer|=${layer - 1}]`).closest('.card').find('button.add-new-layer').first()
                             } //So its removed
                             addNewLayer(null, null, {data})
-                            let ss = $('.form-group select')
                         } else {
-                            //TODO Recursive I have to do the same as I did for Modify Call Structure
-                            loadEntries(layerData, layer, callAttribute)
+                            loadEntries(layerData, layer, attributes.string)
                         }
 
-                        function loadEntries(layerData, layer, callAttribute) {
+                        function loadEntries(layerData, layer, longAttribute) {
                             Object.entries(layerData).forEach(([attribute, val]) => {
-                                $(`.form-group input#layer${layer}-${callAttribute}-${attribute}`).val(val)
+                                $(`.collapse#${longAttribute} .form-group input#layer${layer}-${attribute}`).val(val)
                             })
                         }
 
@@ -101,6 +104,8 @@ function iterObject(attributes,callAttribute,value){
                 }else if(subAttr === '_value'){
                     //TODO - Use for deeper buttons
                 }else{
+                    attributes.array.push(subAttr)
+                    attributes.string=attributes['array'].join(attributeGlue)
                     let element=$('tr.template-element').clone()
                     fillElement(element,table,subAttr,attributes)
                     iterObject(attributes,subAttr,subValue)
@@ -110,8 +115,9 @@ function iterObject(attributes,callAttribute,value){
         }
 
 
+    }else if(typeof value === "string"){
+        $(`button[key|='${attributes.string}']`).children('span.badge').text(value)
     }
-
 }
 
 
@@ -127,8 +133,5 @@ function fillElement(element,table,attr,attributes){
     table.append(element[0])
     addNewLayerOnClick(element)
     addSelectPropertyOnChange(element)
-
     element.find('.collapse').on("shown.bs.collapse",onInputChange)
-    // TODO on change
-    // --
 }
