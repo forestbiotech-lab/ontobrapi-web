@@ -79,7 +79,7 @@ router.get('/listcalls/:moduleName/:callName/map', async function(req, res, next
     listCalls,
     listModules,
     moduleName,
-    className
+    anchor:className
   })
 });
 

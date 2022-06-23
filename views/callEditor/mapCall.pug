@@ -5,7 +5,7 @@ block content
   h2=callName
   .d-grid.pb-5
     a.btn.btn-danger.btn-block(href="result") Call Result
-  table.table#mapping(anchor=className)
+  table#mapping.table(anchor=anchor)
     each attr in Object.entries(json.result.data[0])
       - key=attr[0]
       - value= ( typeof attr[1] === "object") ? attr[1]._value : attr[1]
@@ -14,22 +14,24 @@ block content
           p.d-grid
             button.btn.btn-primary(attribute=`${key}`,type='button' data-bs-toggle='collapse' data-bs-target=`#${key}` aria-expanded='false' aria-controls=`#${key}`) #{key}&nbsp;
               span.badge.bg-success=value
+
           .collapse.card.mx-2.px-2.pt-3(id=`${key}`)
+            layer(:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:layer="0",:attribute=`"${key}"`)
             .card.card-body(layer="0")
               h5.card-title(layer="0") Layer 0
-              .form-group  
+              .form-group
                 label Property
-                v-select(attribute=key,className=className,@open=`loadValues('${key}')`,:loading="true")
+                v-select(attribute=key,anchor=anchor,layer="0",@open=`loadValues('${key}')`,:loading="true")
                   template.row(v-slot:option="option")
                     .row.objectProperty(v-if="option.ObjectProperty")
-                      span.col-1.badge.bg-success Object Property
-                      span.col-2 {{ option.label }}
-                      span.col-1.badge.bg-warning Class
+                      span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-success Object Property
+                      span.col-sm-4.col-md-4.col-lg-3.col-xl-2 {{ option.label }}
+                      span.col-sm-3.col-md-2.col-lg-2.col-xl-1.badge.bg-warning Class
                       span.col {{ option.className }}
                     .row.dataProperty(v-if="option.range")
-                      span.col-1.badge.bg-primary Data Property
-                      span.col-2 {{ option.label }}
-                      span.col-1.badge.bg-dark Range
+                      span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-primary Data Property
+                      span.col-sm-4.col-md-4.col-lg-3.col-xl-2 {{ option.label }}
+                      span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-dark Range
                       span.col {{ option.rangeName }}
                 select.form-control.form-control-lg(id="layer0")
                   option
@@ -44,13 +46,14 @@ block content
               .form-group
                 label Class
                   .badge-holder
-                input.form-control(id=`layer0-class` type="text",name="class")
+                input.form-control(id=`layer0-class` type="text",name="class",v-model=`mapping['$[key]']`)
               .form-group
-                label Property 
+                label Property
                   .badge-holder
                 input.form-control(id=`layer0-property` type="text",name="property")
               .form-group.d-grid
                 button.btn.btn-secondary.btn-block.add-new-layer add new layer
+
 
   div !{html}
     //each moduleValue in modules
@@ -93,10 +96,37 @@ block content
               .form-group
                 label Class
                   .badge-holder
-                input.form-control(id=`layer0-class` type="text",name="class")
+                input.form-control(id=`layer0-class` type="text",name="class",v-model=`mapping['${key}'][0].className`)
               .form-group
                 label Property
                   .badge-holder
                 input.form-control(id=`layer0-property` type="text",name="property")
               .form-group.d-grid
                 button.btn.btn-secondary.btn-block.add-new-layer add new layer
+    #template-layer
+      .card.card-body(layer="0")
+        h5.card-title(layer="0") Layer 0
+        .form-group
+          label Property
+          v-select(attribute=key,anchor=anchor,layer="0",@open=`loadValues('${key}')`,:loading="true",@input="setValueForLayer")
+            template.row(v-slot:option="option")
+              .row.objectProperty(v-if="option.ObjectProperty")
+                span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-success Object Property
+                span.col-sm-4.col-md-4.col-lg-3.col-xl-2 {{ option.label }}
+                span.col-sm-3.col-md-2.col-lg-2.col-xl-1.badge.bg-warning Class
+                span.col {{ option.className }}
+              .row.dataProperty(v-if="option.range")
+                span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-primary Data Property
+                span.col-sm-4.col-md-4.col-lg-3.col-xl-2 {{ option.label }}
+                span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-dark Range
+                span.col {{ option.rangeName }}
+        .form-group
+          label Class
+            .badge-holder
+          input.form-control(id=`layer0-class` type="text",name="class",v-model="className",@change="saveInputValue")
+        .form-group
+          label Property
+            .badge-holder
+          input.form-control(id=`layer0-property` type="text",name="property",v-model="property")
+        .form-group.d-grid
+          button.btn.btn-secondary.btn-block.add-new-layer(@click="") add new layer

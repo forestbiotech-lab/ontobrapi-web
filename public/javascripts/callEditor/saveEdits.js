@@ -18,6 +18,7 @@
     if(val=== true){
       callStructure=window.callStructure
       loadValues()
+      window.vmapping.callStructure=callStructure
     }
   })
   //Export the function for laoder

@@ -1,29 +1,96 @@
+Vue.component('layer',{
+    template:$('#template-layer').clone()[0],
+    props:{
+        callStructure:{type:Object},
+        dataProperties:{type:Object},
+        objectProperties:{type:Object},
+        layer:{type:Number},
+        attribute:{type:String}
+    },
+    data:function(){
+        return {
+            className:"",
+            property:""
+        }
+    },
+    computed:{
+      mapping:function(){
+          return this.callStructure.result.data[0]
+      }
+    },
+    methods:{
+        loadValues(id){
+            let that=this
+            this.$children.filter(child=> child.$attrs.attribute==id)
+                .forEach(vselect=>{
+                    try{
+                        let className=vselect.$attrs.anchor
+                        let properties=that.objectProperties[className].concat(that.dataProperties[className])
+                        let layer=parseInt(vselect.$attrs.layer)
+                        if(layer==0){
+                            //this.mapping[id]=[{className:"",property:""}]
+                        }else if(layer >= this.mapping[id].length && layer != 0){
+                            //this.mapping[id].push({className:"",property:""})
+                        }else{
+                            //Not necessary it aready exists
+                            //this.mapping[id][layer]={className:"",property:""}
+                        }  //TODO layer0 only
+                        vselect.options=properties;vselect.loading=false
+                    } catch (e) {
+                        console.log("Failed to load Properties")
+                    }
+                })
+
+        },
+        saveInputValue(event){
+
+            let input=event.target
+            let dataType=input.name
+            let value=input.value
+            let target=$(input.closest('.form-group')).children('label').children('.badge-holder')
+            modifyCallStructure(this.attribute,this.layer,dataType,value,this.mapping)
+            saveCallStruture(target)
+        },
+        setValueForLayer(val){
+            this.className=val.class
+            this.property=val.label
+        },
+        mounted:function(){
+            //addNewLayerOnClick(element)
+            //addSelectPropertyOnChange(element)
+
+        }
+    }
+})
 window.vmapping=new Vue({                                                  //Anonymous can't get back to it if necessary!!!!
     el:"#mapping",
     data:{
         dataProperties:{},
         objectProperties:{},
-        className:$('#mapping').attr('anchor')
+        mapping:{},
+        className:$('#mapping').attr('anchor'),
+        callStructure:window.callStructure
     },
     methods:{
-      loadValues(id){
-          let that=this
-          this.$children.filter(child=> child.$attrs.attribute==id)
-              .forEach(vselect=>{
-                  let className=vselect.$attrs.classname
-                  let properties=that.objectProperties[className].concat(that.dataProperties[className])
-                  vselect.options=properties;vselect.loading=false
-              })
-      }
+
     },
     beforeMount:async function(){
         this.objectProperties[this.className]=await $.get(`/query/inferred/objectProperty/${this.className}`)
         this.dataProperties[this.className]=await $.get(`/query/inferred/dataProperty/${this.className}`)
-        //window.vmapping.$children.filter(child=> child.$vnode.tag.endsWith("v-select"))
-        //    .forEach(vselect=>{vselect.options=this.dataProperties[this.className],vselect.loading=false})
+        let that = this
+        window.vmapping.$children.filter(child=> child.$vnode.tag.endsWith("v-select"))
+            .forEach(
+                vselect=>{
+                    //vselect.options=this.dataProperties[this.className]
+                    let id=vselect.$attrs.attribute
+                    //that.mapping[id]=[]
+                    vselect.loading=false
+                }
+            )
     }
 })
 Vue.component('v-select', VueSelect.VueSelect);
+
 Vue.config.warnHandler = function (msg, vm, trace) {
     if (msg === `Avoid mutating a prop directly since the value will be overwritten whenever the parent component re-renders. Instead, use a data or computed property based on the prop's value. Prop being mutated: "column"`) {
         //Do nothing
