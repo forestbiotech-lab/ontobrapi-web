@@ -68,7 +68,7 @@ function sparqlQuery(queryParms,triples) {
 }
 
 
-function getObservations(queryParms,triples){
+function getResults(queryParms,triples){
   return sparqlQuery(queryParms,triples)
 }
 
@@ -87,10 +87,10 @@ async function getAnchors(server,moduleName,callName,requestTrip){
   let query1,query2,query3
   query1=query2=query3=""
   query1=subject
-  let queryParms={query1,query2,query3}
+  let queryParams={query1,query2,query3}
 
 
-  let observations=await getObservations(queryParms,[{subject,predicate,object}])
+  let observations=await getResults(queryParams,[{subject,predicate,object}])
   let results=[]
   
   

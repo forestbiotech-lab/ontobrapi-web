@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const glob=require('glob');
 let xsd = require("@ontologies/xsd")
 let classProperties = require('./../componentes/sparql/classProperties')
 let inferredRelationship = require('./../componentes/sparql/inferredRelationships')
@@ -60,6 +61,13 @@ router.get('/inferred/dataPropertyRange/:dataProperty',(req,res)=>{
     let message=err.msg
     res.json({err,message,stack})
   })
+
+})
+
+router.get('/db/sparql/:fileName',(req,res)=>{
+  let files=glob.sync("__dirname/../db/*.nt",{absolute:true})
+  
+  res.json(files)
 
 })
 module.exports = router;
