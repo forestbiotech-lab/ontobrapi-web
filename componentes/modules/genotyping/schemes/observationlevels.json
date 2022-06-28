@@ -1,59 +1,66 @@
 {
-  "_anchor": {
-     "class": "observation_level",
-     "s": "?observation_level",
-     "p": "rdf:type",
-     "o": "ppeo:observation_level"
-  },  
-  "@context": [
-    "https://brapi.org/jsonld/context/metadata.jsonld"
-  ],
-  "metadata": {
-    "datafiles": [
-      {
-        "fileDescription": "This is an Excel data file",
-        "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
-        "fileName": "datafile.xlsx",
-        "fileSize": 4398,
-        "fileType": "application/vnd.ms-excel",
-        "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
-      }
+    "_anchor": {
+        "class": "observation_level",
+        "s": "?observation_level",
+        "p": "rdf:type",
+        "o": "ppeo:observation_level"
+    },
+    "@context": [
+        "https://brapi.org/jsonld/context/metadata.jsonld"
     ],
-    "status": [
-      {
-        "message": "Request accepted, response successful",
-        "messageType": "INFO"
-      }
-    ],
-    "pagination": {
-      "pageSize": 1000,
-      "totalCount": 10,
-      "totalPages": 1,
-      "currentPage": 0
+    "metadata": {
+        "datafiles": [
+            {
+                "fileDescription": "This is an Excel data file",
+                "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+                "fileName": "datafile.xlsx",
+                "fileSize": 4398,
+                "fileType": "application/vnd.ms-excel",
+                "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+            }
+        ],
+        "status": [
+            {
+                "message": "Request accepted, response successful",
+                "messageType": "INFO"
+            }
+        ],
+        "pagination": {
+            "pageSize": 1000,
+            "totalCount": 10,
+            "totalPages": 1,
+            "currentPage": 0
+        }
+    },
+    "result": {
+        "data": [
+            {
+                "levelName": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#observation_leve"
+                        }
+                    ],
+                    "_value": "field"
+                },
+                "levelOrder": 0
+            },
+            {
+                "levelName": "block",
+                "levelOrder": 1
+            },
+            {
+                "levelName": "plot",
+                "levelOrder": 2
+            },
+            {
+                "levelName": "sub-plot",
+                "levelOrder": 3
+            },
+            {
+                "levelName": "plant",
+                "levelOrder": 4
+            }
+        ]
     }
-  },
-  "result": {
-    "data": [
-      {
-        "levelName": "field",
-        "levelOrder": 0
-      },
-      {
-        "levelName": "block",
-        "levelOrder": 1
-      },
-      {
-        "levelName": "plot",
-        "levelOrder": 2
-      },
-      {
-        "levelName": "sub-plot",
-        "levelOrder": 3
-      },
-      {
-        "levelName": "plant",
-        "levelOrder": 4
-      }
-    ]
-  }
 }
