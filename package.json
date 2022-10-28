@@ -23,12 +23,12 @@
     "morgan": "~1.9.1",
     "object-hash": "^2.2.0",
     "pug": "^3.0.2",
-    "puppeteer": "^14.1.2",
-    "sparql-http-client": "^2.4.0",
-    "vue": "^2.6.14",
+    "puppeteer": "^14.4.1",
+    "sparql-http-client": "^2.4.1",
+    "vue": "^2.7.13",
     "xlsx": "^0.17.5"
   },
   "devDependencies": {
-    "selenium-webdriver": "^4.2.0"
+    "selenium-webdriver": "^4.5.0"
   }
 }
