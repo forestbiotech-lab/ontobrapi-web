@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs=require('fs');
+const path=require('path');
 /*
   Check chrome://version for details
   userdata, remote-debugging port and others
@@ -24,14 +25,22 @@ const fs=require('fs');
             return document.querySelector(data.selector).value = data.value
         }, {selector, value})
     })
-    let mapping = fs.readFileSync("/Users/brunocosta/Documents/Projectos/ontobrapi/9may/OntoBrAPI_9May_mapping-added.json",{encoding:"utf8"})
+    let filePath="/brunocosta/Documents/Projectos/ontobrapi/9may/OntoBrAPI_9May_mapping-added.json"
+    let root=""
+    if(process.platform=="darwin"){
+            root="/Users"
+    }else if(process.platform=="linux"){
+        root="/home"
+    }
+    let mapping = fs.readFileSync(path.join(root,filePath),{encoding:"utf8"})
     mapping=mapping.split("/n")[0];
     let element;
 
 
     //Start browser
     //const browser = await puppeteer.launch(opts);
-    const browserURL = 'http://localhost:59292'
+    // Lookup on chrome session "chrome://"
+    const browserURL = 'http://localhost:45553'
     const browser = await puppeteer.connect({browserURL, defaultViewport: null})
 
 
@@ -43,7 +52,7 @@ const fs=require('fs');
 
     //LOAD SpreadSheet and Mapping
     await firstPage.waitForSelector('#augment-file')
-    await (await firstPage.$('#augment-file')).uploadFile(`/Users/brunocosta/Documents/Projectos/ontobrapi/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx`)
+    await (await firstPage.$('#augment-file')).uploadFile(path.join(root,`/brunocosta/Documents/Projectos/ontobrapi/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx`))
     element=await firstPage.$("#mapping-loading-options button.load-mapping-button")
     await element.evaluate(element=>element.click())
     await firstPage.waitForTimeout(1500);
@@ -54,7 +63,7 @@ const fs=require('fs');
     element = await firstPage.waitForSelector("#loadingPanel button.load-mapping-text");
     await element.click();
 
-    if(switchTabAndColumn == true){
+    if(switchTabAndColumn == false){
         //TEST
         element = await firstPage.waitForSelector("#rId2");
         await element.click();
@@ -67,8 +76,14 @@ const fs=require('fs');
         await  element.click();
 
     }
-
     await firstPage.waitForTimeout(1500);
+    if(true===true){
+        //Generate triples
+        genNT = await firstPage.waitForSelector('button.generate-nt')
+        //await firstPage.waitForTimeout(1000);
+        await  genNT.click();
+
+    }
 
     browser.disconnect();
 })();
