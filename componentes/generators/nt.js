@@ -2,6 +2,7 @@ const fs=require('fs')
 const path=require('path')
 //const mapping=require('./../helpers/default-mapping')
 const Triples=require('./../helpers/triples')
+const {map} = require("selenium-webdriver/lib/promise");
 
 
 module.exports={str,json}
@@ -17,14 +18,39 @@ function openAndSort(jSheet,mappings,type){
   return new Promise((res,rej)=>{
     let spreadSheet={}
     jSheet.SheetNames.forEach(sheet=>{
-      let data=jSheet.jsonSheets[sheet] 
-      let csvData=jSheet.csvSheets[sheet]
-      spreadSheet[sheet]={sheet,contents:({parsedFile,header,distinctElements}=getDistintElementsFromEachColumn(data,csvData,headerLineNumber=0))}
+      let data=jSheet.jsonSheets[sheet]
+      let csvData=jSheet.csvSheets[sheet].trim().split("\n").map(line=>line.split(","))
+      try{
+        if(Object.keys(data[0]) != Object.keys(mappings[sheet])){
+          addMissingCreatedColumns(sheet,data,mappings[sheet])
+        }
+        if((csvData[0]) != Object.keys(mappings[sheet])){
+          addMissingCreatedColumns(sheet,csvData,mappings[sheet],"csv")
+        }
+      }catch (e){
+        console.log("Unable to open and parse sheet")
+      }
+      spreadSheet[sheet]={sheet,contents:({parsedFile,header,distinctElements}=getDistinctElementsFromEachColumn(data,csvData,headerLineNumber=0))}
     })
     res(makeTriples(spreadSheet,mappings,type))
   })
 }
+function addMissingCreatedColumns(sheet,data,mappingSheet,type){
+  if(type){
+    if(type=="csv"){
+      let missingColumns=Object.keys(mappingSheet).filter(key=>!data[0].includes(key))
+      data.forEach((row,index)=>{
+        missingColumns.forEach(column=>index==0?row.push(column):row.push(""))
+      })
+    }
+  }else{
+    let missingColumns=Object.keys(mappingSheet).filter(key=>!Object.keys(data[0]).includes(key) )
+    data.forEach((row,index)=>{
+      missingColumns.forEach(column=>data[index][column]="")
+    })
+  }
 
+}
 function makeTriples(spreadSheet,mapping,type){
 
   //START HARDCODED BLOCK ------------------------------------------------------------------------------------------------------
@@ -55,9 +81,10 @@ function makeTriples(spreadSheet,mapping,type){
   }
   prefixes["owl"]=owl
 
-
+  //TODO this can't be hardcoded
   //Must add observation Levels and Observation Variables
-  let default_named_nodes={
+  let default_named_nodes={}
+  let default_named_nodes_backup={
     "rep_level":{
       type:"class",
       name:"observation_level"
@@ -160,16 +187,16 @@ function makeTriples(spreadSheet,mapping,type){
   return triples[typeFunctions[type]]()
 }
 
-function getDistintElementsFromEachColumn(data,csvData,headerLineNumber){
+function getDistinctElementsFromEachColumn(data,csvData,headerLineNumber){
   let result={}
   let header=[]
   let parsedFile=[]
   data.forEach((line,index)=>{
     //line=line.replace(/\t/g,"@£@")
     //line=line.replace(/@£@/g,"\t")
-
-    if(index<=headerLineNumber){ //Might rewrite a couple of time if number is big but usally it should be small. 
-      header=csvData.split("\n")[index].split(",")
+    //TODO add missing columns
+    if(index<=headerLineNumber){ //Might rewrite a couple of times if number is big, but usually it should be small.
+      header=csvData[index]
       let emptyNumber=""
       header.forEach((column,index)=>{
         if(column==""){
@@ -182,17 +209,16 @@ function getDistintElementsFromEachColumn(data,csvData,headerLineNumber){
         }
         result[column]={}
       })
-    }else{
-      let newLine={}
-      //Renaming the columns if we change the header
-      Object.entries(line).map(([key,value],index)=>{Object.assign(newLine,{[header[index]]:value})})
-      parsedFile.push(newLine)
-      
-      //Store unique value only as the key. 
-      Object.entries(line).forEach(([column,data])=>{
-        result[column][data]=""
-      })
     }
+    let newLine={}
+    //Renaming the columns if we change the header
+    Object.entries(line).map(([key,value],index)=>{Object.assign(newLine,{[header[index]]:value})})
+    parsedFile.push(newLine)
+
+    //Store unique value only as the key.
+    Object.entries(line).forEach(([column,data])=>{
+      result[column][data]=""
+    })
   })
   //Restructure the entries to only have the array of unique value
   Object.entries(result).forEach(([key,value])=>{
