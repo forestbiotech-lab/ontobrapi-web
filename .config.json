@@ -1,6 +1,6 @@
 {
   "sparql":{
-    "host":"db",
+    "host":"localhost",
     "port":"8890"
   }
 }

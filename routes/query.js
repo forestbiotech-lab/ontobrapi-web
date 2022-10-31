@@ -7,6 +7,7 @@ let inferredRelationship = require('./../componentes/sparql/inferredRelationship
 let formOptions=require('./../componentes/dataStructures/formOptions')
 let info=require('./../componentes/dataStructures/info')
 const {dataProperty} = require("../componentes/dataStructures/info");
+const path=require('path')
 
 // query/
 
@@ -64,10 +65,16 @@ router.get('/inferred/dataPropertyRange/:dataProperty',(req,res)=>{
 
 })
 
-router.get('/db/sparql/:fileName',(req,res)=>{
+router.get('/db/sparql/search/:fileName',(req,res)=>{
   let files=glob.sync("__dirname/../db/*.nt",{absolute:true})
   
   res.json(files)
+
+})
+router.get('/db/sparql/default/ontoBrapi.nt',(req,res)=>{
+  let db="__dirname/../db/RAIZ_all_v1.nt"
+  //res.set("Content-Disposition", 'attachment; ontoBrAPI.nt"')
+  res.sendFile(path.resolve(db),{headers:{"Content-Disposition": 'attachment; filename:"ontoBrAPI.nt"'}})
 
 })
 module.exports = router;

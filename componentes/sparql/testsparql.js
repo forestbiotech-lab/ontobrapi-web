@@ -6,6 +6,7 @@ let host=sparql.host
 let port=sparql.port
 
 const endpointUrl = `http://${host}:${port}/sparql`
+//should-sponge=soft
 let subject = 's'
 let object = 'o'
 let predicate = 'p'
@@ -34,7 +35,7 @@ function sparqlQuery(queryParms,triples) {
 
 
   SELECT DISTINCT ${query1} ${query2} ${query3}
-  FROM <https://bit.ly/3yJFXvw>
+  FROM <https://drive.anti-sense.com/s/TLQs8EA8ccD8BCs/download/RAIZ_all_v1.nt>
   WHERE
     {\n`
     triples.forEach(triple=>{
@@ -99,7 +100,7 @@ async function getAnchors(server,moduleName,callName,requestTrip){
     let  triples=[{subject,predicate,object}]
     triples[0].subject=`<${observation.observation}>`
     if (index<pageSize){
-      results.push(parseCallStructure(callStructure.result.data[0],queryParms,triples))      
+      results.push(parseCallStructure(callStructure.result.data[0],queryParams,triples))
     }
   })
   delete callStructure["_anchor"]
@@ -152,6 +153,7 @@ async function parseCallStructure(callStructure,queryParams,triples){
 }
 
 function isOntologicalTerm(value){
+  //Process data for others
   let result=true
   let possibleAttributes=["class","property"]
   

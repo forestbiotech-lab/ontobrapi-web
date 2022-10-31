@@ -158,5 +158,42 @@ $('document').ready(function(){
       $('textarea').text(data)
   }
 
+  $('button.load-mapping-file').click(function(){
+    $('input#open-mapping-file').click()
+  })
+  $('input#augment-file').on('change', function() {
+    //TODO
+    let self = $(this)
+    var files = $(this).get(0).files;
+    if (files.length == 1) {
+      // One or more files selected, process the file upload
+
+      // create a FormData object which will be sent as the data payload in the
+      // AJAX request
+      var formData = new FormData();
+      // loop through all the selected files
+      formData.append('uploads[]', files[0], files[0].name);
+
+      $.ajax({
+        url: `/forms/datafile/upload`,
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data, textStatus, jqXHR) {
+          if (success) success(data)
+        },
+        fail: function (jqXHR, textStatus, err) {
+          displayToast("Error", err, 4000)
+        },
+        xhr: function () {
+          return progress()
+        }
+      });
+    }
+  })
+
 })
+
+
 

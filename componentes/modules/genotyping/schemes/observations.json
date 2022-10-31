@@ -30,7 +30,47 @@
         "data": [
             {
                 "additionalInfo": {
-                    "additionalProp1": "string",
+                    "additionalProp1": {
+                        "_sparQL": [
+                            {
+                                "class": {
+                                    "_sparQL": [
+                                        {
+                                            "class": "ppeo:observation_unit",
+                                            "property": "ppeo:hasObservedSubject"
+                                        },
+                                        {
+                                            "class": "ppeo:biological_material",
+                                            "property": "ppeo:hasBiologicalMaterial"
+                                        },
+                                        {
+                                            "class": "ppeo:biological_material",
+                                            "property": "ppeo:hasTaxonIdentifier"
+                                        }
+                                    ],
+                                    "_value": "2408ab11"
+                                },
+                                "property": {
+                                    "_sparQL": [
+                                        {
+                                            "class": "ppeo:observation_unit",
+                                            "property": "ppeo:hasObservedSubject"
+                                        },
+                                        {
+                                            "class": "ppeo:biological_material",
+                                            "property": "ppeo:hasBiologicalMaterial"
+                                        },
+                                        {
+                                            "class": "ppeo:biological_material",
+                                            "property": "ppeo:hasTaxonIdentifier"
+                                        }
+                                    ],
+                                    "_value": "2408ab11"
+                                }
+                            }
+                        ],
+                        "_value": "string"
+                    },
                     "additionalProp2": "string",
                     "additionalProp3": "string"
                 },
