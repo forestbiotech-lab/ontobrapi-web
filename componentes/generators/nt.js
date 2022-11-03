@@ -144,7 +144,7 @@ function makeTriples(spreadSheet,mapping,type){
   Object.entries(spreadSheet).forEach(([sheetName,data])=>{
     let parsedFile,header,distinctElements
     ({parsedFile,header,distinctElements}=data.contents)
-    makeNamedNodes(triples,distinctElements,dependentClasses,sheetName)
+    makeNamedNodes(triples,distinctElements,dependentClasses,sheetName,parsedFile)
   })
   Object.entries(spreadSheet).forEach(([sheetName,data])=>{
     let parsedFile,header,distinctElements
@@ -152,15 +152,18 @@ function makeTriples(spreadSheet,mapping,type){
     addProperties(parsedFile,sheetName,header,triples)
   })
 
-  function makeNamedNodes(triples,distinctElements,dependentClasses,sheetName){
+
+  // As per the initial definition Classes weren't line wise. But they sho
+  function makeNamedNodes(triples,distinctElements,dependentClasses,sheetName,parsedFile){
     Object.entries(distinctElements).forEach(([columnHeader,values])=>{
       let valueMap=mapping[sheetName][columnHeader]
-      refactor(valueMap) //Object added by vue are no longer strings, this converts them to strings except the arrays
+      refactor(valueMap)//Object added by vue are no longer strings, this converts them to strings except the arrays
+      valueMap['parsedFile']=parsedFile
       if(!dependentClasses.includes(valueMap.name)){  //TODO fix this name=Object not string
         values.forEach(value=>{
           triples.makeNamedNode(valueMap,value)
         })
-      }//Observation namednodes are generated when the line is being parsed.
+      }//Observation namednodes are generated when the line is being parsed. //TODO Could be all now.
     })
   }
   function addProperties(parsedFile,sheetName,header,triples){

@@ -174,6 +174,12 @@ class Triples{
       let triple={s:"",p:"",o:""},naming_scheme=""
 
       //Subject
+      let re = new RegExp(/@{[\w\ \(\)\/\*-]+}/g)
+      if (this.isReferencedSubject(mapping.naming_scheme)){
+        //TODO
+        //add line to context
+        //iterate lines recursivley
+      }
       naming_scheme=this.interpolator(mapping.naming_scheme,context)
       triple.s=`<raiz:${encodeURI(naming_scheme)}>`  //Sanitize node names as URIs
       if(mapping.name=="observation"){
@@ -259,9 +265,9 @@ class Triples{
     }
     let variables=[]
     let result=string
-    let re = new RegExp(/@{[\w\ \(\)/-]+}/g)
+    let re = new RegExp(/@{[\w\ \(\)\/\*-]+}/g)
     let re2 = new RegExp(/[@{}]/g)
-    let re3 = new RegExp(/@{[\w \(\)\/-]+}/)
+    let re3 = new RegExp(/@{[\w \(\)\/\*-]+}/)
     try{
       let isInterpolatable=this.isInterpolatable(string,re)
       if(isInterpolatable){  

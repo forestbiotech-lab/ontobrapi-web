@@ -145,15 +145,55 @@
                         "levelOrder": 2
                     }
                 ],
-                "observationUnitsDescription": "Observation units consisted in individual plots themselves consisting of a row of 15 plants at a density of approximately six plants per square meter.",
+                "observationUnitsDescription": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:observation_unit",
+                            "property": "Grape_Yield_Trial"
+                        }
+                    ],
+                    "_value": "Observation units consisted in individual plots themselves consisting of a row of 15 plants at a density of approximately six plants per square meter."
+                },
                 "seasons": [
                     "Spring_2018"
                 ],
-                "startDate": "2022-06-06T22:37:31.238Z",
+                "startDate": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:study",
+                            "property": "Grape_Yield_Trial"
+                        }
+                    ],
+                    "_value": "2022-06-06T22:37:31.238Z"
+                },
                 "studyCode": "Grape_Yield_Spring_2018",
-                "studyDbId": "175ac75a",
-                "studyDescription": "This is a yield study for Spring 2018",
-                "studyName": "INRA's Walnut Genetic Resources Observation at Kenya",
+                "studyDbId": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:study",
+                            "property": "Grape_Yield_Trial"
+                        }
+                    ],
+                    "_value": "175ac75a"
+                },
+                "studyDescription": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:study",
+                            "property": "Grape_Yield_Trial"
+                        }
+                    ],
+                    "_value": "This is a yield study for Spring 2018"
+                },
+                "studyName": {
+                    "_sparQL": [
+                        {
+                            "class": "ppeo:study",
+                            "property": "Grape_Yield_Trial"
+                        }
+                    ],
+                    "_value": "INRA's Walnut Genetic Resources Observation at Kenya"
+                },
                 "studyPUI": "doi:10.155454/12349537312",
                 "studyType": "Phenotyping",
                 "trialDbId": "48b327ea",
