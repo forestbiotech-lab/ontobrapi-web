@@ -1,3 +1,6 @@
+// Checkout alternative versions of this file in 
+// remote-testing
+// production
 {
   "sparql":{
     "host":"localhost",
