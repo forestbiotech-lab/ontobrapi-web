@@ -1,5 +1,5 @@
 const hash = require('object-hash');
-
+const xsd = require("@ontologies/xsd")
 class Triples{
   constructor(prefixes,dependentClasses,default_named_nodes){
     this.type=["class","objectProperty"] //Unnecessary
@@ -352,6 +352,21 @@ class Triples{
   toJSON(){
     return {prefix:this.triples.prefix,individuals:this.triples.individuals,properties:this.triples.properties}
   }
+  getXSDdatatypeURI(name){
+    try{
+      return xsd[name].value
+    }catch (e){
+      console.log(`Datatype: "${name}" was not found. Can't convert`,e)
+      return "https://brapi.biodata.pt/undefined_Datatype"
+    }
+  }
+  isXSDdatatype(name){
+    try{
+      return typeof xsd[name].value === "string"
+    }catch (e){
+      return false
+    }
+  }
   complete(element,that,recusion){
     let prefixes=Object.keys(that.triples.prefix)
 
@@ -371,8 +386,12 @@ class Triples{
           if(recusion){
             console.log("No completion found")
             return element
+          }else if(this.isXSDdatatype(qualifier)){
+            return `${literal}^^<${this.getXSDdatatypeURI(qualifier)}>`
           }else{
-            return `${literal}^^${that.complete(`<${qualifier}>`,that,true)}`          
+            //TODO possible removal for this method
+            // Not sure when this is useful
+            return `${literal}^^${that.complete(`<${qualifier}>`,that,true)}`
           }
         }
       }catch(err){
