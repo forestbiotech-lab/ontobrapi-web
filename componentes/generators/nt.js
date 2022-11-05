@@ -158,21 +158,35 @@ function makeTriples(spreadSheet,mapping,type){
     Object.entries(distinctElements).forEach(([columnHeader,values])=>{
       let valueMap=mapping[sheetName][columnHeader]
       refactor(valueMap)//Object added by vue are no longer strings, this converts them to strings except the arrays
-      valueMap['parsedFile']=parsedFile
-      if(!dependentClasses.includes(valueMap.name)){  //TODO fix this name=Object not string
-        values.forEach(value=>{
-          triples.makeNamedNode(valueMap,value)
-        })
-      }//Observation namednodes are generated when the line is being parsed. //TODO Could be all now.
+      valueMap['parsedFile']=Object.assign({},parsedFile)
+      if(valueMap.type=="class") {
+        if (!dependentClasses.includes(valueMap.name)) {  //TODO fix this name=Object not string
+          if (triples.isReferencedSubject(valueMap.naming_scheme)) {
+            parsedFile.forEach(line => {
+              triples.makeNamedNode(valueMap, line[columnHeader], line)
+            })
+          } else {
+            values.forEach(value => {
+              triples.makeNamedNode(valueMap, value)
+            })
+          }
+        }
+      }
     })
   }
   function addProperties(parsedFile,sheetName,header,triples){
     parsedFile.forEach((line)=>{
       Object.entries(line).forEach(([column,value])=>{  //column == index ??? value== value  
-        mapping[sheetName][column].currentLine=line
-        mapping[sheetName][column].header=header
-        mapping[sheetName][column].mapping=mapping[sheetName]
-        triples.parseLineItem(mapping[sheetName][column],value)
+        try{
+          if(mapping[sheetName][column].type=="class") {
+            mapping[sheetName][column].currentLine = line
+            mapping[sheetName][column].header = header
+            mapping[sheetName][column].mapping = mapping[sheetName]
+            triples.parseLineItem(mapping[sheetName][column], value)
+          }
+        }catch(e){
+          console.log("Unable to file column in mapping: ",e)
+        }
       })
     })
   }
@@ -214,10 +228,12 @@ function getDistinctElementsFromEachColumn(data,csvData,headerLineNumber){
       })
     }
     let newLine={}
+    header.forEach(name=>newLine[name]="")
     //Renaming the columns if we change the header
-    Object.entries(line).map(([key,value],index)=>{Object.assign(newLine,{[header[index]]:value})})
+    header.forEach(name=>{
+      if(line[name]) newLine[name]=line[name]
+    })
     parsedFile.push(newLine)
-
     //Store unique value only as the key.
     Object.entries(line).forEach(([column,data])=>{
       result[column][data]=""
