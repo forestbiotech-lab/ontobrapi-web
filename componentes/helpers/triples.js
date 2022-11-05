@@ -124,10 +124,15 @@ class Triples{
       console.log(`The node_name hasn't been created yet: ${node_name}`)
     }
 
+    //TODO check for objectProperties
+    if(propertyName !== undefined){
+      p=`<${that.ontology.base}:${propertyName}>` //Not working fo
+    }else{
+      p=`<${that.ontology.base}:${propertyValue}>`
+    }
 
-    p=`<${that.ontology.base}:${propertyName}>`
  
-    if(typeof referenceNode == "string" ){
+    if(typeof referenceNode == "string" && propertyName != undefined ){
       referenceNode=`#{${referenceNode}}`  //TODO This whole thing has problems does not generate observation for Ensaio. ObjProperty #1 column
       let isReferencedSubject=this.isReferencedSubject(referenceNode)
       if(isReferencedSubject){  
@@ -151,7 +156,8 @@ class Triples{
       }
     }else{ 
       if( (typeof propertyType === "string") && (typeof propertyValue == "string") ){
-        o=this.interpolator(propertyValue,context)
+        o=context[referenceNode]
+        //o=this.interpolator(propertyValue,context) //old definition
         if(o.length==0) addProperty=false //No value skip adding property
         //TODO Convert time
         //     lookup ontology for unit
@@ -174,12 +180,6 @@ class Triples{
       let triple={s:"",p:"",o:""},naming_scheme=""
 
       //Subject
-      let re = new RegExp(/@{[\w\ \(\)\/\*-]+}/g)
-      if (this.isReferencedSubject(mapping.naming_scheme)){
-        //TODO
-        //add line to context
-        //iterate lines recursivley
-      }
       naming_scheme=this.interpolator(mapping.naming_scheme,context)
       triple.s=`<raiz:${encodeURI(naming_scheme)}>`  //Sanitize node names as URIs
       if(mapping.name=="observation"){
