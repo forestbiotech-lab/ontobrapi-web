@@ -1,6 +1,10 @@
+// Checkout alternative versions of this file in 
+// remote-testing
+// production
+// development
 {
   "sparql":{
-    "host":"109.48.217.254",
-    "port":"80"
+    "host":"localhost",
+    "port":"8890"
   }
 }
