@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const fs=require('fs');
 const path=require('path');
+let chai=require('chai');
 /*
   Check chrome://version for details
   userdata, remote-debugging port and others
@@ -25,22 +26,27 @@ const path=require('path');
             return document.querySelector(data.selector).value = data.value
         }, {selector, value})
     })
-    let filePath="/brunocosta/Documents/Projectos/ontobrapi/9may/OntoBrAPI_9May_mapping-added.json"
+    let defaultMapPath="/brunocosta/Documents/Projectos/ontobrapi/9may/OntoBrAPI_9May_mapping-added.json"
+    let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigation.json"
+    let mapInvsNstudy="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigationNstudy.json"
     let root=""
     if(process.platform=="darwin"){
             root="/Users"
     }else if(process.platform=="linux"){
         root="/home"
     }
-    let mapping = fs.readFileSync(path.join(root,filePath),{encoding:"utf8"})
-    mapping=mapping.split("/n")[0];
+    let mappingGeneral = fs.readFileSync(path.join(root,defaultMapPath),{encoding:"utf8"})
+    let mappingInvestigation=fs.readFileSync(path.join(root,mapInvestigation),{encoding:"utf8"})
+    mappingGeneral=mappingGeneral.split("/n")[0];
+    mappingInvestigation=mappingInvestigation.split("/n")[0];
+    let mapping=mappingInvestigation
     let element;
 
 
     //Start browser
     //const browser = await puppeteer.launch(opts);
     // Lookup on chrome session "chrome://"
-    const browserURL = 'http://localhost:45553'
+    const browserURL = 'http://localhost:59292'
     const browser = await puppeteer.connect({browserURL, defaultViewport: null})
 
 
@@ -52,7 +58,8 @@ const path=require('path');
 
     //LOAD SpreadSheet and Mapping
     await firstPage.waitForSelector('#augment-file')
-    await (await firstPage.$('#augment-file')).uploadFile(path.join(root,`/brunocosta/Documents/Projectos/ontobrapi/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx`))
+    //await (await firstPage.$('#augment-file')).uploadFile(path.join(root,`/brunocosta/Documents/Projectos/ontobrapi/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx`))
+    await (await firstPage.$('#augment-file')).uploadFile(path.join(root,`/brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx`))
     element=await firstPage.$("#mapping-loading-options button.load-mapping-button")
     await element.evaluate(element=>element.click())
     await firstPage.waitForTimeout(1500);
@@ -76,12 +83,26 @@ const path=require('path');
         await  element.click();
 
     }
-    await firstPage.waitForTimeout(1500);
+    //await firstPage.waitForTimeout(6500);
     if(true===true){
         //Generate triples
         genNT = await firstPage.waitForSelector('button.generate-nt')
-        //await firstPage.waitForTimeout(1000);
-        await  genNT.click();
+        await genNT.evaluate(b => b.click());
+        //await  genNT.click();
+        //await genNT.hover() //Just to bring into view
+        await firstPage.evaluate( () => {
+            window.scrollBy(500, window.innerHeight);
+        });
+        //await firstPage.waitForTimeout(6000);
+
+        let textarea=await firstPage.waitForSelector('textarea.generated-ntriples')
+        let value = await firstPage.evaluate(el => el.textContent, textarea)
+        try {
+            chai.assert.isTrue(value.includes("<http://brapi.biodata.pt/raiz/Investigation_INIAV:2Portos:VitisPhenology>"), "Creation of class investigation")
+        }catch(e){
+            console.log("Assertion fail: ",e)
+        }
+
 
     }
 
