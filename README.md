@@ -83,6 +83,8 @@ Estou a ver estes triplos como graphs.
 
  * Set the mappings
  * Define the object properties 
+ * Create necessary class to link to each object property 
+ * Link data proerties to appropriate class
  * Define the data properties
 
  * Use #{} to refer to another node use @{} to get the inline value of the particular column.
@@ -92,9 +94,11 @@ Estou a ver estes triplos como graphs.
 
   1- Identify each column 
   2- Parse all lines into memory with headers for mapping
-  3- Create individuals for all distinct elements in columns that are classes
-  4- Create Dependent individuals and/or dataProperties and objectProperties for each line if the column has associated properties. 
-  5- Generate file/JSON with triples
+  3- Create individuals for all distinct elements in columns that are classes, if class references another column a new class will be created for each row.
+  4- [Deprecated] Create Dependent individuals and/or dataProperties and objectProperties for each line if the column has associated properties. 
+  5- Adds Object Properties for each class
+  6- Add data properties for each clas
+  6- Generate file/JSON with triples
 
 ### Mapping
 
