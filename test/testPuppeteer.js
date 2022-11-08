@@ -27,7 +27,8 @@ let chai=require('chai');
         }, {selector, value})
     })
     let defaultMapPath="/brunocosta/Documents/Projectos/ontobrapi/9may/OntoBrAPI_9May_mapping-added.json"
-    let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigation.json"
+    //let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigation.json"
+    let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/ontobrapi_vitis.json"
     let mapInvsNstudy="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigationNstudy.json"
     let root=""
     if(process.platform=="darwin"){
@@ -87,7 +88,7 @@ let chai=require('chai');
     if(true===true){
         //Generate triples
         genNT = await firstPage.waitForSelector('button.generate-nt')
-        await genNT.evaluate(b => b.click());
+        //await genNT.evaluate(b => b.click());
         //await  genNT.click();
         //await genNT.hover() //Just to bring into view
         await firstPage.evaluate( () => {
