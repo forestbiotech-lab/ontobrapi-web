@@ -531,6 +531,19 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
         let url=(URL.createObjectURL(blob))
         window.open(url, '_blank')
       },
+      downloadMappingFile(){
+        let blob = new Blob([JSON.stringify(this.selection,null, 2)], {type: 'application/json'})
+        let url=(URL.createObjectURL(blob))
+        let a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        a.href = url;
+        a.download = "mapping.json";
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove()
+        //window.open(url, '_blank')
+      },
       loadJSON(){
         try{
           let parsedJSON=JSON.parse(this.uploadedJSON)
