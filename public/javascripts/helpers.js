@@ -310,21 +310,25 @@ function updateGraph(selection,formOptions,worksheet,graph){
     function extractLinks(graph,selection,formOptions,worksheet){
         graph.links=[]
         Object.entries(selection[worksheet]).forEach(([column,columnAttributes])=>{
-            columnAttributes.objectProperties.forEach(property=>{
-                try{
-                    if (property.show===true && property.referenceNode !== '') {
-                        let source = selection[worksheet][column].name.label
-                        let target = selection[worksheet][property.referenceNode].name.label
-                        let selectedObjectProperty = property.property.name
-                        let valueIndex = formOptions.name.ObjectProperty.findIndex(property => property.name === selectedObjectProperty)
-                        if (typeof source === "string" && typeof target === "string" && typeof valueIndex === "number") {
-                            graph.links.push({source, target, value: valueIndex})
+            if(columnAttributes.type.name==="class") {
+                columnAttributes.objectProperties.forEach(property => {
+                    try {
+                        if (property.show === true && property.referenceNode !== '') {
+                            let source = selection[worksheet][column].name.label
+                            let target = selection[worksheet][property.referenceNode].name.label
+                            let targetType = selection[worksheet][property.referenceNode].type.name
+
+                            let selectedObjectProperty = property.property.name
+                            let valueIndex = formOptions.name.ObjectProperty.findIndex(property => property.name === selectedObjectProperty)
+                            if (typeof source === "string" && typeof target === "string" && typeof valueIndex === "number" && targetType == "class") {
+                                graph.links.push({source, target, value: valueIndex})
+                            }
                         }
+                    } catch (err) {
+                        displayToast("Unable to load one of your object properties")
                     }
-                }catch(err){
-                    displayToast("Unable to load one of your object properties")
-                }
-            })
+                })
+            }
         })
     }
 }
