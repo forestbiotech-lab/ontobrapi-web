@@ -552,7 +552,7 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
         document.body.appendChild(a);
         a.style = "display: none";
         a.href = url;
-        a.download = "mapping.json";
+        a.download = window.jSheet.file.name.replace(/\.[a-z]+$/,".json");
         a.click();
         window.URL.revokeObjectURL(url);
         a.remove()
