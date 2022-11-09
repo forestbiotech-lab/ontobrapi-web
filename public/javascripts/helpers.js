@@ -116,6 +116,12 @@ function validateSelectionJSON(jSheet,$data,completeness){
 
                 //Each Column in worksheet
                 forEach(selectionSheetMeta,(selectionColumn,selectionColumnEntries)=>{
+                    if(selectionColumnEntries.type.name!=="class"){ //Clear properties from non-class columns
+                        if( selectionColumnEntries.dataProperties.length>0 || selectionColumnEntries.objectProperties.length>0){
+                            selectionColumnEntries.dataProperties=[]
+                            selectionColumnEntries.objectProperties=[]
+                        }
+                    }
                     if (jSheetColumns.indexOf(selectionColumn) === -1){
                         selectionExtraColumns.push(selectionColumn)
                     }
