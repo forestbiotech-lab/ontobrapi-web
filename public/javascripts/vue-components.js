@@ -476,6 +476,12 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
       validMissingClass(){
         return this.columns.indexOf(this.missingClass) === -1
       },
+      notBlank(){
+        return this.missingClass !== ""
+      },
+      isAddingClassDisabled(){
+        return !(this.validMissingClass && this.notBlank)
+      },
       missingClassBGcolor(){
         return this.validMissingClass ? "white" : "red"
       },
@@ -506,7 +512,7 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
         let dataProperties= await this.dataProperties
       },
       addMissingClass(){
-        if(this.validMissingClass === true){
+        if(this.validMissingClass === true && this.notBlank === true ){
           //TODO Why does this duplicate?
           //this.columns.push(this.missingClass)
 
