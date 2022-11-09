@@ -34,6 +34,8 @@ block content
                     button.btn.btn-primary(style='pointer-events: none;' type='button' disabled='')
                       i.bi-info-lg(role="img" aria-label="Information")
                   button.btn.btn-success.download-mapping-button(v-on:click="downloadMapping" style="float:right;") Download Mapping
+                  button.btn.btn-success.download-mapping-file-button(v-on:click="downloadMappingFile" style="float:right;")
+                      i.bi-save(role="img" aria-label="Download") &nbsp;Download Mapping File
                   button.btn.btn-success.load-mapping-button(type='button' data-bs-toggle='collapse' data-bs-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
                 #loadingPanel.collapse(aria-labelledby="load-mapping", data-bs-parent="#mapping-loading-options")
                   .card.card-body
