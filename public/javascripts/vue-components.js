@@ -226,6 +226,14 @@ function componentMappingForm(){
         this.dataPropertiesCache.dataProperties[this.column]={}
         let dataProperties= await this.dataProperties
       },
+      disableDataProperties(value){
+        try{
+          return this.selection[this.worksheet][value].type.name=="class"
+        }catch (e) {
+          console.log(`Unable to locate type for this value: ${value} - `,e)
+          return false
+        }
+      },
       disableClasses(value){
         let result=false
         try{
@@ -551,6 +559,7 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
           this.selection=parsedJSON
           //TODO calculate completeness Still has error for  Biological material which is empty
           // Study in study not showing then one but nothing on screen (Because false) Exclude show:false from count Requires a if not a oneliner anymore
+
           updateCompleteness(this.selection,this.completeness)
           this.updateGraphModel()
           $('#loadingPanel.collapse').collapse('hide')

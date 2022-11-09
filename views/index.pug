@@ -108,7 +108,7 @@ block content
                           .form-group
                             label Individuals
                             //TODO selectable for classes only make a new method in component
-                            v-select(:options="namedIndividuals",v-model="selection[worksheet][column].objectProperties[objectPropertyForm.id].referenceNode" @input="updateGraphModel(objectPropertyForm)")
+                            v-select(:options="namedIndividuals",:selectable="disableDataProperties",v-model="selection[worksheet][column].objectProperties[objectPropertyForm.id].referenceNode" @input="updateGraphModel(objectPropertyForm)")
                               template(v-slot:option="option")
                                 | {{ option.label }} &nbsp;
                                 span.badge.bg-primary(v-if="selection[worksheet][option.label].type.label") {{ selection[worksheet][option.label].type.label }}
