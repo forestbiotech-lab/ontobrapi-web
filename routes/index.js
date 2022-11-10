@@ -3,12 +3,21 @@ const router = express.Router();
 let sparqlQuery = require('.././componentes/sparql/sparqlQuery')
 const path=require('path')
 const fs = require('fs')
+const { exec } = require("child_process");
+
+let runningVersion="0.0";
+(function getVersion(){
+  exec("git log --pretty=format:'%h' -1", (error, stdout, stderr) => {
+    if(error) console.log("Version not found")
+    else runningVersion=stdout
+  })
+}())
 
 // / no previous route 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Onto BrAPI'})
+  res.render('index', { title: 'Onto BrAPI',version:runningVersion})
 });
 
 // Shows and example of the sqarl quary output.
@@ -36,6 +45,14 @@ router.get('/sparql/raiz/:file',(req,res)=>{
   res.send(`${data}`)
 })
 
+router.get('/running/version',(req,res)=>{
+  //Inefficient since its not dynamic only changes on reload image
+  exec("git log --pretty=format:'%h' -1", (error, stdout, stderr) => {
+    if(error) res.error(error)
+    else res.json(stdout)
+
+  })
+})
 
 
 module.exports = router;
