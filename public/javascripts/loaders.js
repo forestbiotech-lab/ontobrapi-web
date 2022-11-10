@@ -79,6 +79,20 @@ $('document').ready(function(){
           el:"#preview-table",
           data:{
           },
+          methods:{
+            saveNTfile(){
+              let blob = new Blob([$('textarea.generated-ntriples').text()], {type: 'application/n-triples'})
+              let url=(URL.createObjectURL(blob))
+              let a = document.createElement("a");
+              document.body.appendChild(a);
+              a.style = "display: none";
+              a.href = url;
+              a.download = window.jSheet.file.name.replace(/\.[a-z]+$/,".nt");
+              a.click();
+              window.URL.revokeObjectURL(url);
+              a.remove()
+            }
+          }
         })
 
         self.closest('div').nextAll('.preview-table').removeClass('d-none')
@@ -155,6 +169,7 @@ $('document').ready(function(){
   function loadNTriples(data){
       console.log("Loading NT!")
       $('textarea').removeClass('d-none')
+      $('button.save-nt-file').removeClass('d-none')
       $('textarea').text(data)
   }
 
