@@ -121,6 +121,12 @@ function validateSelectionJSON(jSheet,$data,completeness){
                             selectionColumnEntries.dataProperties=[]
                             selectionColumnEntries.objectProperties=[]
                         }
+                    }else if(selectionColumnEntries.type.name==="class"){
+                        let dataProperties = selectionColumnEntries.dataProperties
+                        let objectProperties = selectionColumnEntries.objectProperties
+                        selectionColumnEntries.dataProperties=removeDeletedProperties(dataProperties)
+                        selectionColumnEntries.objectProperties=removeDeletedProperties(objectProperties)
+
                     }
                     if (jSheetColumns.indexOf(selectionColumn) === -1){
                         selectionExtraColumns.push(selectionColumn)
@@ -172,6 +178,16 @@ function validateSelectionJSON(jSheet,$data,completeness){
                 $data=window.structures.addColumnToSelection($data,worksheet,column)
             })
         })
+        function removeDeletedProperties(properties){
+            properties=properties.filter(prop=>prop.show==true)
+            return reindex(properties)
+        }
+        function reindex(properties){
+            for (let i in properties){
+                properties[i].id=i
+            }
+            return properties
+        }
         return $data
     }catch(err){
         console.log("Invalid Selection JSON!")
