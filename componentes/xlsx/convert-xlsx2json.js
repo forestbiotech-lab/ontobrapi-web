@@ -8,7 +8,7 @@ let XLSX = require('xlsx');
 //exports all sheets
 module.exports=function(file){
   let xlsxPath=`${file.filePath}/${file.name}`
-  var xlsx = XLSX.readFile(xlsxPath);
+  var xlsx = XLSX.readFile(xlsxPath,{cellDates:true});
   xlsx.jsonSheets={}
   xlsx.csvSheets={}
   xlsx.headers={}
