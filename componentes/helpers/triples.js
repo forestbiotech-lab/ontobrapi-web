@@ -79,13 +79,13 @@ class Triples{
   makeDependencies(mapping,value,context){
      if(mapping.objectProperties){
         mapping.objectProperties.forEach(objectProperty=>{
-          context.value=value
+          context.__value__=value
           this.makePropertyTriple(objectProperty,mapping,context)
         })
       }
      if(mapping.dataProperties){
       mapping.dataProperties.forEach(dataProperty=>{
-        context.value=value
+        context.__value__=value
         this.makePropertyTriple(dataProperty,mapping,context)
       })
      }
@@ -104,15 +104,9 @@ class Triples{
       propertyType=propertyAttributes.data.type 
     } 
 
-    let node_name
-    //context.assign(context,)
-    //Subject   
-    ///TODO This is not finished
-    if(mapping.name=="observation" && mapping.node_name){
-      node_name=mapping.node_name
-    }else{
-      node_name=this.interpolator(mapping.naming_scheme,context,true)  
-    }
+
+    let node_name=this.interpolator(mapping.naming_scheme,context,true)
+
 
 
     let s,p,o,referenced_node;
@@ -171,11 +165,11 @@ class Triples{
     }
 
   }
-  makeNamedNode(mapping,value,context){
+  makeNamedNode(mapping,__value__,context){
     //TODO verify possible issues with context here. 
     if(mapping.type=="class"){    
-      if(context) context=Object.assign(context,{value})
-      else context={value}
+      if(context) context=Object.assign(context,{__value__})
+      else context={__value__}
 
       let triple={s:"",p:"",o:""},naming_scheme=""
 
@@ -245,7 +239,7 @@ class Triples{
     let referenced_node;
     isSubject=isSubject[0].replace(/[#{}]/g,"")
     if (mapping.mapping[isSubject]){
-      context.value=context[isSubject]
+      context.__value__=context[isSubject]
       referenced_node=this.interpolator(mapping.mapping[isSubject].naming_scheme,context,true)            
     }else{
       if(this.triples.individuals[isSubject]){
@@ -261,7 +255,7 @@ class Triples{
   interpolator(string,context,lookup){
     let that=this
     let reserved_vars={
-      auto_increment:this.auto_increment
+      __auto_increment__:this.auto_increment
     }
     let variables=[]
     let result=string
@@ -391,7 +385,7 @@ class Triples{
           }else{
             //TODO possible removal for this method
             // Not sure when this is useful
-            return `${literal}^^${that.complete(`<${qualifier}>`,that,true)}`
+            return `${literal}^^${this.getXSDdatatypeURI(qualifier)}`//${that.complete(`<${qualifier}>`,that,true)}`
           }
         }
       }catch(err){

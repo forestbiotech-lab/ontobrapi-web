@@ -50,7 +50,6 @@ router.get('/running/version',(req,res)=>{
   exec("git log --pretty=format:'%h' -1", (error, stdout, stderr) => {
     if(error) res.error(error)
     else res.json(stdout)
-
   })
 })
 

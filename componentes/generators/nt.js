@@ -131,7 +131,7 @@ function makeTriples(spreadSheet,mapping,type){
     }
 
   }
-  let dependentClasses=["observation","observation_unit","environment_parameter"] //TO CHECK to I need to add others??? country,investigation, (...)
+  let dependentClasses=[] //TO CHECK to I need to add others??? country,investigation, (...) //Deprecated
 
   //END HARDCODED -----------------------------------------------------------------------------------------------------------------
 

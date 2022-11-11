@@ -28,8 +28,8 @@ let chai=require('chai');
     })
     let defaultMapPath="/brunocosta/Documents/Projectos/ontobrapi/9may/OntoBrAPI_9May_mapping-added.json"
     //let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigation.json"
-    let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/ontobrapi_vitis.json"
-    let mapInvsNstudy="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigationNstudy.json"
+    //let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/ontobrapi_vitis.json"
+    let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigationNstudy.json"
     let root=""
     if(process.platform=="darwin"){
             root="/Users"
@@ -47,7 +47,7 @@ let chai=require('chai');
     //Start browser
     //const browser = await puppeteer.launch(opts);
     // Lookup on chrome session "chrome://"
-    const browserURL = 'http://localhost:59292'
+    const browserURL = 'http://localhost:45553'
     const browser = await puppeteer.connect({browserURL, defaultViewport: null})
 
 
@@ -88,7 +88,7 @@ let chai=require('chai');
     if(true===true){
         //Generate triples
         genNT = await firstPage.waitForSelector('button.generate-nt')
-        //await genNT.evaluate(b => b.click());
+        await genNT.evaluate(b => b.click());
         //await  genNT.click();
         //await genNT.hover() //Just to bring into view
         await firstPage.evaluate( () => {
@@ -99,7 +99,7 @@ let chai=require('chai');
         let textarea=await firstPage.waitForSelector('textarea.generated-ntriples')
         let value = await firstPage.evaluate(el => el.textContent, textarea)
         try {
-            chai.assert.isTrue(value.includes("<http://brapi.biodata.pt/raiz/Investigation_INIAV:2Portos:VitisPhenology>"), "Creation of class investigation")
+            chai.assert.isTrue(value.includes("<http://brapi.biodata.pt/raiz/Investigation_THERMAL%20REQUIREMENTS,%20DURATION%20AND%20PRECOCITY%20OF%20PHENOLOGICAL%20STAGES%20OF%20GRAPEVINE%20CULTIVARS%20OF%20THE%20PORTUGUESE%20COLLECTIONINIAV:2Portos:VitisPhenology>"), "Creation of class investigation")
         }catch(e){
             console.log("Assertion fail: ",e)
         }
