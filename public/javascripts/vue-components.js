@@ -256,10 +256,10 @@ function componentMappingForm(){
         this.selection[this.worksheet][this.column][propertyType][index].show=false
       },
       setAutoIncrement:function(){
-        this.selection[this.worksheet][this.column].naming_scheme+="@{auto_increment}"
+        this.selection[this.worksheet][this.column].naming_scheme+="@{__auto_increment__}"
       },
       setValueAttribute:function(){
-        this.selection[this.worksheet][this.column].naming_scheme+="@{value}"
+        this.selection[this.worksheet][this.column].naming_scheme+="@{__value__}"
       },
       setReferenceAttribute(value){
         try{
