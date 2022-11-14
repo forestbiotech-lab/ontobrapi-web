@@ -322,11 +322,14 @@ function componentSimplePropertySelect() {
         }
       },
       async queryInferredProperties(){
+        //TODO this should be in selection of value type
         let type=this.selection[this.worksheet][this.column].type.name
         let name=this.selection[this.worksheet][this.column].name.name
         if(type === "dataProperty" && name !== "" ){
           this.formOptions.valueType=await $.get(`/query/inferred/dataPropertyRange/${name}`)
           Vue.set(this.selection[this.worksheet][this.column],valueType,{})
+        }else if(type == "class"){
+          this.formOptions.valueType=[{name:"name_node",label:"Named Node"}]
         }
       }
     }
@@ -569,6 +572,7 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
           updateCompleteness(this.selection,this.completeness)
           this.updateGraphModel()
           $('#loadingPanel.collapse').collapse('hide')
+          window.appActiveClasses.selection=this.selection
         }catch(err){
           displayToast("Invalid JSON Error",err,4000)
         }
@@ -577,6 +581,21 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
     mounted:function(){
       //Loads tooltips
       $('[data-toggle="tooltip"]').tooltip()
+      loadActiveClasses(this.selection)
+    }
+  })
+}
+function loadActiveClasses(selection){
+  window.appActiveClasses = new Vue({                                                  //Anonymous can't get back to it if necessary!!!!
+    el:"#active-classes",
+    data:{
+      selection
+    },
+    computed:{
+
+    },
+    methods:{
+
     }
   })
 }
