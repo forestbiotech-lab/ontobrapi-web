@@ -133,6 +133,7 @@ $('document').ready(function(){
   }
   getOntoterms()
 
+
   
   //TODO transform into FUNCTION. This has to be run when it's loaded. 
   function ntGenerationButton(){  

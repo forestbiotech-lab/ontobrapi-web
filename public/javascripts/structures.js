@@ -25,6 +25,7 @@ class Structures{
         this.selection=this.selectionBase
     }
     get completenessColumn(){
+
         return Object.assign({},this.columnStructure)
     }
     get completenessWorksheet(){
