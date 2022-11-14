@@ -185,6 +185,7 @@ function componentMappingForm(){
       displayTextWithBadges(){
         try{
           let cellValue=window.jSheet.jsonSheets[this.worksheet][0][this.column]
+          let referenceCellValue=window.jSheet.jsonSheets[this.worksheet][0]
           cellValue=cellValue.length>10 ? cellValue.substr(0,20).concat("...") : cellValue
           return this.selection[this.worksheet][this.column][this.label]
               .replace("@{__auto_increment__}",`<span class="badge bg-info">Auto Increment</span>`)
