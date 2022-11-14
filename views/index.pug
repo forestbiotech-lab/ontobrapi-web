@@ -194,7 +194,17 @@ block content
           .card-body
             svg#graph-demo
         .card.bg-light.activeClasses#active-classes
-
+          .card-header
+            h5 List of active classes
+          .card-body
+            ul.list-group
+              li.list-group-item(v-for="worksheet of Object.keys(selection)")
+                h5 {{ worksheet }}
+                div(v-for="column in selection[worksheet]")
+                  div(v-if='column.type')
+                    div(v-if='column.type.name=="class"')
+                      span.badge.bg-secondary {{ column.name.label }}:
+                      span.badge.bg-primary {{ column.naming_scheme }}
         .card.bg-light.ontology-terms
           .card-header
             h5 Rdf Syntax Type
