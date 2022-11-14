@@ -196,7 +196,7 @@ block content
         .card.bg-light.activeClasses#active-classes
           .card-header
             h5 List of active classes
-          .card-body
+          .card-body.d-none
             ul.list-group
               li.list-group-item(v-for="worksheet of Object.keys(selection)")
                 h5 {{ worksheet }}

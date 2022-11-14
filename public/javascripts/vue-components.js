@@ -187,8 +187,8 @@ function componentMappingForm(){
           let cellValue=window.jSheet.jsonSheets[this.worksheet][0][this.column]
           cellValue=cellValue.length>10 ? cellValue.substr(0,20).concat("...") : cellValue
           return this.selection[this.worksheet][this.column][this.label]
-              .replace("@{auto_increment}",`<span class="badge bg-info">Auto Increment</span>`)
-              .replace("@{value}",`<span class="badge bg-success value">${cellValue}</span>`)
+              .replace("@{__auto_increment__}",`<span class="badge bg-info">Auto Increment</span>`)
+              .replace("@{__value__}",`<span class="badge bg-success value">${cellValue}</span>`)
               .replace(/@{([\w *\w*]*)}/g,`<span class="badge bg-danger">$1</span>`)
         }catch(e){
           return this.selection[this.worksheet][this.column][this.label]
@@ -586,6 +586,7 @@ function componentMappingWorksheet(formOptions,$data,jSheet){
   })
 }
 function loadActiveClasses(selection){
+  $('#active-classes .card-body').removeClass('d-none')
   window.appActiveClasses = new Vue({                                                  //Anonymous can't get back to it if necessary!!!!
     el:"#active-classes",
     data:{
