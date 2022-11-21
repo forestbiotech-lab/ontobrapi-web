@@ -29,7 +29,7 @@ let chai=require('chai');
     let defaultMapPath="/brunocosta/Documents/Projectos/ontobrapi/9may/OntoBrAPI_9May_mapping-added.json"
     //let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigation.json"
     //let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/ontobrapi_vitis.json"
-    let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigationNstudy.json"
+    let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigationNstudyNperson.json"
     let root=""
     if(process.platform=="darwin"){
             root="/Users"
