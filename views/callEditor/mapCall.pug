@@ -7,7 +7,10 @@ block content
     a.btn.btn-danger.btn-block(href="result") Call Result
   if json.result.data[0]
     div#mapping(anchor=anchor)
-      table.table(v-if="callStructure.result")
+      .position-relative
+        .spinner-grow.position-absolute.translate-middle.start-50(role="status")
+          span.visually-hidden Loading...
+      table.table(v-if="callStructure.result").d-none
         tr(v-for="attribute in Object.keys(callStructure.result.data[0])",:key="attribute")
           td.pt-3(:attritute="attribute")
             p.d-grid(v-if="valueType(attribute)=='direct'")

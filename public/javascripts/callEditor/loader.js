@@ -261,6 +261,8 @@ window.vmapping = new Vue({                                                  //A
         this.objectProperties[this.className] = await $.get(`/query/inferred/objectProperty/${this.className}`)
         this.dataProperties[this.className] = await $.get(`/query/inferred/dataProperty/${this.className}`)
         let that = this
+        $('#mapping table').removeClass('d-none')
+        $('#mapping .spinner-grow').hide()
         /*window.vmapping.$children.filter(child=> child.$vnode.tag.startsWith("vue-component"))
             .forEach(
                 layer=>{
