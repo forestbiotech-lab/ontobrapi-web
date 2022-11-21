@@ -109,6 +109,7 @@ router.get('/listcalls/:moduleName/:callName/json', function(req, res, next) {
   res.json(json)
 });
 
+//This call adds the mapping information
 router.post('/listcalls/:moduleName/:callName/update', function(req, res, next) {
   let moduleName=req.params.moduleName
   let callName=req.params.callName 

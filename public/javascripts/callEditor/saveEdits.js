@@ -17,7 +17,7 @@
   callStructureLoaded.registerListener(function(val){
     if(val=== true){
       callStructure=window.callStructure
-      loadValues()
+      //loadValues()
       window.vmapping.callStructure=callStructure
     }
   })
@@ -32,9 +32,9 @@
     }
   }
 
-
+  //TODO DEPRECATED
   $('.collapse').on("shown.bs.collapse",onInputChange)
-  
+  //TODO DEPRECATED
   function onInputChange(evt,selector,data,handler){
     if(data) data=data.data
     let self=data || $(this)
@@ -74,7 +74,7 @@
         if (data[callAttribute]["_sparQL"].length < layer + 1) {
           data[callAttribute]["_sparQL"][layer] = {}
         }
-        data[callAttribute]["_sparQL"][layer][inputAttribute] = value
+        data[callAttribute]["_sparQL"][layer][inputAttribute] = inputValue
       } else {
         let value = data[callAttribute]
         let previousValue
@@ -108,6 +108,7 @@
     target.find('button.add-new-layer').click(addNewLayer)    
   }
   addNewLayerOnClick($("body"))
+  //TODO on click this
   function addNewLayer(evt,selector,data,handler){
     let target
     if(data) data=data.data

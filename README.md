@@ -152,7 +152,16 @@ https://github.com/SheetJS/sheetjs  (See what the above adds)
 ###### Development
 
 - /forms/parse/file downlaods a file.
-- /forms/parse/file/json  This is the json verison 
+- /forms/parse/file/json  This is the json version 
 
 
 
+## Triple Store
+
+Open virtuoso: Normally running on localhost:8890. Open the Linked Data tab. There you can list active graphs, manage them and upload new ones
+
+#### Adding a new graph (.nt)
+From the Linked Data tab go to Quad Store Upload. Select the file to upload, tick create graph explicitly and select the name used to store the new graph
+
+#### Listing Graphs
+In the Linked Data tab got to Graphs > Graphs. From here you can delete or rename any of the stored graphs

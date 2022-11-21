@@ -15,6 +15,10 @@ let devServer="http://localhost:3000/"
 
 const pageSize=10
 
+const prefixes={
+  "ppeo":"http://purl.org/ppeo/PPEO.owl#"
+}
+
 
 //Possible solution
 Array.prototype.forEachAsync = async function (fn) {
@@ -29,13 +33,13 @@ Array.prototype.forEachAsyncParallel = async function (fn) {
 function sparqlQuery(queryParms,triples) {
   var {subject,predicate,object}=triples[0]
   let {query1,query2,query3}=queryParms
-
+  //TODO do I need this prefix for anything?
   let query =`PREFIX ppeo: <http://purl.org/ppeo/PPEO.owl#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 
   SELECT DISTINCT ${query1} ${query2} ${query3}
-  FROM <https://drive.anti-sense.com/s/TLQs8EA8ccD8BCs/download/RAIZ_all_v1.nt>
+  FROM <http://localhost:8890/vitis>
   WHERE
     {\n`
     triples.forEach(triple=>{
@@ -77,8 +81,9 @@ async function getAnchors(server,moduleName,callName,requestTrip){
   devServer=server
   //Define class and property
   let callStructure=Object.assign({},getCallStructure(moduleName,callName))
-  let subject,predicate,object
+  let subject,predicate,object,anchor
   if(callStructure['_anchor']){
+    anchor=callStructure['_anchor'].class
     subject=callStructure['_anchor'].s
     predicate=callStructure['_anchor'].p  
     object=callStructure['_anchor'].o
@@ -91,14 +96,14 @@ async function getAnchors(server,moduleName,callName,requestTrip){
   let queryParams={query1,query2,query3}
 
 
-  let observations=await getResults(queryParams,[{subject,predicate,object}])
+  let anchorIndividuals=await getResults(queryParams,[{subject,predicate,object}])
   let results=[]
   
   
 
-  observations.forEach(async (observation,index)=>{
+  anchorIndividuals.forEach(async (individual,index)=>{
     let  triples=[{subject,predicate,object}]
-    triples[0].subject=`<${observation.observation}>`
+    triples[0].subject=`<${individual[anchor]}>`
     if (index<pageSize){
       results.push(parseCallStructure(callStructure.result.data[0],queryParams,triples))
     }
@@ -119,18 +124,18 @@ async function parseCallStructure(callStructure,queryParams,triples){
       let queryTriples=[]
       loopValue.forEach((double,idx)=>{
         let object
-        let temp=`?${double.class.replace("ppeo:","")}`
+        let temp=`?${double.class.replace(`${prefixes['ppeo']}`,"")}`
         if(temp==loopQueryParams.query1){
-          loopQueryParams.query1=`?${double.property.replace("ppeo:","")}`
+          loopQueryParams.query1=`?${double.property.replace(`${prefixes['ppeo']}`,"")}`
           object=loopQueryParams.query1  
         }else{
           loopQueryParams.query1=temp
-          object=`?${double.class.replace("ppeo:","")}`  
+          object=`?${double.class.replace(`${prefixes['ppeo']}`,"")}`
         }
         let subject=idx>0 ? queryTriples[(queryTriples.length-1)].object : triples[0].subject
         queryTriples.push({
           subject ,
-          predicate:double.property,
+          predicate:"ppeo:"+double.property,
           object
         })        
       })
