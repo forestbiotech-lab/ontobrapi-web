@@ -15,7 +15,7 @@
     "cookie-parser": "^1.4.6",
     "debug": "~2.6.9",
     "detect-file-type": "^0.2.8",
-    "express": "~4.16.1",
+    "express": "~4.17.3",
     "formidable": "^1.2.6",
     "fs": "0.0.1-security",
     "glob": "^7.2.3",
