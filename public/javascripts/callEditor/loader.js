@@ -1,4 +1,7 @@
+//---------------------------- Vue data handling --------------------------------------------------------------
 Vue.component('subitemObject',{
+    // Loads a collapse component that can be used as a nested element
+    // Loads a series of dynamic layers
     template: $('#template-object').clone()[0],
     props:{
         subItem:{type: String},
@@ -93,11 +96,14 @@ function dynamicLayer(name) {
                     return ""
                 }
             },
+            layers:function(){
+                return this.mapping._sparQL.length
+            },
             canHideLayer: function () {
                 try {
                     if (this.className.split("#")[1] === undefined)
                         return true
-                    else if (this.className.split("#")[1] !== this.anchor && this.anchor !== "")
+                    else if (this.className.split("#")[1] !== this.anchor && this.anchor !== "" && (this.layer+1) == this.layers ) //Only make sense ig we have an Object Property
                         return false
                     else
                         return true
@@ -105,8 +111,7 @@ function dynamicLayer(name) {
                     //If it catches an error it's not ready so hide
                     return true
                 }
-            }
-
+            },
         },
         methods: {
             async loadMissingProperty(className) {
@@ -160,11 +165,20 @@ function dynamicLayer(name) {
                     }
                 } else {
                     let prevValue = this.mapping
-                    this.callStructure.result.data[0][this.attribute] = {
-                        _sparQL: [{
-                            class: val.class,
-                            property: val.label
-                        }], _value: prevValue
+                    if(this.subType=="object"){
+                        this.callStructure.result.data[0][this.attribute][this.subItem] = {
+                            _sparQL: [{
+                                class: val.class,
+                                property: val.label
+                            }], _value: prevValue
+                        }
+                    }else {
+                        this.callStructure.result.data[0][this.attribute] = {
+                            _sparQL: [{
+                                class: val.class,
+                                property: val.label
+                            }], _value: prevValue
+                        }
                     }
                 }
                 this.saveInputValue(null, "class")
@@ -286,6 +300,10 @@ Vue.config.warnHandler = function (msg, vm, trace) {
         //Do nothing
     }
 }
+
+
+//---------------------- END VUE -----------------------------------------------------------------
+
 
 // Loads JSON call spec
 $.ajax({

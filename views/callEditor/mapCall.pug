@@ -88,6 +88,7 @@ block content
        // td
        //   a(href="listcalls/"+moduleValue+"/list")=moduleValue
   .templates
+    //TODO Remove this block I think this was the old version
     table
       tr.template-element
         td
@@ -162,7 +163,7 @@ block content
         p.d-grid
           button.btn.btn-primary(v-if="subItem!=='_sparQL'",:attribute="attribute + '-' +subItem",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute+'-'+subItem" aria-expanded='false' :aria-controls="attribute") {{ subItem }}&nbsp;
             span(v-if="subType=='object'")
-              span.badge.bg-success(v-if="mapping[subItem].sparQL") {{ mapping[subItem]._value }}
+              span.badge.bg-success(v-if="mapping[subItem]._sparQL") {{ mapping[subItem]._value }}
               span.badge.bg-success(v-else) {{ mapping[subItem]  }}
         .collapse.card.mx-2.px-2.pt-3(:id="attribute+'-'+subItem")
           p Sub object
