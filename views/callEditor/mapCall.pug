@@ -12,30 +12,33 @@ block content
           span.visually-hidden Loading...
       table.table(v-if="callStructure.result").d-none
         tr(v-for="attribute in Object.keys(callStructure.result.data[0])",:key="attribute")
-          td.pt-3(:attritute="attribute")
-            p.d-grid(v-if="valueType(attribute)=='direct'")
-              button.btn.btn-primary(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
+          td.pt-3.direct-attribute(:attribute="attribute",v-if="valueType(attribute)=='direct'")
+            p.d-grid
+              button.btn.btn-primary.direct-attribute(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
                 span.badge.bg-success
                   | {{ callStructure.result.data[0][attribute] }}
-            .collapse.card.mx-2.px-2.pt-3(v-if="valueType(attribute)=='direct'",:id="attribute")
+            .collapse.card.mx-2.px-2.pt-3(:id="attribute")
               layer(:layer="0",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute")
-            p.d-grid(v-if="valueType(attribute)=='array'")
-              button.btn.btn-secondary.dropdown-toggle(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
+          td.pt-3.array-attribute(:attribute="attribute",v-if="valueType(attribute)=='array'")
+            p.d-grid
+              button.btn.btn-secondary.dropdown-toggle.array-attribute(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
                 span.badge.bg-success
                   | Array
-            .collapse.card.mx-2.px-2.pt-3(v-if="valueType(attribute)=='array'",:id="attribute")
+            .collapse.card.mx-2.px-2.pt-3(:id="attribute")
               subitem-object(v-for="subItem in Object.keys(callStructure.result.data[0][attribute][0])",:key="subItem",:sub-item="subItem",:attribute="attribute",:sub-type="'array'",:call-structure="callStructure")
-            p.d-grid(v-if="valueType(attribute)=='object'")
-              button.btn.btn-warning.dropdown-toggle(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
+          td.pt-3.object-attribute(:attribute="attribute",v-if="valueType(attribute)=='object'")
+            p.d-grid
+              button.btn.btn-warning.dropdown-toggle.object-attribute(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
                 span.badge.bg-success
                     | Object
-            .collapse.card.mx-2.px-2.pt-3(v-if="valueType(attribute)=='object'",:id="attribute")
+            .collapse.card.mx-2.px-2.pt-3(:id="attribute")
               subitem-object(v-for="subItem in Object.keys(callStructure.result.data[0][attribute])",:key="subItem",:sub-item="subItem",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute",:sub-type="'object'",:call-structure="callStructure" )
-            p.d-grid(v-if="valueType(attribute)=='directProcessed' && callStructure.result.data[0][attribute]._sparQL")
-              button.btn.btn-primary(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
+          td.pt-3.direct-attribute(:attribute="attribute",v-if="valueType(attribute)=='directProcessed' && callStructure.result.data[0][attribute]._sparQL")
+            p.d-grid
+              button.btn.btn-primary.direct-attribute(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
                 span.badge.bg-success
                   | {{ callStructure.result.data[0][attribute]._value }}
-            .collapse.card.mx-2.px-2.pt-3(v-if="valueType(attribute)=='directProcessed'",:id="attribute")
+            .collapse.card.mx-2.px-2.pt-3(:id="attribute")
               layer(v-for=`(layer,index) in callStructure.result.data[0][attribute]._sparQL`,:key="attribute",:layer="index",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute")
               //div(v-else)
                 layer(:layer="0",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute")
