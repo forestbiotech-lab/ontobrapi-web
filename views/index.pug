@@ -29,6 +29,7 @@ block content
                 button.btn.btn-primery.save-nt-file(@click="saveNTfile").d-none
                   i.bi-save(role="img" aria-label="Download") &nbsp;Save triples to file
         #template.d-none
+        //Redefine this id
         #mapping.d-none
           #mapping-column
             .card
@@ -147,6 +148,7 @@ block content
                   a.nav-link(v-bind:key='worksheet.name' v-on:click=' currentTab = worksheet.name;resetColumnSelection() ' v-bind:id='worksheet.id' v-bind:class='{ active: worksheet.name === currentTab }' role='tab' data-toggle='tab')
                     | {{ worksheet.name }}&nbsp;
                     span.badge(v-bind:class="{ 'bg-success': completeness[worksheet.name].complete === completeness[worksheet.name].total, 'bg-danger': completeness[worksheet.name].complete !== completeness[worksheet.name].total  }") {{completeness[worksheet.name].complete}}/{{completeness[worksheet.name].total}}
+              //Redefine this id
               mapping-worksheet#mapping(:worksheet='currentWorkSheet' :completeness='completeness' :info="info")
               .scroll(style='overflow-x:scroll')
                 .dummy(style='width:1000px;height:20px')
