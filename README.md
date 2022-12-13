@@ -165,3 +165,15 @@ From the Linked Data tab go to Quad Store Upload. Select the file to upload, tic
 
 #### Listing Graphs
 In the Linked Data tab got to Graphs > Graphs. From here you can delete or rename any of the stored graphs
+
+#### MongoDB
+Run on docker
+Todo integrate into docker-compose
+https://hub.docker.com/_/mongo
+```bash
+	docker pull mongo:latest
+	docker run -name mongo-ontobrapi -p 27010:27010 -d mongo:latest
+	mongosh ## Access database
+```
+
+
