@@ -1,0 +1,51 @@
+extends ../layout
+block content
+    include menu
+    .card
+        h2.card-header Call GUI
+        .card-body
+            if data["@context"]
+                .card
+                    h5.card-header @context
+                    p.bg-light=data["@context"]
+            if data.metadata
+                .card
+                    h5.card-header Metadata
+                    p.bg-light=JSON.stringify(data.metadata)
+            .card
+                h5.card-header Results
+                .accordion#accordionExample
+                    each result, index in data.result.data
+                        .card.accordion-item
+                            p.accordion-header(id=index)
+                                button.accordion-button.bg-light(type="button" data-bs-toggle="collapse" data-bs-target="#item"+index aria-expanded="true" aria-controls="item"+index) Item #{index}
+                            .accordion-collapse.collapse(id="item"+index aria-labelledby="item"+index data-bs-parent="#accordionExample")
+                                .accordion-body
+                                    table.table
+                                        each val,key in result
+                                            tr
+                                                td
+                                                    p=key
+                                                if (typeof val == "object" && val!=null)
+                                                    td
+                                                        table.table
+                                                            each subVal,subKey in val
+                                                                tr
+                                                                    td=subKey
+                                                                    if(typeof subVal == "object" && subVal !=null)
+                                                                        td
+                                                                            .card
+                                                                                .card-header.bg-primary Array preview
+                                                                                .card-body
+                                                                                    p=JSON.stringify(subVal)
+                                                                                .card-body
+                                                                                    table.table
+                                                                                        each subsubVal,subsubKey in subVal
+                                                                                            tr
+                                                                                                td=subsubKey
+                                                                                                td=subsubVal
+                                                                    else
+                                                                        td=subVal
+                                                else
+                                                    td.not-object
+                                                        p=val

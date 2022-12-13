@@ -5,7 +5,13 @@ var sparqlQuery = require('.././componentes/sparql/sparqlQuery')
 var testsparql = require('.././componentes/sparql/testsparql')
 var classProperties = require('./../componentes/sparql/classProperties')
 var inferredRelationships = require('./../componentes/sparql/inferredRelationships')
+const sanitizeParams  = require('./../componentes/helpers/sanitizeParms')
 const fs = require('fs')
+//TODO implement MongoDB on docker-compose
+//const db = require('./../componentes/db')
+
+
+
 
 // calleditor/ 
 
@@ -86,9 +92,10 @@ router.get('/listcalls/:moduleName/:callName/map', async function(req, res, next
 
 router.get('/listCalls/:moduleName/:callName/result',async function(req,res,next){
   try{
+    let requestParams=sanitizeParams(req.query) //TODO security check params based onl
     let server=`${req.protocol}://${req.headers.host}/`
     let {moduleName,callName}=req.params
-    let queryResults=await testsparql(server,moduleName,callName)
+    let queryResults=await testsparql(server,moduleName,callName,requestParams)
     Promise.all(queryResults.results).then(result=>{
       queryResults.callStructure.result.data=result
       res.json(queryResults.callStructure)
@@ -100,7 +107,23 @@ router.get('/listCalls/:moduleName/:callName/result',async function(req,res,next
   }
   
 })
+router.get('/listCalls/:moduleName/:callName/gui',async function(req,res,next){
+  try{
+    let requestParams=sanitizeParams(req.query) //TODO security check params based onl
+    let server=`${req.protocol}://${req.headers.host}/`
+    let {moduleName,callName}=req.params
+    let queryResults=await testsparql(server,moduleName,callName,requestParams)
+    Promise.all(queryResults.results).then(result=>{
+      queryResults.callStructure.result.data=result
+      res.render( "callEditor/callGUI",{data:queryResults.callStructure})
+    }).catch(err=>{
+      throw err
+    })
+  }catch(err){
+    res.json(err)
+  }
 
+})
 
 router.get('/listcalls/:moduleName/:callName/json', function(req, res, next) {
   let moduleName=req.params.moduleName
@@ -108,9 +131,15 @@ router.get('/listcalls/:moduleName/:callName/json', function(req, res, next) {
   let json=JSON.parse(fs.readFileSync(`componentes/modules/${moduleName}/schemes/${callName}`))
   res.json(json)
 });
-
+router.get('/listcalls/:moduleName/:callName/mongodb/insertOne', async function(req, res, next) {
+  let {moduleName,callName}=req.params
+  let json=JSON.parse(fs.readFileSync(`componentes/modules/${moduleName}/schemes/${callName}`))
+  // TODO waiting for mongoDB implementation
+  //await db.insertOne({moduleName,callName,data:json})
+  res.json(json)
+});
 //This call adds the mapping information
-router.post('/listcalls/:moduleName/:callName/update', function(req, res, next) {
+router.post('/listcalls/:moduleName/:callName/update', async function(req, res, next) {
   let moduleName=req.params.moduleName
   let callName=req.params.callName 
   let file=`componentes/modules/${moduleName}/schemes/${callName}`
@@ -118,6 +147,8 @@ router.post('/listcalls/:moduleName/:callName/update', function(req, res, next) 
   let json=JSON.parse(data)
   let writeData=JSON.stringify(json,null,4)
   let result="ok"
+  // TODO waiting for mongoDB implementation
+  // await db.updateOne({moduleName,callName}, { $set: { data:json}})
   fs.writeFile(file,writeData,function(err){
    if(err){ 
      res.json(err)
