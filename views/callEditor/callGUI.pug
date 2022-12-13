@@ -43,9 +43,11 @@ block content
                                                                                         each subsubVal,subsubKey in subVal
                                                                                             tr
                                                                                                 td=subsubKey
-                                                                                                td=subsubVal
+                                                                                                td
+                                                                                                 span.badge.bg-success=subsubVal
                                                                     else
-                                                                        td=subVal
+                                                                        td
+                                                                            span.badge.bg-success=subVal
                                                 else
                                                     td.not-object
-                                                        p=val
+                                                        span.badge.bg-success=val
