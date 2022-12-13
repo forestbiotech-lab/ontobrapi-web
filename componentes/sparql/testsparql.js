@@ -1,10 +1,11 @@
 const SparqlClient = require('sparql-http-client')
+const fs = require("fs");
 
 const sparql=require('./../../.config').sparql
 
 let host=sparql.host
 let port=sparql.port
-
+const DEFAULT_LIMIT=1000
 const endpointUrl = `http://${host}:${port}/sparql`
 //should-sponge=soft
 let subject = 's'
@@ -30,13 +31,14 @@ Array.prototype.forEachAsyncParallel = async function (fn) {
 }
 
  
-function sparqlQuery(queryParms,triples) {
+function sparqlQuery(queryParms,triples,options) {
+  if (options.limit===undefined) options.limit=DEFAULT_LIMIT;
   var {subject,predicate,object}=triples[0]
   let {query1,query2,query3}=queryParms
   //TODO do I need this prefix for anything?
   let query =`PREFIX ppeo: <http://purl.org/ppeo/PPEO.owl#>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-
+ 
 
   SELECT DISTINCT ${query1} ${query2} ${query3}
   FROM <http://localhost:8890/vitis>
@@ -46,7 +48,7 @@ function sparqlQuery(queryParms,triples) {
       query+=`    ${triple.subject} ${triple.predicate} ${triple.object} .\n`
     })
       
-    query+=`}`
+    query+=`}\nLIMIT ${options.limit}`
 
 
   return new Promise((res,rej)=>{
@@ -73,11 +75,11 @@ function sparqlQuery(queryParms,triples) {
 }
 
 
-function getResults(queryParms,triples){
-  return sparqlQuery(queryParms,triples)
+function getResults(queryParms,triples,options){
+  return sparqlQuery(queryParms,triples,options)
 }
 
-async function getAnchors(server,moduleName,callName,requestTrip){
+async function getAnchors(server,moduleName,callName,requestParam,requestTrip){
   devServer=server
   //Define class and property
   let callStructure=Object.assign({},getCallStructure(moduleName,callName))
@@ -95,8 +97,11 @@ async function getAnchors(server,moduleName,callName,requestTrip){
   query1=subject
   let queryParams={query1,query2,query3}
 
-
-  let anchorIndividuals=await getResults(queryParams,[{subject,predicate,object}])
+  let options={}
+  if(requestParam){
+    if (requestParam.pageSize) options.limit=requestParam.pageSize
+  }
+  let anchorIndividuals=await getResults(queryParams,[{subject,predicate,object}],options)
   let results=[]
   
   
@@ -130,7 +135,7 @@ async function parseCallStructure(callStructure,queryParams,triples){
           object=loopQueryParams.query1  
         }else{
           loopQueryParams.query1=temp
-          object=`?${double.class.replace(`${prefixes['ppeo']}`,"")}`
+          object=`?${double.class.replace(`${prefixes['ppeo']}`,"").replace(`ppeo`,"")}`
         }
         let subject=idx>0 ? queryTriples[(queryTriples.length-1)].object : triples[0].subject
         queryTriples.push({
@@ -141,17 +146,22 @@ async function parseCallStructure(callStructure,queryParams,triples){
       })
       let queryResult
       try{
-        queryResult=await sparqlQuery(loopQueryParams,queryTriples)  
+        queryResult=await sparqlQuery(loopQueryParams,queryTriples,{})
       }catch(err){
         queryResult=null
       }
       try{
-        resultStructure[loopKey]=queryResult[0][loopQueryParams.query1.replace("?","")].replace(brapi,devServer)     
+        resultStructure[loopKey]=queryResult[0][loopQueryParams.query1.replace("?","")].replace(brapi,devServer)
       }catch(err){
         resultStructure[loopKey]=null
       }
     }else{
-
+      if(value instanceof Object){
+        //TODO it queries well but doesn't add to result
+        resultStructure[key]=await parseCallStructure(callStructure[key],queryParams,triples)
+      }else if(typeof value  === "string"){
+        resultStructure[key]=""
+      }
     }
   }
   return resultStructure
@@ -177,12 +187,13 @@ function isOntologicalTerm(value){
 }
 function getCallStructure(moduleName,callName){
   //Get from componetes/modules/genotyping/schemes/${name}
-  let path="./../modules"
+  let path="componentes/modules"
   
   let callStructurePath=`${path}/${moduleName}/schemes/${callName}`
   let callStructure
   try{
-    callStructure=require(callStructurePath)
+    callStructure=JSON.parse(fs.readFileSync(callStructurePath))
+    //callStructure=require(callStructurePath)
   }catch(err){
     let callStructure={}
   }
