@@ -11,6 +11,7 @@ var formsRouter = require('./routes/forms');
 var callEditorRouter = require('./routes/callEditor');
 var raizRouter = require('./routes/raiz');
 var queryRouter = require('./routes/query');
+var factoryRouter = require('./routes/factory');
 
 var app = express();
 
@@ -31,6 +32,8 @@ app.use('/users', usersRouter);
 app.use('/forms', formsRouter);
 app.use('/calleditor', callEditorRouter);
 app.use('/query', queryRouter);
+app.use('/factory', factoryRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

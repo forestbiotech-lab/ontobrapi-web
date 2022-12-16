@@ -1,0 +1,42 @@
+#mapping-column
+    .card
+        .card-header
+            h3#mapping-loading-options Mapping&nbsp;
+                span.d-inline-block(tabindex='0' data-toggle='tooltip' v-bind:title="info.mappingHeader")
+                    button.btn.btn-primary(style='pointer-events: none;' type='button' disabled='')
+                        i.bi-info-lg(role="img" aria-label="Information")
+                button.btn.btn-success.download-mapping-button(v-on:click="downloadMapping" style="float:right;") Download Mapping
+                button.btn.btn-success.download-mapping-file-button(v-on:click="downloadMappingFile" style="float:right;")
+                    i.bi-save(role="img" aria-label="Download") &nbsp;Download Mapping File
+                button.btn.btn-success.load-mapping-button(type='button' data-bs-toggle='collapse' data-bs-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
+            #loadingPanel.collapse(aria-labelledby="load-mapping", data-bs-parent="#mapping-loading-options")
+                .card.card-body
+                    textarea(style="font-size: x-small;" col="120",rows="10" v-model="uploadedJSON")
+                    .row.mt-2.mx-0
+                        button.col.me-2.load-mapping-file.btn.btn-sm.btn-primary.disabled open mapping file
+                        button.col.ms-2.load-mapping-text.btn.btn-sm.btn-primary(v-on:click="loadJSON") load
+                        label.visually-hidden(for="augment-file") Upload file
+                        //TODO maybe change uploads in name. This is not implemented on the backend
+                        input(hidden,type="file",id="open-mapping-file",placeholder="json file",required="",autofocus="",autocomplete="off",name="uploads[]", accept="mime/*,.json")
+        .card-body
+            .form-group.row.gy-2.gx-3.align.items-center
+                .col-auto
+                    label(for="column-selection") Column selection
+                        information-tooltip(:info="info" label="column-selection")
+                .col-auto
+                    v-select(@close="loadDataProperties",:options="columns",v-model="column",id="column-selection" @input="updateCompleteness",style="min-width:400px;")
+                        template(v-slot:option="option")
+                            | {{ option.label }} &nbsp;
+                            span.badge.bg-success(v-if="completeness[worksheet].columns[option.label].complete")
+                                i.bi-check-lg
+                            span.badge.bg-dark(v-if="completeness[worksheet].columns[option.label].complete") {{ selection[worksheet][option.label].type.label }}
+                            span.badge.bg-primary(v-if="completeness[worksheet].columns[option.label].complete && selection[worksheet][option.label].type.name === \"class\"")
+                                | OPs:{{ completeness[worksheet].columns[option.label].objectProperties }}
+                            span.badge.bg-primary(v-if="completeness[worksheet].columns[option.label].complete && selection[worksheet][option.label].type.name === \"class\"")
+                                | DPs:{{ completeness[worksheet].columns[option.label].dataProperties }}
+                .col-auto
+                    input.form-control(type="text",placeholder="Name missing class" v-model="missingClass" :style="{ 'background-color': missingClassBGcolor }",@keyup.enter="addMissingClass" )
+                    //Todo validate if column exists
+                .col-auto
+                    button.btn.btn-primary(@click="addMissingClass", :disabled='isAddingClassDisabled' ) Add missing Class
+        mapping-form(:form-options="formOptions" :data-properties-cache="dataPropertiesCache" :selection="selection",:worksheet="worksheet",:column="column",:named-individuals="namedIndividuals" :completeness="completeness" :info="info", :graph="graph")
