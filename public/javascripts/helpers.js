@@ -410,3 +410,8 @@ window.drop=function(ev) {
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
 }
+
+async function getTemplate(part){
+    let result = await $.parseHTML(await $.get(`/factory/vue/index/${part}`))
+    return result.pop()
+}
