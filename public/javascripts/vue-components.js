@@ -467,6 +467,10 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
           links:[],
           nodes:[]
         },
+        graph_overview:{
+          links:[],
+          nodes:[]
+        },
         dataPropertiesCache:{loaded:false,dataProperties: {}}
       }
     },
@@ -533,6 +537,9 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
       updateGraphModel(){
         updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
       },
+      loadGraphOverview(){
+        updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
+      },
       updateCompleteness(value){
         if(localStorage){
           localStorage.selection=JSON.stringify(this.selection)  //Save current Selection
@@ -573,6 +580,7 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
           updateCompleteness(this.selection,this.completeness)
           this.updateGraphModel()
           $('#loadingPanel.collapse').collapse('hide')
+          this.loadGraphOverview()
           window.appActiveClasses.selection=this.selection
         }catch(err){
           displayToast("Invalid JSON Error",err,4000)
