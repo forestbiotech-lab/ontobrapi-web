@@ -169,9 +169,11 @@ $('document').ready(function(){
   }
   function loadNTriples(data){
       console.log("Loading NT!")
-      $('textarea').removeClass('d-none')
+      $('textarea.generated-ntriples').removeClass('d-none')
       $('button.save-nt-file').removeClass('d-none')
-      $('textarea').text(data)
+      $('textarea.generated-ntriples').text(data)
+      $('textarea.generated-ntriples').addClass('loaded')
+      $('textarea.generated-ntriples').trigger('load',["Loaded","Event"])
   }
 
   $('button.load-mapping-file').click(function(){
@@ -208,6 +210,8 @@ $('document').ready(function(){
       });
     }
   })
+
+
 
 })
 

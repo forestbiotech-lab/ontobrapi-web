@@ -68,9 +68,8 @@ function random(max){
 
         //LOAD SpreadSheet and Mapping
         await firstPage.waitForSelector('#augment-file')
-        //await (await firstPage.$('#augment-file')).uploadFile(path.join(root,`/brunocosta/Documents/Projectos/ontobrapi/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx`))
         await (await firstPage.$('#augment-file')).uploadFile(path.join(root, `/brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx`))
-        //Takes some time till loaded works better then the wait for Selector
+        //Takes some time till loaded works better than the wait for Selector
         await firstPage.waitForTimeout(1500);
         element = await firstPage.waitForSelector("#mapping-loading-options button.load-mapping-button")
         await element.evaluate(element => element.click())
@@ -118,12 +117,9 @@ function random(max){
                 window.scrollBy(500, window.innerHeight);
             });
 
-            await firstPage.waitForTimeout(1000);
-            let textarea = await firstPage.waitForSelector('textarea.generated-ntriples')
+            let textarea = await firstPage.waitForSelector('textarea.generated-ntriples.loaded')
             firstPage.once('load',textarea)
             await testNTs()
-            //explore <frame>.once
-
 
             async function testNTs() {
                 let value = await firstPage.evaluate(el => el.textContent, textarea)
