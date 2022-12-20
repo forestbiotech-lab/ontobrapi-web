@@ -122,7 +122,7 @@ async function loadMapping(jSheet) {
   componentSimplePropertySelect()
   componentSimpleSelect()
   componentPropertySelect()
-  componentMappingWorksheet(formOptions, $data)
+  await componentMappingWorksheet(formOptions, $data)
   componentInformationTooltip()
 
   Vue.config.warnHandler = function (msg, vm, trace) {
@@ -446,10 +446,10 @@ function componentInformationTooltip(){
     }
   })
 }
-function componentMappingWorksheet(formOptions,$data,jSheet){
+async function componentMappingWorksheet(formOptions,$data,jSheet){
   //PARENT WorkSheetTabs (LoadWorkSheetTabs) 1st Function
   Vue.component("mapping-worksheet",{
-    template:$("#mapping-column").clone()[0],
+    template: await getTemplate('mapping-column'),
     props:{
       worksheet:{type:String},
       //columns:{type:Array},
