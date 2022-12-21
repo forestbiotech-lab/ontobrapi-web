@@ -12,7 +12,7 @@ function chart(data,id) {
   const simulation = forceSimulation(nodes, links).on("tick", ticked);
 
   const svg = d3.select("svg#"+id)
-      .attr("viewBox", [-width / 2, -height / 2, width, height]);
+      .attr("viewBox", [-width, -height, 2*width, 2*height]);
 
   const link = svg.append("g")
       .attr("stroke", "#999")
