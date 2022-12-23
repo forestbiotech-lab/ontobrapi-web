@@ -538,7 +538,7 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
         updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
       },
       loadGraphOverview(){
-        updateGraph(this.selection,this.formOptions,this.worksheet,this.graph)
+        updateOverviewGraph(this.selection,this.formOptions,this.graph_overview)
       },
       updateCompleteness(value){
         if(localStorage){

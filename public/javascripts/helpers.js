@@ -309,51 +309,63 @@ async function loadDataStructure(name){
         })
     })
 }
+function updateOverviewGraph(selection,formOptions,graph){
+    for ( const worksheet of Object.keys(selection) ){
+        extractNodes(graph,selection,formOptions,worksheet)
+        extractLinks(graph,selection,formOptions,worksheet)
+    }
+
+    loadChart(graph,"graph-overview")
+}
 function updateGraph(selection,formOptions,worksheet,graph){
+    clearGraph(graph)
     extractNodes(graph,selection,formOptions,worksheet)
     extractLinks(graph,selection,formOptions,worksheet)
     loadChart(graph,"graph-demo")
-    function extractNodes(graph,selection,formOptions,worksheet){
-        graph.nodes=[]
-        Object.entries(selection[worksheet]).forEach(([column,columnAttributes])=>{
-            try {
-                if(columnAttributes.type.name==="class" && columnAttributes.name.name){
-                    let nodeName=columnAttributes.name.name
-                    if(nodeName.length>0){
-                        let nodeIndex=formOptions.name.Class.findIndex(term=> term.name==nodeName)
-                        graph.nodes.push({id:nodeName,group:nodeIndex})
-                    }
-                }
-            }catch(err){
-                displayToast("Error loading a node for graph",err)
-            }
-        })
-    }
-    function extractLinks(graph,selection,formOptions,worksheet){
-        graph.links=[]
-        Object.entries(selection[worksheet]).forEach(([column,columnAttributes])=>{
-            if(columnAttributes.type.name==="class") {
-                columnAttributes.objectProperties.forEach(property => {
-                    try {
-                        if (property.show === true && property.referenceNode !== '') {
-                            let source = selection[worksheet][column].name.label
-                            let target = selection[worksheet][property.referenceNode].name.label
-                            let targetType = selection[worksheet][property.referenceNode].type.name
-
-                            let selectedObjectProperty = property.property.name
-                            let valueIndex = formOptions.name.ObjectProperty.findIndex(property => property.name === selectedObjectProperty)
-                            if (typeof source === "string" && typeof target === "string" && typeof valueIndex === "number" && targetType == "class") {
-                                graph.links.push({source, target, value: valueIndex})
-                            }
-                        }
-                    } catch (err) {
-                        displayToast("Unable to load one of your object properties")
-                    }
-                })
-            }
-        })
-    }
 }
+function clearGraph(graph){
+    graph.nodes=[]
+    graph.links=[]
+}
+function extractNodes(graph,selection,formOptions,worksheet){
+    Object.entries(selection[worksheet]).forEach(([column,columnAttributes])=>{
+        try {
+            if(columnAttributes.type.name==="class" && columnAttributes.name.name){
+                let nodeName=columnAttributes.name.name
+                if(nodeName.length>0){
+                    let nodeIndex=formOptions.name.Class.findIndex(term=> term.name==nodeName)
+                    graph.nodes.push({id:nodeName,group:nodeIndex})
+                }
+            }
+        }catch(err){
+            displayToast("Error loading a node for graph",err)
+        }
+    })
+}
+function extractLinks(graph,selection,formOptions,worksheet){
+    Object.entries(selection[worksheet]).forEach(([column,columnAttributes])=>{
+        if(columnAttributes.type.name==="class") {
+            columnAttributes.objectProperties.forEach(property => {
+                try {
+                    if (property.show === true && property.referenceNode !== '') {
+                        let source = selection[worksheet][column].name.label
+                        let target = selection[worksheet][property.referenceNode].name.label
+                        let targetType = selection[worksheet][property.referenceNode].type.name
+
+                        let selectedObjectProperty = property.property.name
+                        let valueIndex = formOptions.name.ObjectProperty.findIndex(property => property.name === selectedObjectProperty)
+                        if (typeof source === "string" && typeof target === "string" && typeof valueIndex === "number" && targetType == "class") {
+                            graph.links.push({source, target, value: valueIndex})
+                        }
+                    }
+                } catch (err) {
+                    displayToast("Unable to load one of your object properties")
+                }
+            })
+        }
+    })
+}
+
 function makeOntoCard(header,body){
     let rdfType=header.split("#")[1]
     let title=mkel('button',{
