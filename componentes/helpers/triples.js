@@ -1,5 +1,6 @@
 const hash = require('object-hash');
 const xsd = require("@ontologies/xsd")
+//const {string} = require("@ontologies/xsd/index");
 class Triples{
   constructor(prefixes,dependentClasses,default_named_nodes){
     this.type=["class","objectProperty"] //Unnecessary
@@ -156,6 +157,9 @@ class Triples{
         //TODO Convert time
         //     lookup ontology for unit
         o+=`^^${propertyType}`
+      }else{
+        console.log("Not able to set a object for s:",s)
+        addProperty=false
       }
       //TODO
       //value + dataType
@@ -332,22 +336,36 @@ class Triples{
     /*Object.entries(this.triples.prefix).forEach(([name,prefix])=>{
       result+=prefix.prefix+"\n"
     })*/
-    this.triples.metadata.forEach(individual=>{
-      result+=`${that.complete(individual.s,that)} ${that.complete(individual.p,that)} ${that.complete(individual.o,that)} .\n`
-    })
-    Object.entries(this.triples.individuals).forEach(([name,individual])=>{
-      result+=`${that.complete(individual.s,that)} ${that.complete(individual.p,that)} ${that.complete(individual.o,that)} .\n`
-    })
-    Object.entries(this.triples.properties).forEach(([name,individual])=>{
-      result+=`${that.complete(individual.s,that)} ${that.complete(individual.p,that)} ${that.complete(individual.o,that)} .\n`
-    })
-    return result
+    try{
+      this.triples.metadata.forEach(individual=>{
+        result+=`${that.complete(individual.s,that)} ${that.complete(individual.p,that)} ${that.complete(individual.o,that)} .\n`
+      })
+      Object.entries(this.triples.individuals).forEach(([name,individual])=>{
+        result+=`${that.complete(individual.s,that)} ${that.complete(individual.p,that)} ${that.complete(individual.o,that)} .\n`
+      })
+      Object.entries(this.triples.properties).forEach(([name,individual])=>{
+        try{
+          result+=`${that.complete(individual.s,that)} ${that.complete(individual.p,that)} ${that.complete(individual.o,that)} .\n`
+        }catch (e) {
+          console.log(`Name: ${name}, Individual: ${individual}`)
+        }
+
+      })
+    }catch (e){
+     console.log("Error converting triples object to string:",e)
+      result="Error converting triples object to string:"+string(e.message)
+    }finally {
+      return result
+    }
+
   }
   toJSON(){
     return {prefix:this.triples.prefix,individuals:this.triples.individuals,properties:this.triples.properties}
   }
   getXSDdatatypeURI(name){
     try{
+      if (["float","double","boolean","long","int","short","byte"].includes(name))
+        name="xsd"+name
       return xsd[name].value
     }catch (e){
       console.log(`Datatype: "${name}" was not found. Can't convert`,e)
