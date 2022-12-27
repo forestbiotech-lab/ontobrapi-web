@@ -185,6 +185,7 @@ function makeTriples(spreadSheet,mapping,type){
             triples.parseLineItem(mapping[sheetName][column], value)
           }
         }catch(e){
+          console.log(`Mapping: ${mapping[sheetName][column]}\nSheetName: ${sheetName}\n column: ${column}`)
           console.log("Unable to file column in mapping: ",e)
         }
       })
