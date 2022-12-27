@@ -160,6 +160,7 @@ $('document').ready(function(){
           },
           error:function(jqXHR,textStatus,data){
             displayToast("Some error while generating N-Triples!",data,4000)
+            spinner.remove()
           }
         })                
       }catch(err){
