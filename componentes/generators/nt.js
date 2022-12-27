@@ -200,7 +200,7 @@ function makeTriples(spreadSheet,mapping,type){
       } 
     })
   }
-
+  //TODO check the result and send a message or an error
   let typeFunctions={str:"toString",json:"toJSON"}
   return triples[typeFunctions[type]]()
 }
