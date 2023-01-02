@@ -52,8 +52,16 @@ function dynamicLayer(name) {
             mapping: function () {
                 if (this.callStructure.result) {
                     if (this.callStructure.result.data[0][this.attribute])
-                        if(this.subType=="object"){
+                        if(this.subType == "object") {
                             return this.callStructure.result.data[0][this.attribute][this.subItem]
+                        }else if(this.subType == "array"){
+                            //TODO possibly deal with multiple values that are different
+                            if(this.callStructure.result.data[0][this.attribute][0] instanceof Object){
+                                return this.callStructure.result.data[0][this.attribute][0][this.subItem]
+                            }else{
+                                //TODO Not sure what is appropriate
+                                return {}
+                            }
                         }else {
                             return this.callStructure.result.data[0][this.attribute]
                         }
@@ -255,7 +263,11 @@ window.vmapping = new Vue({                                                  //A
         className: $('#mapping').attr('anchor'),
         callStructure: {}
     },
-    computed: {},
+    computed: {
+        isArray(){
+            return false
+        }
+    },
     methods: {
         valueType(attribute) {
             let key = this.callStructure.result.data[0][attribute]
@@ -268,6 +280,28 @@ window.vmapping = new Vue({                                                  //A
                     return "object"
                 }
             else return "direct"
+        },
+        classType(attribute){
+            if(this.valueType(attribute) == "array" ){
+                return "array-attribute"
+            }else if(this.valueType(attribute).startsWith("direct") ){
+                return "direct-attribute"
+            }else if(this.valueType(attribute) == "object" ){
+                return "object-attribute"
+            }else{
+                return ""
+            }
+        },
+        buttonType(attribute){
+            if(this.valueType(attribute) == "array" ){
+                return "btn-secondary dropdown-toggle array-attribute"
+            }else if(this.valueType(attribute).startsWith("direct")){
+                return "btn-primary direct-attribute"
+            }else if(this.valueType(attribute) == "object" ){
+                return "btn-warning dropdown-toggle object-attribute"
+            }else{
+                return ""
+            }
         }
     },
     beforeMount: async function () {
