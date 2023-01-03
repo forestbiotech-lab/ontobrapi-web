@@ -10,11 +10,7 @@ block content
                         span.badge.bg-success(v-else) {{ mapping[subItem]  }}
             .collapse.card.mx-2.px-2.pt-3(:id="attribute+'-'+subItem")
                 p Sub object
-                div(v-if="subType=='object'")
-                    div(v-if="mapping[subItem]._sparQL")
-                        layer-sub-object(v-for='(layer,index) in mapping[subItem]._sparQL',:key="subItem+'-'+layer",:layer="index",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute",:sub-type="subType",:sub-item="subItem")
-                    layer-sub-object(v-else,:layer="0",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute",:sub-type="subType",:sub-item="subItem")
-                div(v-if="subType=='array'")
+                div(v-if="['object','array'].includes(subType)")
                     div(v-if="mapping[subItem]._sparQL")
                         layer-sub-object(v-for='(layer,index) in mapping[subItem]._sparQL',:key="subItem+'-'+layer",:layer="index",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute",:sub-type="subType",:sub-item="subItem")
                     layer-sub-object(v-else,:layer="0",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute",:sub-type="subType",:sub-item="subItem")
