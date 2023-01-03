@@ -1,0 +1,30 @@
+extends ../../../layout
+
+block content
+    #template-layer
+        .card.card-body(:layer="layer")
+            h5.card-title(:layer="layer") Layer {{ layer }}
+            .form-group
+                label Property
+                v-select(:attribute="attribute",:anchor="anchor",:layer="layer",@open='loadValues(attribute)',:loading="false",@input="setValueForLayer")
+                    template.row(v-slot:option="option")
+                        .row.objectProperty(v-if="option.ObjectProperty")
+                            span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-success Object Property
+                            span.col-sm-4.col-md-4.col-lg-3.col-xl-2 {{ option.label }}
+                            span.col-sm-3.col-md-2.col-lg-2.col-xl-1.badge.bg-warning Class
+                            span.col {{ option.className }}
+                        .row.dataProperty(v-if="option.range")
+                            span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-primary Data Property
+                            span.col-sm-4.col-md-4.col-lg-3.col-xl-2 {{ option.label }}
+                            span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-dark Range
+                            span.col {{ option.rangeName }}
+            .form-group
+                label Class
+                    .badge-holder
+                input.form-control(id=`layer0-class` type="text",name="class",v-model="className",@change="saveInputValue(null,'class')")
+            .form-group
+                label Property
+                    .badge-holder
+                input.form-control(id=`layer0-property` type="text",name="property",v-model="property",@change="saveInputValue(null,'property')")
+            .form-group.d-grid
+                button.btn.btn-secondary.btn-block.add-new-layer(:class="{'d-none': canHideLayer}",:disabled="false" @click="addNewLayer") add new layer

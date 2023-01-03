@@ -10,5 +10,8 @@ router.get('/vue/index/:part',(req,res)=>{
     res.render(`factory/vue/index/${req.params.part}`)
 })
 
+router.get('/vue/callEditor/:part',(req,res)=>{
+    res.render(`factory/vue/callEditor/${req.params.part}`)
+})
 
 module.exports = router;

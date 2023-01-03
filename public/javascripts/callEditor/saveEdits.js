@@ -18,6 +18,7 @@
     if(val=== true){
       callStructure=window.callStructure
       //loadValues()
+      if(!window.vmapping) window.vmapping={}
       window.vmapping.callStructure=callStructure
     }
   })
