@@ -174,7 +174,11 @@ async function dynamicLayer(name) {
                     //Test if the layer that was just saved was a lower lever. In that case the levels above should be removed to be corrected
                     if (this.layer < this.mapping._sparQL.length - 1) {
                         for (let i = this.mapping._sparQL.length - 1; i > this.layer; i--) {
-                            this.callStructure.result.data[0][this.attribute]._sparQL.pop()
+                            if(this.subType=="object"){
+                                this.callStructure.result.data[0][this.attribute][this.subItem]._sparQL.pop()
+                            }else if(this.subType=="array"){
+                                this.callStructure.result.data[0][this.attribute][0][this.subItem]._sparQL.pop()
+                            }
                         }
                     }
                 } else {

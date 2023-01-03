@@ -33,9 +33,7 @@
     }
   }
 
-  //TODO DEPRECATED
-  $('.collapse').on("shown.bs.collapse",onInputChange)
-  //TODO DEPRECATED
+
   function onInputChange(evt,selector,data,handler){
     if(data) data=data.data
     let self=data || $(this)
@@ -105,11 +103,7 @@
       }
     }
   }
-  function addNewLayerOnClick(target){
-    target.find('button.add-new-layer').click(addNewLayer)    
-  }
-  addNewLayerOnClick($("body"))
-  //TODO on click this
+
   function addNewLayer(evt,selector,data,handler){
     let target
     if(data) data=data.data
