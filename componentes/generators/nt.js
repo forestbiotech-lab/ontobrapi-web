@@ -2,7 +2,7 @@ const fs=require('fs')
 const path=require('path')
 //const mapping=require('./../helpers/default-mapping')
 const Triples=require('./../helpers/triples')
-const {map} = require("selenium-webdriver/lib/promise");
+
 
 
 module.exports={str,json}
