@@ -47,6 +47,11 @@ function objectProperties(className) {
             ?node               rdf:type                   owl:Restriction            .
             ?node               owl:onProperty             ?ObjectProperty            .
             ?node               owl:someValuesFrom         ?destination               .
+        }UNION {
+            ?class            rdfs:subClassOf              ?node                      .
+            ?node             owl:onProperty               ?ObjectProperty            . 
+            ?node             owl:onClass                  ?destination               .
+            ?objectProperty   rdf:type                     owl:ObjectProperty         .  
         }}`
     //TODO Check if this has the right origin ou destination
     return sparqlQuery(query).then(result=>{
