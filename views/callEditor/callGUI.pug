@@ -11,7 +11,32 @@ block content
             if data.metadata
                 .card
                     h5.card-header Metadata
-                    p.bg-light=JSON.stringify(data.metadata)
+                    .accordion#accordionMetadata
+                        .card.accordion-item
+                            p.accordion-header(id=metadata)
+                                button.accordion-button.bg-light(type="button" data-bs-toggle="collapse" data-bs-target="#metadata" aria-expanded="true" aria-controls="metadata")
+                                    p.bg-light=JSON.stringify(data.metadata)
+                            .accordion-collapse.collapse(id="metadata" aria-labelledby="metadata" data-bs-parent="#accordionMetadata")
+                                .accordion-body
+                                    table.table
+                                        each metadata, index in Object.keys(data.metadata)
+                                            tr
+                                                td
+                                                    h5=metadata
+                                                td
+                                                    table.table
+                                                        each key in Object.keys(data.metadata[metadata])
+                                                            tr
+                                                                if (typeof data.metadata[metadata][key] == "object")
+                                                                    table.table
+                                                                        each subkey in Object.keys(data.metadata[metadata][key])
+                                                                            tr
+                                                                                td=subkey
+                                                                                td=data.metadata[metadata][key][subkey]
+                                                                else
+                                                                    td=key
+                                                                    td=data.metadata[metadata][key]
+
             .card
                 h5.card-header Results
                 .accordion#accordionExample
