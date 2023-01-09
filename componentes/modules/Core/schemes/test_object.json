@@ -1,0 +1,113 @@
+{
+    "_anchor": {
+        "class": "study",
+        "s": "?study",
+        "p": "rdf:type",
+        "o": "ppeo:study"
+    },
+    "@context": [
+        "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+        "datafiles": [
+            {
+                "fileDescription": "This is an Excel data file",
+                "fileMD5Hash": "c2365e900c81a89cf74d83dab60df146",
+                "fileName": "datafile.xlsx",
+                "fileSize": 4398,
+                "fileType": "application/vnd.ms-excel",
+                "fileURL": "https://wiki.brapi.org/examples/datafile.xlsx"
+            }
+        ],
+        "pagination": {
+            "currentPage": 0,
+            "pageSize": 1000,
+            "totalCount": 10,
+            "totalPages": 1
+        },
+        "status": [
+            {
+                "message": "Request accepted, response successful",
+                "messageType": "INFO"
+            }
+        ]
+    },
+    "result": {
+        "data": [
+            {
+                "ObservedVariable": [{
+                    "ID": {
+                        "_sparQL": [
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+                                "property": "hasPart"
+                            },
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+                                "property": "hasInternalIdentifier"
+                            }
+                        ],
+                        "_value": "CO_715:0000162"
+                    },
+                    "name": {
+                        "_sparQL": [
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+                                "property": "hasPart"
+                            },
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+                                "property": "hasName"
+                            }
+                        ],
+                        "_value": "field environment condition, greenhouse"
+                    }
+                }],
+                "Biological_material": {
+                    "Organism": {
+                        "_sparQL": [
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                                "property": "hasBiologicalMaterial"
+                            },
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                                "property": "hasTaxonIdentifier"
+                            }
+                        ],
+                        "_value": "kkjk"
+                    },
+                    "ID": {
+                        "_sparQL": [
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                                "property": "hasBiologicalMaterial"
+                            },
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                                "property": "hasMaterialIdentifier"
+                            }
+                        ],
+                        "_value": "lklklk"
+                    }
+                },
+
+                "trialName": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#investigation",
+                            "property": "partOf"
+                        },
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#investigation",
+                            "property": "hasName"
+                        }
+                    ],
+                    "_value": "Grape_Yield_Trial"
+                }       
+                            
+            }
+            
+        ]
+    }
+}

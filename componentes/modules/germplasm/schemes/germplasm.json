@@ -1,0 +1,216 @@
+{
+    "_anchor": {
+        "class": "biological_material",
+        "s": "?biological_material",
+        "p": "rdf:type",
+        "o": "ppeo:biological_material"
+    },
+    "@context": [
+        "https://brapi.org/jsonld/context/metadata.jsonld"
+    ],
+    "metadata": {
+        "datafiles": [],
+        "pagination": {
+            "currentPage": 0,
+            "pageSize": 1000,
+            "totalCount": 10,
+            "totalPages": 1
+        },
+        "status": [
+            {
+                "message": "Request accepted, response successful",
+                "messageType": "INFO"
+            }
+        ]
+    },
+    "result": {
+        "data": [
+            {
+                "accessionNumber": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#material_source",
+                            "property": "hasMaterialSource"
+                        },
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#material_source",
+                            "property": "hasGermplasmAccessionNumber"
+                        }
+                    ],
+                    "_value": "A0000003"
+                },
+                "acquisitionDate": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#material_source",
+                            "property": "hasMaterialSource"
+                        },
+                        {
+                            "class": "",
+                            "property": ""
+                        }
+                    ],
+                    "_value": "2023-01-05"
+                },
+                "additionalInfo": {
+                    "additionalProp1": "string",
+                    "additionalProp2": "string",
+                    "additionalProp3": "string"
+                },
+                "biologicalStatusOfAccessionCode": "420",
+                "biologicalStatusOfAccessionDescription": "Genetic stock",
+                "breedingMethodDbId": "ffcce7ef",
+                "breedingMethodName": "Male Backcross",
+                "collection": "Rice Diversity Panel 1 (RDP1)",
+                "commonCropName": "Maize",
+                "countryOfOriginCode": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#country",
+                            "property": "hasCountryOfOrigin"
+                        },
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#country",
+                            "property": "hasCountryCode"
+                        }
+                    ],
+                    "_value": "BES"
+                },
+                "defaultDisplayName": "A0000003",
+                "documentationURL": "https://wiki.brapi.org",
+                "donors": [
+                    {
+                        "donorAccessionNumber": "A0000123",
+                        "donorInstituteCode": "PER001"
+                    }
+                ],
+                "externalReferences": [
+                    {
+                        "referenceId": "doi:10.155454/12341234",
+                        "referenceSource": "DOI"
+                    },
+                    {
+                        "referenceId": "75a50e76",
+                        "referenceSource": "Remote Data Collection Upload Tool"
+                    }
+                ],
+                "genus": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                            "property": "hasGenus"
+                        }
+                    ],
+                    "_value": "Aspergillus"
+                },
+                "germplasmDbId": "d4076594",
+                "germplasmName": "A0000003",
+                "germplasmOrigin": [
+                    {
+                        "coordinateUncertainty": {
+                          "_sparQL": [
+                              {
+                                  "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                                  "property": "hasUncertainty"
+                              }
+                          ],
+                          "_value": "20"
+                        },
+                        "coordinates": {
+                            "geometry": {
+                                "coordinates": [
+                                    -76.506042,
+                                    42.417373,
+                                    123
+                                ],
+                                "type": "Point"
+                            },
+                            "type": "Feature"
+                        }
+                    }
+                ],
+                "germplasmPUI": "http://pui.per/accession/A0000003",
+                "germplasmPreprocessing": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                            "property": "hasPreprocessing"
+                        }
+                    ],
+                    "_value": "EO:0007210; transplanted from study 2351 observation unit ID: pot:894"
+                },
+                "instituteCode": "PER001",
+                "instituteName": "The BrAPI Institute",
+                "pedigree": "A0000001/A0000002",
+                "seedSource": "INRA:095115_inra",
+                "seedSourceDescription": "Branches were collected from a 10-year-old tree growing in a progeny trial established in a loamy brown earth soil.",
+                "species": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                            "property": "hasSpecies"
+                        }
+                    ],
+                    "_value": "fructus"
+                },
+                "speciesAuthority": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                            "property": "hasSpeciesAuthority"
+                        }
+                    ],
+                    "_value": "Smith, 1822"
+                },
+                "storageTypes": [
+                    {
+                        "code": "20",
+                        "description": "Field collection"
+                    },
+                    {
+                        "code": "11",
+                        "description": "Short term"
+                    }
+                ],
+                "subtaxa": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                            "property": "hasSubtaxon"
+                        }
+                    ],
+                    "_value": "Aspergillus fructus A"
+                },
+                "subtaxaAuthority": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                            "property": "hasSubtaxonAuthority"
+                        }
+                    ],
+                    "_value": "Smith, 1822"
+                },
+                "synonyms": [
+                    {
+                        "synonym": "variety_1",
+                        "type": "Pre-Code"
+                    }
+                ],
+                "taxonIds": [
+                    {
+                        "sourceName": "NCBI",
+                        "taxonId": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                                    "property": "hasTaxonIdentifier"
+                                }
+                            ],
+                            "_value": "2026747"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -30,47 +30,7 @@
         "data": [
             {
                 "additionalInfo": {
-                    "additionalProp1": {
-                        "_sparQL": [
-                            {
-                                "class": {
-                                    "_sparQL": [
-                                        {
-                                            "class": "ppeo:observation_unit",
-                                            "property": "ppeo:hasObservedSubject"
-                                        },
-                                        {
-                                            "class": "ppeo:biological_material",
-                                            "property": "ppeo:hasBiologicalMaterial"
-                                        },
-                                        {
-                                            "class": "ppeo:biological_material",
-                                            "property": "ppeo:hasTaxonIdentifier"
-                                        }
-                                    ],
-                                    "_value": "2408ab11"
-                                },
-                                "property": {
-                                    "_sparQL": [
-                                        {
-                                            "class": "ppeo:observation_unit",
-                                            "property": "ppeo:hasObservedSubject"
-                                        },
-                                        {
-                                            "class": "ppeo:biological_material",
-                                            "property": "ppeo:hasBiologicalMaterial"
-                                        },
-                                        {
-                                            "class": "ppeo:biological_material",
-                                            "property": "ppeo:hasTaxonIdentifier"
-                                        }
-                                    ],
-                                    "_value": "2408ab11"
-                                }
-                            }
-                        ],
-                        "_value": "string"
-                    },
+                    "additionalProp1": "string",
                     "additionalProp2": "string",
                     "additionalProp3": "string"
                 },
@@ -89,6 +49,13 @@
                         "referenceSource": "Remote Data Collection Upload Tool"
                     }
                 ],
+                "geoCoordinates": {
+                    "geometry": "This was altered to fit this datamodel",
+                    "latitude": "",
+                    "longitude": "",
+                    "altitude": "",
+                    "type": "Feature"
+                },
                 "germplasmDbId": {
                     "_sparQL": [
                         {
@@ -109,8 +76,8 @@
                 "germplasmName": {
                     "_sparQL": [
                         {
-                            "class": "ppeo:observation_unit",
-                            "property": "ppeo:hasObservedSubject"
+                            "class": "nodeID://b11065",
+                            "property": "hasObservedSubject"
                         },
                         {
                             "class": "ppeo:biological_material",
@@ -130,32 +97,7 @@
                             "property": "ppeo:hasDateTime"
                         }
                     ],
-                    "_value": {
-                        "0": "2",
-                        "1": "0",
-                        "2": "2",
-                        "3": "1",
-                        "4": "-",
-                        "5": "0",
-                        "6": "4",
-                        "7": "-",
-                        "8": "0",
-                        "9": "7",
-                        "10": "T",
-                        "11": "1",
-                        "12": "4",
-                        "13": ":",
-                        "14": "3",
-                        "15": "8",
-                        "16": ":",
-                        "17": "1",
-                        "18": "4",
-                        "19": ".",
-                        "20": "2",
-                        "21": "3",
-                        "22": "4",
-                        "23": "Z"
-                    }
+                    "_value": "2023-01-06T00:25:45.326Z"
                 },
                 "observationUnitDbId": {
                     "_sparQL": [
@@ -168,16 +110,7 @@
                             "property": "ppeo:hasInternalIdentifier"
                         }
                     ],
-                    "_value": {
-                        "0": "5",
-                        "1": "9",
-                        "2": "8",
-                        "3": "1",
-                        "4": "1",
-                        "5": "1",
-                        "6": "d",
-                        "7": "4"
-                    }
+                    "_value": "598111d4"
                 },
                 "observationUnitName": {
                     "_sparQL": [
@@ -185,19 +118,45 @@
                             "property": "ppeo:hasObservedSubject",
                             "class": "ppeo:observation_unit"
                         }
-                    ]
+                    ],
+                    "_value": "Plot 1"
                 },
-                "observationVariableDbId": "c403d107",
+                "observationVariableDbId": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+                            "property": "hasVariable"
+                        },
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+                            "property": "hasInternalIdentifier"
+                        }
+                    ],
+                    "_value": "c403d107"
+                },
                 "observationVariableName": {
                     "_sparQL": [
                         {
-                            "property": "ppeo:hasVariable",
-                            "class": "ppeo:observation_variable"
+                            "property": "hasVariable",
+                            "class": "http://purl.org/ppeo/PPEO.owl#observed_variable"
+                        },
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+                            "property": "hasName"
                         }
-                    ]
+                    ],
+                    "_value": "Plant Height in meters"
                 },
                 "season": {
-                    "season": "Spring",
+                    "season": {
+                        "_sparQL": [
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#observation",
+                                "property": "hasSeason"
+                            }
+                        ],
+                        "_value": "Spring"
+                    },
                     "seasonDbId": "Spring_2018",
                     "year": 2018
                 },
@@ -224,7 +183,8 @@
                             "class": "ppeo:observation",
                             "property": "ppeo:hasValue"
                         }
-                    ]
+                    ],
+                    "_value": "2.3"
                 },
                 "observationDbId": "ef24b615"
             }

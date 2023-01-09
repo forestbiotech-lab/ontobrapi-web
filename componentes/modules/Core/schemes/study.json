@@ -44,41 +44,177 @@
                 "commonCropName": {
                     "_sparQL": [
                         {
-                            "class": "Grape_Yield_Trial",
-                            "property": "Grape_Yield_Trial"
+                            "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                            "property": "hasBiologicalMaterial"
+                        },
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+                            "property": "hasSpecies"
                         }
                     ],
                     "_value": "Grape"
                 },
                 "contacts": [
                     {
-                        "contactDbId": "5f4e5509",
-                        "email": "bob@bob.com",
-                        "instituteName": "The BrAPI Institute",
-                        "name": "Bob Robertson",
-                        "orcid": "http://orcid.org/0000-0001-8640-1750",
-                        "type": "PI"
+                        "contactDbId": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#person",
+                                    "property": "hasPersonWithRole"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#person",
+                                    "property": "hasIdentifier"
+                                }
+                            ],
+                            "_value": "5f4e5509"
+                        },
+                        "email": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#person",
+                                    "property": "hasPersonWithRole"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#person",
+                                    "property": "hasEmailContact"
+                                }
+                            ],
+                            "_value": "bob@bob.com"
+                        },
+                        "instituteName": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#person",
+                                    "property": "hasPersonWithRole"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#institution",
+                                    "property": "hasAffiliation"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#institution",
+                                    "property": "hasName"
+                                }
+                            ],
+                            "_value": "The BrAPI Institute"
+                        },
+                        "name": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#person",
+                                    "property": "hasPersonWithRole"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#person",
+                                    "property": "hasName"
+                                }
+                            ],
+                            "_value": "Bob Robertson"
+                        },
+                        "orcid": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#person",
+                                    "property": "hasPersonWithRole"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#person",
+                                    "property": "hasIdentifier"
+                                }
+                            ],
+                            "_value": "http://orcid.org/0000-0001-8640-1750"
+                        },
+                        "type": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#role",
+                                    "property": "hasPersonWithRole"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#role",
+                                    "property": "hasName"
+                                }
+                            ],
+                            "_value": "PI"
+                        }
                     }
                 ],
-                "culturalPractices": "Irrigation was applied according needs during summer to prevent water stress.",
+                "culturalPractices": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#study",
+                            "property": "hasCulturalPractices"
+                        }
+                    ],
+                    "_value": "Irrigation was applied according needs during summer to prevent water stress."
+                },
                 "dataLinks": [
                     {
                         "dataFormat": "Image Archive",
-                        "description": "Raw drone images collected for this study",
-                        "fileFormat": "application/zip",
+                        "description": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#data_file",
+                                    "property": "hasDataFile"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#data_file",
+                                    "property": "hasDescription"
+                                }
+                            ],
+                            "_value": "Raw drone images collected for this study"
+                        },
+                        "fileFormat": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#data_file",
+                                    "property": "hasDataFile"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#data_file",
+                                    "property": "hasDescription"
+                                }
+                            ],
+                            "_value": "application/zip"
+                        },
                         "name": "image-archive.zip",
                         "provenance": "Image Processing Pipeline, built at the University of Antarctica: https://github.com/antarctica/pipeline",
                         "scientificType": "Environmental",
-                        "url": "https://brapi.org/image-archive.zip",
-                        "version": "1.0.3"
+                        "url": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#data_file",
+                                    "property": "hasDataFile"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#data_file",
+                                    "property": "hasDigitalLocation"
+                                }
+                            ],
+                            "_value": "https://brapi.org/image-archive.zip"
+                        },
+                        "version": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#data_file",
+                                    "property": "hasDataFile"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#data_file",
+                                    "property": "hasVersion"
+                                }
+                            ],
+                            "_value": "1.0.3"
+                        }
                     }
                 ],
                 "documentationURL": "https://wiki.brapi.org",
                 "endDate": {
                     "_sparQL": [
                         {
-                            "class": "ppeo:study",
-                            "property": "Grape_Yield_Trial"
+                            "class": "http://purl.org/ppeo/PPEO.owl#study",
+                            "property": "hasEndDateTime"
                         }
                     ],
                     "_value": "2022-06-06T22:37:31.237Z"
@@ -86,24 +222,60 @@
                 "environmentParameters": [
                     {
                         "description": "the soil type was clay",
-                        "parameterName": "soil type",
+                        "parameterName": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#environment",
+                                    "property": "hasEnvironment"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#environment_parameter",
+                                    "property": "hasEnvironmentParameter"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#environment_parameter",
+                                    "property": "hasName"
+                                }
+                            ],
+                            "_value": "soil type"
+                        },
                         "parameterPUI": "PECO:0007155",
                         "unit": "pH",
                         "unitPUI": "PECO:0007059",
-                        "value": "clay soil",
+                        "value": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#environment",
+                                    "property": "hasEnvironment"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#environment_parameter",
+                                    "property": "hasEnvironmentParameter"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#environment_parameter",
+                                    "property": "hasValue"
+                                }
+                            ],
+                            "_value": "clay soil"
+                        },
                         "valuePUI": "ENVO:00002262"
                     }
                 ],
                 "experimentalDesign": {
-                    "_sparQL": [
-                        {
-                            "class": "Grape_Yield_Trial",
-                            "property": "Grape_Yield_Trial"
-                        }
-                    ],
-                    "_value": {
-                        "PUI": "CO_715:0000145",
-                        "description": "Lines were repeated twice at each location using a complete block design. In order to limit competition effects, each block was organized into four sub-blocks corresponding to earliest groups based on a prior information."
+                    "PUI": "CO_715:0000145",
+                    "description": {
+                        "_sparQL": [
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#experimental_design",
+                                "property": "hasExperimentalDesign"
+                            },
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#experimental_design",
+                                "property": "hasDescription"
+                            }
+                        ],
+                        "_value": "Lines were repeated twice at each location using a complete block design. In order to limit competition effects, each block was organized into four sub-blocks corresponding to earliest groups based on a prior information."
                     }
                 },
                 "externalReferences": [
@@ -121,19 +293,75 @@
                     }
                 ],
                 "growthFacility": {
-                    "PUI": "CO_715:0000162",
-                    "description": "field environment condition, greenhouse"
+                    "PUI": {
+                        "_sparQL": [
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#growth_facility",
+                                "property": "hasGrowthFacility"
+                            },
+                            {
+                                "class": "",
+                                "property": ""
+                            }
+                        ],
+                        "_value": "CO_715:0000162"
+                    },
+                    "description": {
+                        "_sparQL": [
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#growth_facility",
+                                "property": "hasGrowthFacility"
+                            },
+                            {
+                                "class": "http://purl.org/ppeo/PPEO.owl#growth_facility",
+                                "property": "hasDescription"
+                            }
+                        ],
+                        "_value": "field environment condition, greenhouse"
+                    }
                 },
                 "lastUpdate": {
                     "timestamp": "2022-06-06T22:37:31.237Z",
                     "version": "1.2.3"
                 },
-                "license": "MIT License",
+                "license": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#investigation",
+                            "property": "partOf"
+                        },
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#investigation",
+                            "property": "hasLicense"
+                        }
+                    ],
+                    "_value": "MIT License"
+                },
                 "locationDbId": "3cfdd67d",
-                "locationName": "Location 1",
+                "locationName": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#named_location",
+                            "property": "hasLocation"
+                        }
+                    ],
+                    "_value": "Location 1"
+                },
                 "observationLevels": [
                     {
-                        "levelName": "field",
+                        "levelName": {
+                            "_sparQL": [
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#observation_level_hierarchy",
+                                    "property": "hasObservationLevelHierarchy"
+                                },
+                                {
+                                    "class": "http://purl.org/ppeo/PPEO.owl#observation_level",
+                                    "property": "hasPart"
+                                }
+                            ],
+                            "_value": "field"
+                        },
                         "levelOrder": 0
                     },
                     {
@@ -148,8 +376,12 @@
                 "observationUnitsDescription": {
                     "_sparQL": [
                         {
-                            "class": "ppeo:observation_unit",
-                            "property": "Grape_Yield_Trial"
+                            "class": "http://purl.org/ppeo/PPEO.owl#observation_unit",
+                            "property": "hasPart"
+                        },
+                        {
+                            "class": "",
+                            "property": ""
                         }
                     ],
                     "_value": "Observation units consisted in individual plots themselves consisting of a row of 15 plants at a density of approximately six plants per square meter."
@@ -160,8 +392,8 @@
                 "startDate": {
                     "_sparQL": [
                         {
-                            "class": "ppeo:study",
-                            "property": "Grape_Yield_Trial"
+                            "class": "http://purl.org/ppeo/PPEO.owl#study",
+                            "property": "hasStartDateTime"
                         }
                     ],
                     "_value": "2022-06-06T22:37:31.238Z"
@@ -170,8 +402,8 @@
                 "studyDbId": {
                     "_sparQL": [
                         {
-                            "class": "ppeo:study",
-                            "property": "Grape_Yield_Trial"
+                            "class": "http://purl.org/ppeo/PPEO.owl#study",
+                            "property": "hasIdentifier"
                         }
                     ],
                     "_value": "175ac75a"
@@ -179,8 +411,8 @@
                 "studyDescription": {
                     "_sparQL": [
                         {
-                            "class": "ppeo:study",
-                            "property": "Grape_Yield_Trial"
+                            "class": "http://purl.org/ppeo/PPEO.owl#study",
+                            "property": "hasDescription"
                         }
                     ],
                     "_value": "This is a yield study for Spring 2018"
@@ -188,16 +420,48 @@
                 "studyName": {
                     "_sparQL": [
                         {
-                            "class": "ppeo:study",
-                            "property": "Grape_Yield_Trial"
+                            "class": "http://purl.org/ppeo/PPEO.owl#study",
+                            "property": "hasName"
                         }
                     ],
                     "_value": "INRA's Walnut Genetic Resources Observation at Kenya"
                 },
-                "studyPUI": "doi:10.155454/12349537312",
+                "studyPUI": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#study",
+                            "property": "hasIdentifier"
+                        }
+                    ],
+                    "_value": "doi:10.155454/12349537312"
+                },
                 "studyType": "Phenotyping",
-                "trialDbId": "48b327ea",
-                "trialName": "Grape_Yield_Trial"
+                "trialDbId": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#investigation",
+                            "property": "partOf"
+                        },
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#investigation",
+                            "property": "hasIdentifier"
+                        }
+                    ],
+                    "_value": "48b327ea"
+                },
+                "trialName": {
+                    "_sparQL": [
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#investigation",
+                            "property": "partOf"
+                        },
+                        {
+                            "class": "http://purl.org/ppeo/PPEO.owl#investigation",
+                            "property": "hasName"
+                        }
+                    ],
+                    "_value": "Grape_Yield_Trial"
+                }
             }
         ]
     }
