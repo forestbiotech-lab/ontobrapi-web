@@ -130,6 +130,7 @@ async function getAnchors(server,moduleName,callName,requestParam,requestTrip){
     totalPages=Math.ceil(queryCount[0].count/options.limit)
   //TODO only true if count is less then default
   else totalPages=1
+  if(!callStructure.metadata.pagination) callStructure.metadata.pagination={}
 
   callStructure.metadata.pagination.currentPage=parseInt(options.page) || 0
   callStructure.metadata.pagination.pageSize=parseInt(options.limit)
