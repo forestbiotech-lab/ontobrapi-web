@@ -78,6 +78,7 @@ $('document').ready(function(){
         window.app = new Vue({                                                  //Anonymous can't get back to it if necessary!!!!
           el:"#preview-table",
           data:{
+            "uriGraph":"http://localhost:8890/ontobrapi"
           },
           methods:{
             saveNTfile(){
@@ -91,6 +92,27 @@ $('document').ready(function(){
               a.click();
               window.URL.revokeObjectURL(url);
               a.remove()
+            },
+            uploadGraph() {
+              let graph = $('textarea.generated-ntriples').text()
+              let that = this
+              let data = JSON.stringify({
+                graph,
+                "uri": that.uriGraph,
+              })
+              let formData = new FormData();
+              // loop through all the selected files
+              formData.set('newGraph', data);
+              $.ajax({
+                url: "/forms/upload/graph",
+                type:"POST",
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: (data, textStatus, jqXHR) => {
+                  console.log(data)
+                }
+              })
             }
           }
         })
@@ -175,6 +197,7 @@ $('document').ready(function(){
       $('textarea.generated-ntriples').text(data)
       $('textarea.generated-ntriples').addClass('loaded')
       $('textarea.generated-ntriples').trigger('load',["Loaded","Event"])
+      $('div.d-grid.upload-graph').removeClass('d-none')
   }
 
   $('button.load-mapping-file').click(function(){

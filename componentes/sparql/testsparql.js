@@ -12,9 +12,10 @@ let subject = 's'
 let object = 'o'
 let predicate = 'p'
 const brapi="http://brapi.biodata.pt/"
+const ontoBrAPI="http://localhost:8890/vitis"
 let devServer="http://localhost:3000/"
 
-const pageSize=10
+let pageSize
 
 const prefixes={
   "ppeo":"http://purl.org/ppeo/PPEO.owl#"
@@ -30,27 +31,8 @@ Array.prototype.forEachAsyncParallel = async function (fn) {
     await Promise.all(this.map(fn));
 }
 
- 
-function sparqlQuery(queryParms,triples,options) {
-  if (options.limit===undefined) options.limit=DEFAULT_LIMIT;
-  var {subject,predicate,object}=triples[0]
-  let {query1,query2,query3}=queryParms
-  //TODO do I need this prefix for anything?
-  let query =`PREFIX ppeo: <http://purl.org/ppeo/PPEO.owl#>
-  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
- 
 
-  SELECT DISTINCT ${query1} ${query2} ${query3}
-  FROM <http://localhost:8890/vitis>
-  WHERE
-    {\n`
-    triples.forEach(triple=>{
-      query+=`    ${triple.subject} ${triple.predicate} ${triple.object} .\n`
-    })
-      
-    query+=`}\nLIMIT ${options.limit}`
-
-
+function processQuery(query){
   return new Promise((res,rej)=>{
     const client = new SparqlClient({ endpointUrl })
     client.query.select(query).then(stream=>{
@@ -61,7 +43,7 @@ function sparqlQuery(queryParms,triples,options) {
           resultTriple[key]=value.value
         })
         result.push(resultTriple)
-      }) 
+      })
       stream.on('error', err => {
         rej(err)
       })
@@ -71,14 +53,48 @@ function sparqlQuery(queryParms,triples,options) {
     }).catch(err=>{
       rej(err)
     })
-  })  
+  })
 }
 
 
-function getResults(queryParms,triples,options){
-  return sparqlQuery(queryParms,triples,options)
+function sparqlQuery(sparqlQueryParams,triples,options,count) {
+  let offset;
+  if (options.limit===undefined){ options.limit=DEFAULT_LIMIT; options.page=0; }
+  if(options.page>0){offset="OFFSET "+options.page}else{offset=""}
+
+  var {subject,predicate,object}=triples[0]
+  let {query1,query2,query3}=sparqlQueryParams
+  let select;
+  if(count){
+    select=`SELECT DISTINCT ( COUNT  ( ${query1} ${query2} ${query3})as ?count)`
+  }else{
+    select=`SELECT DISTINCT ${query1} ${query2} ${query3}`
+  }
+  //TODO do I need this prefix for anything?
+  let query =`PREFIX ppeo: <http://purl.org/ppeo/PPEO.owl#>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+ 
+  ${select}
+  FROM <${ontoBrAPI}>
+  WHERE
+    {\n`
+    triples.forEach(triple=>{
+      query+=`    ${triple.subject} ${triple.predicate} ${triple.object} .\n`
+    })
+      
+    query+=`}\nLIMIT ${options.limit} ${offset}`
+
+
+  return processQuery(query)
 }
 
+
+function getResults(querySelectors,triples,options){
+  return sparqlQuery(querySelectors,triples,options)
+}
+
+//Define request options for SparQL Query
+//Setup metadata response
 async function getAnchors(server,moduleName,callName,requestParam,requestTrip){
   devServer=server
   //Define class and property
@@ -95,34 +111,53 @@ async function getAnchors(server,moduleName,callName,requestParam,requestTrip){
   let query1,query2,query3
   query1=query2=query3=""
   query1=subject
-  let queryParams={query1,query2,query3}
+  let sparqlQuerySelectors={query1,query2,query3}
 
   let options={}
-  if(requestParam){
-    if (requestParam.pageSize) options.limit=requestParam.pageSize
+  let totalPages,queryCount
+  let count;
+  if (requestParam) {
+    if (requestParam.pageSize) {
+      options.page = requestParam.page
+      options.limit = requestParam.pageSize
+      queryCount = await sparqlQuery(sparqlQuerySelectors, [{subject, predicate, object}], {},count = true)
+    }
   }
-  let anchorIndividuals=await getResults(queryParams,[{subject,predicate,object}],options)
+  let anchorIndividuals=await getResults(sparqlQuerySelectors,[{subject,predicate,object}],options)
   let results=[]
-  
+
+  if(options.limit<1000)
+    totalPages=Math.ceil(queryCount[0].count/options.limit)
+  //TODO only true if count is less then default
+  else totalPages=1
+  if(!callStructure.metadata.pagination) callStructure.metadata.pagination={}
+
+  callStructure.metadata.pagination.currentPage=parseInt(options.page) || 0
+  callStructure.metadata.pagination.pageSize=parseInt(options.limit)
+  pageSize=options.limit //Used bellow as safeguard
+  callStructure.metadata.pagination.totalPages=totalPages
+  callStructure.metadata.pagination.totalCount= options.limit<DEFAULT_LIMIT ? parseInt(queryCount[0].count) : DEFAULT_LIMIT
+
   
 
   anchorIndividuals.forEach(async (individual,index)=>{
     let  triples=[{subject,predicate,object}]
     triples[0].subject=`<${individual[anchor]}>`
     if (index<pageSize){
-      results.push(parseCallStructure(callStructure.result.data[0],queryParams,triples))
+      results.push(parseCallStructure(callStructure.result.data[0],sparqlQuerySelectors,triples))
     }
   })
   delete callStructure["_anchor"]
   return {callStructure,results}
 }
 
-async function parseCallStructure(callStructure,queryParams,triples){
+//Get values for each individual bases con the CallStructure
+async function parseCallStructure(callStructure,sparqlQuerySelectors,triples,array){
   //from result or data
   let resultStructure=JSON.parse(JSON.stringify(callStructure))
   for await ([key,value] of Object.entries(callStructure)){
     if(isOntologicalTerm(value) === true){
-      let loopQueryParams=Object.assign({},queryParams)
+      let loopQueryParams=Object.assign({},sparqlQuerySelectors)
       let loopKey=key
       let loopValue=value["_sparQL"]
       
@@ -151,19 +186,36 @@ async function parseCallStructure(callStructure,queryParams,triples){
         queryResult=null
       }
       try{
-        resultStructure[loopKey]=queryResult[0][loopQueryParams.query1.replace("?","")].replace(brapi,devServer)
+        if(array){
+          if(resultStructure._result_array_){
+            for([index,entry] of Object.entries(resultStructure._result_array_)){
+              entry[loopKey]=queryResult[index][loopQueryParams.query1.replace("?","")].replace(brapi,devServer)
+            }
+          }else{
+            resultStructure._result_array_=queryResult.map(item=>{
+              return {[loopKey]:item[loopQueryParams.query1.replace("?","")].replace(brapi,devServer)}
+            })
+          }
+
+        }else
+          resultStructure[loopKey]=queryResult[0][loopQueryParams.query1.replace("?","")].replace(brapi,devServer)
       }catch(err){
         resultStructure[loopKey]=null
       }
     }else{
       if(value instanceof Object){
-        //TODO it queries well but doesn't add to result
-        resultStructure[key]=await parseCallStructure(callStructure[key],queryParams,triples)
+        //TODO
+        if(value instanceof Array){
+          let array;
+          resultStructure[key]=await parseCallStructure(callStructure[key][0],sparqlQuerySelectors,triples,array=true)
+        }else
+          resultStructure[key]=await parseCallStructure(callStructure[key],sparqlQuerySelectors,triples)
       }else if(typeof value  === "string"){
         resultStructure[key]=""
       }
     }
   }
+  if(array)if(resultStructure._result_array_) resultStructure=resultStructure._result_array_
   return resultStructure
 }
 

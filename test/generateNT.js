@@ -36,7 +36,8 @@ function random(max){
     let defaultMapPath="/brunocosta/Documents/Projectos/ontobrapi/9may/OntoBrAPI_9May_mapping-added.json"
     //let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigation.json"
     //let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/ontobrapi_vitis.json"
-    let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigationNstudyNperson.json"
+    //let mapInvestigation="brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/investigationNstudyNperson.json"
+    let mapInvestigation="brunocosta/git/ontoBrAPI/ontoBrAPI-node-docker/reference_files/valores\ de\ Cópia de MIAPPEv1.1_compliant_vitis_submissionOntobrapi.json"
     let root=""
     if(process.platform=="darwin"){
             root="/Users"
@@ -68,7 +69,7 @@ function random(max){
 
         //LOAD SpreadSheet and Mapping
         await firstPage.waitForSelector('#augment-file')
-        await (await firstPage.$('#augment-file')).uploadFile(path.join(root, `/brunocosta/Documents/Projectos/ontobrapi/OntoBrAPI-TEST-IChaves/valores\ de\ Cópia\ de\ MIAPPEv1.1_compliant_vitis_submissionOntobrapi.ods`))
+        await (await firstPage.$('#augment-file')).uploadFile(path.join(root, `brunocosta/git/ontoBrAPI/ontoBrAPI-node-docker/reference_files/valores\ de\ Cópia\ de\ MIAPPEv1.1_compliant_vitis_submissionOntobrapi.ods`))
         //Takes some time till loaded works better than the wait for Selector
         await firstPage.waitForTimeout(1500);
         element = await firstPage.waitForSelector("#mapping-loading-options button.load-mapping-button")

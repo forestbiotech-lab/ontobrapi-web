@@ -13,6 +13,8 @@ let predicate = 'p'
 const pageSize=10
 const brapi="http://brapi.biodata.pt/"
 const devServer="http://localhost:3000/"
+const ontoBrAPI="http://localhost:8890/vitis"
+
 
 //Possible solution
 Array.prototype.forEachAsync = async function (fn) {
@@ -33,7 +35,7 @@ function sparqlQuery(queryParms,triples) {
   PREFIX raiz: <http:brapi.biodata.pt/raiz/>
 
   SELECT DISTINCT ${query1} ${query2} ${query3}
-  FROM <https://bit.ly/3yJFXvw>
+  FROM <${ontoBrAPI}>
   WHERE
     {\n`
     triples.forEach(triple=>{

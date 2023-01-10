@@ -10,7 +10,7 @@ router.get('/', (req,res)=>{
 })
 
 router.get('/:ontoTerm',async function(req,res,next){
-  let ontoTerm = req.params.ontoTerm
+  let ontoTerm = encodeURI(req.params.ontoTerm)
   let queryResults=await jsonld(ontoTerm)
   let result={}
   try{

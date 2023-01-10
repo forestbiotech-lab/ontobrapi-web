@@ -1,41 +1,47 @@
 //---------------------------- Vue data handling --------------------------------------------------------------
-Vue.component('subitemObject',{
-    // Loads a collapse component that can be used as a nested element
-    // Loads a series of dynamic layers
-    template: $('#template-object').clone()[0],
-    props:{
-        subItem:{type: String},
-        attribute:{type: String},
-        subType:{type:String},
-        callStructure:{type:Object},
-        dataProperties:{type:Object},
-        objectProperties:{type:Object}
-    },
-    computed: {
-        mapping: function () {
-            if (this.callStructure.result) {
-                if (this.callStructure.result.data[0][this.attribute])
-                    return this.callStructure.result.data[0][this.attribute]
-            } else {
-                return {}
-            }
+async function loadSubItemObject() {
+    Vue.component('subitemObject', {
+        // Loads a collapse component that can be used as a nested element
+        // Loads a series of dynamic layers
+        template: await getTemplate("template-object"),
+        props: {
+            subItem: {type: String},
+            attribute: {type: String},
+            subType: {type: String},
+            callStructure: {type: Object},
+            dataProperties: {type: Object},
+            objectProperties: {type: Object}
         },
-    },
-    data: function(){
-        return {
-
+        computed: {
+            mapping: function () {
+                if (this.callStructure.result) {
+                    if(this.subType=="object"){
+                        if (this.callStructure.result.data[0][this.attribute])
+                            return this.callStructure.result.data[0][this.attribute]
+                    }else if( this.subType=="array"){
+                        if (this.callStructure.result.data[0][this.attribute][0])
+                            return this.callStructure.result.data[0][this.attribute][0]
+                    }
+                } else {
+                    return {}
+                }
+            },
+        },
+        data: function () {
+            return {}
         }
-    }
-})
+    })
+}
 Vue.component('test',{
     template: $('#template-test').clone()[0],
     props:{
         tester:{type: String}
     }
 })
-function dynamicLayer(name) {
+async function dynamicLayer(name) {
     Vue.component(name, {
-        template: $('#template-layer').clone()[0],
+        template:await getTemplate('template-layer'),
+        //template: $('#template-layer').clone()[0],
         props: {
             callStructure: {type: Object},
             dataProperties: {type: Object},
@@ -52,8 +58,16 @@ function dynamicLayer(name) {
             mapping: function () {
                 if (this.callStructure.result) {
                     if (this.callStructure.result.data[0][this.attribute])
-                        if(this.subType=="object"){
+                        if(this.subType == "object") {
                             return this.callStructure.result.data[0][this.attribute][this.subItem]
+                        }else if(this.subType == "array"){
+                            //TODO possibly deal with multiple values that are different
+                            if(this.callStructure.result.data[0][this.attribute][0] instanceof Object){
+                                return this.callStructure.result.data[0][this.attribute][0][this.subItem]
+                            }else{
+                                //TODO Not sure what is appropriate
+                                return {}
+                            }
                         }else {
                             return this.callStructure.result.data[0][this.attribute]
                         }
@@ -160,13 +174,24 @@ function dynamicLayer(name) {
                     //Test if the layer that was just saved was a lower lever. In that case the levels above should be removed to be corrected
                     if (this.layer < this.mapping._sparQL.length - 1) {
                         for (let i = this.mapping._sparQL.length - 1; i > this.layer; i--) {
-                            this.callStructure.result.data[0][this.attribute]._sparQL.pop()
+                            if(this.subType=="object"){
+                                this.callStructure.result.data[0][this.attribute][this.subItem]._sparQL.pop()
+                            }else if(this.subType=="array"){
+                                this.callStructure.result.data[0][this.attribute][0][this.subItem]._sparQL.pop()
+                            }
                         }
                     }
                 } else {
                     let prevValue = this.mapping
-                    if(this.subType=="object"){
+                    if(this.subType=="object") {
                         this.callStructure.result.data[0][this.attribute][this.subItem] = {
+                            _sparQL: [{
+                                class: val.class,
+                                property: val.label
+                            }], _value: prevValue
+                        }
+                    }else if(this.subType=="array"){
+                        this.callStructure.result.data[0][this.attribute][0][this.subItem] = {
                             _sparQL: [{
                                 class: val.class,
                                 property: val.label
@@ -187,7 +212,7 @@ function dynamicLayer(name) {
                 if (this.anchor != className)
                     this.loadMissingProperty(className)
             },
-            addNewLayer2() {
+            addNewLayer() {
                 let layers = this.mapping._sparQL
                 if (layers) {
                     layers.push({class: "", property: ""})
@@ -196,45 +221,6 @@ function dynamicLayer(name) {
                     this.callStructure.result.data[0][this.attribute] = {_sparQL: [], _value: value}
                 }
             },
-            //TODO rewrite into 2 and replace
-            addNewLayer(evt) {
-                let target
-                if (data) data = data.data
-                if (data) target = data.target
-                let self = target || $(this)
-                //let card=self.closest('.card')
-                let card = $(``)
-                let newCard = card.clone()
-                let newCardTitle = newCard.children('.card-title')
-                let layer = parseInt(newCardTitle.attr("layer")) + 1
-                newCard.attr('layer', layer)
-                newCard.find('input').each(function () {
-                    let previousId = $(this).attr('id')
-                    let newId = previousId.replace(/layer(\d)/, `layer${layer}`)
-                    $(this).attr('id', newId)
-                })
-                newCardTitle.text(`Layer ${layer}`)
-                newCardTitle.attr("layer", layer)
-                card.closest('.collapse').append(newCard)
-                newCard = card.closest('.collapse').children('.card').last()
-                newCard.children('input').each(function () {
-                    let self = $(this)
-                    self.val("")
-                })
-                onInputChange(null, null, {data: newCard})
-                self.remove()
-                if (data) {
-                    if (data.callback) {
-                        self = data
-                        self.callback(self.layerData, self.layer, self.callAttribute)
-                    }
-                }
-                let select = newCard.find('select')
-                let classNameShortHand = card.find('input[name|=class]').val()
-                loadOptionsForNextLayer(classNameShortHand, select)
-                addSelectPropertyOnChange(newCard)
-                addNewLayerOnClick(newCard)
-            }
         },
         mounted: function () {
             //this.loadValues()
@@ -244,54 +230,86 @@ function dynamicLayer(name) {
         }
     })
 }
-dynamicLayer("layer")
-dynamicLayer("layer-sub-object")
-window.vmapping = new Vue({                                                  //Anonymous can't get back to it if necessary!!!!
-    el: "#mapping",
-    data: {
-        dataProperties: {},
-        objectProperties: {},
-        mapping: {},
-        className: $('#mapping').attr('anchor'),
-        callStructure: {}
-    },
-    computed: {},
-    methods: {
-        valueType(attribute) {
-            let key = this.callStructure.result.data[0][attribute]
-            if (typeof key === "object")
-                if (key._sparQL) {
-                    return "directProcessed"
-                } else if (key instanceof Array) {
-                    return "array"
+(async function loadVue() {
+    await loadSubItemObject()
+    await dynamicLayer("layer")
+        //.catch(err => console.log("Error loading Layer: ", err))
+    await dynamicLayer("layer-sub-object")
+    //(err => console.log("Error loading Layer-sub-object: ", err)))
+    window.vmapping = new Vue({                                                  //Anonymous can't get back to it if necessary!!!!
+        el: "#mapping",
+        data: {
+            dataProperties: {},
+            objectProperties: {},
+            mapping: {},
+            className: $('#mapping').attr('anchor'),
+            callStructure: {}
+        },
+        computed: {
+            isArray() {
+                return false
+            }
+        },
+        methods: {
+            valueType(attribute) {
+                let key = this.callStructure.result.data[0][attribute]
+                if (typeof key === "object")
+                    if (key._sparQL) {
+                        return "directProcessed"
+                    } else if (key instanceof Array) {
+                        return "array"
+                    } else {
+                        return "object"
+                    }
+                else return "direct"
+            },
+            classType(attribute) {
+                if (this.valueType(attribute) == "array") {
+                    return "array-attribute"
+                } else if (this.valueType(attribute).startsWith("direct")) {
+                    return "direct-attribute"
+                } else if (this.valueType(attribute) == "object") {
+                    return "object-attribute"
                 } else {
-                    return "object"
+                    return ""
                 }
-            else return "direct"
+            },
+            buttonType(attribute) {
+                if (this.valueType(attribute) == "array") {
+                    return "btn-secondary dropdown-toggle array-attribute"
+                } else if (this.valueType(attribute).startsWith("direct")) {
+                    return "btn-primary direct-attribute"
+                } else if (this.valueType(attribute) == "object") {
+                    return "btn-warning dropdown-toggle object-attribute"
+                } else {
+                    return ""
+                }
+            }
+        },
+        beforeMount: async function () {
+            //Loads the Properties on all v-select
+            this.objectProperties[this.className] = await $.get(`/query/inferred/objectProperty/${this.className}`)
+            this.dataProperties[this.className] = await $.get(`/query/inferred/dataProperty/${this.className}`)
+            let that = this
+            $('#mapping table').removeClass('d-none')
+            $('#mapping .spinner-grow').hide()
+            /*window.vmapping.$children.filter(child=> child.$vnode.tag.startsWith("vue-component"))
+                .forEach(
+                    layer=>{
+                        //vselect.options=this.dataProperties[this.className]
+                        let id=layer.$children[0].$attrs.attribute
+                        //that.mapping[id]=[]
+                        //layer.loadValues(id)
+                        layer.$children[0].loading=false
+
+                    }
+                )
+
+             */
         }
-    },
-    beforeMount: async function () {
-        //Loads the Properties on all v-select
-        this.objectProperties[this.className] = await $.get(`/query/inferred/objectProperty/${this.className}`)
-        this.dataProperties[this.className] = await $.get(`/query/inferred/dataProperty/${this.className}`)
-        let that = this
-        $('#mapping table').removeClass('d-none')
-        $('#mapping .spinner-grow').hide()
-        /*window.vmapping.$children.filter(child=> child.$vnode.tag.startsWith("vue-component"))
-            .forEach(
-                layer=>{
-                    //vselect.options=this.dataProperties[this.className]
-                    let id=layer.$children[0].$attrs.attribute
-                    //that.mapping[id]=[]
-                    //layer.loadValues(id)
-                    layer.$children[0].loading=false
-
-                }
-            )
-
-         */
-    }
-})
+    })
+    window.vmapping.callStructure=window.callStructure
+}())
 
 Vue.component('v-select', VueSelect.VueSelect);
 
@@ -450,4 +468,9 @@ function fillElement(element,table,attr,attributes){
     addNewLayerOnClick(element)
     addSelectPropertyOnChange(element)
     element.find('.collapse').on("shown.bs.collapse",onInputChange)
+}
+
+async function getTemplate(part){
+    let result = await $.parseHTML(await $.get(`/factory/vue/callEditor/${part}`))
+    return result.pop()
 }

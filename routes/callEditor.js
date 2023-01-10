@@ -9,7 +9,28 @@ const sanitizeParams  = require('./../componentes/helpers/sanitizeParms')
 const fs = require('fs')
 //TODO implement MongoDB on docker-compose
 //const db = require('./../componentes/db')
-
+let defaultCall={
+  "@context": [
+    "https://brapi.org/jsonld/context/metadata.jsonld"
+  ],
+  "metadata": {
+    "datafiles": [],
+    "pagination": {
+      "currentPage": 0,
+      "pageSize": 1,
+      "totalCount": 1,
+      "totalPages": 1
+    },
+    "status": [
+      {
+        "message": "Request accepted, response successful",
+        "messageType": "INFO"
+      }
+    ]
+  },
+  "result": {
+    "data": []
+  }}
 
 
 
@@ -58,7 +79,8 @@ router.get('/listcalls/:moduleName/list', function(req, res, next) {
 router.get('/listcalls/:moduleName/:callName/map', async function(req, res, next) {
   let moduleName=req.params.moduleName
   let callName=req.params.callName 
-  let json=require(`.././componentes/modules/${moduleName}/schemes/${callName}`)
+  //let json=require(`.././componentes/modules/${moduleName}/schemes/${callName}`)
+  let json=JSON.parse(fs.readFileSync(`componentes/modules/${moduleName}/schemes/${callName}`))
   let className=json["_anchor"].class
    
   prettyHtml=require('json-pretty-html').default
@@ -103,6 +125,7 @@ router.get('/listCalls/:moduleName/:callName/result',async function(req,res,next
       throw err
     })  
   }catch(err){
+
     res.json(err)
   }
   
@@ -120,8 +143,18 @@ router.get('/listCalls/:moduleName/:callName/gui',async function(req,res,next){
       throw err
     })
   }catch(err){
-    res.json(err)
+    defaultCall.metadata.status[0].message=err.message
+    defaultCall.metadata.status[0].messageType="Error"
+    defaultCall.metadata.status[0].stack=err.stack
+    res.json(defaultCall)
   }
+
+})
+router.get('/listCalls/:moduleName/:callName/report',async function(req,res,next){
+    let server=`${req.protocol}://${req.headers.host}/`
+    let {moduleName,callName}=req.params
+    let json=JSON.parse(fs.readFileSync(`componentes/modules/${moduleName}/schemes/${callName}`))
+    res.render( "callEditor/reportGUI",{data:json,callName})
 
 })
 

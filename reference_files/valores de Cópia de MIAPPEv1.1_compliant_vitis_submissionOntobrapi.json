@@ -1,0 +1,3443 @@
+{
+  "Investigation": {
+    "Investigation unique ID": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Investigation title*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Investigation description": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDescription",
+        "label": "hasDescription"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Submission date": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasSubmissionDate",
+        "label": "hasSubmissionDate"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "name": "dateTime",
+        "label": "dateTime",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "[object HTMLDivElement]": {}
+    },
+    "Public release date": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasPublicReleaseDate",
+        "label": "hasPublicReleaseDate"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "License": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasLicense",
+        "label": "hasLicense"
+      },
+      "naming_scheme": "@{License}@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "MIAPPE version*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasMIAPPEVersion",
+        "label": "hasMIAPPEVersion"
+      },
+      "naming_scheme": "@{MIAPPE version*}@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Associated publication": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasAssociatedPublication",
+        "label": "hasAssociatedPublication"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "[object HTMLDivElement]": {}
+    },
+    "Investigation": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "investigation",
+        "label": "investigation"
+      },
+      "naming_scheme": "Investigation_@{Investigation title*}@{Investigation unique ID}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Investigation unique ID",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Investigation title*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        },
+        {
+          "id": "2",
+          "property": "",
+          "show": true,
+          "referenceNode": "Investigation description",
+          "data": {
+            "value": "hasDescription",
+            "type": "string"
+          }
+        },
+        {
+          "id": "3",
+          "property": "",
+          "show": true,
+          "referenceNode": "Public release date",
+          "data": {
+            "value": "hasPublicReleaseDate",
+            "type": "dateTime"
+          }
+        },
+        {
+          "id": "4",
+          "property": "",
+          "show": true,
+          "referenceNode": "License",
+          "data": {
+            "value": "hasLicense",
+            "type": "string"
+          }
+        },
+        {
+          "id": "5",
+          "property": "",
+          "show": true,
+          "referenceNode": "MIAPPE version*",
+          "data": {
+            "value": "hasMIAPPEVersion",
+            "type": "string"
+          }
+        },
+        {
+          "id": "6",
+          "property": "",
+          "show": true,
+          "referenceNode": "Associated publication",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [],
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      }
+    }
+  },
+  "Study": {
+    "Study unique ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Study title*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Study description": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDescription",
+        "label": "hasDescription"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Start date of study*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasStartDateTime",
+        "label": "hasStartDateTime"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "name": "dateTime",
+        "label": "dateTime",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "End date of study": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasEndDateTime",
+        "label": "hasEndDateTime"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "name": "dateTime",
+        "label": "dateTime",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Contact institution*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasAddress",
+        "label": "hasAddress"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "[object HTMLDivElement]": {}
+    },
+    "Geographic location (country)*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasCountryCode",
+        "label": "hasCountryCode"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "[object HTMLDivElement]": {}
+    },
+    "Experimental site name*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Geographic location (latitude)": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasLatitude",
+        "label": "hasLatitude"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "name": "xsdfloat",
+        "label": "xsdfloat"
+      }
+    },
+    "Geographic location (longitude)": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasLongitude",
+        "label": "hasLongitude"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "name": "xsdfloat",
+        "label": "xsdfloat"
+      }
+    },
+    "Geographic location (altitude)": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasAltitude",
+        "label": "hasAltitude"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "name": "xsdfloat",
+        "label": "xsdfloat"
+      }
+    },
+    "Description of statistical design*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDescription",
+        "label": "hasDescription"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "[object HTMLDivElement]": {}
+    },
+    "Type of statistical design": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasType",
+        "label": "hasType"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Observation unit level hierarchy": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "observation_level_hierarchy",
+        "label": "observation_level_hierarchy"
+      },
+      "naming_scheme": "Obs_unit_level_hierarchy@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "[object HTMLDivElement]": {}
+    },
+    "Observation unit description*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasObservationUnitDescription",
+        "label": "hasObservationUnitDescription"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "[object HTMLDivElement]": {}
+    },
+    "Description of growth facility*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDescription",
+        "label": "hasDescription"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Type of growth facility": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasType",
+        "label": "hasType"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Cultural practices": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasCulturalPractices",
+        "label": "hasCulturalPractices"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      }
+    },
+    "Map of experimental design": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasExperimentalDesignMap",
+        "label": "hasExperimentalDesignMap"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Study": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "study",
+        "label": "study"
+      },
+      "naming_scheme": "Study_@{Study unique ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Study unique ID*",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Study title*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        },
+        {
+          "id": "2",
+          "property": "",
+          "show": true,
+          "referenceNode": "Start date of study*",
+          "data": {
+            "value": "hasStartDateTime",
+            "type": "dateTime"
+          }
+        },
+        {
+          "id": "3",
+          "property": "",
+          "show": true,
+          "referenceNode": "End date of study",
+          "data": {
+            "value": "hasEndDateTime",
+            "type": "dateTime"
+          }
+        },
+        {
+          "id": "4",
+          "property": "",
+          "show": true,
+          "referenceNode": "Study description",
+          "data": {
+            "value": "hasDescription",
+            "type": "string"
+          }
+        },
+        {
+          "id": "5",
+          "property": "",
+          "show": true,
+          "referenceNode": "Cultural practices",
+          "data": {
+            "value": "hasCulturalPractices",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#partOf",
+            "destination": "http://purl.org/ppeo/PPEO.owl#investigation",
+            "name": "partOf",
+            "label": "partOf",
+            "term": "http://purl.org/ppeo/PPEO.owl#partOf",
+            "class": "http://purl.org/ppeo/PPEO.owl#investigation",
+            "className": "investigation",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Institution",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "1",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasGrowthFacility",
+            "destination": "http://purl.org/ppeo/PPEO.owl#growth_facility",
+            "name": "hasGrowthFacility",
+            "label": "hasGrowthFacility",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasGrowthFacility",
+            "class": "http://purl.org/ppeo/PPEO.owl#growth_facility",
+            "className": "growth_facility",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Growth Facility",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "2",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasExperimentalDesign",
+            "destination": "http://purl.org/ppeo/PPEO.owl#experimental_design",
+            "name": "hasExperimentalDesign",
+            "label": "hasExperimentalDesign",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasExperimentalDesign",
+            "class": "http://purl.org/ppeo/PPEO.owl#experimental_design",
+            "className": "experimental_design",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Statistical Design",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "3",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasObservationLevelHierarchy",
+            "destination": "http://purl.org/ppeo/PPEO.owl#observation_level_hierarchy",
+            "name": "hasObservationLevelHierarchy",
+            "label": "hasObservationLevelHierarchy",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasObservationLevelHierarchy",
+            "class": "http://purl.org/ppeo/PPEO.owl#observation_level_hierarchy",
+            "className": "observation_level_hierarchy",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Observation unit level hierarchy",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "4",
+          "property": {
+            "name": "hasLocation",
+            "label": "hasLocation"
+          },
+          "show": true,
+          "referenceNode": "Study_location",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "5",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasObservationLevelHierarchy",
+            "destination": "http://purl.org/ppeo/PPEO.owl#observation_level_hierarchy",
+            "name": "hasObservationLevelHierarchy",
+            "label": "hasObservationLevelHierarchy",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasObservationLevelHierarchy",
+            "class": "http://purl.org/ppeo/PPEO.owl#observation_level_hierarchy",
+            "className": "observation_level_hierarchy",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Observation unit level hierarchy",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "6",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#partOf",
+            "destination": "http://purl.org/ppeo/PPEO.owl#investigation",
+            "name": "partOf",
+            "label": "partOf",
+            "term": "http://purl.org/ppeo/PPEO.owl#partOf",
+            "class": "http://purl.org/ppeo/PPEO.owl#investigation",
+            "className": "investigation",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Investigation",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ],
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      }
+    },
+    "Study_location": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "named_location",
+        "label": "named_location"
+      },
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      },
+      "naming_scheme": "Study_location_@{Experimental site name*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Geographic location (latitude)",
+          "data": {
+            "value": "hasLatitude",
+            "type": "xsdfloat"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Geographic location (longitude)",
+          "data": {
+            "value": "hasLongitude",
+            "type": "xsdfloat"
+          }
+        },
+        {
+          "id": "2",
+          "property": "",
+          "show": true,
+          "referenceNode": "Geographic location (altitude)",
+          "data": {
+            "value": "hasAltitude",
+            "type": "xsdfloat"
+          }
+        },
+        {
+          "id": "3",
+          "property": "",
+          "show": true,
+          "referenceNode": "Experimental site name*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        },
+        {
+          "id": "4",
+          "property": "",
+          "show": true,
+          "referenceNode": "Geographic location (country)*",
+          "data": {
+            "value": "hasCountryCode",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": []
+    },
+    "Institution_Location": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "named_location",
+        "label": "named_location"
+      },
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      },
+      "naming_scheme": "NL_@{Contact institution*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Contact institution*",
+          "data": {
+            "value": "hasAddress",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "name": "hasLocation",
+            "label": "hasLocation"
+          },
+          "show": true,
+          "referenceNode": "",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "Institution": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "institution",
+        "label": "institution"
+      },
+      "valueType": "",
+      "naming_scheme": "Institution_@{Contact institution*}",
+      "dataProperties": [],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasLocation",
+            "destination": "http://purl.org/ppeo/PPEO.owl#named_location",
+            "name": "hasLocation",
+            "label": "hasLocation",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasLocation",
+            "class": "http://purl.org/ppeo/PPEO.owl#named_location",
+            "className": "named_location",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Institution_Location",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "1",
+          "property": {
+            "name": "hasPart",
+            "label": "hasPart"
+          },
+          "show": true,
+          "referenceNode": "Study",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "Statistical Design": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "experimental_design",
+        "label": "experimental_design"
+      },
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      },
+      "naming_scheme": "Statistical_design_@{Description of statistical design*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Description of statistical design*",
+          "data": {
+            "value": "hasDescription",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Type of statistical design",
+          "data": {
+            "value": "hasType",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": []
+    },
+    "Growth Facility": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "growth_facility",
+        "label": "growth_facility"
+      },
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      },
+      "naming_scheme": "Growth_facility_@{Description of growth facility*}-@{Type of growth facility}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Description of growth facility*",
+          "data": {
+            "value": "hasDescription",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Type of growth facility",
+          "data": {
+            "value": "hasType",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": []
+    },
+    "Investigation unique ID": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Investigation title*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Investigation": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "investigation",
+        "label": "investigation"
+      },
+      "valueType": "",
+      "naming_scheme": "Investigation_@{Investigation title*}@{Investigation unique ID}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Investigation unique ID",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Investigation title*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "name": "hasPart",
+            "label": "hasPart"
+          },
+          "show": true,
+          "referenceNode": "Study",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    }
+  },
+  "Person": {
+    "Study unique ID": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Person name*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Person email": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasEmailContact",
+        "label": "hasEmailContact"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Person ID": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Person role*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Person affiliation*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Person": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "person",
+        "label": "person"
+      },
+      "valueType": "",
+      "naming_scheme": "Person_@{Person ID}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Person name*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Person email",
+          "data": {
+            "value": "hasEmailContact",
+            "type": "string"
+          }
+        },
+        {
+          "id": "2",
+          "property": "",
+          "show": true,
+          "referenceNode": "Person ID",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasRole",
+            "destination": "http://purl.org/ppeo/PPEO.owl#role",
+            "name": "hasRole",
+            "label": "hasRole",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasRole",
+            "class": "http://purl.org/ppeo/PPEO.owl#role",
+            "className": "role",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Role",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "1",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasAffiliation",
+            "destination": "http://purl.org/ppeo/PPEO.owl#institution",
+            "name": "hasAffiliation",
+            "label": "hasAffiliation",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasAffiliation",
+            "class": "http://purl.org/ppeo/PPEO.owl#institution",
+            "className": "institution",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Institution",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "Role": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "role",
+        "label": "role"
+      },
+      "valueType": "",
+      "naming_scheme": "role_@{Role}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Person role*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#isRoleOfPersonIn",
+            "destination": "nodeID://b11077",
+            "name": "isRoleOfPersonIn",
+            "label": "isRoleOfPersonIn",
+            "term": "http://purl.org/ppeo/PPEO.owl#isRoleOfPersonIn",
+            "class": "nodeID://b11077",
+            "className": "",
+            "classOntology": "nodeID://b11077"
+          },
+          "show": true,
+          "referenceNode": "",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "Institution": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "institution",
+        "label": "institution"
+      },
+      "valueType": "",
+      "naming_scheme": "Institution_@{Person affiliation*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Person affiliation*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": []
+    },
+    "Study": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "study",
+        "label": "study"
+      },
+      "valueType": "",
+      "naming_scheme": "Study_@{Study unique ID}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Study unique ID",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "name": "hasPersonWithRole",
+            "label": "hasPersonWithRole"
+          },
+          "show": true,
+          "referenceNode": "Person",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "1",
+          "property": {
+            "name": "hasPersonWithRole",
+            "label": "hasPersonWithRole"
+          },
+          "show": true,
+          "referenceNode": "Role",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    }
+  },
+  "Biological Material": {
+    "Study unique ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Biological material ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasMaterialIdentifier",
+        "label": "hasMaterialIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Organism*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasTaxonIdentifier",
+        "label": "hasTaxonIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Genus": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasGenus",
+        "label": "hasGenus"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Species": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasSpecies",
+        "label": "hasSpecies"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Biological material latitude": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasLatitude",
+        "label": "hasLatitude"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#float",
+        "name": "float",
+        "label": "float",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Biological material longitude": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasLongitude",
+        "label": "hasLongitude"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#float",
+        "name": "float",
+        "label": "float",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Biological material altitude": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasAltitude",
+        "label": "hasAltitude"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#float",
+        "name": "float",
+        "label": "float",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Biological material coordinates uncertainty": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasUncertainty",
+        "label": "hasUncertainty"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#float",
+        "name": "float",
+        "label": "float",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Biological material preprocessing": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasPreprocessing",
+        "label": "hasPreprocessing"
+      },
+      "valueType": "",
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Material source ID": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Material source DOI": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDOI",
+        "label": "hasDOI"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#anyURI",
+        "name": "anyURI",
+        "label": "anyURI",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Material source latitude": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasLatitude",
+        "label": "hasLatitude"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#float",
+        "name": "float",
+        "label": "float",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Material source longitude": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasLongitude",
+        "label": "hasLongitude"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#float",
+        "name": "float",
+        "label": "float",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Material source altitude": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasAltitude",
+        "label": "hasAltitude"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#float",
+        "name": "float",
+        "label": "float",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Material source coordinates uncertainty": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasUncertainty",
+        "label": "hasUncertainty"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#float",
+        "name": "float",
+        "label": "float",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Material source description": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDescription",
+        "label": "hasDescription"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Biological Material": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "biological_material",
+        "label": "biological_material"
+      },
+      "valueType": "",
+      "naming_scheme": "BiologicalMaterial_@{Biological material ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Organism*",
+          "data": {
+            "value": "hasTaxonIdentifier",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Genus",
+          "data": {
+            "value": "hasGenus",
+            "type": "string"
+          }
+        },
+        {
+          "id": "2",
+          "property": "",
+          "show": true,
+          "referenceNode": "Species",
+          "data": {
+            "value": "hasSpecies",
+            "type": "string"
+          }
+        },
+        {
+          "id": "3",
+          "property": "",
+          "show": true,
+          "referenceNode": "Biological material ID*",
+          "data": {
+            "value": "hasMaterialIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "name": "hasMaterialSource",
+            "label": "hasMaterialSource"
+          },
+          "show": true,
+          "referenceNode": "material source",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "1",
+          "property": {
+            "name": "hasLocation",
+            "label": "hasLocation"
+          },
+          "show": true,
+          "referenceNode": "Biological_material_location",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "Study": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "study",
+        "label": "study"
+      },
+      "valueType": "",
+      "naming_scheme": "Study_@{Study unique ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Study unique ID*",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "name": "hasBiologicalMaterial",
+            "label": "hasBiologicalMaterial"
+          },
+          "show": true,
+          "referenceNode": "Biological Material",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "material source": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "material_source",
+        "label": "material_source"
+      },
+      "valueType": "",
+      "naming_scheme": "material_source_@{Material source ID}",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Biological_material_location": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "GPS_location",
+        "label": "GPS_location"
+      },
+      "valueType": "",
+      "naming_scheme": "Biological_material_GPS_@{Biological material ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Biological material latitude",
+          "data": {
+            "value": "hasLatitude",
+            "type": "float"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Biological material longitude",
+          "data": {
+            "value": "hasLongitude",
+            "type": "float"
+          }
+        },
+        {
+          "id": "2",
+          "property": "",
+          "show": true,
+          "referenceNode": "Biological material altitude",
+          "data": {
+            "value": "hasAltitude",
+            "type": "float"
+          }
+        },
+        {
+          "id": "3",
+          "property": "",
+          "show": true,
+          "referenceNode": "Biological material coordinates uncertainty",
+          "data": {
+            "value": "hasUncertainty",
+            "type": "float"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": 0,
+          "property": "",
+          "show": false,
+          "referenceNode": "",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    }
+  },
+  "Observation Unit": {
+    "Study unique ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Biological Material ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasMaterialIdentifier",
+        "label": "hasMaterialIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Observation unit ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{Observation unit ID*}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Observation unit type*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasType",
+        "label": "hasType"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "External ID": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasExternalIdentifier",
+        "label": "hasExternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#anyURI",
+        "name": "anyURI",
+        "label": "anyURI",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Spatial distribution": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "spatial_distribution",
+        "label": "spatial_distribution"
+      },
+      "valueType": "",
+      "naming_scheme": "spatial_distribution_@{Spatial distribution}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "name": "hasObservation",
+            "label": "hasObservation"
+          },
+          "show": true,
+          "referenceNode": "observation unit",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ],
+      "[object HTMLDivElement]": {}
+    },
+    "Observation unit factor value": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasValue",
+        "label": "hasValue"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#int",
+        "name": "int",
+        "label": "int",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}@{Observation unit factor value}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "observation unit": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "observation_unit",
+        "label": "observation_unit"
+      },
+      "valueType": "",
+      "naming_scheme": "ObservationUnit_@{Observation unit ID*}",
+      "dataProperties": [],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "name": "partOf",
+            "label": "partOf"
+          },
+          "show": true,
+          "referenceNode": "Study",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "1",
+          "property": {
+            "name": "hasBiologicalMaterial",
+            "label": "hasBiologicalMaterial"
+          },
+          "show": true,
+          "referenceNode": "biological_material",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "2",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasObservationLevel",
+            "destination": "http://purl.org/ppeo/PPEO.owl#observation_level",
+            "name": "hasObservationLevel",
+            "label": "hasObservationLevel",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasObservationLevel",
+            "class": "http://purl.org/ppeo/PPEO.owl#observation_level",
+            "className": "observation_level",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "observation unit",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "3",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasSpatialDistribution",
+            "destination": "http://purl.org/ppeo/PPEO.owl#spatial_distribution",
+            "name": "hasSpatialDistribution",
+            "label": "hasSpatialDistribution",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasSpatialDistribution",
+            "class": "http://purl.org/ppeo/PPEO.owl#spatial_distribution",
+            "className": "spatial_distribution",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "Study": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "study",
+        "label": "study"
+      },
+      "valueType": "",
+      "naming_scheme": "Study_@{Study unique ID*}",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "biological_material": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "biological_material",
+        "label": "biological_material"
+      },
+      "valueType": "",
+      "naming_scheme": "BiologicalMaterial_@{Biological material ID*}",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "spatial_distribution": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasType",
+        "label": "hasType"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__auto_increment__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "spstial_distribution_type": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    }
+  },
+  "Sample": {
+    "Observation unit ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": "",
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Sample ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Plant structure development stage": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasPlantStructureDevelopmentStage",
+        "label": "hasPlantStructureDevelopmentStage"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Plant anatomical entity*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasPlantAnatomicalEntity",
+        "label": "hasPlantAnatomicalEntity"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Sample description": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDescription",
+        "label": "hasDescription"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Collection date*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDateTime",
+        "label": "hasDateTime"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "name": "dateTime",
+        "label": "dateTime",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "External ID": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasExternalIdentifier",
+        "label": "hasExternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#anyURI",
+        "name": "anyURI",
+        "label": "anyURI",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Sample": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "sample",
+        "label": "sample"
+      },
+      "valueType": "",
+      "naming_scheme": "sample_@{Sample ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Plant structure development stage",
+          "data": {
+            "value": "hasPlantStructureDevelopmentStage",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Plant anatomical entity*",
+          "data": {
+            "value": "hasPlantAnatomicalEntity",
+            "type": "string"
+          }
+        },
+        {
+          "id": "2",
+          "property": "",
+          "show": true,
+          "referenceNode": "Sample description",
+          "data": {
+            "value": "hasDescription",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#derivesFrom",
+            "destination": "http://purl.org/ppeo/PPEO.owl#observation_unit",
+            "name": "derivesFrom",
+            "label": "derivesFrom",
+            "term": "http://purl.org/ppeo/PPEO.owl#derivesFrom",
+            "class": "http://purl.org/ppeo/PPEO.owl#observation_unit",
+            "className": "observation_unit",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Observation_unit",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "Study": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Observation_unit": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "observation_unit",
+        "label": "observation_unit"
+      },
+      "valueType": "",
+      "naming_scheme": "observation_unit_@{Observation unit ID*}",
+      "dataProperties": [],
+      "objectProperties": []
+    }
+  },
+  "Observed Variable": {
+    "Study unique ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Variable ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasInternalIdentifier",
+        "label": "hasInternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Variable name": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Variable accession number": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasExternalIdentifier",
+        "label": "hasExternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Trait*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Trait accession number": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasExternalIdentifier",
+        "label": "hasExternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Method*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Method accession number": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasExternalIdentifier",
+        "label": "hasExternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Method description": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDescription",
+        "label": "hasDescription"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Reference associated to the method": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasAssociatedPublication",
+        "label": "hasAssociatedPublication"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Scale*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Scale accession number": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasExternalIdentifier",
+        "label": "hasExternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Time scale": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasTimeScale",
+        "label": "hasTimeScale"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "observed_variable": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "observed_variable",
+        "label": "observed_variable"
+      },
+      "valueType": "",
+      "naming_scheme": "observed_variable@{Variable ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Variable name",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Variable accession number",
+          "data": {
+            "value": "hasExternalIdentifier",
+            "type": "string"
+          }
+        },
+        {
+          "id": 2,
+          "property": "",
+          "show": true,
+          "referenceNode": "Variable ID*",
+          "data": {
+            "value": "hasInternalIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasMethod",
+            "destination": "http://purl.org/ppeo/PPEO.owl#method",
+            "name": "hasMethod",
+            "label": "hasMethod",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasMethod",
+            "class": "http://purl.org/ppeo/PPEO.owl#method",
+            "className": "method",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "method",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "1",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasScale",
+            "destination": "http://purl.org/ppeo/PPEO.owl#scale",
+            "name": "hasScale",
+            "label": "hasScale",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasScale",
+            "class": "http://purl.org/ppeo/PPEO.owl#scale",
+            "className": "scale",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "scale",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "2",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasTrait",
+            "destination": "http://purl.org/ppeo/PPEO.owl#trait",
+            "name": "hasTrait",
+            "label": "hasTrait",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasTrait",
+            "class": "http://purl.org/ppeo/PPEO.owl#trait",
+            "className": "trait",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "trait",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "3",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#partOf",
+            "destination": "http://purl.org/ppeo/PPEO.owl#study",
+            "name": "partOf",
+            "label": "partOf",
+            "term": "http://purl.org/ppeo/PPEO.owl#partOf",
+            "class": "http://purl.org/ppeo/PPEO.owl#study",
+            "className": "study",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "study",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "scale": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "scale",
+        "label": "scale"
+      },
+      "valueType": "",
+      "naming_scheme": "scale_@{Scale*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Scale*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Scale accession number",
+          "data": {
+            "value": "hasExternalIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "name": "hasMethod",
+            "label": "hasMethod"
+          },
+          "show": true,
+          "referenceNode": "method",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "method": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "method",
+        "label": "method"
+      },
+      "valueType": "",
+      "naming_scheme": "method_@{Method*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Method*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Method accession number",
+          "data": {
+            "value": "hasExternalIdentifier",
+            "type": "string"
+          }
+        },
+        {
+          "id": "2",
+          "property": "",
+          "show": true,
+          "referenceNode": "Method description",
+          "data": {
+            "value": "hasDescription",
+            "type": "string"
+          }
+        },
+        {
+          "id": "3",
+          "property": "",
+          "show": true,
+          "referenceNode": "Reference associated to the method",
+          "data": {
+            "value": "hasAssociatedPublication",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "name": "hasScale",
+            "label": "hasScale"
+          },
+          "show": true,
+          "referenceNode": "scale",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "study": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "study",
+        "label": "study"
+      },
+      "valueType": "",
+      "naming_scheme": "Study_@{Study unique ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Study unique ID*",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": 0,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasPart",
+            "destination": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+            "name": "hasPart",
+            "label": "hasPart",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasPart",
+            "class": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+            "className": "observed_variable",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "observed_variable",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "trait": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "trait",
+        "label": "trait"
+      },
+      "valueType": "",
+      "naming_scheme": "trait_@{Trait*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Trait*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Trait accession number",
+          "data": {
+            "value": "hasExternalIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "name": "hasVariable",
+            "label": "hasVariable"
+          },
+          "show": true,
+          "referenceNode": "observed_variable",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    }
+  },
+  "Data file": {
+    "Study unique ID*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Data file link*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Data file description*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Data file version*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    }
+  },
+  "data_value": {
+    "Sample ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasInternalIdentifier",
+        "label": "hasInternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "value": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasValue",
+        "label": "hasValue"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#int",
+        "name": "int",
+        "label": "int",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Variable ID*": {
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasInternalIdentifier",
+        "label": "hasInternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
+      "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "Observation": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "observation",
+        "label": "observation"
+      },
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      },
+      "naming_scheme": "Observation_@{Variable ID*}@{Sample ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "value",
+          "data": {
+            "value": "hasValue",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasObservedSubject",
+            "destination": "nodeID://b11065",
+            "name": "hasObservedSubject",
+            "label": "hasObservedSubject",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasObservedSubject",
+            "class": "nodeID://b11065",
+            "className": "",
+            "classOntology": "nodeID://b11065"
+          },
+          "show": true,
+          "referenceNode": "Sample",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": "1",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasVariable",
+            "destination": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+            "name": "hasVariable",
+            "label": "hasVariable",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasVariable",
+            "class": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+            "className": "observed_variable",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Observed Variable",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "Sample": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "sample",
+        "label": "sample"
+      },
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      },
+      "naming_scheme": "Sample_@{Sample ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Sample ID*",
+          "data": {
+            "value": "hasInternalIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": []
+    },
+    "Observed Variable": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "observed_variable",
+        "label": "observed_variable"
+      },
+      "valueType": "",
+      "naming_scheme": "Obs_var@{Variable ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Variable ID*",
+          "data": {
+            "value": "hasInternalIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": []
+    }
+  },
+  "Environment": {
+    "Study unique ID*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Environment parameter*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Environment parameter value*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    }
+  },
+  "Factor": {
+    "Study unique ID*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Factor type*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Factor description": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Factor values*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    }
+  },
+  "Event": {
+    "Study unique ID*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Observation unit ID": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Event type*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Event acession number": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Event description": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    },
+    "Event date*": {
+      "type": "",
+      "name": "",
+      "valueType": "",
+      "naming_scheme": "",
+      "dataProperties": [],
+      "objectProperties": []
+    }
+  }
+}

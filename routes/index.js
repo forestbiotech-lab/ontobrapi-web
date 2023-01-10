@@ -4,6 +4,12 @@ let sparqlQuery = require('.././componentes/sparql/sparqlQuery')
 const path=require('path')
 const fs = require('fs')
 const { exec } = require("child_process");
+const cors = require('cors')
+
+/*var corsOptions = {
+  origin: 'http://example.com',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}*/
 
 let runningVersion="0.0";
 (function getVersion(){

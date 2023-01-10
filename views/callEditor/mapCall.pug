@@ -6,6 +6,7 @@ block content
   .d-grid.pb-5
     a.btn.btn-danger.btn-block(href="result") Call Result
     a.btn.btn-danger.btn-block(href="gui") Call Result GUI
+    a.btn.btn-danger.btn-block(href="report") Call Report GUI
   if json.result.data[0]
     div#mapping(anchor=anchor)
       .position-relative
@@ -13,162 +14,31 @@ block content
           span.visually-hidden Loading...
       table.table(v-if="callStructure.result").d-none
         tr(v-for="attribute in Object.keys(callStructure.result.data[0])",:key="attribute")
-          td.pt-3.direct-attribute(:attribute="attribute",v-if="valueType(attribute)=='direct'")
+          td.pt-3(:class="classType(attribute)",:attribute="attribute")
             p.d-grid
-              button.btn.btn-primary.direct-attribute(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
-                span.badge.bg-success
+              button.btn(:class="buttonType(attribute)",:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
+                span.badge.bg-success(v-if="valueType(attribute)=='direct'")
                   | {{ callStructure.result.data[0][attribute] }}
-            .collapse.card.mx-2.px-2.pt-3(:id="attribute")
-              layer(:layer="0",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute")
-          td.pt-3.array-attribute(:attribute="attribute",v-if="valueType(attribute)=='array'")
-            p.d-grid
-              button.btn.btn-secondary.dropdown-toggle.array-attribute(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
-                span.badge.bg-success
-                  | Array
-            .collapse.card.mx-2.px-2.pt-3(:id="attribute")
-              subitem-object(v-for="subItem in Object.keys(callStructure.result.data[0][attribute][0])",:key="subItem",:sub-item="subItem",:attribute="attribute",:sub-type="'array'",:call-structure="callStructure")
-          td.pt-3.object-attribute(:attribute="attribute",v-if="valueType(attribute)=='object'")
-            p.d-grid
-              button.btn.btn-warning.dropdown-toggle.object-attribute(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
-                span.badge.bg-success
-                    | Object
-            .collapse.card.mx-2.px-2.pt-3(:id="attribute")
-              subitem-object(v-for="subItem in Object.keys(callStructure.result.data[0][attribute])",:key="subItem",:sub-item="subItem",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute",:sub-type="'object'",:call-structure="callStructure" )
-          td.pt-3.direct-attribute(:attribute="attribute",v-if="valueType(attribute)=='directProcessed' && callStructure.result.data[0][attribute]._sparQL")
-            p.d-grid
-              button.btn.btn-primary.direct-attribute(:attribute="attribute",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute" aria-expanded='false' :aria-controls="attribute") {{ attribute }}&nbsp;
-                span.badge.bg-success
+                span.badge.bg-success(v-if="valueType(attribute)=='object'")
+                  | object
+                span.badge.bg-success(v-if="valueType(attribute)=='array'")
+                  | array
+                span.badge.bg-success(v-if="valueType(attribute)=='directProcessed'")
                   | {{ callStructure.result.data[0][attribute]._value }}
-            .collapse.card.mx-2.px-2.pt-3(:id="attribute")
+            .collapse.card.mx-2.px-2.pt-3(:id="attribute",v-if="valueType(attribute)=='direct'")
+              layer(:layer="0",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute")
+            .collapse.card.mx-2.px-2.pt-3(:id="attribute",v-if="valueType(attribute)=='object'")
+              subitem-object(v-for="subItem in Object.keys(callStructure.result.data[0][attribute])",:key="subItem",:sub-item="subItem",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute",:sub-type="'object'",:call-structure="callStructure" )
+            .collapse.card.mx-2.px-2.pt-3(:id="attribute",v-if="valueType(attribute)=='array'")
+              subitem-object(v-for="subItem in Object.keys(callStructure.result.data[0][attribute][0])",:key="subItem",:sub-item="subItem",:attribute="attribute",:sub-type="'array'",:data-properties="dataProperties",:object-properties="objectProperties",:call-structure="callStructure")
+            .collapse.card.mx-2.px-2.pt-3(:id="attribute",v-if="valueType(attribute)=='directProcessed'")
               layer(v-for=`(layer,index) in callStructure.result.data[0][attribute]._sparQL`,:key="attribute",:layer="index",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute")
-              //div(v-else)
-                layer(:layer="0",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute")
-              //.card.card-body(layer="0").d-none
-                h5.card-title(layer="0") Layer 0
-                .form-group
-                  label Property
-                  v-select(attribute=key,anchor=anchor,layer="0",@open=`loadValues('${key}')`,:loading="true")
-                    template.row(v-slot:option="option")
-                      .row.objectProperty(v-if="option.ObjectProperty")
-                        span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-success Object Property
-                        span.col-sm-4.col-md-4.col-lg-3.col-xl-2 {{ option.label }}
-                        span.col-sm-3.col-md-2.col-lg-2.col-xl-1.badge.bg-warning Class
-                        span.col {{ option.className }}
-                      .row.dataProperty(v-if="option.range")
-                        span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-primary Data Property
-                        span.col-sm-4.col-md-4.col-lg-3.col-xl-2 {{ option.label }}
-                        span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-dark Range
-                        span.col {{ option.rangeName }}
-                  select.form-control.form-control-lg(id="layer0")
-                    option
-                    - let properties=anchorProperties.objectProperties.concat(anchorProperties.dataProperties)
-                    each entryProp in Object.entries(properties)
-                      - property=entryProp[1].term
-                      - propertyShortHand=property.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
-                      - className=entryProp[1].class
-                      - classNameShortHand=className.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
-                      option(className=className,property=property,classNameShortHand=classNameShortHand,propertyShortHand=propertyShortHand)
-                        | Property:[#{propertyShortHand}] | Class:[#{classNameShortHand}]
-                .form-group
-                  label Class
-                    .badge-holder
-                  input.form-control(id=`layer0-class` type="text",name="class",v-model=`mapping['$[key]']`)
-                .form-group
-                  label Property
-                    .badge-holder
-                  input.form-control(id=`layer0-property` type="text",name="property")
-                .form-group.d-grid
-                  button.btn.btn-secondary.btn-block.add-new-layer add new layer
   else
     .alert.alert-warning.d-flex.justify-content-center(role="alert")
       p.fs-3 No data found!
-
   div !{html}
     //each moduleValue in modules
       //tr
        // td
        //   a(href="listcalls/"+moduleValue+"/list")=moduleValue
-  .templates
-    //TODO Remove this block I think this was the old version
-    table
-      tr.template-element
-        td
-          p.d-grid
-            button.btn.btn-primary(key='',type='button' data-bs-toggle='collapse' data-bs-target=`#` aria-expanded='false' aria-controls=`#`)
-              span.button-text
-              span.button-space &nbsp;
-              span.badge.bg-success
-          .collapse.card.mx-5(id="")
-            .card.card-body(layer="0",key="")
-              h5.card-title(layer="0") Layer 0
-              .form-group
-                label Property
-                select.form-control.form-control-lg(id="layer0")
-                  option
-                  each entryProp in Object.entries(anchorProperties.objectProperties)
-                    - property=entryProp[1].term
-                    - propertyShortHand=property.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
-                    - className=entryProp[1].class
-                    - classNameShortHand=className.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
-                    option(className=className,property=property,classNameShortHand=classNameShortHand,propertyShortHand=propertyShortHand)
-                     | Property:[#{propertyShortHand}] | Class:[#{classNameShortHand}]
-                  each entryProp in Object.entries(anchorProperties.dataProperties)
-                    - property=entryProp[1].term
-                    - propertyShortHand=property.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
-                    - className=entryProp[1].class
-                    - classNameShortHand=className.replace("http://purl.org/ppeo/PPEO.owl#","ppeo:")
-                    - rangeName=entryProp[1].range
-                    - rangeShortHand=rangeName.replace(/^.*#/,"ppeo:")
-                    option(className=className,property=property,classNameShortHand=classNameShortHand,propertyShortHand=propertyShortHand,rangeShortHand=rangeShortHand)
-                      span.badge.bg-success Data Property
-                      | :[#{propertyShortHand}] | Range:[#{rangeShortHand}]
-              .form-group
-                label Class
-                  .badge-holder
-                input.form-control(id=`layer0-class` type="text",name="class",v-model=`mapping['${key}'][0].className`)
-              .form-group
-                label Property
-                  .badge-holder
-                input.form-control(id=`layer0-property` type="text",name="property")
-              .form-group.d-grid
-                button.btn.btn-secondary.btn-block.add-new-layer add new layer
-    #template-layer
-      .card.card-body(:layer="layer")
-        h5.card-title(:layer="layer") Layer {{ layer }}
-        .form-group
-          label Property
-          v-select(:attribute="attribute",:anchor="anchor",:layer="layer",@open='loadValues(attribute)',:loading="false",@input="setValueForLayer")
-            template.row(v-slot:option="option")
-              .row.objectProperty(v-if="option.ObjectProperty")
-                span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-success Object Property
-                span.col-sm-4.col-md-4.col-lg-3.col-xl-2 {{ option.label }}
-                span.col-sm-3.col-md-2.col-lg-2.col-xl-1.badge.bg-warning Class
-                span.col {{ option.className }}
-              .row.dataProperty(v-if="option.range")
-                span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-primary Data Property
-                span.col-sm-4.col-md-4.col-lg-3.col-xl-2 {{ option.label }}
-                span.col-sm-3.col-md-2.col-xl-2.col-xl-1.badge.bg-dark Range
-                span.col {{ option.rangeName }}
-        .form-group
-          label Class
-            .badge-holder
-          input.form-control(id=`layer0-class` type="text",name="class",v-model="className",@change="saveInputValue(null,'class')")
-        .form-group
-          label Property
-            .badge-holder
-          input.form-control(id=`layer0-property` type="text",name="property",v-model="property",@change="saveInputValue(null,'property')")
-        .form-group.d-grid
-          button.btn.btn-secondary.btn-block.add-new-layer(:class="{'d-none': canHideLayer}",:disabled="false" @click="addNewLayer2") add new layer
-    #template-object
-      div
-        p.d-grid
-          button.btn.btn-primary(v-if="subItem!=='_sparQL'",:attribute="attribute + '-' +subItem",type='button' data-bs-toggle='collapse' :data-bs-target="'#'+attribute+'-'+subItem" aria-expanded='false' :aria-controls="attribute") {{ subItem }}&nbsp;
-            span(v-if="subType=='object'")
-              span.badge.bg-success(v-if="mapping[subItem]._sparQL") {{ mapping[subItem]._value }}
-              span.badge.bg-success(v-else) {{ mapping[subItem]  }}
-        .collapse.card.mx-2.px-2.pt-3(:id="attribute+'-'+subItem")
-          p Sub object
-          div(v-if="subType=='object'")
-            div(v-if="mapping[subItem]._sparQL")
-              layer-sub-object(v-for='(layer,index) in mapping[subItem]._sparQL',:key="subItem+'-'+layer",:layer="index",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute",:sub-type="subType",:sub-item="subItem")
-            layer-sub-object(v-else,:layer="0",:call-structure="callStructure",:data-properties="dataProperties",:object-properties="objectProperties",:attribute="attribute",:sub-type="subType",:sub-item="subItem")
+

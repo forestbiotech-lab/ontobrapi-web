@@ -8,7 +8,8 @@ const uploadDir=path.join(__dirname,"../uploads/")
 const destination="uploadedfiles"
 const nt=require('./../componentes/generators/nt')
 const convertXlsx2json=require('.././componentes/xlsx/convert-xlsx2json')
-
+const uploadGraph=require('.././componentes/sparql/uploadGraph')
+const formidable = require("formidable");
 // forms/
 
 router.post('/datafile/upload',(req,res)=>{
@@ -169,6 +170,34 @@ router.get('/parse/file/',(req,res)=>{
   }
 })
 
+router.post("/upload/graph",(req,res)=>{
+  const formidable=require("formidable")
+  // create an incoming form object
+  var form = new formidable.IncomingForm();
+  form.multiples = false;
+  // log any errors that occur
+  form.on('error', function(err) {
+    console.log('An error has occurred: \n' + err);
+    res.json({info:"Error getting incoming data! - ",err})
+  });
+  // once all the files have been uploaded, send a response to the client
+  form.on('end', function() {
+    //Not necessary for single file
+  });
+  // parse the incoming request containing the form data
+  form.parse(req,(err,field,files)=>{
+    if(err) res.json({info:"Error parsing incoming data! - ",err})
+    if(field){
+      uploadGraph(JSON.parse(field.newGraph)).then(result=>
+          res.json({result,statusText:result.statusText,status:result.status})
+      ).catch(err=>{
+        res.json({info:"Error occurred! - ",err,err})
+      })
+    }else{
+      res.json({info:"Error occurred, while retrieving data from client!! - ",err,err})
+    }
+  });
+})
 
 
 module.exports = router;

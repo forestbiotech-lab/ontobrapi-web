@@ -55,7 +55,7 @@ function random(max){
 
     if(testCalls==true){
         //TODO Crawl call and select one at random
-        await firstPage.goto('http://localhost:3000/callEditor/listcalls/Core/programs.json/map');
+        await firstPage.goto('http://localhost:3000/callEditor/listcalls/Core/test_object.json/map');
 
         async function getStateOfLoading(){
             return await firstPage.evaluate(()=> {

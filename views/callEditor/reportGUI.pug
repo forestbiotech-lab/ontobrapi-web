@@ -1,0 +1,130 @@
+extends ../layout
+block content
+    include menu
+    .card
+        h2.card-header Call Report
+        .card-body
+            if data["@context"]
+                .card
+                    h5.card-header @context
+                    p.bg-light=data["@context"]
+            if data.metadata
+                .card
+                    h5.card-header Metadata
+                    .accordion#accordionMetadata
+                        .card.accordion-item
+                            p.accordion-header(id=metadata)
+                                button.accordion-button.bg-light(type="button" data-bs-toggle="collapse" data-bs-target="#metadata" aria-expanded="true" aria-controls="metadata")
+                                    p.bg-light=JSON.stringify(data.metadata)
+                            .accordion-collapse.collapse(id="metadata" aria-labelledby="metadata" data-bs-parent="#accordionMetadata")
+                                .accordion-body
+                                    table.table
+                                        each metadata, index in Object.keys(data.metadata)
+                                            tr
+                                                td
+                                                    h5=metadata
+                                                td
+                                                    table.table
+                                                        each key in Object.keys(data.metadata[metadata])
+                                                            tr
+                                                                if (typeof data.metadata[metadata][key] == "object")
+                                                                    table.table
+                                                                        each subkey in Object.keys(data.metadata[metadata][key])
+                                                                            tr
+                                                                                td=subkey
+                                                                                td=data.metadata[metadata][key][subkey]
+                                                                else
+                                                                    td=key
+                                                                    td=data.metadata[metadata][key]
+
+            .card
+                h5.card-header Results
+                .accordion#accordionExample
+                    each result, index in data.result.data
+                        .card.accordion-item
+                            p.accordion-header(id=index)
+                                button.accordion-button.bg-light(type="button" data-bs-toggle="collapse" data-bs-target="#item"+index aria-expanded="true" aria-controls="item"+index) Item #{index}
+                            .accordion-collapse(id="item"+index aria-labelledby="item"+index data-bs-parent="#accordionExample")
+                                .accordion-body
+                                    table.table
+                                        tr
+                                            th CallName
+                                            th Attribute
+                                            th dataType
+                                            th SubAttribute
+                                            th Class
+                                            th DataProperty
+                                        each val,attribute in result
+                                            if (typeof val == "object" && val!=null)
+                                                each subVal,subKey in val
+                                                        if(typeof subVal == "object" && subVal !=null && subKey != "_sparQL")
+                                                                each subsubVal,subsubKey in subVal
+                                                                    if( subsubKey != "_sparQL" && subsubKey != "_value")
+                                                                        tr
+                                                                            th=callName + "/"
+                                                                            td
+                                                                                p=attribute
+                                                                            td Array
+                                                                            td=subsubKey
+
+                                                                            if(typeof subsubVal == "object" && subsubVal._sparQL)
+                                                                                - let term=subsubVal._sparQL.pop()
+                                                                                td
+                                                                                    span.badge.bg-success=term.class
+                                                                                td
+                                                                                    span.badge.bg-success=term.property
+                                                                            else
+                                                                                td
+                                                                                td
+
+                                                        if(subKey == "_sparQL")
+                                                            tr
+                                                                th=callName + "/"
+                                                                    td
+                                                                        p=attribute
+                                                                    td Non-Object
+                                                                    td -
+                                                                    - let term=subVal.pop()
+                                                                    td
+                                                                        span.badge.bg-success=JSON.stringify(term.class)
+                                                                    td
+                                                                        span.badge.bg-success=JSON.stringify(term.property)
+                                                        //Object
+                                                        if( subKey != "_sparQL" && subKey != "_value" && typeof subVal == "object" && val.constructor.name=="Object")
+                                                            tr
+                                                                th=callName + "/"
+                                                                td
+                                                                    p=attribute
+                                                                td Object
+                                                                td=subKey
+                                                                if(subVal._sparQL)
+                                                                    - let term=subVal._sparQL.pop()
+                                                                    td
+                                                                        span.badge.bg-success=term.class
+                                                                    td
+                                                                        span.badge.bg-success=term.property
+                                                        if( subKey != "_sparQL" && subKey != "_value" && typeof subVal != "object")
+                                                            tr
+                                                                th=callName + "/"
+                                                                td
+                                                                    p=attribute
+                                                                td Object
+                                                                td=subKey
+                                                                if(subVal._sparQL)
+                                                                    - let term=subVal._sparQL.pop()
+                                                                    td
+                                                                        span.badge.bg-success=term.class
+                                                                    td
+                                                                        span.badge.bg-success=term.property
+                                                                else
+                                                                    td
+                                                                    td
+                                            else
+                                                tr
+                                                    th=callName + "/"
+                                                    td
+                                                        p=attribute
+                                                    td Not object
+                                                    td.not-object
+                                                    td -
+                                                    td -
