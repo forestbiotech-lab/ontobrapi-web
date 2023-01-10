@@ -19,7 +19,7 @@ block content
                 span.glyphicon.glyphicon-floppy-open
                   i.bi-folder2-open  &nbsp; upload file &nbsp;
                   i.bi-file-earmark-excel-fill
-            .preview-table#preview-table.d-none
+            .preview-table#preview-table
               worksheet-tabs
               .d-grid
                 button.btn.btn-success.generate-nt
@@ -28,6 +28,12 @@ block content
               .d-grid
                 button.btn.btn-primery.save-nt-file(@click="saveNTfile").d-none
                   i.bi-save(role="img" aria-label="Download") &nbsp;Save triples to file
+              .d-grid.d-none.upload-graph
+                label(v-bind:for="uri-graph") Graph URI
+                  input.form-control#uri-graph(v-model="uriGraph")
+                button.btn.btn-primery.upload-graph(@click="uploadGraph")
+                  i.bi-save(role="img" aria-label="Download") &nbsp;Upload triples to graph
+
         #template.d-none
         //Redefine this id
         #mapping.d-none
