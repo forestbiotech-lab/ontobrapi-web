@@ -14,6 +14,15 @@ block content
                     button.btn.btn-success.load-mapping-button(type='button' data-bs-toggle='collapse' data-bs-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
                 #loadingPanel.collapse(aria-labelledby="load-mapping", data-bs-parent="#mapping-loading-options")
                     .card.card-body
+                        .card
+                            .card-header
+                                h5 Templates:
+                            .card-body
+                                button.btn.btn-primary(@click="loadTemplateMapping")
+                                    .d-flex.flex-row
+                                        .p-1.btn.btn-dark X
+                                        .p-1 valores de Cópia de MIAPPEv1.1_compliant_vitis_submissionOntobrapi
+
                         textarea(style="font-size: x-small;" col="120",rows="10" v-model="uploadedJSON")
                         .row.mt-2.mx-0
                             button.col.me-2.load-mapping-file.btn.btn-sm.btn-primary.disabled open mapping file
