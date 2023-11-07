@@ -13,4 +13,5 @@ EXPOSE 3000
 
 CMD [ "node","bin/www" ]
 
+LABEL version="1.0"
 
