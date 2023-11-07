@@ -10,6 +10,7 @@ const nt=require('./../componentes/generators/nt')
 const convertXlsx2json=require('.././componentes/xlsx/convert-xlsx2json')
 const uploadGraph=require('.././componentes/sparql/uploadGraph')
 const formidable = require("formidable");
+const fs=require("fs")
 // forms/
 
 router.post('/datafile/upload',(req,res)=>{
@@ -199,5 +200,15 @@ router.post("/upload/graph",(req,res)=>{
   });
 })
 
+
+router.post("/get/mapping",(req,res)=>{
+  try {
+    let file = `reference_files/${req.body.file}`
+    let mapping = JSON.parse(fs.readFileSync(file))
+    res.json(JSON.stringify(mapping,null,2))
+  }catch (e) {
+    res.json(e)
+  }
+})
 
 module.exports = router;

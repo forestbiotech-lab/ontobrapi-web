@@ -551,6 +551,13 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
       saveMapping(){ //To big
         let data=JSON.stringify(this.selection,null, 2)
       },
+      async loadTemplateMapping(event){
+        let target=event.target
+        let file=target.closest(".flex-row").querySelectorAll(".fileName")[0].textContent+".json"
+        let mapping=await $.post("/forms/get/mapping", {file})
+        this.uploadedJSON=mapping
+        this.loadJSON()
+      },
       downloadMapping(){
         let blob = new Blob([JSON.stringify(this.selection,null, 2)], {type: 'application/json'})
         let url=(URL.createObjectURL(blob))
