@@ -32,6 +32,13 @@ block content
                             //TODO maybe change uploads in name. This is not implemented on the backend
                             input(hidden,type="file",id="open-mapping-file",placeholder="json file",required="",autofocus="",autocomplete="off",name="uploads[]", accept="mime/*,.json")
             .card-body
+                .d-flex.flex-row
+                    .p-2
+                        label(for="listPPEOClasses") Add missing Classes
+                    .p-2.flex-fill
+                        v-select#listPPEOClasses(multiple :options="ppeoClasses",v-model="missingClasses")
+                    .p-2
+                        button.btn.btn-primary(@click="addMissingClasses", :disabled='isAddingClassesDisabled' ) Add missing Classes
                 .form-group.row.gy-2.gx-3.align.items-center
                     .col-auto
                         label(for="column-selection") Column selection

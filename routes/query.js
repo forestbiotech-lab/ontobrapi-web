@@ -8,6 +8,7 @@ let formOptions=require('./../componentes/dataStructures/formOptions')
 let info=require('./../componentes/dataStructures/info')
 const {dataProperty} = require("../componentes/dataStructures/info");
 const path=require('path')
+const listClasses = require('./../componentes/sparql/ppeoListClasses')
 
 // query/
 
@@ -63,6 +64,16 @@ router.get('/inferred/dataPropertyRange/:dataProperty',(req,res)=>{
     res.json({err,message,stack})
   })
 
+})
+
+router.get('/ppeo/listClasses',async (req,res)=>{
+  try{
+    let classList=await listClasses()
+    if (classList instanceof Error) res.json()
+    res.json(classList)
+  }catch (e) {
+    res.sendStatus(400)
+  }
 })
 
 router.get('/db/sparql/search/:fileName',(req,res)=>{
