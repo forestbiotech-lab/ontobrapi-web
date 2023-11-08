@@ -460,6 +460,7 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
       return {
         column:"",
         missingClass:"",
+        missingClasses:[],
         uploadedJSON:"",
         formOptions,
         selection:$data, //Change this to data
@@ -471,7 +472,8 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
           links:[],
           nodes:[]
         },
-        dataPropertiesCache:{loaded:false,dataProperties: {}}
+        dataPropertiesCache:{loaded:false,dataProperties: {}},
+        ppeoClasses:[]
       }
     },
     computed:{
@@ -483,6 +485,9 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
       },
       validMissingClass(){
         return this.columns.indexOf(this.missingClass) === -1
+      },
+      isAddingClassesDisabled(){
+        return this.missingClasses.length==0
       },
       notBlank(){
         return this.missingClass !== ""
@@ -532,6 +537,14 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
           window.structures.addColumnToSelection(this.selection,this.worksheet,this.missingClass)
           this.missingClass=""
           //TODO add to selection, and possibly some other data structures. Export function to add column to <<selection>> in validateSelection.
+        }
+      },
+      addMissingClasses(){
+        if(this.missingClasses.length>0 ){
+          for(let ppeoClass of this.missingClasses){
+            this.missingClass=ppeoClass
+            this.addMissingClass()
+          }
         }
       },
       updateGraphModel(){
@@ -598,6 +611,14 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
       //Loads tooltips
       $('[data-toggle="tooltip"]').tooltip()
       loadActiveClasses(this.selection)
+    },
+    async beforeMount() {
+      try {
+        let ppeoClasses = await $.get("/query/ppeo/listClasses")
+        this.ppeoClasses = ppeoClasses
+      }catch (e) {
+        displayToast("Unable to load Classes from PPEO",e)
+      }
     }
   })
 }

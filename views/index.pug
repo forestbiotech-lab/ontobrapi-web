@@ -22,7 +22,7 @@ block content
             .preview-table#preview-table.d-none
               worksheet-tabs
               .d-grid
-                button.btn.btn-success.generate-nt
+                button.btn.btn-success.generate-nt(@click="generateNTs")
                   |Generate N-Triples (NT)
               textarea.generated-ntriples(cols="120",rows="10" style="width:100%;").d-none
               .d-grid
