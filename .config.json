@@ -1,6 +1,8 @@
 {
   "sparql":{
-    "host":"109.48.217.254",
-    "port":"80"
+    "user": "dba",
+    "pass": "dba",
+    "host":"localhost",
+    "port":"8890"
   }
 }
