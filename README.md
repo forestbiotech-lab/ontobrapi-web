@@ -71,6 +71,15 @@ Estou a ver estes triplos como graphs.
 
 ```
 
+## debug NT generation
+```bash
+DEBUG=l1 npm start
+```
+
+## Instancing the PPEO ontolgy
+Each spreadsheet must have a class to add the data properties
+Generally the columns are considered to have data properties for a Class. The class should appear in other spreadsheets in order to connect. I.E In the investigation spreadsheet there is a general description of the investigation, while in the study spreadsheet that isn't a fine detail of the investigtion, rather it is only a support to connect the study to the investigation.  
+
 
 #### Use case
 
