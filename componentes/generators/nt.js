@@ -2,7 +2,7 @@ const fs=require('fs')
 const path=require('path')
 //const mapping=require('./../helpers/default-mapping')
 const Triples=require('./../helpers/triples')
-
+const debug = require('debug')('l1');
 
 
 module.exports={str,json}
@@ -28,7 +28,7 @@ function openAndSort(jSheet,mappings,type){
           addMissingCreatedColumns(sheet,csvData,mappings[sheet],"csv")
         }
       }catch (e){
-        console.log("Unable to open and parse sheet")
+        debug("Unable to open and parse sheet")
       }
       spreadSheet[sheet]={sheet,contents:({parsedFile,header,distinctElements}=getDistinctElementsFromEachColumn(data,csvData,headerLineNumber=0))}
     })
@@ -185,8 +185,8 @@ function makeTriples(spreadSheet,mapping,type){
             triples.parseLineItem(mapping[sheetName][column], value)
           }
         }catch(e){
-          console.log(`Mapping: ${mapping[sheetName][column]}\nSheetName: ${sheetName}\n column: ${column}`)
-          console.log("Unable to file column in mapping: ",e)
+          debug(`Mapping: ${mapping[sheetName][column]}\nSheetName: ${sheetName}\n column: ${column}`)
+          debug("Unable to file column in mapping: ",e)
         }
       })
     })
