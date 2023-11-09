@@ -6,7 +6,8 @@
     "start": "node ./bin/www",
     "dev-start": "${HOME}/.npm-global/bin/nodemon ./bin/wwww",
     "dev-start-debug": "SELENIUM=TRUE PORT=3000 mode=DEVELOPMENT ${HOME}/.npm-global/bin/nodemon --inspect ./bin/wwww",
-    "test": "SELENIUM=TRUE PORT=3002 mode=DEVELOPMENT ${HOME}/.npm-global/bin/nodemon ./bin/wwww"
+    "test": "/home/brunocosta/.npm-global/bin/mocha componentes/generators",
+    "test2": "SELENIUM=TRUE PORT=3002 mode=DEVELOPMENT ${HOME}/.npm-global/bin/nodemon ./bin/wwww"
   },
   "dependencies": {
     "@ontologies/core": "^2.0.3",
