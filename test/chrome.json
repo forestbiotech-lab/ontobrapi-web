@@ -1,0 +1,16 @@
+{
+  "linux": {
+    "fireworks":{
+      "userDataDir":"/home/brunocosta/.cache/JetBrains/WebStorm2023.2/chrome-user-data-45027",
+      "executablePath": "/opt/google/chrome/google-chrome",
+      "port":"45027",
+      "serverPort": "3010"
+    }
+  },
+  "mac": {
+    "userDataDir":"/Users/brunocosta/Library/Application Support/Google/Chrome",
+    "executablePath":"/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome",
+    "port": "4555",
+    "serverPort": "3000"
+  }
+}

@@ -1,5 +1,5 @@
-const puppeteer = require('puppeteer');
 const userConfig=require("./chrome.json")["linux"]["fireworks"]
+const puppeteer = require('puppeteer');
 const fs=require('fs');
 const path=require('path');
 let chai=require('chai');
@@ -23,6 +23,7 @@ function random(max){
 
     let opts={
         headless:false,
+
         executablePath:userConfig.executablePath,
         //devtools: true,
         //slowMo: 250, // slow down by 250ms
@@ -41,7 +42,7 @@ function random(max){
     let mapInvestigation="brunocosta/git/ontoBrAPI/ontoBrAPI-node-docker/reference_files/valores\ de\ Cópia de MIAPPEv1.1_compliant_vitis_submissionOntobrapi.json"
     let root=""
     if(process.platform=="darwin"){
-            root="/Users"
+        root="/Users"
     }else if(process.platform=="linux"){
         root="/home"
     }
@@ -121,7 +122,11 @@ function random(max){
 
             let textarea = await firstPage.waitForSelector('textarea.generated-ntriples.loaded')
             firstPage.once('load',textarea)
-            await testNTs()
+
+            //Remove class
+            element = await firstPage.waitForSelector('#active-classes #Study #Study-investigation span.btn')
+            await element.evaluate(element => element.click())
+            //await testNTs()
 
             async function testNTs() {
                 let value = await firstPage.evaluate(el => el.textContent, textarea)

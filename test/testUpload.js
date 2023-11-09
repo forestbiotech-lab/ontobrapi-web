@@ -4,6 +4,10 @@ const firefox = require("selenium-webdriver/firefox")
 const {Keyboard} = require("selenium-webdriver/lib/input");
 const fs=require('fs')
 const {copy} = require("selenium-webdriver/io");
+// import os module
+const os = require("os");
+
+
 let opts = new chrome.Options();
 let service= new chrome.ServiceBuilder().build()
 let ffOpts= new firefox.Options();
@@ -18,6 +22,8 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// check the available memory
+const userHomeDir = os.homedir();
 
 
 let switchTab=false;
@@ -31,9 +37,9 @@ let loadMapping=true;
         .build();
 
     try{
-        await driver.get('http://localhost:3000');
+        await driver.get('http://localhost:3010');
 
-        await  driver.findElement(By.css('#augment-file')).sendKeys('$HOME/Documents/Projectos/ontobrapi/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx');
+        await  driver.findElement(By.css('#augment-file')).sendKeys(`${userHomeDir}/Documents/Projectos/ontobrapi/MIAPPEv1.1_compliant_vitis_submissionOntobrapi.xlsx`);
         //Fill properties
         await driver.wait(until.elementLocated(By.xpath("//input[@type='search']"))).click() //Open Column Select
         await driver.wait(until.elementLocated(By.id("vs1__option-1"))).click() //Select Column
@@ -48,7 +54,7 @@ let loadMapping=true;
 
         if( loadMapping == true ) {
             await driver.wait(until.elementLocated(By.css("button.load-mapping-button"))).click() //Open type select
-            let mapping=fs.readFileSync("/home/brunocosta/Downloads/ontobrapi/9may/OntoBrAPI_9May_mapping-fixed.json",{encoding:"utf8"})
+            let mapping=fs.readFileSync(`${userHomeDir}/brunocosta/Downloads/ontobrapi/9may/OntoBrAPI_9May_mapping-fixed.json`,{encoding:"utf8"})
             let element = driver.findElement(By.css("#loadingPanel textarea"))
             mapping=mapping.trim()
             await driver.wait(driver.executeScript('arguments[0].value=arguments[1]',element,mapping))
