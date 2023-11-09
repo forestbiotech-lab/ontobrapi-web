@@ -524,6 +524,9 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
         this.dataPropertiesCache.dataProperties[this.column]=[]
         let dataProperties= await this.dataProperties
       },
+      removeClass(worksheet,column){
+        window.structures.removeColumnFromSelection(this.selection,worksheet,column)
+      },
       addMissingClass(){
         if(this.validMissingClass === true && this.notBlank === true ){
           //TODO Why does this duplicate?
@@ -633,7 +636,10 @@ function loadActiveClasses(selection){
 
     },
     methods:{
-
+      removeClass(worksheet,columnName,columnAttributes){
+        window.app.$children[0].$children[0].removeClass(worksheet,columnName)
+        this.$forceUpdate()
+      }
     }
   })
 }

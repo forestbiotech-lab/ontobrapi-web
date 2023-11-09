@@ -49,6 +49,25 @@ class Structures{
         Vue.set(completeness[worksheet].columns,column,columnStructure)
         return completeness
     }
+    removeColumnFromSelection(selection,worksheet,columnName){
+        delete selection[worksheet][columnName]
+        Object.entries(selection[worksheet])
+            .filter(([column,value])=>value.type.name=="class")
+            .filter(([column,value])=>value.objectProperties.length>0)
+            .filter(([column,value])=> {
+                let objectProperty=value.objectProperties.filter(op => op.referenceNode == columnName)
+                if(objectProperty.length>0){
+                    Vue.set(selection[worksheet][column].objectProperties[objectProperty[0].id],"show",false)
+                }
+            })
+
+        //TODO deal with completness
+
+
+
+
+    }
+
 }
 
 

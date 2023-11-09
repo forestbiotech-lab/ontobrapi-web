@@ -172,9 +172,10 @@ block content
             ul.list-group
               li.list-group-item(v-for="worksheet of Object.keys(selection)")
                 h5 {{ worksheet }}
-                div(v-for="column in selection[worksheet]")
-                  div(v-if='column.type')
-                    div(v-if='column.type.name=="class"')
+                div(v-for="(column,columnName) in selection[worksheet]")
+                  div(v-if='column.type',:id="worksheet")
+                    div(v-if='column.type.name=="class"',:id="worksheet+'-'+column.name.name")
+                      span.btn.btn-danger.badge(@click="removeClass(worksheet,columnName,column)",title="Remove class and all object properties pointing to it.") X
                       span.badge.bg-secondary {{ column.name.label }}:
                       span.badge.bg-primary {{ column.naming_scheme }}
         .card.bg-light.ontology-terms
