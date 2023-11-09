@@ -1128,7 +1128,7 @@
     }
   },
   "Person": {
-    "Study unique ID": {
+    "Study unique ID*": {
       "type": {
         "label": "Data Property",
         "name": "dataProperty"
@@ -1412,7 +1412,7 @@
         "label": "study"
       },
       "valueType": "",
-      "naming_scheme": "Study_@{Study unique ID}",
+      "naming_scheme": "Study_@{Study unique ID*}",
       "dataProperties": [
         {
           "id": "0",
@@ -1800,7 +1800,10 @@
         "name": "biological_material",
         "label": "biological_material"
       },
-      "valueType": "",
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      },
       "naming_scheme": "BiologicalMaterial_@{Biological material ID*}",
       "dataProperties": [
         {
@@ -1979,18 +1982,7 @@
           }
         }
       ],
-      "objectProperties": [
-        {
-          "id": 0,
-          "property": "",
-          "show": false,
-          "referenceNode": "",
-          "data": {
-            "value": "",
-            "type": ""
-          }
-        }
-      ]
+      "objectProperties": []
     }
   },
   "Observation Unit": {
@@ -2256,8 +2248,11 @@
         "name": "biological_material",
         "label": "biological_material"
       },
-      "valueType": "",
-      "naming_scheme": "BiologicalMaterial_@{Biological material ID*}",
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      },
+      "naming_scheme": "BiologicalMaterial_@{Biological Material ID*}",
       "dataProperties": [],
       "objectProperties": []
     },
@@ -2440,7 +2435,7 @@
         "label": "sample"
       },
       "valueType": "",
-      "naming_scheme": "sample_@{Sample ID*}",
+      "naming_scheme": "Sample_@{Sample ID*}",
       "dataProperties": [
         {
           "id": "0",
@@ -2789,7 +2784,7 @@
         "label": "observed_variable"
       },
       "valueType": "",
-      "naming_scheme": "observed_variable@{Variable ID*}",
+      "naming_scheme": "Observed_variable@{Variable ID*}",
       "dataProperties": [
         {
           "id": "0",
@@ -2812,7 +2807,7 @@
           }
         },
         {
-          "id": 2,
+          "id": "2",
           "property": "",
           "show": true,
           "referenceNode": "Variable ID*",
@@ -3044,7 +3039,7 @@
       ],
       "objectProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasPart",
             "destination": "http://purl.org/ppeo/PPEO.owl#observed_variable",
@@ -3314,7 +3309,7 @@
         "label": "observed_variable"
       },
       "valueType": "",
-      "naming_scheme": "Obs_var@{Variable ID*}",
+      "naming_scheme": "Observed_variable@{Variable ID*}",
       "dataProperties": [
         {
           "id": "0",
