@@ -331,9 +331,9 @@ function extractNodes(graph,selection,formOptions,worksheet){
     Object.entries(selection[worksheet]).forEach(([column,columnAttributes])=>{
         try {
             if(columnAttributes.type.name==="class" && columnAttributes.name.name){
-                let nodeName=columnAttributes.name.name
-                if(nodeName.length>0){
-                    let nodeIndex=formOptions.name.Class.findIndex(term=> term.name==nodeName)
+                let nodeName=`${columnAttributes.name.name}:${columnAttributes.naming_scheme}`
+                if(nodeName.length>0 && graph.nodes.filter(node=>node.id==nodeName).length==0){
+                    let nodeIndex=formOptions.name.Class.findIndex(term=> term.name==columnAttributes.name.name)
                     graph.nodes.push({id:nodeName,group:nodeIndex})
                 }
             }
@@ -348,8 +348,8 @@ function extractLinks(graph,selection,formOptions,worksheet){
             columnAttributes.objectProperties.forEach(property => {
                 try {
                     if (property.show === true && property.referenceNode !== '') {
-                        let source = selection[worksheet][column].name.label
-                        let target = selection[worksheet][property.referenceNode].name.label
+                        let source = `${selection[worksheet][column].name.label}:${selection[worksheet][column].naming_scheme}`
+                        let target = `${selection[worksheet][property.referenceNode].name.label}:${selection[worksheet][property.referenceNode].naming_scheme}`
                         let targetType = selection[worksheet][property.referenceNode].type.name
 
                         let selectedObjectProperty = property.property.name
