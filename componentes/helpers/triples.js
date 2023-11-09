@@ -374,6 +374,8 @@ class Triples{
   }
   isXSDdatatype(name){
     try{
+      if (["float","double","boolean","long","int","short","byte"].includes(name))
+        name="xsd"+name
       return typeof xsd[name].value === "string"
     }catch (e){
       return false
@@ -403,6 +405,7 @@ class Triples{
           }else{
             //TODO possible removal for this method
             // Not sure when this is useful
+            //Mabe @PT ou something else
             return `${literal}^^${this.getXSDdatatypeURI(qualifier)}`//${that.complete(`<${qualifier}>`,that,true)}`
           }
         }
