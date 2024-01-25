@@ -153,7 +153,17 @@ function validateSelectionJSON(jSheet,$data,completeness){
                 }
 
                 if(selectionExtraColumns.length > 0 || selectionMissingColumns.length > 0){
-                    displayToast("Mismatch between Mapping and SpreadSheet",`Uploaded mapping has <${worksheet}> with the following missing columns: << ${selectionMissingColumns} >>. And your spreadsheet doesn't have the following columns: << ${selectionExtraColumns} >> present in your mapping.`,600000)
+                    if(selectionExtraColumns.length > 0 ){
+                        for ( let column of selectionExtraColumns){
+                            if($data[worksheet][column].type.name!="class"){
+                                displayToast("Extra column in Spreadsheet",`Uploaded mapping has Worksheet:<${worksheet}> with the following extra column:<${column}> not present in your spreadsheet.`,600000)
+                            }
+                        }
+                    }else if(selectionMissingColumns.length > 0){
+                        displayToast("Mismatch between Mapping and SpreadSheet",`Uploaded mapping has <${worksheet}> with the following missing columns: << ${selectionMissingColumns} >>. And your spreadsheet doesn't have the following columns: << ${selectionExtraColumns} >> present in your mapping.`,600000)
+                    }
+
+
                 }
 
 
