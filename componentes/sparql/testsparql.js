@@ -12,7 +12,7 @@ let subject = 's'
 let object = 'o'
 let predicate = 'p'
 const brapi="http://brapi.biodata.pt/"
-const ontoBrAPI="http://localhost:8890/vitis"
+const ontoBrAPI=sparql.ontoBrAPI
 let devServer="http://localhost:3000/"
 
 let pageSize
