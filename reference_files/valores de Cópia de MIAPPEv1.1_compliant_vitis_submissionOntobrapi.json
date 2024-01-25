@@ -3133,8 +3133,8 @@
         "name": "dataProperty"
       },
       "name": {
-        "name": "hasDescription",
-        "label": "hasDescription"
+        "name": "hasVersion",
+        "label": "hasVersion"
       },
       "valueType": "",
       "naming_scheme": "@{__value__}",
@@ -3157,49 +3157,6 @@
       "objectProperties": [],
       "[object HTMLDivElement]": {}
     },
-    "data_file": {
-      "type": {
-        "label": "Class",
-        "name": "class"
-      },
-      "name": {
-        "name": "data_file",
-        "label": "data_file"
-      },
-      "valueType": "",
-      "naming_scheme": "Data_file_@{__auto_increment__}",
-      "dataProperties": [
-        {
-          "id": 0,
-          "property": "",
-          "show": true,
-          "referenceNode": "Data file link*",
-          "data": {
-            "value": "hasDigitalLocation",
-            "type": "anyURI"
-          }
-        },
-        {
-          "id": 1,
-          "property": "",
-          "show": true,
-          "referenceNode": "Data file description*",
-          "data": {
-            "value": "hasDescription"
-          }
-        },
-        {
-          "id": 2,
-          "property": "",
-          "show": true,
-          "referenceNode": "Data file version*",
-          "data": {
-            "value": "hasVersion"
-          }
-        }
-      ],
-      "objectProperties": []
-    },
     "study": {
       "type": {
         "label": "Class",
@@ -3210,7 +3167,7 @@
         "label": "study"
       },
       "valueType": "",
-      "naming_scheme": "Study_@{Study unique ID*}",
+      "naming_scheme": "Study_@{Study title*}",
       "dataProperties": [
         {
           "id": 0,
@@ -3244,6 +3201,49 @@
           }
         }
       ]
+    },
+    "data_file": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "data_file",
+        "label": "data_file"
+      },
+      "valueType": "",
+      "naming_scheme": "Data_file_@{__auto_increment__}",
+      "dataProperties": [
+        {
+          "id": 0,
+          "property": "",
+          "show": true,
+          "referenceNode": "Data file link*",
+          "data": {
+            "value": "hasDigitalLocation",
+            "type": "anyURI"
+          }
+        },
+        {
+          "id": 1,
+          "property": "",
+          "show": true,
+          "referenceNode": "Data file description*",
+          "data": {
+            "value": "hasVersion"
+          }
+        },
+        {
+          "id": 2,
+          "property": "",
+          "show": true,
+          "referenceNode": "Data file version*",
+          "data": {
+            "value": "hasVersion"
+          }
+        }
+      ],
+      "objectProperties": []
     }
   },
   "data_value": {
