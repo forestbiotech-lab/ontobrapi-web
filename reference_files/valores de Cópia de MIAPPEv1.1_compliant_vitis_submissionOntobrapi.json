@@ -161,7 +161,7 @@
         "name": "investigation",
         "label": "investigation"
       },
-      "naming_scheme": "Investigation_@{Investigation title*}@{Investigation unique ID}",
+      "naming_scheme": "Investigation_@{Investigation unique ID}",
       "dataProperties": [
         {
           "id": "0",
@@ -1078,7 +1078,7 @@
         "label": "investigation"
       },
       "valueType": "",
-      "naming_scheme": "Investigation_@{Investigation title*}@{Investigation unique ID}",
+      "naming_scheme": "Investigation_@{Investigation unique ID}",
       "dataProperties": [
         {
           "id": "0",
