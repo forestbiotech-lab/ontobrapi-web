@@ -2100,7 +2100,7 @@
       "naming_scheme": "Study_@{Study unique ID*}",
       "dataProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": "",
           "show": true,
           "referenceNode": "Study unique ID*",
@@ -2112,7 +2112,7 @@
       ],
       "objectProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasBiologicalMaterial",
             "destination": "http://purl.org/ppeo/PPEO.owl#biological_material",
@@ -2185,7 +2185,7 @@
       ],
       "objectProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasBiologicalMaterial",
             "destination": "http://purl.org/ppeo/PPEO.owl#biological_material",
@@ -2204,7 +2204,7 @@
           }
         },
         {
-          "id": 1,
+          "id": "1",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasSpatialDistribution",
             "destination": "http://purl.org/ppeo/PPEO.owl#spatial_distribution",
@@ -2223,7 +2223,7 @@
           }
         },
         {
-          "id": 2,
+          "id": "2",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasFactorValue",
             "destination": "http://purl.org/ppeo/PPEO.owl#factor_value",
@@ -2281,7 +2281,7 @@
       "naming_scheme": "Observation_unit_factor_value_@{factor_value}",
       "dataProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": "",
           "show": true,
           "referenceNode": "Observation unit factor value",
@@ -2487,14 +2487,6 @@
           }
         }
       ]
-    },
-    "Study": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
-      "dataProperties": [],
-      "objectProperties": []
     },
     "Observation_unit": {
       "type": {
