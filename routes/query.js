@@ -76,6 +76,8 @@ router.get('/ppeo/listClasses',async (req,res)=>{
   }
 })
 
+
+
 router.get('/db/sparql/search/:fileName',(req,res)=>{
   let files=glob.sync("__dirname/../db/*.nt",{absolute:true})
   
