@@ -3088,36 +3088,162 @@
   },
   "Data file": {
     "Study unique ID*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Data file link*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDigitalLocation",
+        "label": "hasDigitalLocation"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#anyURI",
+        "name": "anyURI",
+        "label": "anyURI",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Data file description*": {
-      "type": "",
-      "name": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDescription",
+        "label": "hasDescription"
+      },
       "valueType": "",
-      "naming_scheme": "",
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Data file version*": {
-      "type": "",
-      "name": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasVersion",
+        "label": "hasVersion"
+      },
       "valueType": "",
-      "naming_scheme": "",
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "data_file": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "data_file",
+        "label": "data_file"
+      },
+      "valueType": "",
+      "naming_scheme": "Data_file_@{__auto_increment__}",
+      "dataProperties": [
+        {
+          "id": 0,
+          "property": "",
+          "show": true,
+          "referenceNode": "Data file link*",
+          "data": {
+            "value": "hasDigitalLocation",
+            "type": "anyURI"
+          }
+        },
+        {
+          "id": 1,
+          "property": "",
+          "show": true,
+          "referenceNode": "Data file description*",
+          "data": {
+            "value": "hasDescription"
+          }
+        },
+        {
+          "id": 2,
+          "property": "",
+          "show": true,
+          "referenceNode": "Data file version*",
+          "data": {
+            "value": "hasVersion"
+          }
+        }
+      ],
       "objectProperties": []
+    },
+    "study": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "study",
+        "label": "study"
+      },
+      "valueType": "",
+      "naming_scheme": "Study_@{Study unique ID*}",
+      "dataProperties": [
+        {
+          "id": 0,
+          "property": "",
+          "show": true,
+          "referenceNode": "Study unique ID*",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": 0,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasDataFile",
+            "destination": "http://purl.org/ppeo/PPEO.owl#data_file",
+            "name": "hasDataFile",
+            "label": "hasDataFile",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasDataFile",
+            "class": "http://purl.org/ppeo/PPEO.owl#data_file",
+            "className": "data_file",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "data_file",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
     }
   },
   "data_value": {
