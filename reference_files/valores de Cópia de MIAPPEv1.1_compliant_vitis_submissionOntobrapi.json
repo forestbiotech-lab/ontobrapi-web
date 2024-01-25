@@ -74,8 +74,7 @@
         "name": "dateTime",
         "label": "dateTime",
         "ontology": "http://www.w3.org/2001/XMLSchema"
-      },
-      "[object HTMLDivElement]": {}
+      }
     },
     "Public release date": {
       "type": {
@@ -151,8 +150,7 @@
         "name": "string",
         "label": "string",
         "ontology": "http://www.w3.org/2001/XMLSchema"
-      },
-      "[object HTMLDivElement]": {}
+      }
     },
     "Investigation": {
       "type": {
@@ -356,8 +354,7 @@
         "name": "string",
         "label": "string",
         "ontology": "http://www.w3.org/2001/XMLSchema"
-      },
-      "[object HTMLDivElement]": {}
+      }
     },
     "Geographic location (country)*": {
       "type": {
@@ -376,8 +373,7 @@
         "name": "string",
         "label": "string",
         "ontology": "http://www.w3.org/2001/XMLSchema"
-      },
-      "[object HTMLDivElement]": {}
+      }
     },
     "Experimental site name*": {
       "type": {
@@ -466,8 +462,7 @@
         "name": "string",
         "label": "string",
         "ontology": "http://www.w3.org/2001/XMLSchema"
-      },
-      "[object HTMLDivElement]": {}
+      }
     },
     "Type of statistical design": {
       "type": {
@@ -505,8 +500,7 @@
         "name": "string",
         "label": "string",
         "ontology": "http://www.w3.org/2001/XMLSchema"
-      },
-      "[object HTMLDivElement]": {}
+      }
     },
     "Observation unit description*": {
       "type": {
@@ -525,8 +519,7 @@
         "name": "string",
         "label": "string",
         "ontology": "http://www.w3.org/2001/XMLSchema"
-      },
-      "[object HTMLDivElement]": {}
+      }
     },
     "Description of growth facility*": {
       "type": {
@@ -1054,8 +1047,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Investigation title*": {
       "type": {
@@ -1074,8 +1066,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Investigation": {
       "type": {
@@ -1145,8 +1136,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Person name*": {
       "type": {
@@ -1165,8 +1155,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Person email": {
       "type": {
@@ -1185,8 +1174,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Person ID": {
       "type": {
@@ -1205,8 +1193,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Person role*": {
       "type": {
@@ -1225,8 +1212,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Person affiliation*": {
       "type": {
@@ -1245,8 +1231,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Person": {
       "type": {
@@ -1342,7 +1327,7 @@
         "label": "role"
       },
       "valueType": "",
-      "naming_scheme": "role_@{Role}",
+      "naming_scheme": "role_@{Person role*}",
       "dataProperties": [
         {
           "id": "0",
@@ -1473,8 +1458,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Biological material ID*": {
       "type": {
@@ -1493,8 +1477,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Organism*": {
       "type": {
@@ -1513,8 +1496,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Genus": {
       "type": {
@@ -1533,8 +1515,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Species": {
       "type": {
@@ -1553,8 +1534,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Biological material latitude": {
       "type": {
@@ -1573,8 +1553,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Biological material longitude": {
       "type": {
@@ -1593,8 +1572,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Biological material altitude": {
       "type": {
@@ -1613,8 +1591,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Biological material coordinates uncertainty": {
       "type": {
@@ -1633,8 +1610,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Biological material preprocessing": {
       "type": {
@@ -1648,8 +1624,7 @@
       "valueType": "",
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Material source ID": {
       "type": {
@@ -1668,8 +1643,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Material source DOI": {
       "type": {
@@ -1688,8 +1662,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Material source latitude": {
       "type": {
@@ -1708,8 +1681,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Material source longitude": {
       "type": {
@@ -1728,8 +1700,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Material source altitude": {
       "type": {
@@ -1748,8 +1719,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Material source coordinates uncertainty": {
       "type": {
@@ -1768,8 +1738,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Material source description": {
       "type": {
@@ -1788,8 +1757,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Biological Material": {
       "type": {
@@ -2003,8 +1971,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Biological Material ID*": {
       "type": {
@@ -2023,8 +1990,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Observation unit ID*": {
       "type": {
@@ -2032,8 +1998,8 @@
         "name": "dataProperty"
       },
       "name": {
-        "name": "hasIdentifier",
-        "label": "hasIdentifier"
+        "name": "hasInternalIdentifier",
+        "label": "hasInternalIdentifier"
       },
       "valueType": {
         "term": "http://www.w3.org/2001/XMLSchema#string",
@@ -2043,8 +2009,7 @@
       },
       "naming_scheme": "@{Observation unit ID*}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Observation unit type*": {
       "type": {
@@ -2063,8 +2028,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "External ID": {
       "type": {
@@ -2083,180 +2047,9 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Spatial distribution": {
-      "type": {
-        "label": "Class",
-        "name": "class"
-      },
-      "name": {
-        "name": "spatial_distribution",
-        "label": "spatial_distribution"
-      },
-      "valueType": "",
-      "naming_scheme": "spatial_distribution_@{Spatial distribution}",
-      "dataProperties": [
-        {
-          "id": "0",
-          "property": "",
-          "show": true,
-          "referenceNode": "",
-          "data": {
-            "value": "",
-            "type": ""
-          }
-        }
-      ],
-      "objectProperties": [
-        {
-          "id": "0",
-          "property": {
-            "name": "hasObservation",
-            "label": "hasObservation"
-          },
-          "show": true,
-          "referenceNode": "observation unit",
-          "data": {
-            "value": "",
-            "type": ""
-          }
-        }
-      ],
-      "[object HTMLDivElement]": {}
-    },
-    "Observation unit factor value": {
-      "type": {
-        "label": "Data Property",
-        "name": "dataProperty"
-      },
-      "name": {
-        "name": "hasValue",
-        "label": "hasValue"
-      },
-      "valueType": {
-        "term": "http://www.w3.org/2001/XMLSchema#int",
-        "name": "int",
-        "label": "int",
-        "ontology": "http://www.w3.org/2001/XMLSchema"
-      },
-      "naming_scheme": "@{__value__}@{Observation unit factor value}",
-      "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
-    },
-    "observation unit": {
-      "type": {
-        "label": "Class",
-        "name": "class"
-      },
-      "name": {
-        "name": "observation_unit",
-        "label": "observation_unit"
-      },
-      "valueType": "",
-      "naming_scheme": "ObservationUnit_@{Observation unit ID*}",
-      "dataProperties": [],
-      "objectProperties": [
-        {
-          "id": "0",
-          "property": {
-            "name": "partOf",
-            "label": "partOf"
-          },
-          "show": true,
-          "referenceNode": "Study",
-          "data": {
-            "value": "",
-            "type": ""
-          }
-        },
-        {
-          "id": "1",
-          "property": {
-            "name": "hasBiologicalMaterial",
-            "label": "hasBiologicalMaterial"
-          },
-          "show": true,
-          "referenceNode": "biological_material",
-          "data": {
-            "value": "",
-            "type": ""
-          }
-        },
-        {
-          "id": "2",
-          "property": {
-            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasObservationLevel",
-            "destination": "http://purl.org/ppeo/PPEO.owl#observation_level",
-            "name": "hasObservationLevel",
-            "label": "hasObservationLevel",
-            "term": "http://purl.org/ppeo/PPEO.owl#hasObservationLevel",
-            "class": "http://purl.org/ppeo/PPEO.owl#observation_level",
-            "className": "observation_level",
-            "classOntology": "http://purl.org/ppeo/PPEO.owl"
-          },
-          "show": true,
-          "referenceNode": "observation unit",
-          "data": {
-            "value": "",
-            "type": ""
-          }
-        },
-        {
-          "id": "3",
-          "property": {
-            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasSpatialDistribution",
-            "destination": "http://purl.org/ppeo/PPEO.owl#spatial_distribution",
-            "name": "hasSpatialDistribution",
-            "label": "hasSpatialDistribution",
-            "term": "http://purl.org/ppeo/PPEO.owl#hasSpatialDistribution",
-            "class": "http://purl.org/ppeo/PPEO.owl#spatial_distribution",
-            "className": "spatial_distribution",
-            "classOntology": "http://purl.org/ppeo/PPEO.owl"
-          },
-          "show": true,
-          "referenceNode": "",
-          "data": {
-            "value": "",
-            "type": ""
-          }
-        }
-      ]
-    },
-    "Study": {
-      "type": {
-        "label": "Class",
-        "name": "class"
-      },
-      "name": {
-        "name": "study",
-        "label": "study"
-      },
-      "valueType": "",
-      "naming_scheme": "Study_@{Study unique ID*}",
-      "dataProperties": [],
-      "objectProperties": []
-    },
-    "biological_material": {
-      "type": {
-        "label": "Class",
-        "name": "class"
-      },
-      "name": {
-        "name": "biological_material",
-        "label": "biological_material"
-      },
-      "valueType": {
-        "label": "Named Node",
-        "name": "named_node"
-      },
-      "naming_scheme": "BiologicalMaterial_@{Biological Material ID*}",
-      "dataProperties": [],
-      "objectProperties": []
-    },
-    "spatial_distribution": {
       "type": {
         "label": "Data Property",
         "name": "dataProperty"
@@ -2273,20 +2066,232 @@
       },
       "naming_scheme": "@{__auto_increment__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
-    "spstial_distribution_type": {
+    "Observation unit factor value": {
       "type": {
         "label": "Data Property",
         "name": "dataProperty"
       },
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "name": {
+        "name": "hasValue",
+        "label": "hasValue"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#int",
+        "name": "int",
+        "label": "int",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
+    },
+    "Study": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "study",
+        "label": "study"
+      },
+      "valueType": "",
+      "naming_scheme": "Study_@{Study unique ID*}",
+      "dataProperties": [
+        {
+          "id": 0,
+          "property": "",
+          "show": true,
+          "referenceNode": "Study unique ID*",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": 0,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasBiologicalMaterial",
+            "destination": "http://purl.org/ppeo/PPEO.owl#biological_material",
+            "name": "hasBiologicalMaterial",
+            "label": "hasBiologicalMaterial",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasBiologicalMaterial",
+            "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+            "className": "biological_material",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Biological_material",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "Biological_material": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "biological_material",
+        "label": "biological_material"
+      },
+      "valueType": {
+        "label": "Named Node",
+        "name": "named_node"
+      },
+      "naming_scheme": "BiologicalMaterial_@{Biological Material ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Biological Material ID*",
+          "data": {
+            "value": "hasMaterialIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": []
+    },
+    "Observation unit": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "observation_unit",
+        "label": "observation_unit"
+      },
+      "valueType": "",
+      "naming_scheme": "ObservationUnit_@{Observation unit ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Observation unit ID*",
+          "data": {
+            "value": "hasInternalIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": 0,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasBiologicalMaterial",
+            "destination": "http://purl.org/ppeo/PPEO.owl#biological_material",
+            "name": "hasBiologicalMaterial",
+            "label": "hasBiologicalMaterial",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasBiologicalMaterial",
+            "class": "http://purl.org/ppeo/PPEO.owl#biological_material",
+            "className": "biological_material",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Biological_material",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": 1,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasSpatialDistribution",
+            "destination": "http://purl.org/ppeo/PPEO.owl#spatial_distribution",
+            "name": "hasSpatialDistribution",
+            "label": "hasSpatialDistribution",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasSpatialDistribution",
+            "class": "http://purl.org/ppeo/PPEO.owl#spatial_distribution",
+            "className": "spatial_distribution",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "Spatial distribution Class",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": 2,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasFactorValue",
+            "destination": "http://purl.org/ppeo/PPEO.owl#factor_value",
+            "name": "hasFactorValue",
+            "label": "hasFactorValue",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasFactorValue",
+            "class": "http://purl.org/ppeo/PPEO.owl#factor_value",
+            "className": "factor_value",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "factor_value",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "Spatial distribution Class": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "spatial_distribution",
+        "label": "spatial_distribution"
+      },
+      "valueType": "",
+      "naming_scheme": "Spatial_distribution_@{Spatial distribution}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Spatial distribution",
+          "data": {
+            "value": "hasType",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": []
+    },
+    "factor_value": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "factor_value",
+        "label": "factor_value"
+      },
+      "valueType": "",
+      "naming_scheme": "Observation_unit_factor_value_@{factor_value}",
+      "dataProperties": [
+        {
+          "id": 0,
+          "property": "",
+          "show": true,
+          "referenceNode": "Observation unit factor value",
+          "data": {
+            "value": "hasValue",
+            "type": "int"
+          }
+        }
+      ],
+      "objectProperties": []
     }
   },
   "Sample": {
@@ -2302,8 +2307,7 @@
       "valueType": "",
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Sample ID*": {
       "type": {
@@ -2322,8 +2326,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Plant structure development stage": {
       "type": {
@@ -2342,8 +2345,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Plant anatomical entity*": {
       "type": {
@@ -2362,8 +2364,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Sample description": {
       "type": {
@@ -2382,8 +2383,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Collection date*": {
       "type": {
@@ -2402,8 +2402,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "External ID": {
       "type": {
@@ -2422,8 +2421,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Sample": {
       "type": {
@@ -2531,8 +2529,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Variable ID*": {
       "type": {
@@ -2551,8 +2548,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Variable name": {
       "type": {
@@ -2571,8 +2567,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Variable accession number": {
       "type": {
@@ -2591,8 +2586,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Trait*": {
       "type": {
@@ -2611,8 +2605,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Trait accession number": {
       "type": {
@@ -2631,8 +2624,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Method*": {
       "type": {
@@ -2651,8 +2643,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Method accession number": {
       "type": {
@@ -2671,8 +2662,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Method description": {
       "type": {
@@ -2691,8 +2681,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Reference associated to the method": {
       "type": {
@@ -2711,8 +2700,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Scale*": {
       "type": {
@@ -2731,8 +2719,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Scale accession number": {
       "type": {
@@ -2751,8 +2738,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Time scale": {
       "type": {
@@ -2771,8 +2757,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "observed_variable": {
       "type": {
@@ -3161,8 +3146,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "value": {
       "type": {
@@ -3181,8 +3165,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Variable ID*": {
       "type": {
@@ -3201,8 +3184,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Observation": {
       "type": {
