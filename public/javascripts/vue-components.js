@@ -386,7 +386,8 @@ function componentPropertySelect(){
       formOptions:{type:Object},
       selection:{type:Object},
       dataPropertyForm:{type:Object},
-      info:{type:Object}
+      info:{type:Object},
+      infoLabel:{type:String}
     },
     computed:{
       getDisplayLabel(){
@@ -538,7 +539,22 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
 
           Vue.set(this.completeness[this.worksheet].columns,this.missingClass,window.structures.completeness.column)
           window.structures.addColumnToSelection(this.selection,this.worksheet,this.missingClass)
+          this.selection[this.worksheet][this.missingClass].type={
+            name:"class",
+            label:"Class"
+          }
+          this.selection[this.worksheet][this.missingClass].valueType={
+            name:"named_node",
+            label:"Named Node"
+          }
+          if(this.formOptions.name.Class.filter(value=>value.name===this.missingClass).length===1){
+            this.selection[this.worksheet][this.missingClass].name={
+              name:this.missingClass,
+              label:this.missingClass
+            }
+          }
           this.missingClass=""
+
           //TODO add to selection, and possibly some other data structures. Export function to add column to <<selection>> in validateSelection.
         }
       },

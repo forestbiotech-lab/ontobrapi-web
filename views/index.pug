@@ -72,8 +72,8 @@ block content
                     .card
                       .card-body(v-for="objectPropertyForm in selection[worksheet][column].objectProperties")
                         .visibility-wrapper(v-if=" objectPropertyForm.show == true ")
-                          property-select(:label="'objectProperty (all)'" :term-type="'ObjectProperty'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info")
-                          property-select(:label="'objectProperty (inferred)'" :term-type="'objectPropertyInferred'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info")
+                          property-select(:label="'objectProperty (all)'" :term-type="'ObjectProperty'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info" :info-label="'object-property-selection'")
+                          property-select(:label="'objectProperty (inferred)'"  :term-type="'objectPropertyInferred'" :property-type="'objectProperties'" :selection="selection" :form-options="formOptions" :worksheet="worksheet" :column="column" :data-property-form="objectPropertyForm" :info="info" :info-label="'object-property-selection-inferred'")
                           .form-group
                             label Individuals
                             //TODO selectable for classes only make a new method in component
@@ -96,6 +96,7 @@ block content
                       .visibility-wrapper(v-if=" dataPropertyForm.show == true ")
                         .form-group
                           label Properties
+                            information-tooltip(:info="info" label="data-property-selection")
                           v-select(:options="namedIndividuals",:selectable="disableClasses",v-model="selection[worksheet][column].dataProperties[dataPropertyForm.id].referenceNode" @input="updateGraphModel(dataPropertyForm);updateDataProperty(dataPropertyForm)")
                             template(v-slot:option="option")
                               | {{ option.label }} &nbsp;
@@ -124,7 +125,7 @@ block content
           #template-property-select
             .form-group
               label(v-bind:for='label') {{ getDisplayLabel }}
-                information-tooltip(:info="info" :label="label")
+                information-tooltip(:info="info" :label="infoLabel")
               v-select(@open="queryInferredProperties",@input="loadInferredDestinationClass",:options="formOptions['name'][termType]" v-bind:id="label" v-model="selection[worksheet][column][propertyType][dataPropertyForm.id].property")
           #template-simple-property-select
             .form-group
