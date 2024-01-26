@@ -3170,7 +3170,7 @@
       "naming_scheme": "Study_@{Study title*}",
       "dataProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": "",
           "show": true,
           "referenceNode": "Study unique ID*",
@@ -3182,7 +3182,7 @@
       ],
       "objectProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasDataFile",
             "destination": "http://purl.org/ppeo/PPEO.owl#data_file",
@@ -3215,7 +3215,7 @@
       "naming_scheme": "Data_file_@{__auto_increment__}",
       "dataProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": "",
           "show": true,
           "referenceNode": "Data file link*",
@@ -3225,7 +3225,7 @@
           }
         },
         {
-          "id": 1,
+          "id": "1",
           "property": "",
           "show": true,
           "referenceNode": "Data file description*",
@@ -3234,7 +3234,7 @@
           }
         },
         {
-          "id": 2,
+          "id": "2",
           "property": "",
           "show": true,
           "referenceNode": "Data file version*",
@@ -3427,27 +3427,98 @@
   },
   "Environment": {
     "Study unique ID*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Environment parameter*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasName",
+        "label": "hasName"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Environment parameter value*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasValue",
+        "label": "hasValue"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#float",
+        "name": "float",
+        "label": "float",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "environment_parameter": {
+      "type": {
+        "label": "Class",
+        "name": "class"
+      },
+      "name": {
+        "name": "environment_parameter",
+        "label": "environment_parameter"
+      },
+      "valueType": "",
+      "naming_scheme": "Environment_parameter_@{Environment parameter*}",
+      "dataProperties": [
+        {
+          "id": 0,
+          "property": "",
+          "show": true,
+          "referenceNode": "Environment parameter*",
+          "data": {
+            "value": "hasName",
+            "type": "string"
+          }
+        },
+        {
+          "id": 1,
+          "property": "",
+          "show": true,
+          "referenceNode": "Environment parameter value*",
+          "data": {
+            "value": "hasValue",
+            "type": "float"
+          }
+        }
+      ],
       "objectProperties": []
     }
   },
