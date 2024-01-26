@@ -1105,8 +1105,14 @@
         {
           "id": "0",
           "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasPart",
+            "destination": "http://purl.org/ppeo/PPEO.owl#study",
             "name": "hasPart",
-            "label": "hasPart"
+            "label": "hasPart",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasPart",
+            "class": "http://purl.org/ppeo/PPEO.owl#study",
+            "className": "study",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
           },
           "show": true,
           "referenceNode": "Study",
@@ -3167,7 +3173,7 @@
         "label": "study"
       },
       "valueType": "",
-      "naming_scheme": "Study_@{Study title*}",
+      "naming_scheme": "Study_@{Study unique ID*}",
       "dataProperties": [
         {
           "id": "0",
@@ -3499,7 +3505,7 @@
       "naming_scheme": "Environment_parameter_@{Environment parameter*}",
       "dataProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": "",
           "show": true,
           "referenceNode": "Environment parameter*",
@@ -3509,7 +3515,7 @@
           }
         },
         {
-          "id": 1,
+          "id": "1",
           "property": "",
           "show": true,
           "referenceNode": "Environment parameter value*",
@@ -3517,9 +3523,93 @@
             "value": "hasValue",
             "type": "float"
           }
+        },
+        {
+          "id": 2,
+          "property": "",
+          "show": false,
+          "referenceNode": "",
+          "data": {
+            "value": "",
+            "type": ""
+          }
         }
       ],
       "objectProperties": []
+    },
+    "environment": {
+      "type": {
+        "name": "class",
+        "label": "Class"
+      },
+      "name": {
+        "name": "environment",
+        "label": "environment"
+      },
+      "valueType": {
+        "name": "named_node",
+        "label": "Named Node"
+      },
+      "naming_scheme": "@{__auto_increment__}",
+      "dataProperties": [],
+      "objectProperties": [
+        {
+          "id": 0,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasEnvironmentParameter",
+            "destination": "http://purl.org/ppeo/PPEO.owl#environment_parameter",
+            "name": "hasEnvironmentParameter",
+            "label": "hasEnvironmentParameter",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasEnvironmentParameter",
+            "class": "http://purl.org/ppeo/PPEO.owl#environment_parameter",
+            "className": "environment_parameter",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "environment_parameter",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "study": {
+      "type": {
+        "name": "class",
+        "label": "Class"
+      },
+      "name": {
+        "name": "study",
+        "label": "study"
+      },
+      "valueType": {
+        "name": "named_node",
+        "label": "Named Node"
+      },
+      "naming_scheme": "Study_@{Study unique ID*}",
+      "dataProperties": [],
+      "objectProperties": [
+        {
+          "id": 0,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasPart",
+            "destination": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+            "name": "hasPart",
+            "label": "hasPart",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasPart",
+            "class": "http://purl.org/ppeo/PPEO.owl#observed_variable",
+            "className": "observed_variable",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "environment",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
     }
   },
   "Factor": {
