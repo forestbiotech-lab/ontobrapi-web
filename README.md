@@ -166,6 +166,13 @@ https://github.com/SheetJS/sheetjs  (See what the above adds)
 - /forms/parse/file downlaods a file.
 - /forms/parse/file/json  This is the json version 
 
+### Information tooltips
+Adding tooltips requires a simple html element:
+```jade
+ information-tooltip(:info="info" label="nomeoftextmessage")
+```
+The label identifies the key in: components/datastructures/info.js
+
 
 
 ## Triple Store
