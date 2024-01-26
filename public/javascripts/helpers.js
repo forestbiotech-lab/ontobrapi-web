@@ -437,3 +437,11 @@ async function getTemplate(part){
     let result = await $.parseHTML(await $.get(`/factory/vue/index/${part}`))
     return result.pop()
 }
+
+window.addEventListener("beforeunload", function (e) {
+    var confirmationMessage = 'It looks like you have been editing something. '
+        + 'If you leave before saving, your changes will be lost.';
+
+    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+});
