@@ -3523,16 +3523,6 @@
             "value": "hasValue",
             "type": "float"
           }
-        },
-        {
-          "id": 2,
-          "property": "",
-          "show": false,
-          "referenceNode": "",
-          "data": {
-            "value": "",
-            "type": ""
-          }
         }
       ],
       "objectProperties": []
@@ -3554,7 +3544,7 @@
       "dataProperties": [],
       "objectProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasEnvironmentParameter",
             "destination": "http://purl.org/ppeo/PPEO.owl#environment_parameter",
@@ -3591,7 +3581,7 @@
       "dataProperties": [],
       "objectProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasPart",
             "destination": "http://purl.org/ppeo/PPEO.owl#observed_variable",
@@ -3614,36 +3604,238 @@
   },
   "Factor": {
     "Study unique ID*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Factor type*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasType",
+        "label": "hasType"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Factor description": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDescription",
+        "label": "hasDescription"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Factor values*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasValue",
+        "label": "hasValue"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#float",
+        "name": "float",
+        "label": "float",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "study": {
+      "type": {
+        "name": "class",
+        "label": "Class"
+      },
+      "name": {
+        "name": "study",
+        "label": "study"
+      },
+      "valueType": {
+        "name": "named_node",
+        "label": "Named Node"
+      },
+      "naming_scheme": "Study_@{Study unique ID*}",
+      "dataProperties": [
+        {
+          "id": 0,
+          "property": "",
+          "show": true,
+          "referenceNode": "Study unique ID*",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": 0,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasFactor",
+            "destination": "http://purl.org/ppeo/PPEO.owl#factor",
+            "name": "hasFactor",
+            "label": "hasFactor",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasFactor",
+            "class": "http://purl.org/ppeo/PPEO.owl#factor",
+            "className": "factor",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "factor",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "factor": {
+      "type": {
+        "name": "class",
+        "label": "Class"
+      },
+      "name": {
+        "name": "factor",
+        "label": "factor"
+      },
+      "valueType": {
+        "name": "named_node",
+        "label": "Named Node"
+      },
+      "naming_scheme": "Factor_@{Factor description}",
+      "dataProperties": [
+        {
+          "id": 0,
+          "property": "",
+          "show": true,
+          "referenceNode": "Factor type*",
+          "data": {
+            "value": "hasType",
+            "type": "string"
+          }
+        },
+        {
+          "id": 1,
+          "property": "",
+          "show": true,
+          "referenceNode": "Factor description",
+          "data": {
+            "value": "hasDescription",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": 0,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasModality",
+            "destination": "http://purl.org/ppeo/PPEO.owl#factor_value",
+            "name": "hasModality",
+            "label": "hasModality",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasModality",
+            "class": "http://purl.org/ppeo/PPEO.owl#factor_value",
+            "className": "factor_value",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "factor_value",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "factor_value": {
+      "type": {
+        "name": "class",
+        "label": "Class"
+      },
+      "name": {
+        "name": "factor_value",
+        "label": "factor_value"
+      },
+      "valueType": {
+        "name": "named_node",
+        "label": "Named Node"
+      },
+      "naming_scheme": "Factor_value_@{Factor values*}",
+      "dataProperties": [
+        {
+          "id": 0,
+          "property": "",
+          "show": true,
+          "referenceNode": "Factor values*",
+          "data": {
+            "value": "hasValue",
+            "type": "float"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": 0,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#isModalityOf",
+            "destination": "http://purl.org/ppeo/PPEO.owl#factor",
+            "name": "isModalityOf",
+            "label": "isModalityOf",
+            "term": "http://purl.org/ppeo/PPEO.owl#isModalityOf",
+            "class": "http://purl.org/ppeo/PPEO.owl#factor",
+            "className": "factor",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "factor",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
     }
   },
   "Event": {
