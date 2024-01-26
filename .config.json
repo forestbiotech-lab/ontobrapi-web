@@ -1,8 +1,10 @@
 {
-  "sparql":{
+  "sparql": {
     "user": "dba",
     "pass": "dba",
     "host":"localhost",
-    "port":"8890"
+    "port":"8890",
+    "ontobrapi":"http://localhost:8890/ontobrapi"
   }
+
 }
