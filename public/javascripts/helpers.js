@@ -441,7 +441,9 @@ async function getTemplate(part){
 window.addEventListener("beforeunload", function (e) {
     var confirmationMessage = 'It looks like you have been editing something. '
         + 'If you leave before saving, your changes will be lost.';
-
+    if (window.app instanceof HTMLElement ){
+        return;
+    }
     (e || window.event).returnValue = confirmationMessage; //Gecko + IE
     return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
 });
