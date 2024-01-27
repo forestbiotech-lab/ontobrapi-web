@@ -11,12 +11,15 @@ const convertXlsx2json=require('.././componentes/xlsx/convert-xlsx2json')
 const uploadGraph=require('.././componentes/sparql/uploadGraph')
 const formidable = require("formidable");
 const fs=require("fs")
+const validator=require('.././componentes/validator/run_miappe_validator')
 // forms/
 
 router.post('/datafile/upload',(req,res)=>{
-  uploadFile.uploadFileGetPreview(req,uploadDir,destination).then(data=>{
+  uploadFile.uploadFileGetPreview(req,uploadDir,destination).then(async data=>{
     //Action is now for jsheet
+    let validation=await validator.miappe(data.file)
     data.jsheet=convertXlsx2json(data.file)
+    data.validation=validation.toString()
     res.json(data)
   }).catch(err=>{
     let message=err.message
@@ -66,7 +69,7 @@ router.get('/ontologycomments/:ontology/',(req,res)=>{
 router.post('/parse/file/xlsx',async (req,res)=>{
   try{
     //TODO refactor this whole logic elsewhere. 
-    // encasulate "req" to send. 
+    // encasulate "req" to send.
     let payload=await new Promise((resolve,rej)=>{
         const formidable=require("formidable")
         // create an incoming form object

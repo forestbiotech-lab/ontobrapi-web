@@ -5,6 +5,10 @@
     "host":"localhost",
     "port":"8890",
     "ontobrapi":"http://localhost:8890/ontobrapi"
+  },
+  "validator": {
+    "hostname":"localhost",
+    "port":"3004"
   }
 
 }
