@@ -79,6 +79,10 @@ $('document').ready(function(){
 
         self.closest('div').nextAll('.preview-table').removeClass('d-none')
 
+        if(data.validation){
+          $('textarea#input-validation').text(data.validation)
+
+        }
         function resetUploadAbility(){
           $(".upload-augment-file").text("Upload another file")
           $(".upload-augment-file").unbind('click')
