@@ -3699,7 +3699,7 @@
       "naming_scheme": "Study_@{Study unique ID*}",
       "dataProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": "",
           "show": true,
           "referenceNode": "Study unique ID*",
@@ -3711,7 +3711,7 @@
       ],
       "objectProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasFactor",
             "destination": "http://purl.org/ppeo/PPEO.owl#factor",
@@ -3747,7 +3747,7 @@
       "naming_scheme": "Factor_@{Factor description}",
       "dataProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": "",
           "show": true,
           "referenceNode": "Factor type*",
@@ -3757,7 +3757,7 @@
           }
         },
         {
-          "id": 1,
+          "id": "1",
           "property": "",
           "show": true,
           "referenceNode": "Factor description",
@@ -3769,7 +3769,7 @@
       ],
       "objectProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasModality",
             "destination": "http://purl.org/ppeo/PPEO.owl#factor_value",
@@ -3805,7 +3805,7 @@
       "naming_scheme": "Factor_value_@{Factor values*}",
       "dataProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": "",
           "show": true,
           "referenceNode": "Factor values*",
@@ -3817,7 +3817,7 @@
       ],
       "objectProperties": [
         {
-          "id": 0,
+          "id": "0",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#isModalityOf",
             "destination": "http://purl.org/ppeo/PPEO.owl#factor",
@@ -3840,51 +3840,287 @@
   },
   "Event": {
     "Study unique ID*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasIdentifier",
+        "label": "hasIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Observation unit ID": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasInternalIdentifier",
+        "label": "hasInternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Event type*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasType",
+        "label": "hasType"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Event acession number": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasExternalIdentifier",
+        "label": "hasExternalIdentifier"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#anyURI",
+        "name": "anyURI",
+        "label": "anyURI",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Event description": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDescription",
+        "label": "hasDescription"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#string",
+        "name": "string",
+        "label": "string",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": []
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
     },
     "Event date*": {
-      "type": "",
-      "name": "",
-      "valueType": "",
-      "naming_scheme": "",
+      "type": {
+        "label": "Data Property",
+        "name": "dataProperty"
+      },
+      "name": {
+        "name": "hasDateTime",
+        "label": "hasDateTime"
+      },
+      "valueType": {
+        "term": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "name": "dateTime",
+        "label": "dateTime",
+        "ontology": "http://www.w3.org/2001/XMLSchema"
+      },
+      "naming_scheme": "@{__value__}",
       "dataProperties": [],
+      "objectProperties": [],
+      "[object HTMLDivElement]": {}
+    },
+    "study": {
+      "type": {
+        "name": "class",
+        "label": "Class"
+      },
+      "name": {
+        "name": "study",
+        "label": "study"
+      },
+      "valueType": {
+        "name": "named_node",
+        "label": "Named Node"
+      },
+      "naming_scheme": "Study_@{Study unique ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Study unique ID*",
+          "data": {
+            "value": "hasIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "observation_unit": {
+      "type": {
+        "name": "class",
+        "label": "Class"
+      },
+      "name": {
+        "name": "observation_unit",
+        "label": "observation_unit"
+      },
+      "valueType": {
+        "name": "named_node",
+        "label": "Named Node"
+      },
+      "naming_scheme": "observation_unit_@{Observation unit ID*}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Observation unit ID",
+          "data": {
+            "value": "hasInternalIdentifier",
+            "type": "string"
+          }
+        }
+      ],
+      "objectProperties": [
+        {
+          "id": "0",
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#partOf",
+            "destination": "http://purl.org/ppeo/PPEO.owl#study",
+            "name": "partOf",
+            "label": "partOf",
+            "term": "http://purl.org/ppeo/PPEO.owl#partOf",
+            "class": "http://purl.org/ppeo/PPEO.owl#study",
+            "className": "study",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "study",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        },
+        {
+          "id": 1,
+          "property": {
+            "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasEvent",
+            "destination": "http://purl.org/ppeo/PPEO.owl#event",
+            "name": "hasEvent",
+            "label": "hasEvent",
+            "term": "http://purl.org/ppeo/PPEO.owl#hasEvent",
+            "class": "http://purl.org/ppeo/PPEO.owl#event",
+            "className": "event",
+            "classOntology": "http://purl.org/ppeo/PPEO.owl"
+          },
+          "show": true,
+          "referenceNode": "event",
+          "data": {
+            "value": "",
+            "type": ""
+          }
+        }
+      ]
+    },
+    "event": {
+      "type": {
+        "name": "class",
+        "label": "Class"
+      },
+      "name": {
+        "name": "event",
+        "label": "event"
+      },
+      "valueType": {
+        "name": "named_node",
+        "label": "Named Node"
+      },
+      "naming_scheme": "Event_@{Event acession number}",
+      "dataProperties": [
+        {
+          "id": "0",
+          "property": "",
+          "show": true,
+          "referenceNode": "Event type*",
+          "data": {
+            "value": "hasType",
+            "type": "string"
+          }
+        },
+        {
+          "id": "1",
+          "property": "",
+          "show": true,
+          "referenceNode": "Event acession number",
+          "data": {
+            "value": "hasExternalIdentifier",
+            "type": "anyURI"
+          }
+        },
+        {
+          "id": "2",
+          "property": "",
+          "show": true,
+          "referenceNode": "Event description",
+          "data": {
+            "value": "hasDescription",
+            "type": "string"
+          }
+        },
+        {
+          "id": "3",
+          "property": "",
+          "show": true,
+          "referenceNode": "Event date*",
+          "data": {
+            "value": "hasDateTime",
+            "type": "dateTime"
+          }
+        }
+      ],
       "objectProperties": []
     }
   }
