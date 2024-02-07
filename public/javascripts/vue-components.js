@@ -182,6 +182,22 @@ function componentMappingForm(){
       getDisplayLabel:function(){
         return capitalize(this.label)
       },
+      getClassName(){
+        let classNames={}
+        for ( [worksheet,worksheetData] of  Object.entries(this.selection)){
+          if(worksheet!=this.worksheet){
+            for ( [column,columnData] of Object.entries(this.selection[worksheet])){
+              if (columnData.type){
+                if(columnData.type.name === "class" && columnData.naming_scheme!="" && columnData.name.name!=""){
+                  classNames[columnData.name.name]=columnData.naming_scheme
+                }
+              }
+            }
+          }
+        }
+        let currentClass=this.selection[this.worksheet][this.column].name.name
+        return classNames[currentClass]
+      },
       displayTextWithBadges(){
         try{
           let cellValue=window.jSheet.jsonSheets[this.worksheet][0][this.column]
@@ -221,6 +237,9 @@ function componentMappingForm(){
       }
     },
     methods:{
+      setPreviousClassName(){
+        this.selection[this.worksheet][this.column].naming_scheme=this.getClassName
+      },
       //TODO Not working async must be done beforehand on name choice
       async loadDataProperties(){
         this.dataPropertiesCache.loaded=false

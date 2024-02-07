@@ -49,7 +49,7 @@ $('document').ready(function(){
             progressBar.text(percentComplete + '%');
             progressBar.width(percentComplete + '%');
             if (percentComplete === 100) {
-              progressBar.html('Done');
+              progressBar.html('Validating...');
             }
           }
         }, false);
@@ -63,6 +63,8 @@ $('document').ready(function(){
         displayToast("Warning!","Unsupported file type! Please try again with another file. Should be a tab seperated value (.tsv) file.")
         resetProgressBar(".progress-augment-dynamic")
       }else if( filename.endsWith(".xlsx") || filename.endsWith(".xls") || filename.endsWith(".ods") ){
+        let progressBar = $('.progress.progress-augment-dynamic .progress-bar')
+        progressBar.html('Done');
         let jSheet=data.jsheet
         window.jSheet=jSheet
         jSheet.file=data.file
@@ -81,7 +83,7 @@ $('document').ready(function(){
 
         if(data.validation){
           $('textarea#input-validation').text(data.validation)
-
+          progressBar.hide()
         }
         function resetUploadAbility(){
           $(".upload-augment-file").text("Upload another file")
