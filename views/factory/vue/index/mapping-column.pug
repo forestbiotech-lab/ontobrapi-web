@@ -4,11 +4,16 @@ block content
     #mapping-column
         .card
             .card-header
-                h3#mapping-loading-options Mapping&nbsp;
-                    span.d-inline-block(tabindex='0' data-toggle='tooltip' v-bind:title="info.mappingHeader")
-                        button.btn.btn-primary(style='pointer-events: none;' type='button' disabled='')
-                            i.bi-info-lg(role="img" aria-label="Information")
-                    button.btn.btn-success.load-mapping-button(type='button' data-bs-toggle='collapse' data-bs-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
+                h3#mapping-loading-options
+                    .row
+                        .col-3
+                            | Mapping&nbsp;
+                            span.d-inline-block(tabindex='0' data-toggle='tooltip' v-bind:title="info.mappingHeader")
+                            button.btn.btn-primary(style='pointer-events: none;' type='button' disabled='')
+                                i.bi-info-lg(role="img" aria-label="Information")
+                        .col-9
+                            .d-grid
+                                button.btn.btn-success.load-mapping-button(type='button' data-bs-toggle='collapse' data-bs-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
                 #loadingPanel.collapse(aria-labelledby="load-mapping", data-bs-parent="#mapping-loading-options")
                     .card.card-body
                         .card
@@ -16,11 +21,11 @@ block content
                                 h5 Templates:
                             .card-body
                                 //TODO get list of templates
-                                button.btn.btn-primary(@click="loadTemplateMapping")
-                                    .d-flex.flex-row
-                                        .p-1.btn.btn-dark JSON
-                                        .p-1.fileName valores de Cópia de MIAPPEv1.1_compliant_vitis_submissionOntobrapi
-
+                                .d-grid
+                                    button.btn.btn-primary(@click="loadTemplateMapping")
+                                        .d-flex.flex-row
+                                            .p-1.btn.btn-dark JSON
+                                            .p-1.fileName MIAPPEv1.1 + data_value
                         textarea(style="font-size: x-small;" col="120",rows="10" v-model="uploadedJSON")
                         .row.mt-2.mx-0
                             button.col.me-2.load-mapping-file.btn.btn-sm.btn-primary.disabled open mapping file
