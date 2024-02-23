@@ -8,9 +8,6 @@ block content
                     span.d-inline-block(tabindex='0' data-toggle='tooltip' v-bind:title="info.mappingHeader")
                         button.btn.btn-primary(style='pointer-events: none;' type='button' disabled='')
                             i.bi-info-lg(role="img" aria-label="Information")
-                    button.btn.btn-success.download-mapping-button(v-on:click="downloadMapping" style="float:right;") Download Mapping
-                    button.btn.btn-success.download-mapping-file-button(v-on:click="downloadMappingFile" style="float:right;")
-                        i.bi-save(role="img" aria-label="Download") &nbsp;Download Mapping File
                     button.btn.btn-success.load-mapping-button(type='button' data-bs-toggle='collapse' data-bs-target='#loadingPanel' aria-expanded='false' aria-controls='loadingPanel' style="float:right;") Load Mapping
                 #loadingPanel.collapse(aria-labelledby="load-mapping", data-bs-parent="#mapping-loading-options")
                     .card.card-body
@@ -56,3 +53,13 @@ block content
                                 span.badge.bg-primary(v-if="completeness[worksheet].columns[option.label].complete && selection[worksheet][option.label].type.name === \"class\"")
                                     | DPs:{{ completeness[worksheet].columns[option.label].dataProperties }}
             mapping-form(:form-options="formOptions" :data-properties-cache="dataPropertiesCache" :selection="selection",:worksheet="worksheet",:column="column",:named-individuals="namedIndividuals" :completeness="completeness" :info="info", :graph="graph")
+            .d-grid.dropdown
+                button.btn.btn-success.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
+                    | Download Mapping
+                ul.dropdown-menu
+                    li
+                        button.dropdown-item.btn.btn-success.download-mapping-button(v-on:click="downloadMapping" style="float:right;")
+                            i.bi-plus-circle(role="img" aria-label="Download") &nbsp;open in new tab
+                    li.bg-success
+                        button.dropdown-item.btn.btn-success.download-mapping-file-button(v-on:click="downloadMappingFile" style="float:right;")
+                            i.bi-save(role="img" aria-label="Download") &nbsp;download file
