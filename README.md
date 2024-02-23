@@ -206,3 +206,10 @@ Modify the call structure add the anchor. The anchor defines the starting class 
 "p": "rdf:type",
 "o": "ppeo:study"
 },
+
+
+
+## TODO
+
+Updating a dataproperty might not propagate in Class data properties
+
