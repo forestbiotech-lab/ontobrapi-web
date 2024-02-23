@@ -153,8 +153,36 @@ block content
               button.btn.btn-danger.btn-sm#no(v-on:click="no") no
       .col-4
         .card.bg-light.menu
-          .card-header
+          .card-header#validation-results
             h5 Input validation
+            .row.validation.success.validation-success.d-none
+              .col-12
+                p.d-inline-flex.gap-1
+                  button.btn.btn-primary(data-bs-toggle='collapse' href='#collapseSuccessValidator' role='button' aria-expanded='false' aria-controls='collapseSuccessValidator')
+                    span.badge.bg-success.position-relative(type='button')
+                      i.bi-check-circle(role="img")
+                      span.success-counter.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-warning
+                        | 0
+                        span.visually-hidden unread messages
+                    span
+                      | &nbsp;&nbsp;&nbsp; Success
+                #collapseSuccessValidator.collapse
+                  .card.card-body
+                    ul.list-group.validation-item-success
+            .row.validation.fail.validation-fail.d-none
+              .col-12
+                p.d-inline-flex.gap-1
+                  button.btn.btn-primary(data-bs-toggle='collapse' href='#collapseFailValidator' role='button' aria-expanded='false' aria-controls='collapseFailValidator')
+                    span.badge.bg-danger.position-relative(type='button')
+                      i.bi-x-circle(role="img")
+                      span.fail-counter.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-warning
+                        | 1
+                        span.visually-hidden unread messages
+                    span
+                      | &nbsp;&nbsp;&nbsp; FAIL
+                #collapseFailValidator.collapse
+                  .card.card-body
+                    ul.list-group.validation-item-fail
             textarea#input-validation.form-control(cols="30")
           .card-header
             h5 BrAPI call editor

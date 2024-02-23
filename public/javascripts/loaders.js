@@ -82,6 +82,33 @@ $('document').ready(function(){
         self.closest('div').nextAll('.preview-table').removeClass('d-none')
 
         if(data.validation){
+          let fail=0
+          let success=0
+          data.validation.split("\n").forEach(function(line){
+            if(line.startsWith("CHECK FAILED")){
+              fail++
+              let li=document.createElement("li")
+              li.className="list-group-item"
+              li.textContent=line.replace("CHECK FAILED - ","")
+              $('div#validation-results .validation-fail ul.validation-item-fail').append(li)
+            }
+            if(line.startsWith("CHECK PASSED")){
+              success++
+              let li=document.createElement("li")
+              li.className="list-group-item"
+              li.textContent=line.replace("CHECK PASSED - ","")
+              $('div#validation-results .validation-success ul.validation-item-success').append(li)
+            }
+          })
+          if(fail>0) {
+            $('div#validation-results .validation-fail').removeClass('d-none')
+            $('div#validation-results .validation-fail .fail-counter').text(fail)
+          }
+          if(success>0) {
+            $('div#validation-results .validation-success').removeClass('d-none')
+            $('div#validation-results .validation-success .success-counter').text(success)
+          }
+
           $('textarea#input-validation').text(data.validation)
           progressBar.hide()
         }
