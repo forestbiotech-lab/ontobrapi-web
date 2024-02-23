@@ -157,29 +157,31 @@ block content
             h5 Input validation
             .row.validation.success.validation-success.d-none
               .col-12
-                p.d-inline-flex.gap-1
-                  button.btn.btn-primary(data-bs-toggle='collapse' href='#collapseSuccessValidator' role='button' aria-expanded='false' aria-controls='collapseSuccessValidator')
-                    span.badge.bg-success.position-relative(type='button')
-                      i.bi-check-circle(role="img")
-                      span.success-counter.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-warning
-                        | 0
-                        span.visually-hidden unread messages
-                    span
-                      | &nbsp;&nbsp;&nbsp; Success
+                p.d-flex.gap-1
+                  .d-grid
+                    button.btn.btn-secondary(data-bs-toggle='collapse' href='#collapseSuccessValidator' role='button' aria-expanded='false' aria-controls='collapseSuccessValidator')
+                      span.mt-1.float-start.badge.bg-success.position-relative(type='button')
+                        i.bi-check-circle(role="img")
+                        span.success-counter.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-warning
+                          | 0
+                          span.visually-hidden unread messages
+                      span.float-start
+                        | &nbsp;&nbsp;&nbsp; Success
                 #collapseSuccessValidator.collapse
                   .card.card-body
                     ul.list-group.validation-item-success
             .row.validation.fail.validation-fail.d-none
               .col-12
-                p.d-inline-flex.gap-1
-                  button.btn.btn-primary(data-bs-toggle='collapse' href='#collapseFailValidator' role='button' aria-expanded='false' aria-controls='collapseFailValidator')
-                    span.badge.bg-danger.position-relative(type='button')
-                      i.bi-x-circle(role="img")
-                      span.fail-counter.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-warning
-                        | 1
-                        span.visually-hidden unread messages
-                    span
-                      | &nbsp;&nbsp;&nbsp; FAIL
+                p.d-flex.gap-1
+                  .d-grid
+                    button.btn.btn-secondary(data-bs-toggle='collapse' href='#collapseFailValidator' role='button' aria-expanded='false' aria-controls='collapseFailValidator')
+                      span.mt-1.float-start.badge.bg-danger.position-relative(type='button')
+                        i.bi-x-circle(role="img")
+                        span.fail-counter.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-warning
+                          | 0
+                          span.visually-hidden unread messages
+                      span.float-start
+                        | &nbsp;&nbsp;&nbsp; FAIL
                 #collapseFailValidator.collapse
                   .card.card-body
                     ul.list-group.validation-item-fail
