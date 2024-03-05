@@ -84,6 +84,7 @@ $('document').ready(function(){
         if(data.validation){
           let fail=0
           let success=0
+          let warn = 0
           data.validation.split("\n").forEach(function(line){
             if(line.startsWith("CHECK FAILED")){
               fail++
@@ -99,17 +100,26 @@ $('document').ready(function(){
               li.textContent=line.replace("CHECK PASSED - ","")
               $('div#validation-results .validation-success ul.validation-item-success').append(li)
             }
+            if(line.startsWith("CHECK WARNING")){
+              success++
+              let li=document.createElement("li")
+              li.className="list-group-item"
+              li.textContent=line.replace("CHECK WARNING - ","")
+              $('div#validation-results .validation-warn ul.validation-item-warn').append(li)
+            }
           })
           if(fail>0) {
             $('div#validation-results .validation-fail').removeClass('d-none')
             $('div#validation-results .validation-fail .fail-counter').text(fail)
           }
+          if(warn>0) {
+            $('div#validation-results .validation-warn').removeClass('d-none')
+            $('div#validation-results .validation-warn .warn-counter').text(warn)
+          }
           if(success>0) {
             $('div#validation-results .validation-success').removeClass('d-none')
             $('div#validation-results .validation-success .success-counter').text(success)
           }
-
-          $('textarea#input-validation').text(data.validation)
           progressBar.hide()
         }
         function resetUploadAbility(){

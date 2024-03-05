@@ -170,6 +170,21 @@ block content
                 #collapseSuccessValidator.collapse
                   .card.card-body
                     ul.list-group.validation-item-success
+            .row.validation.warn.validation-warn.d-none
+              .col-12
+                p.d-flex.gap-1
+                  .d-grid
+                    button.btn.btn-secondary(data-bs-toggle='collapse' href='#collapseWarningValidator' role='button' aria-expanded='false' aria-controls='collapseWarningValidator')
+                      span.mt-1.float-start.badge.bg-success.position-relative(type='button')
+                        i.bi-check-circle(role="img")
+                        span.warn-counter.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-warning
+                          | 0
+                          span.visually-hidden unread messages
+                      span.float-start
+                        | &nbsp;&nbsp;&nbsp; Success
+                #collapseWarnValidator.collapse
+                  .card.card-body
+                    ul.list-group.validation-item-warn
             .row.validation.fail.validation-fail.d-none
               .col-12
                 p.d-flex.gap-1
@@ -185,7 +200,6 @@ block content
                 #collapseFailValidator.collapse
                   .card.card-body
                     ul.list-group.validation-item-fail
-            textarea#input-validation.form-control(cols="30")
           .card-header
             h5 BrAPI call editor
           .card-body
