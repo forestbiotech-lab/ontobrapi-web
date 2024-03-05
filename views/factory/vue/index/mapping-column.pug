@@ -26,7 +26,7 @@ block content
                                         .d-flex.flex-row
                                             .p-1.btn.btn-dark JSON
                                             .p-1.fileName MIAPPEv1.1 + data_value
-                        textarea(style="font-size: x-small;" col="120",rows="10" v-model="uploadedJSON")
+                        textarea(style="font-size: x-small;" col="120",rows="10" v-model="uploadedJSON" placeholder="Or paste your mapping here!")
                         .row.mt-2.mx-0
                             button.col.me-2.load-mapping-file.btn.btn-sm.btn-primary.disabled open mapping file
                             button.col.ms-2.load-mapping-text.btn.btn-sm.btn-primary(v-on:click="loadJSON") load
