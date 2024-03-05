@@ -481,6 +481,7 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
         column:"",
         missingClass:"",
         missingClasses:[],
+        mappings:[],
         uploadedJSON:"",
         formOptions,
         selection:$data, //Change this to data
@@ -654,6 +655,8 @@ async function componentMappingWorksheet(formOptions,$data,jSheet){
       try {
         let ppeoClasses = await $.get("/query/ppeo/listClasses")
         this.ppeoClasses = ppeoClasses
+        let mappings = await $.get("/query/mapping/json")
+        this.mappings = mappings
       }catch (e) {
         displayToast("Unable to load Classes from PPEO",e)
       }

@@ -26,6 +26,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Onto BrAPI',version:runningVersion})
 });
 
+
+
 // Shows and example of the sqarl quary output.
 router.get('/query', function(req, res, next) {
   sparqlQuery().then(queryRes=>{

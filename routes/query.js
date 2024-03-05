@@ -77,7 +77,12 @@ router.get('/ppeo/listClasses',async (req,res)=>{
 })
 
 
+router.get('/mapping/json',(req,res)=>{
+  let mappings=glob.sync("__dirname/../reference_files/*.json")
+  mappings=mappings.map(file=>path.basename(file,".json"))
+  res.json(mappings)
 
+})
 router.get('/db/sparql/search/:fileName',(req,res)=>{
   let files=glob.sync("__dirname/../db/*.nt",{absolute:true})
   
