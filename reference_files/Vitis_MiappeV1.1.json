@@ -229,7 +229,7 @@
           "show": true,
           "referenceNode": "Associated publication",
           "data": {
-            "value": "hasAssociatedPublication",
+            "value": "hasName",
             "type": "string"
           }
         }
@@ -3540,7 +3540,7 @@
         "name": "named_node",
         "label": "Named Node"
       },
-      "naming_scheme": "@{__auto_increment__}",
+      "naming_scheme": "Environment_@{__auto_increment__}",
       "dataProperties": [],
       "objectProperties": [
         {
@@ -4011,7 +4011,7 @@
         "name": "named_node",
         "label": "Named Node"
       },
-      "naming_scheme": "observation_unit_@{Observation unit ID*}",
+      "naming_scheme": "ObservationUnit_@{Observation unit ID*}",
       "dataProperties": [
         {
           "id": "0",
@@ -4045,7 +4045,7 @@
           }
         },
         {
-          "id": 1,
+          "id": "1",
           "property": {
             "ObjectProperty": "http://purl.org/ppeo/PPEO.owl#hasEvent",
             "destination": "http://purl.org/ppeo/PPEO.owl#event",
