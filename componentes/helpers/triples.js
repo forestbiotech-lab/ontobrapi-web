@@ -2,19 +2,20 @@ const hash = require('object-hash');
 const xsd = require("@ontologies/xsd")
 //const {string} = require("@ontologies/xsd/index");
 class Triples{
-  constructor(prefixes,dependentClasses,default_named_nodes){
+  constructor(prefixes,dependentClasses,default_named_nodes,name){
     this.type=["class","objectProperty"] //Unnecessary
-    this.dependentClasses=dependentClasses //Possible rename 
+    this.dependentClasses=dependentClasses //Possible rename
+    //TODO change name from raiz to ontobrapi
     this.ontology={
                     base:"miappe",
-                    name:"raiz"
+                    name
                   }
     this.hash=hash
     this.triples={
                     prefix:{},
                     metadata:[
-                      {s:"<http://brapi.biodata.pt/raiz>",p:"<rdf:type>",o:"<owl:Ontology>"},
-                      {s:"<http://brapi.biodata.pt/raiz>",p:"<owl:imports>",o:"<http://purl.org/ppeo/PPEO.owl>"},
+                      {s:`<${prefixes[this.ontology.name].url}>`,p:"<rdf:type>",o:"<owl:Ontology>"},
+                      {s:`<${prefixes[this.ontology.name].url}>`,p:"<owl:imports>",o:"<http://purl.org/ppeo/PPEO.owl>"},
                       {s:"<miappe:hasLicense>",p:"<http://www.w3.org/2000/01/rdf-schema#subPropertyOf>",o:"<miappe:hasName>"}
                     ],
                     individuals:{
@@ -52,14 +53,14 @@ class Triples{
       return add    
     }
   } 
-  parseLineItem(mapping,value){
+  parseLineItem(mapping,value,lineInfo){
     //TODO I'm certain there probably are issues here due to the new format of currentLine in mapping.
     let context=mapping.currentLine
-    //this.makeNamedContext(mapping.header,mapping.currentLine)  //Removable
     if(this.dependentClasses.includes(mapping.name)){
+      //TODO Deprecated this can be used for stuff that is not in spreadsheet
       this.makeNamedNode(mapping,value,context)
     }
-    this.makeDependencies(mapping,value,context)
+    this.makeDependencies(mapping,value,context,lineInfo)
   }
   makeObservationProperties(observationProperties){
     let that=this
@@ -77,22 +78,22 @@ class Triples{
       })
     }
   }
-  makeDependencies(mapping,value,context){
+  makeDependencies(mapping,value,context,lineInfo){
      if(mapping.objectProperties){
         mapping.objectProperties.forEach(objectProperty=>{
           context.__value__=value
-          this.makePropertyTriple(objectProperty,mapping,context)
+          this.makePropertyTriple(objectProperty,mapping,context,lineInfo)
         })
       }
      if(mapping.dataProperties){
       mapping.dataProperties.forEach(dataProperty=>{
         context.__value__=value
-        this.makePropertyTriple(dataProperty,mapping,context)
+        this.makePropertyTriple(dataProperty,mapping,context,lineInfo)
       })
      }
 
   }
-  makePropertyTriple(propertyAttributes,mapping,context){
+  makePropertyTriple(propertyAttributes,mapping,context,lineInfo){
     let that=this
 
     //Don't add it if not visible
@@ -106,7 +107,7 @@ class Triples{
     } 
 
 
-    let node_name=this.interpolator(mapping.naming_scheme,context,true)
+    let node_name=this.interpolator(mapping.naming_scheme,context,true,lineInfo)
 
 
 
@@ -256,7 +257,7 @@ class Triples{
     }
     return referenced_node
   }
-  interpolator(string,context,lookup){
+  interpolator(string,context,lookup,lineInfo){
     let that=this
     let reserved_vars={
       __auto_increment__:this.auto_increment
@@ -273,7 +274,7 @@ class Triples{
           let temp=variable.replace(re2,"")
           //Tests for reserved_vars: Autoincrement
           if(Object.keys(reserved_vars).includes(temp)){
-            temp=reserved_vars[temp](string,that,lookup)        
+            temp=reserved_vars[temp](string,that,lookup,lineInfo)
           }else{
             temp=context[temp]  
           }
@@ -296,12 +297,18 @@ class Triples{
   isInterpolatable(value,re){
     return value.match(re)
   }
-  auto_increment(naming_scheme,that,lookup){
+  auto_increment(naming_scheme,that,lookup,lineInfo){
     let auto_increment=that.cache.auto_increment
     let value=null
     if(lookup){
       if(auto_increment[naming_scheme]){
         value=auto_increment[naming_scheme].value
+        if(lineInfo){
+          let newValue=parseInt(value)-parseInt(lineInfo.lines)+parseInt(lineInfo.index)+1
+          if(newValue>=0){
+            value=newValue
+          }
+        }
       } //TODO ELSE value will be null
     }else{
       if(auto_increment[naming_scheme]){

@@ -136,11 +136,14 @@ function makeTriples(spreadSheet,mapping,type){
   //END HARDCODED -----------------------------------------------------------------------------------------------------------------
 
   // Either their name has dependencies or its not for distinctElements.
-  let triples=new Triples(prefixes,dependentClasses,default_named_nodes)
+  //Must be one of the given prefix names above
+  const name= "raiz"
+  let triples=new Triples(prefixes,dependentClasses,default_named_nodes,name)
 
   
   parsedFile,header,distinctElements
   
+
   Object.entries(spreadSheet).forEach(([sheetName,data])=>{
     let parsedFile,header,distinctElements
     ({parsedFile,header,distinctElements}=data.contents)
@@ -175,14 +178,14 @@ function makeTriples(spreadSheet,mapping,type){
     })
   }
   function addProperties(parsedFile,sheetName,header,triples){
-    parsedFile.forEach((line)=>{
+    parsedFile.forEach((line,index)=>{
       Object.entries(line).forEach(([column,value])=>{  //column == index ??? value== value  
         try{
           if(mapping[sheetName][column].type=="class") {
             mapping[sheetName][column].currentLine = line
             mapping[sheetName][column].header = header
             mapping[sheetName][column].mapping = mapping[sheetName]
-            triples.parseLineItem(mapping[sheetName][column], value)
+            triples.parseLineItem(mapping[sheetName][column], value, {lines:parsedFile.length,index})
           }
         }catch(e){
           debug(`Mapping: ${mapping[sheetName][column]}\nSheetName: ${sheetName}\n column: ${column}`)
