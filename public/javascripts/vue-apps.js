@@ -34,7 +34,9 @@ function mainApp() {
                     contentType: false,
                     data: formData,
                     success: (data, textStatus, jqXHR) => {
-                        console.log(data)
+                        if (data.statusText === "OK") {
+                            displayToast(`Uploaded Graph`, `Graph: ${data.statusText}`)
+                        }
                     }
                 })
             },
