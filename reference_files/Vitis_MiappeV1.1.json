@@ -3110,8 +3110,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Data file link*": {
       "type": {
@@ -3130,8 +3129,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Data file description*": {
       "type": {
@@ -3139,14 +3137,16 @@
         "name": "dataProperty"
       },
       "name": {
-        "name": "hasVersion",
-        "label": "hasVersion"
+        "name": "hasDescription",
+        "label": "hasDescription"
       },
-      "valueType": "",
+      "valueType": {
+        "name": "string",
+        "label": "string"
+      },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Data file version*": {
       "type": {
@@ -3157,7 +3157,10 @@
         "name": "hasVersion",
         "label": "hasVersion"
       },
-      "valueType": "",
+      "valueType": {
+        "name": "xsdfloat",
+        "label": "xsdfloat"
+      },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
       "objectProperties": [],
@@ -3236,7 +3239,8 @@
           "show": true,
           "referenceNode": "Data file description*",
           "data": {
-            "value": "hasVersion"
+            "value": "hasDescription",
+            "type": "string"
           }
         },
         {
@@ -3245,7 +3249,8 @@
           "show": true,
           "referenceNode": "Data file version*",
           "data": {
-            "value": "hasVersion"
+            "value": "hasVersion",
+            "type": "xsdfloat"
           }
         }
       ],
