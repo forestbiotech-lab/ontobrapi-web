@@ -134,7 +134,8 @@ class Triples{
       if(isReferencedSubject){  
         let isReference=this.isReference(referenceNode)
         if(isReference){
-          referenced_node=this.makeObservationFromSubject(isReference,referenceNode,mapping,context)  
+          context.__lineInfo__=lineInfo
+          referenced_node=this.refermakeObservationFromSubject(isReference,referenceNode,mapping,context)
         }else{
           referenced_node=this.interpolator(mapping.naming_scheme,context)
         }  
@@ -245,7 +246,11 @@ class Triples{
     isSubject=isSubject[0].replace(/[#{}]/g,"")
     if (mapping.mapping[isSubject]){
       context.__value__=context[isSubject]
-      referenced_node=this.interpolator(mapping.mapping[isSubject].naming_scheme,context,true)            
+      if(context.__lineInfo__){
+        referenced_node=this.interpolator(mapping.mapping[isSubject].naming_scheme,context,true,context.__lineInfo__)
+      }else{
+        referenced_node=this.interpolator(mapping.mapping[isSubject].naming_scheme,context,true)
+      }
     }else{
       if(this.triples.individuals[isSubject]){
         referenced_node=isSubject
