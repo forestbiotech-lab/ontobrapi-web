@@ -1,0 +1,6 @@
+/usr/bin/env bash
+path=$1
+file=$2
+echo $path
+echo $file
+curl --digest --user dba:dba --verbose --url "http://localhost:8890/sparql-graph-crud-auth?graph-uri=http://localhost:8890/ontobrapi" -X POST -T "${path}/${file}"
