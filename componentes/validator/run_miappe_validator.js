@@ -51,9 +51,15 @@ function miappe(file){
 
 
 function extract(html){
-    let root=parse(html.replace(/.*\<\/head\>/, "").replace("</html>",""))
-    let data=root.getElementsByTagName("p")[0].innerHTML.replace(/<br>/g,"\n")
-    return data
+    try{
+        let root=parse(html.replace(/.*\<\/head\>/, "").replace("</html>",""))
+        let data=root.getElementsByTagName("p")[0].innerHTML.replace(/<br>/g,"\n")
+        return data
+    }catch(err){
+        //Error processing
+        return `CHECK FAILED - Request from validator failed!\nCHECK FAILED - ${err.message}`
+    }
+
 }
 
 //Deprecated version requires python dependencies to be install in the container
