@@ -11,12 +11,11 @@ const cors = require('cors')
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }*/
 
-let runningVersion="0.0";
+let runningVersion="DEV";
 (function getVersion(){
-  exec("git log --pretty=format:'%h' -1", (error, stdout, stderr) => {
-    if(error) console.log("Version not found")
-    else runningVersion=stdout
-  })
+  if(process.env.GIT_COMMIT){
+    runningVersion=process.env.GIT_COMMIT
+  }
 }())
 
 // / no previous route 
