@@ -133,7 +133,7 @@ function random(max){
                 await firstPage.waitForTimeout(1000)
                 let classNameNew = await(await directRows[attributeChoice].$(`.collapse#${collapseId} input[name="class"]`)).evaluate(el => el.value)
                 let propertyNameNew = await(await directRows[attributeChoice].$(`.collapse#${collapseId} input[name="property"]`)).evaluate(el => el.value)
-                let expectedClassName, expectedPropertyName
+                let expecqtedClassName, expectedPropertyName
                 let anchor = await(await firstPage.$(`td[attribute="${attributeName}"] .collapse#${collapseId} .v-select`)).evaluate(el => el.getAttribute("anchor"))
                 if (optionText.startsWith("Object Property")) {
                     expectedPropertyName = optionText.split(/Class/)[0].replace(/^.* Property/, "")
