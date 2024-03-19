@@ -9,7 +9,7 @@ RUN npm install --production
 
 COPY . .
 
-RUN git rev-parse HEAD > .GIT_COMMIT
+#RUN git rev-parse HEAD > .GIT_COMMIT
 EXPOSE 3000
 
 CMD [ "sh", "-c", "GIT_COMMIT=$(cat .GIT_COMMIT) npm start" ]
