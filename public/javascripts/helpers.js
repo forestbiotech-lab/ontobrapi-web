@@ -444,6 +444,9 @@ window.addEventListener("beforeunload", function (e) {
     if (window.app instanceof HTMLElement ){
         return;
     }
+    if (document.location.pathname != "/" ){
+        return;
+    }
     (e || window.event).returnValue = confirmationMessage; //Gecko + IE
     return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
 });
