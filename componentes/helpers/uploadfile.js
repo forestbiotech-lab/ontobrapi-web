@@ -119,7 +119,7 @@ function uploadFileGetPreview(req,uploadDir,destination){
               });
             }
           })
-        }else if(result.ext=="zip" && result.mime=="application/zip"){
+        }else if((result.ext=="msi" && result.mime=="application/x-msi") || (result.ext=="zip" && result.mime=="application/zip")){ //For xls and xlsx
           let destinationDir=path.join(uploadDir,`/${destination}`)
           let destinationFile=path.join(destinationDir, file.name)
           fs.exists(destinationDir, (exists)=>{

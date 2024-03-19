@@ -8,45 +8,49 @@ module.exports = {
 
 function miappe(file){
     return new Promise((resolve,reject)=> {
-        let logs=""
-        const postData = JSON.stringify({
-            "file": `external/${file.name}`,
-        });
-        const options = {
-            hostname: config.hostname,
-            port: config.port,
-            path: '/upload', //indifferent
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(postData),
-            },
-        };
-
-        const req = http.request(options, (res) => {
-            console.log(`STATUS: ${res.statusCode}`);
-            console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
-            res.setEncoding('utf8');
-            res.on('data', (chunk) => {
-                console.log(`BODY: ${chunk}`);
-                logs+=chunk
+        try{
+            let logs=""
+            const postData = JSON.stringify({
+                "file": `external/${file.name}`,
             });
-            res.on('end', () => {
-                console.log('No more data in response.');
-                let data = extract(logs)
-                resolve(data)
+            const options = {
+                hostname: config.hostname,
+                port: config.port,
+                path: '/upload', //indifferent
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Content-Length': Buffer.byteLength(postData),
+                },
+            };
+
+            const req = http.request(options, (res) => {
+                console.log(`STATUS: ${res.statusCode}`);
+                console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
+                res.setEncoding('utf8');
+                res.on('data', (chunk) => {
+                    console.log(`BODY: ${chunk}`);
+                    logs+=chunk
+                });
+                res.on('end', () => {
+                    console.log('No more data in response.');
+                    let data = extract(logs)
+                    resolve(data)
+                });
             });
-        });
 
-        req.on('error', (e) => {
-            console.error(`problem with request: ${e.message}`);
-        });
+            req.on('error', (e) => {
+                console.error(`problem with request: ${e.message}`);
+            });
 
-        // Write data to request body
-        req.write(postData);
-        req.end();
+            // Write data to request body
+            req.write(postData);
+            req.end();
+
+        }catch(err){
+            resolve(`CHECK FAILED - Request from validator failed!\nCHECK FAILED - ${err.message}`)
+        }
     })
-
 }
 
 
