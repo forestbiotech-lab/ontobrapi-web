@@ -2,4 +2,4 @@ uploads/*
 node_modules
 
 #WebStorm
-./idea
+.idea
