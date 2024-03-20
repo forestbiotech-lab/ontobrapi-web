@@ -5,7 +5,7 @@ As an example the name space should look something like this for the first datas
 
 ## Initialize collection
 This starts a collection, in which every dataset will be added to this graph 
-`SparQL
+```SparQL
 PREFIX ontobrapi: <http://brapi.biodata.pt/ontobrapi/>
 PREFIX miappe: <http://purl.org/ppeo/PPEO.owl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
@@ -15,10 +15,10 @@ INSERT INTO GRAPH ontobrapi: {
     ontobrapi: rdf:type owl:Ontology . 
     ontobrapi: owl:imports miappe: .
 }    
-`
+```
 
 ## Lookup datasets
-`SparQL
+```SparQL
 PREFIX ontobrapi: <http://brapi.biodata.pt/ontobrapi/>
 PREFIX void: <http://rdfs.org/ns/void#>
 
@@ -27,10 +27,10 @@ FROM ontobrapi:
 WHERE{
     ?datasets void:inDataset ontobrapi: .
 }
-`
+```
 
 ## Lookup datasets with Investigation ID
-`SparQL
+```SparQL
 PREFIX ontobrapi: <http://brapi.biodata.pt/ontobrapi/>
 PREFIX miappe: <http://purl.org/ppeo/PPEO.owl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
@@ -43,15 +43,30 @@ WHERE{
     ?dsInvestigation rdf:type miappe:investigation .
     ?dsInvestigation miappe:hasIdentifier ?id .
 }
-`
+```
 
 
 ### By name
+Search for datasets in OntoBrAPI with the Investigation name: "Investigation 0001"^^xsd:string
+```SparQL
+PREFIX ontobrapi: <http://brapi.biodata.pt/ontobrapi/>
+PREFIX miappe: <http://purl.org/ppeo/PPEO.owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+PREFIX void: <http://rdfs.org/ns/void#>
+
+SELECT DISTINCT ?datasets ?dsInvestigation
+FROM ontobrapi:
+WHERE{
+    ?datasets void:inDataset ontobrapi: .
+    ?dsInvestigation rdf:type miappe:investigation .
+    ?dsInvestigation miappe:hasName "Investigation 0001"^^xsd:string .
+}
+```
 
 ### By ID
-Specific example for the inserted triple. 
+Search for datasets in OntoBrAPI with the Investigation ID: "0001"^^xsd:string
 
-`SparQL
+```SparQL
 PREFIX ontobrapi: <http://brapi.biodata.pt/ontobrapi/>
 PREFIX miappe: <http://purl.org/ppeo/PPEO.owl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
@@ -64,11 +79,11 @@ WHERE{
     ?dsInvestigation rdf:type miappe:investigation .
     ?dsInvestigation miappe:hasIdentifier "0001"^^xsd:string .
 }
-`
+```
 
 
 ## Add Dataset
-`SparQL
+```SparQL
 PREFIX ontobrapi: <http://brapi.biodata.pt/ontobrapi/>
 PREFIX dataset01: <http://brapi.biodata.pt/ontobrapi/000001#>
 PREFIX miappe: <http://purl.org/ppeo/PPEO.owl#>
@@ -80,8 +95,9 @@ INSERT INTO GRAPH ontobrapi: {
     dataset01: <void:inDataset> ontobrapi: .
     dataset01:Investigation_01 rdf:type miappe:investigation .
     dataset01:Investigation_01 miappe:hasIdentifier "0001"^^xsd:string .
+    dataset01:Investigation_01 miappe:hasName "Investigation 0001"^^xsd:string .
 }
-`
+```
 
 ## Remove specific dataset
 
@@ -93,7 +109,7 @@ INSERT INTO GRAPH ontobrapi: {
 ## Submit to staging
 
 ### Initialize collection
-`SparQL
+```SparQL
 PREFIX staging: <http://brapi.biodata.pt/staging/ontobrapi>
 PREFIX miappe: <http://purl.org/ppeo/PPEO.owl#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
@@ -103,10 +119,10 @@ INSERT INTO GRAPH staging: {
     staging: rdf:type owl:Ontology .
     staging: owl:imports miappe: .
 }
-`
+```
 
 ### Add dataset to staging
-`SparQL
+```SparQL
 PREFIX ontobrapi: <http://brapi.biodata.pt/ontobrapi/>
 PREFIX dataset01: <http://brapi.biodata.pt/ontobrapi/000001#>
 PREFIX miappe: <http://purl.org/ppeo/PPEO.owl#>
@@ -121,10 +137,10 @@ INSERT INTO GRAPH staging: {
     dataset01:Investigation_01 miappe:hasIdentifier "0001"^^xsd:string .
     dataset01:Investigation_01 miappe:hasName "Investigation 0001"^^xsd:string .
 }
-`
+```
 
 ### List datasets in staging
-`SparQL
+```SparQL
 PREFIX staging: <http://brapi.biodata.pt/staging/ontobrapi>
 PREFIX void: <http://rdfs.org/ns/void#>
 
@@ -133,7 +149,7 @@ FROM staging:
 WHERE{
     ?datasets void:inDataset staging: .
 }
-`
+```
 
 ## Dataverse test instance 
 A dataverse test instance to test dataset creation is done using [dataverse-docker](https://github.com/IQSS/dataverse-docker).
