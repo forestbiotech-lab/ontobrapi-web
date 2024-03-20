@@ -126,9 +126,7 @@ $('document').ready(function(){
           $(".upload-augment-file").text("Upload another file")
           $(".upload-augment-file").unbind('click')
           $(".upload-augment-file").click(function(){
-            if(confirm("All unsaved mappings will be lost! Proceed?")){
              window.location.reload();
-            }
           })
         }
         resetUploadAbility()
