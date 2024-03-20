@@ -8,7 +8,6 @@ require('./componentes/helpers/util.js')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var formsRouter = require('./routes/forms');
-var callEditorRouter = require('./routes/callEditor');
 var raizRouter = require('./routes/raiz');
 var queryRouter = require('./routes/query');
 var factoryRouter = require('./routes/factory');
@@ -30,7 +29,6 @@ app.use('/', indexRouter);
 app.use('/raiz', raizRouter);
 app.use('/users', usersRouter);
 app.use('/forms', formsRouter);
-app.use('/calleditor', callEditorRouter);
 app.use('/query', queryRouter);
 app.use('/factory', factoryRouter);
 

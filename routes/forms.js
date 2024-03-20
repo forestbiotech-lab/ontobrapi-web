@@ -97,7 +97,7 @@ router.post('/parse/file/xlsx',async (req,res)=>{
     })
     let selection=payload.selection
     let jSheet=payload.jSheet
-    nt.str(jSheet,selection).then(data=>{
+    nt.json(jSheet,selection).then(data=>{
       res.json(data)
     }).catch(err=>{
       let message=err.message

@@ -21,17 +21,17 @@ Array.prototype.forEachAsyncParallel = async function (fn) {
 }
 
  
-function sparqlQuery(className) {
+function sparqlQuery(className,baseOntologyURI) {
 
   let query =`
-  PREFIX ppeo: <http://purl.org/ppeo/PPEO.owl#>
+  PREFIX baseOntology: <${baseOntologyURI}>
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   
   SELECT DISTINCT ?property ?class
-  FROM <https://bit.ly/3yJFXvw>
+  FROM <${from}>
   WHERE
     {
-     ?individual1  rdf:type   ppeo:${className} .
+     ?individual1  rdf:type   baseOntology:${className} .
      ?individual1  ?property  ?individual2      .
      optional{?individual2  rdf:type   ?class } .
      optional{?individual1  rdf:type   ?class } .

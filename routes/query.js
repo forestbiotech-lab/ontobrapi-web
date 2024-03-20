@@ -2,13 +2,16 @@ const express = require('express');
 const router = express.Router();
 const glob=require('glob');
 let xsd = require("@ontologies/xsd")
-let classProperties = require('./../componentes/sparql/classProperties')
+let classProperties = require('../componentes/sparql/baseOntologyClassProperties')
 let inferredRelationship = require('./../componentes/sparql/inferredRelationships')
 let formOptions=require('./../componentes/dataStructures/formOptions')
 let info=require('./../componentes/dataStructures/info')
 const {dataProperty} = require("../componentes/dataStructures/info");
 const path=require('path')
 const listClasses = require('./../componentes/sparql/ppeoListClasses')
+
+//TODO set this in config file
+const baseOntologyURI="http://purl.org/ppeo/PPEO.owl#"
 
 // query/
 
@@ -19,7 +22,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/ppeo/class/:class/properties/', async function(req, res, next) {
   let className=req.params.class
-  let queryResult=await classProperties(className)
+  let queryResult=await classProperties(className,baseOntologyURI)
   res.json(queryResult)  
 });
 
@@ -36,7 +39,7 @@ router.get('/dataStructures/formOptions/', function(req, res) {
 
 router.get('/inferred/objectProperty/:class',(req,res)=>{
   let className=req.params.class
-  inferredRelationship.objectProperties(className).then(result=>{
+  inferredRelationship.objectProperties(className,baseOntologyURI).then(result=>{
       res.json(result)
   }).catch(err=>{
     let message=err.msg
@@ -46,7 +49,7 @@ router.get('/inferred/objectProperty/:class',(req,res)=>{
 })
 router.get('/inferred/dataProperty/:class',(req,res)=>{
   let className=req.params.class
-  inferredRelationship.dataProperties(className).then(result=>{
+  inferredRelationship.dataProperties(className,baseOntologyURI).then(result=>{
     res.json(result)
   }).catch(err=>{
     let message=err.msg
@@ -57,7 +60,7 @@ router.get('/inferred/dataProperty/:class',(req,res)=>{
 
 router.get('/inferred/dataPropertyRange/:dataProperty',(req,res)=>{
   let dataProperty=req.params.dataProperty
-  inferredRelationship.dataPropertyRange(dataProperty).then(result=>{
+  inferredRelationship.dataPropertyRange(dataProperty,baseOntologyURI).then(result=>{
     res.json(result)
   }).catch(err=>{
     let message=err.msg

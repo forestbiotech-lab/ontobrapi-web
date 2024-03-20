@@ -1,3 +1,4 @@
+
 const SparqlClient = require('sparql-http-client')
 const sparql=require('./../../.config').sparql
 

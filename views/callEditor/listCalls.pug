@@ -1,9 +1,0 @@
-extends ../layout
-block content
-  include menu
-  h2 List of Calls
-  table.table
-    each call in calls
-      tr
-        td
-          a(href=""+call+"/map")=call
