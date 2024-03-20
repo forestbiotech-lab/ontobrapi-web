@@ -24,7 +24,7 @@ block content
               .d-grid
                 button.btn.btn-success.generate-nt(@click="generateNTs")
                   |Generate N-Triples (NT)
-              textarea.generated-ntriples(cols="120",rows="10" style="width:100%;").d-none
+              textarea.generated-ntriples(cols="120",rows="10" style="width:100%;",spellcheck="false").d-none
               .d-grid
                 button.btn.btn-primery.save-nt-file(@click="saveNTfile").d-none
                   i.bi-save(role="img" aria-label="Download") &nbsp;Save triples to file
