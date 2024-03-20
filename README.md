@@ -214,3 +214,9 @@ Modify the call structure add the anchor. The anchor defines the starting class 
 
 Updating a dataproperty might not propagate in Class data properties
 
+
+# Changing the base ontology
+This action was not considered when the project was designed, however since 90% of the actions are implemented based on ontology properties and the options are derived from the base ontology changing the base ontology will only take a couple of actions  
+ 1) Change the base ontology in the Triples constructor `componentes/helpers/triples.js` 
+ 2) Provide the prefix to the base ontology in `componentes/generators/nt.js` *makeTriples* function 
+ 3) Change the "from" URI in the used `componentes/sparql/*.js` files that are used. Most are now set to require explictly the base ontolgy for queries 
