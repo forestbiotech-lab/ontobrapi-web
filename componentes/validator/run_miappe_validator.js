@@ -57,7 +57,7 @@ function miappe(file){
 function extract(html){
     try{
         let root=parse(html.replace(/.*\<\/head\>/, "").replace("</html>",""))
-        let data=root.getElementsByTagName("p")[0].innerHTML.replace(/<br>/g,"\n")
+        let data=root.getElementsByTagName("p")[0].innerHTML.replace(/<br>/g,"\n").replace(/&gt;/g,">").replace(/&lt;/g,"<")
         return data
     }catch(err){
         //Error processing
