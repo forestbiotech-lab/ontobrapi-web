@@ -109,6 +109,24 @@ $('document').ready(function(){
             }
           })
           if(fail>0) {
+
+
+            var alertPlaceholder = document.getElementById('loadingPanel')
+            var alertTrigger = document.getElementById('loadingPanel')
+
+            function alert(message, type) {
+              var wrapper = document.createElement('div')
+              wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+
+              alertPlaceholder.prepend(wrapper)
+            }
+
+            if (alertTrigger) {
+              alertTrigger.addEventListener('show.bs.collapse', function () {
+                alert('The input validation has failed! Please fix the errors to continue, or click on the "Upload another file" button to try again. Click the Fail panel on the right to see the errors.', 'danger')
+              })
+            }
+
             $('div#validation-results .validation-fail').removeClass('d-none')
             $('div#validation-results .validation-fail .fail-counter').text(fail)
           }
