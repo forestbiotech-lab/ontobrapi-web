@@ -123,7 +123,7 @@ $('document').ready(function(){
 
             if (alertTrigger) {
               alertTrigger.addEventListener('show.bs.collapse', function () {
-                alert('The input validation has failed! Please fix the errors to continue, or click on the "Upload another file" button to try again. Click the Fail panel on the right to see the errors.', 'danger')
+                alert('The input validation has failed! Please fix the errors to continue, or click on the "Upload another file" button to try again. Click the FAIL panel on the right to see the errors.', 'danger')
               })
             }
 
