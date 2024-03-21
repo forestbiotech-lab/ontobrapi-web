@@ -1,3 +1,6 @@
+///Deprecated used for reference on using fetch-blob and digest-fetch
+
+
 const Blob = require('fetch-blob'); //v2
 const DigestFetch = require('digest-fetch'); //v2
 const sparql=require('./../../.config').sparql

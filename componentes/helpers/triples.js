@@ -3,9 +3,21 @@ const xsd = require("@ontologies/xsd")
 //const {string} = require("@ontologies/xsd/index");
 class Triples{
   constructor(prefixes,dependentClasses,default_named_nodes,name){
-    this.type=["class","objectProperty"] //Unnecessary
+    let individuals, properties = undefined
+    if( prefixes instanceof Object && prefixes.baseOntology && prefixes.prefix && prefixes.individuals && prefixes.properties &&
+        dependentClasses === undefined && default_named_nodes === undefined && name === undefined ){
+      //overloading constructor with JSON
+      dependentClasses=undefined
+      default_named_nodes=undefined  //ok it check for type
+      name=prefixes.baseOntology.name
+      individuals=prefixes.individuals
+      properties=prefixes.properties
+      prefixes=prefixes.prefix
+    }
+
     this.dependentClasses=dependentClasses //Possible rename
-    //TODO change name from raiz to ontobrapi
+
+    //TODO change base ontology
     this.ontology={
                     base:"miappe",
                     name
@@ -21,8 +33,13 @@ class Triples{
                     individuals:{
 
                     },
-                    properties:{}
+                    properties:{},
+
                   }
+    if( individuals !== undefined && properties !== undefined ){
+      this.triples.individuals=individuals
+      this.triples.properties=properties
+    }
     this.addPrefixes(prefixes)
     this.cache={auto_increment:{}}
     this.makeObservationProperties(default_named_nodes)
@@ -181,7 +198,8 @@ class Triples{
 
       //Subject
       naming_scheme=this.interpolator(mapping.naming_scheme,context)
-      triple.s=`<raiz:${encodeURI(naming_scheme)}>`  //Sanitize node names as URIs
+
+      triple.s=`<${this.ontology.name}:${encodeURI(naming_scheme)}>`  //Sanitize node names as URIs
       if(mapping.name=="observation"){
         mapping.node_name=naming_scheme
       }
@@ -372,7 +390,7 @@ class Triples{
 
   }
   toJSON(){
-    return {prefix:this.triples.prefix,individuals:this.triples.individuals,properties:this.triples.properties}
+    return {prefix:this.triples.prefix,individuals:this.triples.individuals,properties:this.triples.properties,baseOntology: this.ontology}
   }
   getXSDdatatypeURI(name){
     try{

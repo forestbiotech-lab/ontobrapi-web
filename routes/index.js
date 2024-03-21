@@ -52,13 +52,6 @@ router.get('/sparql/raiz/:file',(req,res)=>{
   res.send(`${data}`)
 })
 
-router.get('/running/version',(req,res)=>{
-  //Inefficient since its not dynamic only changes on reload image
-  exec("git log --pretty=format:'%h' -1", (error, stdout, stderr) => {
-    if(error) res.error(error)
-    else res.json(stdout)
-  })
-})
 
 
 module.exports = router;

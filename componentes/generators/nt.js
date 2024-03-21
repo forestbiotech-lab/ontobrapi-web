@@ -5,7 +5,7 @@ const Triples=require('./../helpers/triples')
 const debug = require('debug')('l1');
 
 
-module.exports={str,json}
+module.exports={str,json,json2str}
 
 
 function str(files,mapping){
@@ -13,6 +13,13 @@ function str(files,mapping){
 }
 function json(jSheet,mapping){
   return openAndSort(jSheet,mapping,type="json")
+}
+
+function json2str(jsonTriples){
+  return new Promise((res,rej)=>{
+    let triples=new Triples(jsonTriples)
+    res(triples.toString())
+  })
 }
 function openAndSort(jSheet,mappings,type){
   return new Promise((res,rej)=>{
@@ -55,11 +62,19 @@ function makeTriples(spreadSheet,mapping,type){
 
   //START HARDCODED BLOCK ------------------------------------------------------------------------------------------------------
   let prefixes={}
-  const raiz={
-    prefix:"PREFIX raiz: <http://brapi.biodata.pt/raiz#>",
-    url:"http://brapi.biodata.pt/raiz/"
+  const ontobrapi={
+    prefix:"PREFIX ontobrapi: <http://brapi.biodata.pt/ontobrapi#>",
+    url:"http://brapi.biodata.pt/ontobrapi"
   }
-  prefixes["raiz"]=raiz
+  prefixes["ontobrapi"]=ontobrapi
+  function datasetPrefix(UID){
+    return {
+      prefix:`PREFIX dataset: <${ontobrapi.url}/${UID}#>`,
+      url:ontobrapi.url+`/${UID}#`
+    }
+  }
+  prefixes["dataset"]= datasetPrefix("000001")
+
   const miappe={
     prefix:"PREFIX miappe: <http://purl.org/ppeo/PPEO.owl#>",
     url:"http://purl.org/ppeo/PPEO.owl#"
@@ -137,7 +152,7 @@ function makeTriples(spreadSheet,mapping,type){
 
   // Either their name has dependencies or its not for distinctElements.
   //Must be one of the given prefix names above
-  const name= "raiz"
+  const name= "dataset"
   let triples=new Triples(prefixes,dependentClasses,default_named_nodes,name)
 
   

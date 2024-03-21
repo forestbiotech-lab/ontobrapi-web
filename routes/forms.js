@@ -8,10 +8,10 @@ const uploadDir=path.join(__dirname,"../uploads/")
 const destination="uploadedfiles"
 const nt=require('./../componentes/generators/nt')
 const convertXlsx2json=require('.././componentes/xlsx/convert-xlsx2json')
-const uploadGraph=require('.././componentes/sparql/uploadGraph')
-const formidable = require("formidable");
 const fs=require("fs")
 const validator=require('.././componentes/validator/run_miappe_validator')
+const formData= require('./../componentes/helpers/formData').singleFile
+const submitGraph=require('.././componentes/sparql/submitGraph')
 // forms/
 
 router.post('/datafile/upload',(req,res)=>{
@@ -28,6 +28,8 @@ router.post('/datafile/upload',(req,res)=>{
   })
 })
 
+
+//USED by public/javascript/loaders.js
 router.get('/ontologyterms/:ontology/',(req,res)=>{
     query=`
     PREFIX rdf-syntax: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -45,6 +47,8 @@ router.get('/ontologyterms/:ontology/',(req,res)=>{
     res.end(message)
   })
 })
+
+//TODO - NOT used Marked for removal
 router.get('/ontologycomments/:ontology/',(req,res)=>{
     query=`
       PREFIX rdf-syntax: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -68,36 +72,29 @@ router.get('/ontologycomments/:ontology/',(req,res)=>{
 
 router.post('/parse/file/xlsx',async (req,res)=>{
   try{
-    //TODO refactor this whole logic elsewhere. 
-    // encasulate "req" to send.
-    let payload=await new Promise((resolve,rej)=>{
-        const formidable=require("formidable")
-        // create an incoming form object
-        var form = new formidable.IncomingForm();
-        form.multiples = false;
-        // log any errors that occur
-        form.on('error', function(err) {
-          console.log('An error has occured: \n' + err);
-          rej(err);
-        });
-        // once all the files have been uploaded, send a response to the client
-        form.on('end', function() {
-          //Not necessary for single file
-        });
-        // parse the incoming request containing the form data
-        form.parse(req,(err,field,files)=>{
-          if(err) rej(err)
-          if(field){
-            resolve(JSON.parse(field.payload))
-          }else{
-            rej(new Error("Something failed while retreiving data from client!"))
-          }
-          
-        });
-    })
+    let form_data=await formData(req)
+    let payload=JSON.parse(form_data.payload)
     let selection=payload.selection
     let jSheet=payload.jSheet
     nt.json(jSheet,selection).then(data=>{
+      res.json(data)
+    }).catch(err=>{
+      let message=err.message
+      res.writeHead( 400, message, {'content-type' : 'text/plain'});
+      res.end(message)
+    })
+  }catch(err){
+    let message=err.message
+    res.writeHead( 400, message, {'content-type' : 'text/plain'});
+    res.end(message)
+  }
+})
+
+router.post('/convert/json/triples/string',async (req,res)=>{
+  try{
+    let form_data=await formData(req)
+    let payload=JSON.parse(form_data.payload)
+    nt.json2str(payload).then(data=>{
       res.json(data)
     }).catch(err=>{
       let message=err.message
@@ -174,33 +171,14 @@ router.get('/parse/file/',(req,res)=>{
   }
 })
 
-router.post("/upload/graph",(req,res)=>{
-  const formidable=require("formidable")
-  // create an incoming form object
-  var form = new formidable.IncomingForm();
-  form.multiples = false;
-  // log any errors that occur
-  form.on('error', function(err) {
-    console.log('An error has occurred: \n' + err);
-    res.json({info:"Error getting incoming data! - ",err})
-  });
-  // once all the files have been uploaded, send a response to the client
-  form.on('end', function() {
-    //Not necessary for single file
-  });
-  // parse the incoming request containing the form data
-  form.parse(req,(err,field,files)=>{
-    if(err) res.json({info:"Error parsing incoming data! - ",err})
-    if(field){
-      uploadGraph(JSON.parse(field.newGraph)).then(result=>
-          res.json({result,statusText:result.statusText,status:result.status})
-      ).catch(err=>{
-        res.json({info:"Error occurred! - ",err,err})
-      })
-    }else{
-      res.json({info:"Error occurred, while retrieving data from client!! - ",err,err})
-    }
-  });
+router.post("/upload/graph",async (req,res)=>{
+  let form_data=await formData(req)
+  let payload=JSON.parse(form_data.payload)
+  submitGraph.staging(payload).then(result=>
+      res.json({result,statusText:result.statusText,status:result.status})
+  ).catch(err=>{
+    res.json({info:"Error occurred! - ",err,err})
+  })
 })
 
 
@@ -214,4 +192,11 @@ router.post("/get/mapping",(req,res)=>{
   }
 })
 
+/*
+router.post("/submit/staging",async (req,res)=>{
+    let payload = await newForm(req){
+
+  }
+})
+*/
 module.exports = router;
