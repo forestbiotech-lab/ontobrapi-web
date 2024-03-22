@@ -3081,8 +3081,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Data file link*": {
       "type": {
@@ -3101,8 +3100,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Data file description*": {
       "type": {
@@ -3110,14 +3108,16 @@
         "name": "dataProperty"
       },
       "name": {
-        "name": "hasVersion",
-        "label": "hasVersion"
+        "name": "hasDescription",
+        "label": "hasDescription"
       },
-      "valueType": "",
+      "valueType": {
+        "name": "string",
+        "label": "string"
+      },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Data file version*": {
       "type": {
@@ -3128,11 +3128,13 @@
         "name": "hasVersion",
         "label": "hasVersion"
       },
-      "valueType": "",
+      "valueType": {
+        "name": "xsdfloat",
+        "label": "xsdfloat"
+      },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "study": {
       "type": {
@@ -3207,7 +3209,8 @@
           "show": true,
           "referenceNode": "Data file description*",
           "data": {
-            "value": "hasVersion"
+            "value": "hasDescription",
+            "type": "string"
           }
         },
         {
@@ -3216,7 +3219,8 @@
           "show": true,
           "referenceNode": "Data file version*",
           "data": {
-            "value": "hasVersion"
+            "value": "hasVersion",
+            "type": "xsdfloat"
           }
         }
       ],
@@ -3420,8 +3424,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Environment parameter*": {
       "type": {
@@ -3440,8 +3443,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Environment parameter value*": {
       "type": {
@@ -3460,8 +3462,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "environment_parameter": {
       "type": {
@@ -3591,8 +3592,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Factor type*": {
       "type": {
@@ -3611,8 +3611,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Factor description": {
       "type": {
@@ -3631,8 +3630,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Factor values*": {
       "type": {
@@ -3651,8 +3649,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "study": {
       "type": {
@@ -3827,8 +3824,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Observation unit ID": {
       "type": {
@@ -3847,8 +3843,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Event type*": {
       "type": {
@@ -3867,8 +3862,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Event acession number": {
       "type": {
@@ -3887,8 +3881,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Event description": {
       "type": {
@@ -3907,8 +3900,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Event date*": {
       "type": {
@@ -3927,8 +3919,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "study": {
       "type": {

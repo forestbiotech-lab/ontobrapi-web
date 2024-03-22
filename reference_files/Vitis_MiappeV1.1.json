@@ -3134,8 +3134,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "study": {
       "type": {
@@ -3425,8 +3424,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Environment parameter*": {
       "type": {
@@ -3445,8 +3443,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Environment parameter value*": {
       "type": {
@@ -3465,8 +3462,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "environment_parameter": {
       "type": {
@@ -3596,8 +3592,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Factor type*": {
       "type": {
@@ -3616,8 +3611,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Factor description": {
       "type": {
@@ -3636,8 +3630,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Factor values*": {
       "type": {
@@ -3656,8 +3649,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "study": {
       "type": {
@@ -3832,8 +3824,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Observation unit ID": {
       "type": {
@@ -3852,8 +3843,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Event type*": {
       "type": {
@@ -3872,8 +3862,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Event acession number": {
       "type": {
@@ -3892,8 +3881,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Event description": {
       "type": {
@@ -3912,8 +3900,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "Event date*": {
       "type": {
@@ -3932,8 +3919,7 @@
       },
       "naming_scheme": "@{__value__}",
       "dataProperties": [],
-      "objectProperties": [],
-      "[object HTMLDivElement]": {}
+      "objectProperties": []
     },
     "study": {
       "type": {
