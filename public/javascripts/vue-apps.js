@@ -4,13 +4,17 @@ function mainApp() {
         data: {
             "uriGraph": "http://localhost:8890/ontobrapi",
             triples:{
-                json: null
+                json: null,
+                str: null,
+                uid: null
             },
         },
         methods: {
             async saveNTfile(event) {
-                let text=await this.convertNTs(event)
-                let blob = new Blob([text], {type: 'application/n-triples'})
+                if(this.triples.str==null){
+                    this.triples.str=await this.convertNTs(event)
+                }
+                let blob = new Blob([this.triples.str], {type: 'application/n-triples'})
                 let url = (URL.createObjectURL(blob))
                 let a = document.createElement("a");
                 document.body.appendChild(a);
@@ -24,10 +28,7 @@ function mainApp() {
             uploadGraph() {
                 let graph = $('textarea.generated-ntriples').text()
                 let that = this
-                let data = JSON.stringify({
-                    graph,
-                    "uri": that.uriGraph,
-                })
+                let data = JSON.stringify(this.triples.json)
                 let formData = new FormData();
                 // loop through all the selected files
                 formData.set('payload', data);
@@ -38,8 +39,17 @@ function mainApp() {
                     contentType: false,
                     data: formData,
                     success: (data, textStatus, jqXHR) => {
-                        if (data.statusText === "OK") {
-                            displayToast(`Uploaded Graph`, `Graph: ${data.statusText}`)
+                        //TODO This is useless otherwise it wouldn't be in success
+                        if ( textStatus === "success"){
+                            if(data.err == null){
+                                that.triples.uid = data.uid
+                            }else{
+                                displayToast("Error",JSON.stringify(data.err),4000)
+                            }
+
+                        }else{
+                            //todo?? will it break?
+                            displayToast("Error",data.err,4000)
                         }
                     }
                 })
