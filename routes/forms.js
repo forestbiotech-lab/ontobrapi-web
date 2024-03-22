@@ -174,10 +174,11 @@ router.get('/parse/file/',(req,res)=>{
 router.post("/upload/graph",async (req,res)=>{
   let form_data=await formData(req)
   let payload=JSON.parse(form_data.payload)
-  submitGraph.staging(payload).then(result=>
-      res.json({result,statusText:result.statusText,status:result.status})
+  submitGraph.staging(payload).then(result=> {
+        res.json(result)
+      }
   ).catch(err=>{
-    res.json({info:"Error occurred! - ",err,err})
+    res.json({uid:null,data:null,err})
   })
 })
 

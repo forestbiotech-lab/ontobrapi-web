@@ -9,6 +9,12 @@
   "validator": {
     "hostname":"localhost",
     "port":"3004"
+  },
+  "admin": {
+    "protocol": "http",
+    "hostname": "localhost",
+    "port": 3000,
+    "path":"/admin/brapi/dataset/submit/",
+    "method": "POST"
   }
-
 }
