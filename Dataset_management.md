@@ -40,6 +40,7 @@ SELECT DISTINCT ?datasets ?dsInvestigation  ?id
 FROM ontobrapi: 
 WHERE{
     ?datasets void:inDataset ontobrapi: .
+    ?dataset mippe:hasInvestigation ?dsInvestigation
     ?dsInvestigation rdf:type miappe:investigation .
     ?dsInvestigation miappe:hasIdentifier ?id .
 }
@@ -92,7 +93,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
 PREFIX void: <http://rdfs.org/ns/void#>
 
 INSERT INTO GRAPH ontobrapi: {
-    dataset01: <void:inDataset> ontobrapi: .
+    dataset01: void:inDataset ontobrapi: .
     dataset01:Investigation_01 rdf:type miappe:investigation .
     dataset01:Investigation_01 miappe:hasIdentifier "0001"^^xsd:string .
     dataset01:Investigation_01 miappe:hasName "Investigation 0001"^^xsd:string .
@@ -135,7 +136,7 @@ PREFIX void: <http://rdfs.org/ns/void#>
 PREFIX staging: <http://brapi.biodata.pt/staging/ontobrapi>
 
 INSERT INTO GRAPH staging: {
-    dataset01: <void:inDataset> staging: .
+    dataset01: void:inDataset staging: .
     dataset01:Investigation_01 rdf:type miappe:investigation .
     dataset01:Investigation_01 miappe:hasIdentifier "0001"^^xsd:string .
     dataset01:Investigation_01 miappe:hasName "Investigation 0001"^^xsd:string .
