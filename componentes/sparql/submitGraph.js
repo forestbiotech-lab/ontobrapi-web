@@ -1,8 +1,4 @@
 const hash = require('object-hash');
-const Blob = require('fetch-blob'); //v2
-const http = require('http');
-const fs=require("fs")
-const {Transform} = require('stream');
 const options=require('./../../.config').admin
 
 
@@ -11,8 +7,9 @@ function staging(jsonTriples){
      let payload=JSON.stringify(jsonTriples)
      let uid=generateUID(payload)
      let formData = new FormData();
-     formData.set('payload', payload);
-     fetch(`${options.protocol}://${options.hostname}:${options.port}${options.path}${uid}`, {
+     formData.append('payload', payload);
+     let d = new Date();
+     fetch(`${options.protocol}://${options.hostname}:${options.port}${options.path}${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}${uid}`, {
          method: options.method,
          body: formData
      }).then(async (res)=>{
