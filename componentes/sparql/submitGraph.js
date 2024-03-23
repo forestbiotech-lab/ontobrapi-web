@@ -1,6 +1,6 @@
 const hash = require('object-hash');
 const options=require('./../../.config').admin
-
+require('./../helpers/util')
 
 function staging(jsonTriples){
  return new Promise(async (resolve,reject)=>{
@@ -9,7 +9,8 @@ function staging(jsonTriples){
      let formData = new FormData();
      formData.append('payload', payload);
      let d = new Date();
-     fetch(`${options.protocol}://${options.hostname}:${options.port}${options.path}${d.getFullYear()}${d.getMonth() + 1}${d.getDate()}${uid}`, {
+     uid=`${d.getFullYear()}${(d.getMonth() + 1).toString().padStart(2, "0")}${d.getDate().toString().padStart(2, "0")}${uid}`
+     fetch(`${options.protocol}://${options.hostname}:${options.port}${options.path}${uid}`, {
          method: options.method,
          body: formData
      }).then(async (res)=>{
