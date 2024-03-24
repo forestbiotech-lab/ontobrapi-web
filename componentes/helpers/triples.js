@@ -390,6 +390,9 @@ class Triples{
 
   }
   toJSON(){
+    for( let [key,property] of Object.entries(this.triples.properties)) {
+      this.triples.properties[key].o=this.complete(property.o,this)
+    }
     return {prefix:this.triples.prefix,individuals:this.triples.individuals,properties:this.triples.properties,baseOntology: this.ontology}
   }
   getXSDdatatypeURI(name){
