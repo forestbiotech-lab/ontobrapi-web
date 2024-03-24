@@ -229,7 +229,7 @@
           "show": true,
           "referenceNode": "Associated publication",
           "data": {
-            "value": "hasName",
+            "value": "hasAssociatedPublication",
             "type": "string"
           }
         }
