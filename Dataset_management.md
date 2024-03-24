@@ -2,7 +2,8 @@
 The datasets are instances of the [PPEO](http://purl.org/ppeo/PPEO.owl), their namespace is [domain]/[projectname]/[date][dataset md5hash]. 
 As an example the name space should look something like this for the first dataset <https://brapi.biodata.pt/ontobrapi/20240322511da0aadfdb4786f4a5fcfda51c8bf3>, an alternative value is to generate a UID for each dataset through dataverse. 
 
-![Graphical Representation of OntoBrAPI dataset storage](https://raw.githubusercontent.com/forestbiotech-lab/ontoBrAPI-node-docker/2e85cc3ff5ebc630aa8da8153888888e469506be/public/images/ontobrapiDatasetKG.png)
+![Graphical Representation of OntoBrAPI dataset storage generated at: https://www.ldf.fi/service/rdf-grapher](https://raw.githubusercontent.com/forestbiotech-lab/ontoBrAPI-node-docker/2e85cc3ff5ebc630aa8da8153888888e469506be/public/images/ontobrapiDatasetKG.png)
+
 
 ## Initialize collection
 This starts a collection, in which every dataset will be added to this graph 
