@@ -395,10 +395,20 @@ class Triples{
     }
     return {prefix:this.triples.prefix,individuals:this.triples.individuals,properties:this.triples.properties,baseOntology: this.ontology}
   }
-  getXSDdatatypeURI(name){
+  getXSDdatatypeURI(name,literal){
+    literal=literal.replace(/"/g,'')
     try{
-      if (["float","double","boolean","long","int","short","byte"].includes(name))
-        name="xsd"+name
+      if (["float","double","boolean","long","int","short","byte"].includes(name)){
+        //TODO validate other types
+        if(name=="float" && literal.match("[0-9]*\\.*[0-9]*")[0].length == literal.length)
+          name="xsd"+name
+        else if(name=="int" && literal.match("[0-9]*")[0].length == literal.length)
+          name="xsd"+name
+        else if( name=="boolean" && (literal.lower == "true" || literal.lower == "false" ) )
+          name="xsd"+name
+        else
+          name="xsd"+'string'
+      }
       return xsd[name].value
     }catch (e){
       console.log(`Datatype: "${name}" was not found. Can't convert`,e)
@@ -434,11 +444,12 @@ class Triples{
             console.log("No completion found")
             return element
           }else if(this.isXSDdatatype(qualifier)){
-            return `${literal}^^<${this.getXSDdatatypeURI(qualifier)}>`
+            return `${literal}^^<${this.getXSDdatatypeURI(qualifier,literal)}>`
           }else{
             //TODO possible removal for this method
             // Not sure when this is useful
             //Mabe @PT ou something else
+            // URL????
             return `${literal}^^${this.getXSDdatatypeURI(qualifier)}`//${that.complete(`<${qualifier}>`,that,true)}`
           }
         }
