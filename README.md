@@ -164,8 +164,10 @@ https://github.com/SheetJS/sheetjs  (See what the above adds)
 
 ###### Development
 
-- /forms/parse/file downlaods a file.
-- /forms/parse/file/json  This is the json version 
+- /forms/parse/file downlaods a file. The file will not have the appropriate namespace of the destination. 
+- /forms/parse/file/json  This is the json version. 
+The JSON comes with the observation of data properties already transformed, with datatype validation for Boolean, integer and float.  
+
 
 ### Information tooltips
 Adding tooltips requires a simple html element:
