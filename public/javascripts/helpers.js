@@ -285,8 +285,8 @@ function loadOntologyDataToFormOptions(formOptions){
         //Not sure this is correctly classified
         window.ontologies.ppeo[`http://purl.org/ppeo/PPEO.owl#spatial_coordinate`].map((term)=>{formOptions.name.DataProperty.push({name:term.split("#")[1],label:term.split("#")[1]})})
     }catch(err){
-        console.log("Ontologies haven't loaded yet")
-        displayToast("Ontologies haven't loaded!",err,4000)
+        console.log("Ontologies haven't loaded yet ")
+        displayToast("Ontologies haven't loaded! ",err,4000)
     }
 }
 async function loadXSDdatatypes(){

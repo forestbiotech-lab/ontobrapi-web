@@ -152,7 +152,7 @@ class Triples{
         let isReference=this.isReference(referenceNode)
         if(isReference){
           context.__lineInfo__=lineInfo
-          referenced_node=this.refermakeObservationFromSubject(isReference,referenceNode,mapping,context)
+          referenced_node=this.makeObservationFromSubject(isReference,referenceNode,mapping,context)
         }else{
           referenced_node=this.interpolator(mapping.naming_scheme,context)
         }  
@@ -391,7 +391,9 @@ class Triples{
   }
   toJSON(){
     for( let [key,property] of Object.entries(this.triples.properties)) {
-      this.triples.properties[key].o=this.complete(property.o,this)
+      if(property.o.match("\\^\\^")){
+        this.triples.properties[key].o=this.complete(property.o,this)
+      }
     }
     return {prefix:this.triples.prefix,individuals:this.triples.individuals,properties:this.triples.properties,baseOntology: this.ontology}
   }
@@ -407,7 +409,7 @@ class Triples{
         else if( name=="boolean" && (literal.lower == "true" || literal.lower == "false" ) )
           name="xsd"+name
         else
-          name="xsd"+'string'
+          name='string'
       }
       return xsd[name].value
     }catch (e){
