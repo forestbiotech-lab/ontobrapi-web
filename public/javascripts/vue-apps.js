@@ -25,7 +25,13 @@ function mainApp() {
                 window.URL.revokeObjectURL(url);
                 a.remove()
             },
-            uploadGraph() {
+            uploadGraph(event) {
+                let button = event.target
+                let spinner = mkel('span', {
+                    class: "spinner-border spinner-border-sm",
+                    role: "status",
+                    "aria-hidden": "true"
+                }, button)
                 let graph = $('textarea.generated-ntriples').text()
                 let that = this
                 let data = JSON.stringify(this.triples.json)
@@ -39,6 +45,7 @@ function mainApp() {
                     contentType: false,
                     data: formData,
                     success: (data, textStatus, jqXHR) => {
+                        spinner.remove()
                         //TODO This is useless otherwise it wouldn't be in success
                         if ( textStatus === "success"){
                             if(data.err == null){

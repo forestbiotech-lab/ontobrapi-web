@@ -27,8 +27,8 @@ class Triples{
                     prefix:{},
                     metadata:[
                       {s:`<${prefixes[this.ontology.name].url}>`,p:"<rdf:type>",o:"<owl:Ontology>"},
-                      {s:`<${prefixes[this.ontology.name].url}>`,p:"<owl:imports>",o:"<http://purl.org/ppeo/PPEO.owl>"},
-                      {s:"<miappe:hasLicense>",p:"<http://www.w3.org/2000/01/rdf-schema#subPropertyOf>",o:"<miappe:hasName>"}
+                      {s:`<${prefixes[this.ontology.name].url}>`,p:"<owl:imports>",o:`<${prefixes.miappe.url.slice(0,-1)}}>`},
+                      {s:"<miappe:hasLicense>",p:`<${prefixes.rdf.url}subPropertyOf>`,o:"<miappe:hasName>"}
                     ],
                     individuals:{
 

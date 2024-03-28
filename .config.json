@@ -4,7 +4,9 @@
     "pass": "dba",
     "host":"localhost",
     "port":"8890",
-    "ontobrapi":"http://localhost:8890/ontobrapi"
+    "ontoBrAPIgraph":"http://localhost:8890/ontobrapi",
+    "ontoBrAPI-comment": "This is the namespace used in the prefix to generate the triples, in nt.js",
+    "ontoBrAPI":"http://brapi.biodata.pt"
   },
   "validator": {
     "hostname":"localhost",

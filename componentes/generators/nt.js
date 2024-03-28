@@ -3,6 +3,7 @@ const path=require('path')
 //const mapping=require('./../helpers/default-mapping')
 const Triples=require('./../helpers/triples')
 const debug = require('debug')('l1');
+const ontoBrAPI=require('./../../.config').sparql.ontoBrAPI
 
 
 module.exports={str,json,json2str}
@@ -63,8 +64,8 @@ function makeTriples(spreadSheet,mapping,type){
   //START HARDCODED BLOCK ------------------------------------------------------------------------------------------------------
   let prefixes={}
   const ontobrapi={
-    prefix:"PREFIX ontobrapi: <http://brapi.biodata.pt/ontobrapi#>",
-    url:"http://brapi.biodata.pt/ontobrapi"
+    prefix:`PREFIX ontobrapi: <${ontoBrAPI}/ontobrapi#>`,
+    url:`${ontoBrAPI}/ontobrapi`
   }
   prefixes["ontobrapi"]=ontobrapi
   function datasetPrefix(UID){
