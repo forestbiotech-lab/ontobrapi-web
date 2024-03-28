@@ -400,7 +400,7 @@ class Triples{
   getXSDdatatypeURI(name,literal){
     literal=literal.replace(/"/g,'')
     try{
-      if (["float","double","boolean","long","int","short","byte"].includes(name)){
+      if (["xsdfloat","float","double","boolean","long","int","short","byte"].includes(name)){
         //TODO validate other types
         if(name=="float" && literal.match("[0-9]*\\.*[0-9]*")[0].length == literal.length)
           name="xsd"+name
