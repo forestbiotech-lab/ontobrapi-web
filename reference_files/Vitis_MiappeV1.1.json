@@ -2475,7 +2475,7 @@
         "label": "observation_unit"
       },
       "valueType": "",
-      "naming_scheme": "observation_unit_@{Observation unit ID*}",
+      "naming_scheme": "observationUnit_@{Observation unit ID*}",
       "dataProperties": [],
       "objectProperties": []
     }
