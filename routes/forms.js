@@ -12,6 +12,7 @@ const fs=require("fs")
 const validator=require('.././componentes/validator/run_miappe_validator')
 const formData= require('./../componentes/helpers/formData').singleFile
 const submitGraph=require('.././componentes/sparql/submitGraph')
+const if_transposed_transform=require('./../componentes/xlsx/if_transposed_transform')
 // forms/
 
 router.post('/datafile/upload',(req,res)=>{
@@ -19,6 +20,7 @@ router.post('/datafile/upload',(req,res)=>{
     //Action is now for jsheet
     let validation=await validator.miappe(data.file)
     data.jsheet=convertXlsx2json(data.file)
+    data.jsheet=if_transposed_transform(data.jsheet)
     data.validation=validation.toString()
     res.json(data)
   }).catch(err=>{
