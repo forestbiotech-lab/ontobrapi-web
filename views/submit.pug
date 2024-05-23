@@ -187,14 +187,14 @@ block content
                 p.d-flex.gap-1
                   .d-grid
                     button.btn.btn-secondary(data-bs-toggle='collapse' href='#collapseWarningValidator' role='button' aria-expanded='false' aria-controls='collapseWarningValidator')
-                      span.mt-1.float-start.badge.bg-success.position-relative(type='button')
-                        i.bi-check-circle(role="img")
+                      span.mt-1.float-start.badge.bg-warning.position-relative(type='button')
+                        i.bi-exclamation-circle(role="img")
                         span.warn-counter.position-absolute.top-0.start-100.translate-middle.badge.rounded-pill.bg-warning
                           | 0
                           span.visually-hidden unread messages
                       span.float-start
-                        | &nbsp;&nbsp;&nbsp; Success
-                #collapseWarnValidator.collapse
+                        | &nbsp;&nbsp;&nbsp; Warning
+                #collapseWarningValidator.collapse
                   .card.card-body
                     ul.list-group.validation-item-warn
             .row.validation.fail.validation-fail.d-none

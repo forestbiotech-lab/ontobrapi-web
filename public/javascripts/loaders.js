@@ -101,7 +101,7 @@ $('document').ready(function(){
               $('div#validation-results .validation-success ul.validation-item-success').append(li)
             }
             if(line.startsWith("CHECK WARNING")){
-              success++
+              warn++
               let li=document.createElement("li")
               li.className="list-group-item"
               li.textContent=line.replace("CHECK WARNING - ","")

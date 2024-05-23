@@ -21,8 +21,8 @@ let runningVersion="DEV";
 // / no previous route 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Onto BrAPI',version:runningVersion})
+router.get('/submit', function(req, res, next) {
+  res.render('submit', { title: 'Onto BrAPI',version:runningVersion})
 });
 
 
