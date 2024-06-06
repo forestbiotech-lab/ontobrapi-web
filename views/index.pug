@@ -22,7 +22,9 @@ block content
                         li
                             a.dropdown-item(href='#') About us
                 input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
-                button.btn.btn-outline-success(type='submit') Search
+                button.btn.btn-outline-success(type='submit')
+                    span.p-2 !{octicons["search"].toSVG({ "class": "file" })}
+                    span Search
     .main
         .container-fluid
             .row
@@ -34,7 +36,8 @@ block content
                         | &nbsp;Standards.
                     svg#graph-ppeo
                     p The graph aboves shows a summary of the Knowledge graph that is generated. Blue nodes represent classes, the smaller nodes represent dataproperties and the node are connected by object properties. You can hover with the arrow to view the respective property name.
-                    p To submit data, please start by filling a MIAPPE template.
+                    p To submit data, please start by filling a&nbsp;
+                        a(href="https://github.com/MIAPPE/MIAPPE/raw/master/MIAPPE_Checklist-Data-Model-v1.1/MIAPPE_Checklist-Data-Model-v1.1.xlsx" target="_blank") MIAPPE template.
                 .col-4
                     .row
                         .col-6
@@ -57,7 +60,7 @@ block content
             .row
                 .col-4.contacts
                     h5 Contacts:
-                    .d-flex.justify-content-center
+                    .d-flex.flex-row.pl-4
                         a(href="mailto:brunovasquescosta@gmail.com" subject="More info on PHENO website" target="_blank")
                             span.p-2 !{octicons["mail"].toSVG({ "class": "file","height":'24px' })}
                         a(href="https://github.com/forestbiotech-lab/ontoBrAPI" target="_blank")

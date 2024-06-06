@@ -29,4 +29,4 @@ loadChart({
         {source:"Biological Material",target:"Arabidopsis",value:5,name:"hasGenus"},
         {source:"Biological Material",target:"thaliana",value:5,name:"hasSpecies"},
     ]},"graph-ppeo")
-$("svg#graph-ppeo").attr("viewBox", "-300 -300 1000 410")
+$("svg#graph-ppeo").attr("viewBox", "-300 -200 1000 410")
