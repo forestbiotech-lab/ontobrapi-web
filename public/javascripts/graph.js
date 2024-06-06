@@ -22,16 +22,21 @@ function chart(data,id) {
     .enter().append("line")
       .attr("stroke-width", d => Math.sqrt(d.value)*2);
 
+  link.append("title")
+    .text(d => d.name );
+
   const node = svg.append("g")
       .attr("stroke", "#fff")
       .attr("stroke-width", 1.5)
     .selectAll("circle")
     .data(nodes)
     .enter().append("circle")
-      .attr("r", 20)
+      .attr("r", d=> {if (d.value) return d.value; else return 20})
       .attr("fill", color(data))
       .call(drag(simulation));
 
+  //node.circle
+  //    .attr("r", d=> d.value*20);
   node.append("title")
       .text(d => d.id);
 

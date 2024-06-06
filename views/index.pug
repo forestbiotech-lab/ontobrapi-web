@@ -1,0 +1,76 @@
+extends layout-frontpage
+
+block content
+    .header
+        .container-fluid
+            .row
+                .col-2
+                    img(src="/images/pheno.png")
+                .col-10
+
+    nav.navbar.navbar-light.bg-light
+        .container-fluid
+            .d-flex
+                button.btn.btn-outline-success Log In
+            form.d-flex
+                .btn-group
+                    button.btn.btn-outline-success.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
+                        | About
+                    ul.dropdown-menu
+                        li
+                            a.dropdown-item(href='#') Documentation
+                        li
+                            a.dropdown-item(href='#') About us
+                input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
+                button.btn.btn-outline-success(type='submit') Search
+    .main
+        .container-fluid
+            .row
+                .col-8
+                    p Welcome to PHENO, a FAIR phenotypic datastore complient with the&nbsp;
+                        a(href="https://www.miappe.org/" target="_blank") MIAPPE
+                        | &nbsp;and&nbsp;
+                        a(href="https://brapi.org") BrAPI
+                        | &nbsp;Standards.
+                    svg#graph-ppeo
+                    p The graph aboves shows a summary of the Knowledge graph that is generated. Blue nodes represent classes, the smaller nodes represent dataproperties and the node are connected by object properties. You can hover with the arrow to view the respective property name.
+                    p To submit data, please start by filling a MIAPPE template.
+                .col-4
+                    .row
+                        .col-6
+                            .card.species-card.rice.d-flex.align-items-center.justify-content-center
+                                span.p-2 Rice
+                        .col-6
+                            .card.species-card.grapevine.d-flex.align-items-center.justify-content-center
+                                span.p-2.align-content-center Grapevine
+                    .row
+                        .col-6
+                            .card.species-card.cork-oak.d-flex.align-items-center.justify-content-center
+                                span.p-2 Cork Oak
+                        .col-6
+                            .card.species-card.tomato.d-flex.align-items-center.justify-content-center
+                                span.p-2 Tomato
+                    .row
+                        a(href="/submit").btn.btn-outline-success Submit you data
+    .footer
+        .container-fluid
+            .row
+                .col-4.contacts
+                    h5 Contacts:
+                    .d-flex.justify-content-center
+                        a(href="mailto:brunovasquescosta@gmail.com" subject="More info on PHENO website" target="_blank")
+                            span.p-2 !{octicons["mail"].toSVG({ "class": "file","height":'24px' })}
+                        a(href="https://github.com/forestbiotech-lab/ontoBrAPI" target="_blank")
+                            span.p-2 !{octicons["mark-github"].toSVG({ "class": "file","height":'24px' })}
+                        a(href="https://ontobrapi-docs.readthedocs.io/en/latest/" target="_blank")
+                            span.p-2 !{octicons["file"].toSVG({ "class": "file","height":'24px' })}
+
+                .col-4.co-funded
+                    h5 Co-funded by:
+                    .d-flex.flex-wrap
+                        .logo.biodata
+                        .logo.elixir
+                .col-4.hosted
+                    h5 Hosted by:
+                    .d-flex.flex-wrap
+                        .logo.ist

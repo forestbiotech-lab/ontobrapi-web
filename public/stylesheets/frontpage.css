@@ -1,0 +1,82 @@
+.header {
+    background: beige;
+}
+.header img {
+    height: 150px;
+    width: auto;
+    padding: 20px;
+    float: left
+}
+.main {
+    padding: 20px;
+}
+
+.main .species-card{
+    height: 200px;
+    /*max-width: 200px;*/
+    width: 100%;
+    border: 1px solid black;
+    margin: 10px;
+    float: left;
+}
+.species-card.rice{
+    background-image: url("../images/rice-sandy-ravaloniaina-rARwqh9IXEE-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.species-card.grapevine{
+    background-image: url("../images/grapevine-boudewijn-boer-qT515JdZNy8-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.species-card.cork-oak{
+    background-image: url("../images/corkoak-jacek-ulinski-XJe5vMl8xjg-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.species-card.tomato{
+    background-image: url("../images/tomato-engin-akyurt-eb26eV-ys_k-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.species-card span{
+    background-color: rgba(240, 240, 240, 0.66);
+}
+
+.row .btn{
+   margin-left: 10px;
+}
+.footer{
+    background-color: #333333;
+    height: 300px;
+    color: beige;
+}
+.footer h5{
+    padding: 40px;
+}
+.footer .logo{
+    height: 100px;
+    padding: 10px;
+}
+
+.footer .elixir{
+    background-image: url("/images/funded_by/elixir-white.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width:100px;
+}
+.footer .biodata{
+    background-image: url("/images/funded_by/biodata.svg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    width:150px;
+}
+.footer .ist{
+    background-image: url("/images/hosted_by/IST_A_RGB_NEG_cropped.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width:200px;
+}
+.footer .contacts span{
+    height: 24px;
+}

@@ -5,6 +5,8 @@ const path=require('path')
 const fs = require('fs')
 const { exec } = require("child_process");
 const cors = require('cors')
+const octicons = require('@primer/octicons')
+
 
 /*var corsOptions = {
   origin: 'http://example.com',
@@ -19,6 +21,12 @@ let runningVersion="DEV";
 }())
 
 // / no previous route 
+
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'PHENO',version:runningVersion,octicons});
+});
+
+
 
 /* GET home page. */
 router.get('/submit', function(req, res, next) {

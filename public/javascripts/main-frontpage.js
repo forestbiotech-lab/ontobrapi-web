@@ -1,0 +1,32 @@
+loadChart({
+    nodes:[
+        {id:"Investigation",group:0,value:20},
+        {id:"Study",group:0,value:20},
+        {id:"Biological Material",group:0,value:20},
+        {id:"Observation Unit",group:0,value:20},
+        {id:"Observation",group:0,value:20},
+        {id:"Environment",group:0,value:20},
+        {id:"EnvironmentParameter",group:0,value:20},
+        {id:"MaterialSource",group:0},
+        {id:"id",group:1,value:10},
+        {id:"title",group:1,value:10},
+        {id:"description",group:1,value:10},
+        {id:"Arabidopsis",group:2,value:10},
+        {id:"thaliana",group:2,value:10},
+    ],
+    links:[
+        {source:"Investigation",target:"Study",value:10,name:"partOf/hasPart"},
+        {source:"Study",target:"Biological Material",value:10,name:"hasBiologicalMaterial"},
+        {source:"Study",target:"Observation Unit",value:10,name:"partOf/hasPart"},
+        {source:"Observation Unit",target:"Biological Material",name:"hasBiologicalMaterial",value: 10},
+        {source:"Observation Unit",target:"Observation",value:10,name:"part of"},
+        {source:"Study",target:"Environment",value:10},
+        {source:"Environment",target:"EnvironmentParameter",value:10,name:"hasEnvironmentParameter"},
+        {source:"Biological Material",target:"MaterialSource",value:10,name:"hasMaterialSource"},
+        {source:"Investigation",target:"id",value:5,name:"hasIdentifier"},
+        {source:"Investigation",target:"title",value:5,name:"hasName"},
+        {source:"Investigation",target:"description",value:5,name:"hasDescription"},
+        {source:"Biological Material",target:"Arabidopsis",value:5,name:"hasGenus"},
+        {source:"Biological Material",target:"thaliana",value:5,name:"hasSpecies"},
+    ]},"graph-ppeo")
+$("svg#graph-ppeo").attr("viewBox", "-300 -300 1000 410")
