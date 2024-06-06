@@ -1,3 +1,10 @@
+# Welcome to OntoBrAPI
+![OntoBrAPI logo](https://github.com/forestbiotech-lab/ontoBrAPI-node-docker/blob/master/public/images/logo.png)
+
+OntoBrAPI runs a web server, which provides a Graphical User Interface (GUI) that allows the conversion of the MIAPPE spreadsheet into n-triples format. The GUI allows the user to dynamically map the MIAPPE spreadsheet to the appropriate PPEO ontological properties using a JavaScript Object Notation (JSON). The user can also start from an initial mapping in JSON and adjust any fields deemed necessary. The GUI uses the constraints coded in the ontology to validate the mapping. As an example, the data types allowed for each of the data properties is enforced by the GUI, which are inherited from the rules in the ontology; the same goes for the object properties that can link classes and the data properties that can annotate classes.
+
+# Setup
+
 ## NGINX
 add the following line to location section of your server in nginx config file. To allow body size to be larger. This is for the ajax request to send mapping and jsheet
 
