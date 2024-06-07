@@ -6,6 +6,8 @@ const fs = require('fs')
 const { exec } = require("child_process");
 const cors = require('cors')
 const octicons = require('@primer/octicons')
+const config = require('../.config.json')
+
 
 
 /*var corsOptions = {
@@ -34,6 +36,13 @@ router.get('/submit', function(req, res, next) {
 });
 
 
+router.get('/dev/configs', function(req, res, next) {
+  let admin={}
+  if (req.hostname == 'localhost') {
+    admin=config.admin
+  }
+  res.json( admin )
+});
 
 // Shows and example of the sqarl quary output.
 router.get('/query', function(req, res, next) {
