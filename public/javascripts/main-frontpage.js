@@ -15,7 +15,7 @@ window.app = new Vue({
         async lookupTerm(){
             if(this.lookup_data_property.length>2){
                 that=this
-                $.post(this.devhost+"/admin/query/lookup/data-property",{
+                $.post(this.devhost_admin+"/admin/query/lookup/data-property",{
                     graph: "staging:",
                     term:this.lookup_data_property
                 }).then(result=>{
