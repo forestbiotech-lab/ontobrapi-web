@@ -1,0 +1,11 @@
+#modal-results.modal.fade(aria-hidden='true', aria-labelledby='modal-results-label', tabindex='-1')
+    .modal-dialog.modal-dialog-centered
+        .modal-content
+            .modal-header
+                h5#modal-results-label.modal-title Login
+                button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+            .modal-body
+                .d-flex.justify-content-center
+                    a.btn.btn-danger(href="/admin") Admin
+                    a.btn.btn-warning(href="/admin/brapi") Curation
+
