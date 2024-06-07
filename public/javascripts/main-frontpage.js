@@ -3,7 +3,7 @@ window.app = new Vue({
     data:{
         "lookup_data_property": "",
         lookup_result:[],
-        devhost:""
+        devhost_admin:""
     },
     computed:{
 
@@ -48,7 +48,7 @@ window.app = new Vue({
         window.modal = new bootstrap.Modal(document.getElementById('modal-results'), {})
         fetch("/dev/configs").then(res=>res.json()).then(admin=>{
             if(admin){
-                this.devhost=`${admin.protocol}://${admin.hostname}:${admin.port}`
+                this.devhost_admin=`${admin.protocol}://${admin.hostname}:${admin.port}`
             }
         })
     }

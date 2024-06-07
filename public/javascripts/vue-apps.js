@@ -8,6 +8,7 @@ function mainApp() {
                 str: null,
                 uid: null
             },
+            devhost_admin:""
         },
         methods: {
             async saveNTfile(event) {
@@ -149,6 +150,13 @@ function mainApp() {
                     }
                 })
             }
+        },
+        beforeMount() {
+            fetch("/dev/configs").then(res=>res.json()).then(admin=>{
+                if(admin){
+                    this.devhost_admin=`${admin.protocol}://${admin.hostname}:${admin.port}`
+                }
+            })
         }
     })
 }

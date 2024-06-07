@@ -46,7 +46,7 @@ block content
                     use(xlink:href='#check-circle-fill')
                   div
                     | Your dataset has been submitted with the id:
-                    a#graphUID(:href="`/admin/brapi/dataset/status/${triples.uid}`") {{triples.uid}}
+                    a#graphUID(:href="`${devhost_admin}/admin/brapi/dataset/status/${triples.uid}`") {{triples.uid}}
                     | &nbsp;you can check the status of your data set on this page.
 
         #template.d-none
