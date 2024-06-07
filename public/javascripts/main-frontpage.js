@@ -1,3 +1,60 @@
+window.app = new Vue({
+    el: '#app',
+    data:{
+        "lookup_data_property": "",
+        lookup_result:[],
+        devhost:""
+    },
+    computed:{
+
+    },
+    methods:{
+        loginPanel(){
+            window.modal.show()
+        },
+        async lookupTerm(){
+            if(this.lookup_data_property.length>2){
+                that=this
+                $.post(this.devhost+"/admin/query/lookup/data-property",{
+                    graph: "staging:",
+                    term:this.lookup_data_property
+                }).then(result=>{
+                    if(result.data.length>0){
+                        that.lookup_result=result.data
+                    }else{
+                        that.lookup_result=[{
+                            class:"#None",
+                            dataPropertyURI:"",
+                            property:"#None",
+                            dataValue:"No results found!"
+                        }]
+                    }
+
+                })
+
+
+            } else{
+                this.lookup_result=[]
+            }
+
+        }
+    },
+    async beforeMount() {
+        let response= await fetch('/factory/vue/index/modal')
+        let htmlString=await response.text()
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(htmlString, 'text/html')
+        document.getElementById("app").append(doc.getElementById("modal-results"))
+        window.modal = new bootstrap.Modal(document.getElementById('modal-results'), {})
+        fetch("/dev/configs").then(res=>res.json()).then(admin=>{
+            if(admin){
+                this.devhost=`${admin.protocol}://${admin.hostname}:${admin.port}`
+            }
+        })
+    }
+})
+
+
 loadChart({
     nodes:[
         {id:"Investigation",group:0,value:20},
@@ -30,3 +87,6 @@ loadChart({
         {source:"Biological Material",target:"thaliana",value:5,name:"hasSpecies"},
     ]},"graph-ppeo")
 $("svg#graph-ppeo").attr("viewBox", "-300 -200 1000 410")
+
+
+

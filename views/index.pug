@@ -27,7 +27,7 @@ block content
         .main
             ul.list-group.lookup-results.card(style="max-height:300px; overflow-y:scroll;")
                 li.list-group-item(v-for="result in lookup_result")
-                    a.d-flex(:href="'/'+result.dataPropertyURI.split(\"/\").slice(3).join(\"/\")")
+                    a.d-flex(:href="devhost+'/'+result.dataPropertyURI.split(\"/\").slice(3).join(\"/\")")
                         .btn.btn-primary.d-flex
                             .align-self-center
                                 span.badge.bg-dark Class:
