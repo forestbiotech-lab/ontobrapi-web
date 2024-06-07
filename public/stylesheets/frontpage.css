@@ -19,6 +19,9 @@
     margin: 10px;
     float: left;
 }
+.main .data-value{
+    background-color: beige;
+}
 .species-card.rice{
     background-image: url("../images/rice-sandy-ravaloniaina-rARwqh9IXEE-unsplash.jpg");
     background-size: cover;

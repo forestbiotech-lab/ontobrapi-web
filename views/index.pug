@@ -1,79 +1,94 @@
 extends layout-frontpage
 
 block content
-    .header
-        .container-fluid
-            .row
-                .col-2
-                    img(src="/images/pheno.png")
-                .col-10
+    #app
+        .header
+            .container-fluid
+                .row
+                    .col-2
+                        img(src="/images/pheno.png")
+                    .col-10
 
-    nav.navbar.navbar-light.bg-light
-        .container-fluid
-            .d-flex
-                button.btn.btn-outline-success Log In
-            form.d-flex
-                .btn-group
-                    button.btn.btn-outline-success.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
-                        | About
-                    ul.dropdown-menu
-                        li
-                            a.dropdown-item(href='#') Documentation
-                        li
-                            a.dropdown-item(href='#') About us
-                input.form-control.me-2(type='search' placeholder='Search' aria-label='Search')
-                button.btn.btn-outline-success(type='submit')
-                    span.p-2 !{octicons["search"].toSVG({ "class": "file" })}
-                    span Search
-    .main
-        .container-fluid
-            .row
-                .col-8
-                    p Welcome to PHENO, a FAIR phenotypic datastore complient with the&nbsp;
-                        a(href="https://www.miappe.org/" target="_blank") MIAPPE
-                        | &nbsp;and&nbsp;
-                        a(href="https://brapi.org") BrAPI
-                        | &nbsp;Standards.
-                    svg#graph-ppeo
-                    p The graph aboves shows a summary of the Knowledge graph that is generated. Blue nodes represent classes, the smaller nodes represent dataproperties and the node are connected by object properties. You can hover with the arrow to view the respective property name.
-                    p To submit data, please start by filling a&nbsp;
-                        a(href="https://github.com/MIAPPE/MIAPPE/raw/master/MIAPPE_Checklist-Data-Model-v1.1/MIAPPE_Checklist-Data-Model-v1.1.xlsx" target="_blank") MIAPPE template.
-                .col-4
-                    .row
-                        .col-6
-                            .card.species-card.rice.d-flex.align-items-center.justify-content-center
-                                span.p-2 Rice
-                        .col-6
-                            .card.species-card.grapevine.d-flex.align-items-center.justify-content-center
-                                span.p-2.align-content-center Grapevine
-                    .row
-                        .col-6
-                            .card.species-card.cork-oak.d-flex.align-items-center.justify-content-center
-                                span.p-2 Cork Oak
-                        .col-6
-                            .card.species-card.tomato.d-flex.align-items-center.justify-content-center
-                                span.p-2 Tomato
-                    .row
-                        a(href="/submit").btn.btn-outline-success Submit you data
-    .footer
-        .container-fluid
-            .row
-                .col-4.contacts
-                    h5 Contacts:
-                    .d-flex.flex-row.pl-4
-                        a(href="mailto:brunovasquescosta@gmail.com" subject="More info on PHENO website" target="_blank")
-                            span.p-2 !{octicons["mail"].toSVG({ "class": "file","height":'24px' })}
-                        a(href="https://github.com/forestbiotech-lab/ontoBrAPI" target="_blank")
-                            span.p-2 !{octicons["mark-github"].toSVG({ "class": "file","height":'24px' })}
-                        a(href="https://ontobrapi-docs.readthedocs.io/en/latest/" target="_blank")
-                            span.p-2 !{octicons["file"].toSVG({ "class": "file","height":'24px' })}
+        nav.navbar.navbar-light.bg-light
+            .container-fluid
+                .d-flex
+                    button.btn.btn-outline-success(@click="loginPanel") Log In
+                form.d-flex
+                    .btn-group
+                        button.btn.btn-outline-success.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
+                            | About
+                        ul.dropdown-menu
+                            li
+                                a.dropdown-item(href='https://ontobrapi-docs.readthedocs.io/en/latest/', target="_blank") Documentation
+                            li
+                                a.dropdown-item(href='https://github.com/forestbiotech-lab/PHENO/blob/master/README.md') About us
+                    input.form-control.me-2(type='search' placeholder='Search' aria-label='Search' v-model="lookup_data_property" @keyup="lookupTerm")
 
-                .col-4.co-funded
-                    h5 Co-funded by:
-                    .d-flex.flex-wrap
-                        .logo.biodata
-                        .logo.elixir
-                .col-4.hosted
-                    h5 Hosted by:
-                    .d-flex.flex-wrap
-                        .logo.ist
+        .main
+            ul.list-group.lookup-results.card(style="max-height:300px; overflow-y:scroll;")
+                li.list-group-item(v-for="result in lookup_result")
+                    a.d-flex(:href="'/'+result.dataPropertyURI.split(\"/\").slice(3).join(\"/\")")
+                        .btn.btn-primary.d-flex
+                            .align-self-center
+                                span.badge.bg-dark Class:
+                                strong.text-bg-success &nbsp;{{ result.class.split("#")[1]}}
+                        .btn.btn-success.d-flex
+                            .align-self-center
+                                span.badge.bg-dark Property:
+                                strong.text-bg-success &nbsp;{{ result.property.split("#")[1]}}
+                        .flex-grow-1.btn.data-value
+                            span.badge.bg-dark &nbsp;Value:
+                            span.text-success(v-if="lookup_data_property.length>2") &nbsp;{{ result.dataValue.toLowerCase().split(lookup_data_property).join("["+lookup_data_property+"]")}}
+                            span.text-success(v-else) &nbsp;No Results
+
+            .container-fluid
+                .row
+                    .col-8
+                        p Welcome to PHENO, a FAIR phenotypic datastore complient with the&nbsp;
+                            a(href="https://www.miappe.org/" target="_blank") MIAPPE
+                            | &nbsp;and&nbsp;
+                            a(href="https://brapi.org") BrAPI
+                            | &nbsp;Standards.
+                        svg#graph-ppeo
+                        p The graph aboves shows a summary of the Knowledge graph that is generated. Blue nodes represent classes, the smaller nodes represent dataproperties and the node are connected by object properties. You can hover with the arrow to view the respective property name.
+                        p To submit data, please start by filling a&nbsp;
+                            a(href="https://github.com/MIAPPE/MIAPPE/raw/master/MIAPPE_Checklist-Data-Model-v1.1/MIAPPE_Checklist-Data-Model-v1.1.xlsx" target="_blank") MIAPPE template.
+                    .col-4
+                        .row
+                            .col-6
+                                .card.species-card.rice.d-flex.align-items-center.justify-content-center
+                                    span.p-2 Rice
+                            .col-6
+                                .card.species-card.grapevine.d-flex.align-items-center.justify-content-center
+                                    span.p-2.align-content-center Grapevine
+                        .row
+                            .col-6
+                                .card.species-card.cork-oak.d-flex.align-items-center.justify-content-center
+                                    span.p-2 Cork Oak
+                            .col-6
+                                .card.species-card.tomato.d-flex.align-items-center.justify-content-center
+                                    span.p-2 Tomato
+                        .row
+                            a(href="/submit").btn.btn-outline-success Submit you data
+        .footer
+            .container-fluid
+                .row
+                    .col-4.contacts
+                        h5 Contacts:
+                        .d-flex.flex-row.ps-4
+                            a(href="mailto:brunovasquescosta@gmail.com" subject="More info on PHENO website" target="_blank")
+                                span.p-2 !{octicons["mail"].toSVG({ "class": "file","height":'24px' })}
+                            a(href="https://github.com/forestbiotech-lab/PHENO" target="_blank")
+                                span.p-2 !{octicons["mark-github"].toSVG({ "class": "file","height":'24px' })}
+                            a(href="https://ontobrapi-docs.readthedocs.io/en/latest/" target="_blank")
+                                span.p-2 !{octicons["file"].toSVG({ "class": "file","height":'24px' })}
+
+                    .col-4.co-funded
+                        h5 Co-funded by:
+                        .d-flex.flex-wrap
+                            .logo.biodata
+                            .logo.elixir
+                    .col-4.hosted
+                        h5 Hosted by:
+                        .d-flex.flex-wrap
+                            .logo.ist
