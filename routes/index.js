@@ -38,7 +38,7 @@ router.get('/submit', function(req, res, next) {
 
 router.get('/dev/configs', function(req, res, next) {
   let admin={}
-  if (req.hostname == 'localhost') {
+  if (process.env.GIT_COMMIT != "DEV") {
     admin=config.admin
   }
   res.json( admin )
