@@ -153,7 +153,7 @@ function mainApp() {
         },
         beforeMount() {
             fetch("/dev/configs").then(res=>res.json()).then(admin=>{
-                if(admin){
+                if(Object.keys(admin).length>0){
                     this.devhost_admin=`${admin.protocol}://${admin.hostname}:${admin.port}`
                 }
             })
