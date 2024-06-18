@@ -27,7 +27,7 @@ class Triples{
                     prefix:{},
                     metadata:[
                       {s:`<${prefixes[this.ontology.name].url}>`,p:"<rdf:type>",o:"<owl:Ontology>"},
-                      {s:`<${prefixes[this.ontology.name].url}>`,p:"<owl:imports>",o:`<${prefixes.miappe.url.slice(0,-1)}}>`},
+                      {s:`<${prefixes[this.ontology.name].url}>`,p:"<owl:imports>",o:`<${prefixes.miappe.url.slice(0,-1)}>`},
                       {s:"<miappe:hasLicense>",p:`<${prefixes.rdf.url}subPropertyOf>`,o:"<miappe:hasName>"}
                     ],
                     individuals:{
