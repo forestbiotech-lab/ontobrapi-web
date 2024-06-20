@@ -47,7 +47,7 @@ window.app = new Vue({
         document.getElementById("app").append(doc.getElementById("modal-results"))
         window.modal = new bootstrap.Modal(document.getElementById('modal-results'), {})
         fetch("/dev/configs").then(res=>res.json()).then(admin=>{
-            if(admin){
+            if(Object.keys(admin).length>0){
                 this.devhost_admin=`${admin.protocol}://${admin.hostname}:${admin.port}`
             }
         })
