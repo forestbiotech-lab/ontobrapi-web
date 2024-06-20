@@ -3,7 +3,8 @@ window.app = new Vue({
     data:{
         "lookup_data_property": "",
         lookup_result:[],
-        devhost_admin:""
+        devhost_admin:"",
+        graph:"staging:"
     },
     computed:{
 
@@ -12,31 +13,40 @@ window.app = new Vue({
         loginPanel(){
             window.modal.show()
         },
-        async lookupTerm(){
-            if(this.lookup_data_property.length>2){
-                that=this
-                $.post(this.devhost_admin+"/admin/query/lookup/data-property",{
-                    graph: "staging:",
-                    term:this.lookup_data_property
-                }).then(result=>{
-                    if(result.data.length>0){
-                        that.lookup_result=result.data
-                    }else{
-                        that.lookup_result=[{
-                            class:"#None",
-                            dataPropertyURI:"",
-                            property:"#None",
-                            dataValue:"No results found!"
-                        }]
-                    }
+        async fetchDataProperty(graph, term) {
+            try {
+                const response = await $.post(this.devhost_admin + "/admin/query/lookup/data-property", {
+                    graph,
+                    term,
+                });
+                if (response.data && response.data.length > 0) {
+                    this.lookup_result = response.data;
+                    return; // Early exit if data is found
+                }
 
-                })
-
-
-            } else{
-                this.lookup_result=[]
+                // Set default result for no data found
+                this.lookup_result = [{
+                    class: "#None",
+                    dataPropertyURI: "",
+                    property: "#None",
+                    dataValue: "No results found!",
+                }];
+            } catch (error) {
+                console.error("Error fetching data property:", error);
+                // Handle errors appropriately (e.g., display an error message)
             }
+        },
+        async lookupTerm() {
+            if (this.lookup_data_property.length > 2) {
+                this.fetchDataProperty(this.graph, this.lookup_data_property)
+                    .then(() => {
+                        //TODO something
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching data property:", error);
+                    })
 
+            }
         }
     },
     async beforeMount() {
