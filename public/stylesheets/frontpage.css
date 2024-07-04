@@ -22,23 +22,23 @@
 .main .data-value{
     background-color: beige;
 }
-.species-card.rice{
-    background-image: url("../images/rice-sandy-ravaloniaina-rARwqh9IXEE-unsplash.jpg");
+.species-card.Oryza_sativa{
+    background-image: url("../images/species/rice-sandy-ravaloniaina-rARwqh9IXEE-unsplash.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
-.species-card.grapevine{
-    background-image: url("../images/grapevine-boudewijn-boer-qT515JdZNy8-unsplash.jpg");
+.species-card.Vitis_vinifera{
+    background-image: url("../images/species/grapevine-boudewijn-boer-qT515JdZNy8-unsplash.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
 .species-card.cork-oak{
-    background-image: url("../images/corkoak-jacek-ulinski-XJe5vMl8xjg-unsplash.jpg");
+    background-image: url("../images/species/corkoak-jacek-ulinski-XJe5vMl8xjg-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 .species-card.tomato{
-    background-image: url("../images/tomato-engin-akyurt-eb26eV-ys_k-unsplash.jpg");
+    background-image: url("../images/species/tomato-engin-akyurt-eb26eV-ys_k-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }

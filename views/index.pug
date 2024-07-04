@@ -22,7 +22,7 @@ block content
                                 a.dropdown-item(href='https://ontobrapi-docs.readthedocs.io/en/latest/', target="_blank") Documentation
                             li
                                 a.dropdown-item(href='https://github.com/forestbiotech-lab/PHENO/blob/master/README.md') About us
-                    input.form-control.me-2(type='search' placeholder='Search' aria-label='Search' v-model="lookup_data_property" @keyup="lookupTerm")
+                    input.form-control.me-2(type='search' placeholder='Search' aria-label='Search' v-model="lookup_data_property" @input="lookupTerm")
 
         .main
             ul.list-group.lookup-results.card(style="max-height:300px; overflow-y:scroll;")
@@ -55,12 +55,14 @@ block content
                             a(href="https://github.com/MIAPPE/MIAPPE/raw/master/MIAPPE_Checklist-Data-Model-v1.1/MIAPPE_Checklist-Data-Model-v1.1.xlsx" target="_blank") MIAPPE template.
                     .col-4
                         .row
-                            .col-6
-                                .card.species-card.rice.d-flex.align-items-center.justify-content-center
-                                    span.p-2 Rice
-                            .col-6
-                                .card.species-card.grapevine.d-flex.align-items-center.justify-content-center
-                                    span.p-2.align-content-center Grapevine
+                            .col-6(v-for="org in organisms.slice(0,2)")
+                                a(:href="devhost_admin+'/admin/'")
+                                    .card.species-card.d-flex.align-items-center.justify-content-center(:style="{'background-image': 'url(\"../images/species/'+org.genus+'_'+org.species+'.jpg\")', 'background-size': 'cover','background-repeat': 'no-repeat'}" )
+                                        span.p-2 {{org.genus}}  {{org.species}}
+                        .row
+                            .col-6.col-6(v-for="org in organisms.slice(2,4)")
+                                .card.species-card.d-flex.align-items-center.justify-content-center(:style="{'background-image': 'url(\"../images/species/'+org.genus+'_'+org.species+'.jpg\")', 'background-size': 'cover','background-repeat': 'no-repeat'}" )
+                                    span.p-2 {{org.genus}}  {{org.species}}
                         .row
                             .col-6
                                 .card.species-card.cork-oak.d-flex.align-items-center.justify-content-center

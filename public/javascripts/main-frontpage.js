@@ -4,7 +4,8 @@ window.app = new Vue({
         "lookup_data_property": "",
         lookup_result:[],
         devhost_admin:"",
-        graph:"staging:"
+        graph:"staging:",
+        organisms:[]
     },
     computed:{
 
@@ -46,6 +47,8 @@ window.app = new Vue({
                         console.error("Error fetching data property:", error);
                     })
 
+            }else{
+                this.lookup_result = []
             }
         }
     },
@@ -56,11 +59,17 @@ window.app = new Vue({
         const doc = parser.parseFromString(htmlString, 'text/html')
         document.getElementById("app").append(doc.getElementById("modal-results"))
         window.modal = new bootstrap.Modal(document.getElementById('modal-results'), {})
-        fetch("/dev/configs").then(res=>res.json()).then(admin=>{
-            if(Object.keys(admin).length>0){
-                this.devhost_admin=`${admin.protocol}://${admin.hostname}:${admin.port}`
-            }
-        })
+        response = await fetch("/dev/configs")
+        let admin=await response.json()
+        if(Object.keys(admin).length>0){
+            this.devhost_admin=`${admin.protocol}://${admin.hostname}:${admin.port}`
+        }
+        response = await $.post(this.devhost_admin + "/admin/query/list/species", {
+            graph:this.graph
+        });
+        if (response.data && response.data.length > 0) {
+            this.organisms = response.data;
+        }
     }
 })
 
