@@ -6,7 +6,7 @@ block content
             .container-fluid
                 .row
                     .col-2
-                        img(src="/images/pheno.png")
+                        img(src="/images/pheno_logo.webp")
                     .col-10
 
         nav.navbar.navbar-light.bg-light
@@ -19,7 +19,7 @@ block content
                             | About
                         ul.dropdown-menu
                             li
-                                a.dropdown-item(href='https://ontobrapi-docs.readthedocs.io/en/latest/', target="_blank") Documentation
+                                a.dropdown-item(href='https://pheno-docs.readthedocs.io/en/latest/', target="_blank") Documentation
                             li
                                 a.dropdown-item(href='https://github.com/forestbiotech-lab/PHENO/blob/master/README.md') About us
                     input.form-control.me-2(type='search' placeholder='Search' aria-label='Search' v-model="lookup_data_property" @input="lookupTerm")
@@ -82,7 +82,7 @@ block content
                                 span.p-2 !{octicons["mail"].toSVG({ "class": "file","height":'24px' })}
                             a(href="https://github.com/forestbiotech-lab/PHENO" target="_blank")
                                 span.p-2 !{octicons["mark-github"].toSVG({ "class": "file","height":'24px' })}
-                            a(href="https://ontobrapi-docs.readthedocs.io/en/latest/" target="_blank")
+                            a(href="https://pheno-docs.readthedocs.io/en/latest/" target="_blank")
                                 span.p-2 !{octicons["file"].toSVG({ "class": "file","height":'24px' })}
 
                     .col-4.co-funded
