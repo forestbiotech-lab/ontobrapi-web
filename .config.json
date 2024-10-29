@@ -2,6 +2,7 @@
   "sparql": {
     "user": "dba",
     "pass": "dba",
+    "protocol": "http",
     "host":"localhost",
     "port":"8890",
     "ontoBrAPIgraph":"http://localhost:8890/ontobrapi",
