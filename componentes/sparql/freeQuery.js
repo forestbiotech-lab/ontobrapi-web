@@ -3,9 +3,9 @@ const sparql=require('./../../.config').sparql
 
 let host=sparql.host
 let port=sparql.port
+let protocol=sparql.protocol
 
-const endpointUrl = `http://${host}:${port}/sparql`
- 
+const endpointUrl = `${protocol}://${host}:${port}/sparql`
 
 module.exports = function(query) {
   return new Promise((res,rej)=>{

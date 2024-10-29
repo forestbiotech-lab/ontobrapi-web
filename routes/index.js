@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-let sparqlQuery = require('.././componentes/sparql/sparqlQuery')
+const freeQuery = require('.././componentes/sparql/freeQuery')
 const path=require('path')
 const fs = require('fs')
 const { exec } = require("child_process");
@@ -44,11 +44,18 @@ router.get('/dev/configs', function(req, res, next) {
   res.json( admin )
 });
 
-// Shows and example of the sqarl quary output.
+// Shows and example of the sqarl query output.
 router.get('/query', function(req, res, next) {
-  sparqlQuery().then(queryRes=>{
-  	result=queryRes.split('\n')
-  	res.render('query', { title: 'Express', result});
+  let subject = 's'
+  let object = 'o'
+  let predicate = 'p'
+  const query = ` 
+  SELECT DISTINCT * 
+  FROM <https://raw.githubusercontent.com/MIAPPE/MIAPPE-ontology/master/PPEO.owl> 
+  WHERE { ?${subject} ?${predicate} ?${object}}`
+  freeQuery(query).then(queryRes=>{
+    let result=queryRes
+    res.render('query', { title: 'Example Query', result});
   }).catch(err=>{
     res.error(err)
   })
