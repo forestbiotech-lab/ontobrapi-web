@@ -45,7 +45,7 @@ router.get('/ontologyterms/:ontology/',(req,res)=>{
     res.json(data)
   }).catch(err=>{
     let message=err.message
-    res.writeHead( 400, message, {'content-type' : 'text/plain'});
+    res.writeHead( 400, {'content-type' : 'text/plain'});
     res.end(message)
   })
 })
