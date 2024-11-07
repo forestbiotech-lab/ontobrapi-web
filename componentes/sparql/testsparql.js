@@ -5,8 +5,9 @@ const sparql=require('./../../.config').sparql
 
 let host=sparql.host
 let port=sparql.port
+let protocol=sparql.protocol
 const DEFAULT_LIMIT=1000
-const endpointUrl = `http://${host}:${port}/sparql`
+const endpointUrl = `${protocol}://${host}:${port}/sparql`
 //should-sponge=soft
 let subject = 's'
 let object = 'o'
