@@ -86,6 +86,13 @@ router.get('/mapping/json',(req,res)=>{
   res.json(mappings)
 
 })
+
+router.get('/reference_files/xlsx',(req,res)=>{
+  let ref_files=glob.sync("__dirname/../reference_files/MIAPPE*.xlsx")
+  ref_files=ref_files.map(file=>path.basename(file,".xlsx"))
+  res.json(ref_files)
+})
+
 router.get('/db/sparql/search/:fileName',(req,res)=>{
   let files=glob.sync("__dirname/../db/*.nt",{absolute:true})
   
