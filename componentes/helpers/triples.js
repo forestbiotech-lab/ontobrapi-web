@@ -400,12 +400,18 @@ class Triples{
   getXSDdatatypeURI(name,literal){
     literal=literal.replace(/"/g,'')
     try{
+
       if (["xsdfloat","float","double","boolean","long","int","short","byte","dateTime"].includes(name)){
         //TODO validate other types
         if(name == "dateTime" && literal.match("[0-9]{4}(-[0-9]{2}){2}")[0].length == literal.length ){
-          literal+="T00:00:00.000Z"
+          //Fix date
+          name="date"
         }
-        if(name=="float" && literal.match("[0-9]*\\.*[0-9]*")[0].length == literal.length)
+        else if(name == "dateTime" && literal.match("[0-9]{4}(-[0-9]{2}){2}T([0-9]{2}:*){3}\\.[0-9]{3}Z")[0].length == literal.length ){
+          //DO nothing this is okay
+          literal=literal
+        }
+        else if(name=="float" && literal.match("[0-9]*\\.*[0-9]*")[0].length == literal.length)
           name="xsd"+name
         else if(name=="int" && literal.match("[0-9]*")[0].length == literal.length)
           name="xsd"+name
@@ -429,10 +435,10 @@ class Triples{
       return false
     }
   }
-  complete(element,that,recusion){
+  complete(element,that,recursion){
     let prefixes=Object.keys(that.triples.prefix)
 
-    let re=new RegExp(/<(\w+):/)
+    let re=new RegExp(/^<(\w+):/)
     let match=element.match(re)
     if(match){
       if(prefixes.includes(match[1])){ 
@@ -445,7 +451,7 @@ class Triples{
         if(qualifier.startsWith("@")){
           return `${literal}${qualifier}`
         }else{
-          if(recusion){
+          if(recursion){
             console.log("No completion found")
             return element
           }else if(this.isXSDdatatype(qualifier)){
@@ -455,7 +461,11 @@ class Triples{
             // Not sure when this is useful
             //Mabe @PT ou something else
             // URL????
-            return `${literal}^^${this.getXSDdatatypeURI(qualifier)}`//${that.complete(`<${qualifier}>`,that,true)}`
+            if(qualifier.match("^<http[s]*:")){
+              return element
+            }else{
+              return `${literal}^^${this.getXSDdatatypeURI(qualifier)}`//${that.complete(`<${qualifier}>`,that,true)}`
+            }
           }
         }
       }catch(err){
