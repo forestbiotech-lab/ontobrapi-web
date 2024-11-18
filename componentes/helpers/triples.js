@@ -400,8 +400,11 @@ class Triples{
   getXSDdatatypeURI(name,literal){
     literal=literal.replace(/"/g,'')
     try{
-      if (["xsdfloat","float","double","boolean","long","int","short","byte"].includes(name)){
+      if (["xsdfloat","float","double","boolean","long","int","short","byte","dateTime"].includes(name)){
         //TODO validate other types
+        if(name == "dateTime" && literal.match("[0-9]{4}(-[0-9]{2}){2}")[0].length == literal.length ){
+          literal+="T00:00:00.000Z"
+        }
         if(name=="float" && literal.match("[0-9]*\\.*[0-9]*")[0].length == literal.length)
           name="xsd"+name
         else if(name=="int" && literal.match("[0-9]*")[0].length == literal.length)
