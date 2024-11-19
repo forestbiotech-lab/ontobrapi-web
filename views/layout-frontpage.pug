@@ -4,11 +4,13 @@ head
   <!-- Google tag (gtag.js) -->
   script(async src="https://www.googletagmanager.com/gtag/js?id=G-107MR999GE")
   script.
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    if(location.host="brapi.biodata.pt") {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    gtag('config', 'G-107MR999GE');
+      gtag('config', 'G-107MR999GE');
+    }
 
   meta(charset="utf-8")
   meta(name="viewport",content="width=device-width, initial-scale=1")
